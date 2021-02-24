@@ -1,5 +1,5 @@
 use oxygengine::prelude::*;
-//use crate::states::splash::SplashState;
+use crate::states::splash::SplashState;
 
 #[derive(Default)]
 pub struct LoadingState {
@@ -37,7 +37,7 @@ impl State for LoadingState {
         let assets = &mut world.write_resource::<AssetsDatabase>();
         if let Some(preloader) = &mut self.preloader {
             if preloader.process(assets).unwrap() {
-                //return StateChange::Swap(Box::new(SplashState));
+                return StateChange::Swap(Box::new(SplashState));
             }
         } else {
             self.preloader = Some(

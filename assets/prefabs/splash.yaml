@@ -10,31 +10,26 @@ entities:
         CompositeTransform:
           scale:
             x: 640
-            y: 600
+            y: 480
         NonPersistent: ~
-  # Background Img
+  # Background Color
   - Data:
       components:
         Tag: ui
-        CompositeRenderable: None
-        CompositeTransform:
-          scale:
-            x: 1
-            y: 0.7
-        CompositeUiElement:
-          camera_name: camera_ui
-          theme: splash
-          alignment:
-            x:
-              Value: 0.5
-            y:
-              Value: 0.5
-          fixed_width:
-            Value: 640
-          fixed_height:
-            Value: 500
-          element_type:
-            Image: {}
+        CompositeRenderable:
+          Rectangle:
+            color:
+              r: 0
+              g: 0
+              b: 0
+              a: 100
+            rect:
+              x: -320
+              y: -240
+              w: 640
+              h: 480
+        CompositeTransform: {}
+        CompositeRenderDepth: 1
         NonPersistent: ~
   # Press Enter
   - Data:
