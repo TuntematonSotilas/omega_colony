@@ -31,7 +31,7 @@ pub fn main_js() -> Result<(), JsValue> {
                 // register assets protocols from composite renderer module.
                 oxygengine::composite_renderer::protocols_installer(assets);
                 // register assets protocols from audio module.
-                oxygengine::audio::protocols_installer(assets);
+                //oxygengine::audio::protocols_installer(assets);
             }),
         )
         // install core module prefabs management.
@@ -39,7 +39,7 @@ pub fn main_js() -> Result<(), JsValue> {
             // install composite renderer prefabs.
             oxygengine::composite_renderer::prefabs_installer(prefabs);
             // install audio prefabs.
-            oxygengine::audio::prefabs_installer(prefabs);
+            //oxygengine::audio::prefabs_installer(prefabs);
             // install 2d physics prefabs.
             oxygengine::physics_2d::prefabs_installer(prefabs);
             // install prefabs for integration between 2D physics and composite rendering.
@@ -64,7 +64,7 @@ pub fn main_js() -> Result<(), JsValue> {
             ),
         )
         // install audio support.
-        .with_bundle(oxygengine::audio::bundle_installer, WebAudio::default())
+        //.with_bundle(oxygengine::audio::bundle_installer, WebAudio::default())
         // install 2D physics with default gravity force vector.
         .with_bundle(
             oxygengine::physics_2d::bundle_installer,
