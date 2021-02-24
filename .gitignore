@@ -11,3 +11,4 @@ Cargo.lock
 
 assets-intermediate/
 assets-baked/
+bin/
