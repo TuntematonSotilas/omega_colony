@@ -67,7 +67,7 @@ entities:
                 g: 220
                 b: 78
                 a: 255
-        # Flash:
-        #   show_time: 0.5
-        #   phase: 0
+        Flash:
+           show_time: 0.5
+           phase: 0
         NonPersistent: ~
