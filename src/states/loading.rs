@@ -14,7 +14,7 @@ impl State for LoadingState {
 		world
             .create_entity()
             .with(CompositeCamera::new(CompositeScalingMode::CenterAspect))
-            .with(CompositeTransform::scale(320.0.into()))
+            .with(CompositeTransform::scale(640.0.into()))
             .with(NonPersistent(token))
 			.build();
         
@@ -28,7 +28,7 @@ impl State for LoadingState {
 					.size(10.0)
 					.into(),
 			))
-			.with(CompositeTransform::translation([0., -10.].into()))
+			.with(CompositeTransform::translation([0., 0.].into()))
 			.with(NonPersistent(token))
             .build();
     }

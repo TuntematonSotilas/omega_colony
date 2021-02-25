@@ -1,1 +1,2 @@
 prefab://prefabs/splash.yaml
+ui-theme://ui/ui.json
