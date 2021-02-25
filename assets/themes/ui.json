@@ -1,8 +1,8 @@
 {
     "text": {
         "Text": {
-        "font_name": "Verdana",
-        "font_size": { "Value": 10 }
+        	"font_name": "Verdana",
+        	"font_size": { "Value": 15 }
         }
     }
 }

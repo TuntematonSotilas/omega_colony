@@ -23,9 +23,9 @@ impl State for LoadingState {
 			.create_entity()
 			.with(CompositeRenderable(
 				Text::new("Verdana", "Loading")
-					.color(Color::rgb(66, 165, 219))
+					.color(Color::rgb(255,220,78))
 					.align(TextAlign::Center)
-					.size(10.0)
+					.size(20.0)
 					.into(),
 			))
 			.with(CompositeTransform::translation([0., 0.].into()))

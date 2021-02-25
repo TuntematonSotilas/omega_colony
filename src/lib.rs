@@ -60,7 +60,7 @@ pub fn main_js() -> Result<(), JsValue> {
             oxygengine::composite_renderer::bundle_installer,
             WebCompositeRenderer::with_state(
                 get_canvas_by_id("screen"), // canvas target.
-                RenderState::new(Some(Color::black())),
+                RenderState::new(Some(Color::rgb(5,5,5))),
             ),
         )
         // install audio support.
