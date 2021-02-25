@@ -12,7 +12,7 @@ entities:
             x: 640
             y: 480
         NonPersistent: ~
-  # Background Img
+  #Planet
   - Data:
       components:
         Tag: ui
@@ -24,6 +24,10 @@ entities:
         CompositeUiElement:
           camera_name: camera_ui
           theme: planet
+          fixed_width:
+            Value: 480
+          fixed_height:
+            Value: 480
           alignment:
             x:
               Value: 0.5
@@ -31,10 +35,6 @@ entities:
               Value: 0
           bottom_anchor:
             Value: 1
-          fixed_width:
-            Value: 480
-          fixed_height:
-            Value: 480
           element_type:
             Image: {}
         NonPersistent: ~

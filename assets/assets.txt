@@ -1,4 +1,4 @@
-ui-theme://themes/ui.json
+ui-theme://themes/texts.json
 ui-theme://themes/images.json
 png://images/planet.png
 prefab://prefabs/splash.yaml
