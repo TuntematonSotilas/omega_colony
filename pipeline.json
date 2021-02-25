@@ -11,7 +11,7 @@
 				"from": [
 				  "prefabs/",
 				  "images/",
-				  "ui/",
+				  "themes/",
 				  "assets.txt"
 				]
 			  }

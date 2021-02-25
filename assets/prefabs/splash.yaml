@@ -12,35 +12,59 @@ entities:
             x: 640
             y: 480
         NonPersistent: ~
-  # Press Enter
+  # Background Img
   - Data:
       components:
         Tag: ui
         CompositeRenderable: None
-        CompositeTransform: {}
+        CompositeTransform:
+          scale:
+            x: 1
+            y: 0.75
         CompositeUiElement:
           camera_name: camera_ui
-          fixed_width:
-            Value: 100
-          fixed_height:
-            Value: 5
-          bottom_anchor:
-            Value: 1.3
+          theme: planet
           alignment:
             x:
               Value: 0.5
             y:
-              Value: 0.5
-          theme: text
+              Value: -0.2
+          fixed_width:
+            Value: 480
+          fixed_height:
+            Value: 480
           element_type:
-            Text:
-              text: Press Enter
-              color:
-                r: 66
-                g: 165
-                b: 219
-                a: 255
-        # Flash:
-        #   show_time: 0.5
-        #   phase: 0
+            Image: {}
         NonPersistent: ~
+  # Press Enter
+  # - Data:
+  #     components:
+  #       Tag: ui
+  #       CompositeRenderable: None
+  #       CompositeTransform: {}
+  #       CompositeUiElement:
+  #         camera_name: camera_ui
+  #         fixed_width:
+  #           Value: 100
+  #         fixed_height:
+  #           Value: 5
+  #         bottom_anchor:
+  #           Value: 1.3
+  #         alignment:
+  #           x:
+  #             Value: 0.5
+  #           y:
+  #             Value: 0.5
+  #         theme: text
+  #         element_type:
+  #           Text:
+  #             text: Press Enter
+  #             color:
+  #               r: 66
+  #               g: 165
+  #               b: 219
+  #               a: 255
+  #       # Flash:
+  #       #   show_time: 0.5
+  #       #   phase: 0
+  #       NonPersistent: ~

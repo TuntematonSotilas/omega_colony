@@ -1,0 +1,15 @@
+{
+    "planet": {
+        "Image": {
+            "image_path": {
+                "Single": "images/planet.png"
+            },
+            "source_rect": {
+                "x": 0,
+                "y": 0,
+                "w": 480,
+                "h": 480
+            }
+        }
+    }
+}
