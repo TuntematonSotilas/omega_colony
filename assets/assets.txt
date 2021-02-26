@@ -1,5 +1,6 @@
 ui-theme://themes/texts.json
 ui-theme://themes/images.json
-png://images/planet.png
 png://images/stars.png
+png://images/title.png
+png://images/planet.png
 prefab://prefabs/splash.yaml

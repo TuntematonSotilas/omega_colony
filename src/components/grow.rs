@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct Grow {
     pub phase: Scalar,
     pub max: Scalar,
+	pub speed: Scalar,
 }
 
 impl Component for Grow {

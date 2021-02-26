@@ -19,7 +19,7 @@ entities:
         CompositeRenderable: None
         CompositeTransform:
           scale:
-            x: 1
+            x: 2
             y: 1
         CompositeUiElement:
           camera_name: camera_ui
@@ -36,6 +36,36 @@ entities:
           element_type:
             Image: {}
         NonPersistent: ~
+  #Title
+  - Data:
+      components:
+        Tag: ui
+        CompositeRenderable: None
+        CompositeTransform:
+          scale:
+            x: 0
+            y: 0
+        CompositeUiElement:
+          camera_name: camera_ui
+          theme: title
+          fixed_width:
+            Value: 300
+          fixed_height:
+            Value: 30
+          alignment:
+            x:
+              Value: 0.5
+            y:
+              Value: 2
+          top_anchor:
+            Value: -0.5
+          element_type:
+            Image: {}
+        NonPersistent: ~
+        Grow:
+          phase: 0
+          max: 1.5
+          speed: 1
   #Planet
   - Data:
       components:
@@ -81,7 +111,7 @@ entities:
             x:
               Value: 0.5
             y:
-              Value: 0.5
+              Value: -1
           theme: text
           element_type:
             Text:
@@ -91,7 +121,7 @@ entities:
                 g: 220
                 b: 78
                 a: 255
-        Flash:
-           show_time: 0.5
-           phase: 0
         NonPersistent: ~
+        Flash:
+          show_time: 0.5
+          phase: 0

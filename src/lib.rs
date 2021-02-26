@@ -7,8 +7,14 @@ mod systems;
 
 use crate::{
     states::loading::LoadingState,
-	components::flash::Flash,
-	systems::flash::FlashSystem,
+	components::{
+		flash::Flash,
+		grow::Grow,
+	},
+	systems::{
+		flash::FlashSystem,
+		grow::GrowSystem,
+	},
 };
 use oxygengine::prelude::*;
 use wasm_bindgen::prelude::*;
@@ -50,6 +56,7 @@ pub fn main_js() -> Result<(), JsValue> {
             oxygengine::integration_physics_2d_composite_renderer::prefabs_installer(prefabs);
             // register game prefabs component factories.
 			prefabs.register_component_factory::<Flash>("Flash");
+			prefabs.register_component_factory::<Grow>("Grow");
         })
         // install input managment.
         .with_bundle(oxygengine::input::bundle_installer, |input| {
@@ -85,6 +92,7 @@ pub fn main_js() -> Result<(), JsValue> {
         // install web storage engine resource.
         .with_resource(WebStorageEngine)
 		.with_system(FlashSystem, "flash", &[])
+		.with_system(GrowSystem, "grow", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.
