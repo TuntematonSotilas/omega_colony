@@ -11,5 +11,18 @@
                 "h": 480
             }
         }
+    },
+    "stars": {
+        "Image": {
+            "image_path": {
+                "Single": "images/stars.png"
+            },
+            "source_rect": {
+                "x": 0,
+                "y": 0,
+                "w": 640,
+                "h": 480
+            }
+        }
     }
 }

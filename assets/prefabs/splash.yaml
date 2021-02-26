@@ -12,6 +12,30 @@ entities:
             x: 640
             y: 480
         NonPersistent: ~
+  #Stars
+  - Data:
+      components:
+        Tag: ui
+        CompositeRenderable: None
+        CompositeTransform:
+          scale:
+            x: 1
+            y: 1
+        CompositeUiElement:
+          camera_name: camera_ui
+          theme: stars
+          fixed_width:
+            Value: 640
+          fixed_height:
+            Value: 480
+          alignment:
+            x:
+              Value: 0.5
+            y:
+              Value: 0.5
+          element_type:
+            Image: {}
+        NonPersistent: ~
   #Planet
   - Data:
       components:
