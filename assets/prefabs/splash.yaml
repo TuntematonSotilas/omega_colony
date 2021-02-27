@@ -16,6 +16,7 @@ entities:
   - Data:
       components:
         Tag: ui
+        NonPersistent: ~
         CompositeRenderable: None
         CompositeTransform:
           scale:
@@ -35,19 +36,20 @@ entities:
               Value: 0.5
           element_type:
             Image: {}
-        NonPersistent: ~
   #Title
   - Data:
       components:
         Tag: ui
+        NonPersistent: ~
         CompositeRenderable: None
-        CompositeTransform:
-          scale:
-            x: 0
-            y: 0
+        CompositeTransform: {}
         CompositeUiElement:
           camera_name: camera_ui
-          theme: title
+          alignment:
+            x:
+              Value: 0.5
+            y:
+              Value: -1
           fixed_width:
             Value: 300
           fixed_height:
@@ -60,16 +62,62 @@ entities:
           top_anchor:
             Value: -0.5
           element_type:
-            Image: {}
-        NonPersistent: ~
+            None:
+          children:
+            - alignment:
+                x:
+                  Value: 0.5
+                y:
+                  Value: 0.5
+              right_anchor:
+                Value: 1
+              bottom_anchor:
+                Value: 1
+              theme: title
+              element_type:
+                Image: {}
+              scale:
+                x: 0
+                y: 0
         Grow:
           phase: 0
           max: 1.5
           speed: 1
+  #Title
+  # - Data:
+  #     components:
+  #       Tag: ui
+  #       CompositeRenderable: None
+  #       CompositeTransform:
+  #         scale:
+  #           x: 0
+  #           y: 0
+  #       CompositeUiElement:
+  #         camera_name: camera_ui
+  #         theme: title
+  #         fixed_width:
+  #           Value: 300
+  #         fixed_height:
+  #           Value: 30
+  #         alignment:
+  #           x:
+  #             Value: 0.5
+  #           y:
+  #             Value: 2
+  #         top_anchor:
+  #           Value: -0.5
+  #         element_type:
+  #           Image: {}
+  #       NonPersistent: ~
+  #       Grow:
+  #         phase: 0
+  #         max: 1.5
+  #         speed: 1
   #Planet
   - Data:
       components:
         Tag: ui
+        NonPersistent: ~
         CompositeRenderable: None
         CompositeTransform:
           scale:
@@ -91,11 +139,11 @@ entities:
             Value: 1
           element_type:
             Image: {}
-        NonPersistent: ~
   #Press Enter
   - Data:
       components:
         Tag: ui
+        NonPersistent: ~
         CompositeRenderable: None
         CompositeTransform:
           scale:
@@ -121,7 +169,6 @@ entities:
                 g: 220
                 b: 78
                 a: 255
-        NonPersistent: ~
         Flash:
           show_time: 0.5
           phase: 0
