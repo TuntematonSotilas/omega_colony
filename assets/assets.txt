@@ -1,6 +1,8 @@
+map://planet.map
+prefab://prefabs/splash.yaml
+prefab://prefabs/planet.yaml
 ui-theme://themes/texts.json
 ui-theme://themes/images.json
-png://images/stars.png
-png://images/title.png
-png://images/planet.png
-prefab://prefabs/splash.yaml
+png://ui/stars.png
+png://ui/title.png
+png://ui/planet.png

@@ -10,9 +10,33 @@
 			  "Copy": {
 				"from": [
 				  "prefabs/",
-				  "images/",
+				  "images/ui",
 				  "themes/",
 				  "assets.txt"
+				]
+			  }
+			},
+			{
+			  "Atlas": {
+				"paths": ["images/sprites"],
+				"output_image": "sprites.png",
+				"output_atlas": "sprites.json",
+				"pretty": true
+			  }
+			}
+		  ]
+		}
+	  },
+	  {
+		"Pipeline": {
+		  "destination": "assets-intermediate",
+		  "commands": [
+			{
+			  "Tiled": {
+				"input": "assets/maps/planet.json",
+				"output": "planet.map",
+				"spritesheets": [
+				  "assets-intermediate/sprites.0.json"
 				]
 			  }
 			}

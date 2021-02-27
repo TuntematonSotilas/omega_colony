@@ -2,7 +2,7 @@
 	"stars": {
         "Image": {
             "image_path": {
-                "Single": "images/stars.png"
+                "Single": "ui/stars.png"
             },
             "source_rect": {
                 "x": 0,
@@ -15,7 +15,7 @@
 	"title": {
         "Image": {
             "image_path": {
-                "Single": "images/title.png"
+                "Single": "ui/title.png"
             },
             "source_rect": {
                 "x": 0,
@@ -28,7 +28,7 @@
     "planet": {
         "Image": {
             "image_path": {
-                "Single": "images/planet.png"
+                "Single": "ui/planet.png"
             },
             "source_rect": {
                 "x": 0,
