@@ -37,5 +37,18 @@
                 "h": 480
             }
         }
+    },
+	"landscape": {
+        "Image": {
+            "image_path": {
+                "Single": "ui/landscape.png"
+            },
+            "source_rect": {
+                "x": 0,
+                "y": 0,
+                "w": 480,
+                "h": 480
+            }
+        }
     }
 }
