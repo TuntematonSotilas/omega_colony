@@ -47,20 +47,13 @@ entities:
           camera_name: camera_ui
           alignment:
             x:
-              Value: 0.5
+              Value: 0 
             y:
-              Value: -1
+              Value: 3
           fixed_width:
-            Value: 300
+            Value: 640
           fixed_height:
             Value: 30
-          alignment:
-            x:
-              Value: 0.5
-            y:
-              Value: 2
-          top_anchor:
-            Value: -0.5
           element_type:
             None:
           children:
@@ -77,42 +70,12 @@ entities:
               element_type:
                 Image: {}
               scale:
-                x: 0
-                y: 0
+                x: 1
+                y: 1
         Grow:
           phase: 0
           max: 1.5
           speed: 1
-  #Title
-  # - Data:
-  #     components:
-  #       Tag: ui
-  #       CompositeRenderable: None
-  #       CompositeTransform:
-  #         scale:
-  #           x: 0
-  #           y: 0
-  #       CompositeUiElement:
-  #         camera_name: camera_ui
-  #         theme: title
-  #         fixed_width:
-  #           Value: 300
-  #         fixed_height:
-  #           Value: 30
-  #         alignment:
-  #           x:
-  #             Value: 0.5
-  #           y:
-  #             Value: 2
-  #         top_anchor:
-  #           Value: -0.5
-  #         element_type:
-  #           Image: {}
-  #       NonPersistent: ~
-  #       Grow:
-  #         phase: 0
-  #         max: 1.5
-  #         speed: 1
   #Planet
   - Data:
       components:
