@@ -20,15 +20,15 @@ entities:
         CompositeRenderable: None
         CompositeTransform:
           scale:
-            x: 2
-            y: 1
+            x: 2.1
+            y: 1.5
         CompositeUiElement:
           camera_name: camera_ui
           theme: landscape
           fixed_width:
-            Value: 1024
+            Value: 640
           fixed_height:
-            Value: 768
+            Value: 480
           alignment:
             x:
               Value: 0.5
@@ -36,75 +36,36 @@ entities:
               Value: 0.5
           element_type:
             Image: {}
-  # Text Box
-  # - Data:
-  #     components:
-  #       Tag: ui
-  #       CompositeRenderable:
-  #         Rectangle:
-  #           color:
-  #             r: 0
-  #             g: 0
-  #             b: 0
-  #             a: 100
-  #           rect:
-  #             x: -500
-  #             y: -120
-  #             w: 1000
-  #             h: 210
-  #       CompositeTransform: {}
-  #       CompositeRenderDepth: 1
-  #       NonPersistent: ~
-  # # Text
-  # - Data:
-  #     components:
-  #       Tag: ui
-  #       CompositeRenderable: None
-  #       CompositeTransform: {}
-  #       CompositeUiElement:
-  #         camera_name: camera_ui
-  #         alignment:
-  #           x:
-  #             Value: 0.5
-  #           y:
-  #             Value: 11
-  #         fixed_width:
-  #           Value: 350
-  #         fixed_height:
-  #           Value: 10
-  #         element_type:
-  #           None
-  #       CompositeRenderDepth: 2
-  #       TextAni:
-  #         curr_slide: 0
-  #         curr_text: 0
-  #         phase: 0
-  #         interval: 1
-  #         slides:
-  #           -
-  #             color:
-  #               r: 0
-  #               g: 168
-  #               b: 0
-  #               a: 255
-  #             text:
-  #               - And with the destruction of Caramawn,
-  #               - the four heroes went about their ways.
-  #               - Each hero was then given the task of 
-  #               - forever destroying all that is evil.
-  #           - 
-  #             color:
-  #               r: 87
-  #               g: 255
-  #               b: 87
-  #               a: 255
-  #             text:
-  #               - "Grandpa: This Billy, is the true"
-  #               - story of the Ends of the Earth.
-  #               - ""
-  #               - "Billy: Really!? I wana be a hero"
-  #               - someday! I wana be big and strong
-  #               - and fight the gohrahns! I'll call
-  #               - myself Atoch, after my favorite hero
-  #               - from the Kalan stories!
-  #       NonPersistent: ~
+  # Text
+  - Data:
+      components:
+        Tag: ui
+        CompositeRenderable: None
+        CompositeTransform: {}
+        CompositeUiElement:
+          camera_name: camera_ui
+          alignment:
+            x:
+              Value: 0
+            y:
+              Value: 10
+          fixed_width:
+            Value: 640
+          fixed_height:
+            Value: 10
+          element_type:
+            None
+        CompositeRenderDepth: 1
+        TextAni:
+          curr_text: 0
+          phase: 0
+          interval: 1
+          texts:
+            - This is an intro
+            - with animations
+          color:
+            r: 16
+            g: 4
+            b: 37
+            a: 255
+        NonPersistent: ~

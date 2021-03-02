@@ -10,10 +10,12 @@ use crate::{
 	components::{
 		flash::Flash,
 		grow::Grow,
+        text_ani::TextAni,
 	},
 	systems::{
 		flash::FlashSystem,
 		grow::GrowSystem,
+        text_ani::TextAniSystem,
 	},
 };
 use oxygengine::prelude::*;
@@ -57,6 +59,7 @@ pub fn main_js() -> Result<(), JsValue> {
             // register game prefabs component factories.
 			prefabs.register_component_factory::<Flash>("Flash");
 			prefabs.register_component_factory::<Grow>("Grow");
+			prefabs.register_component_factory::<TextAni>("TextAni");
         })
         // install input managment.
         .with_bundle(oxygengine::input::bundle_installer, |input| {
@@ -93,6 +96,7 @@ pub fn main_js() -> Result<(), JsValue> {
         .with_resource(WebStorageEngine)
 		.with_system(FlashSystem, "flash", &[])
 		.with_system(GrowSystem, "grow", &[])
+        .with_system(TextAniSystem, "text_ani", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.

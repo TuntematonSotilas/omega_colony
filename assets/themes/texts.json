@@ -2,7 +2,13 @@
     "text": {
         "Text": {
         	"font_name": "Courrier",
-        	"font_size": { "Value": 10 }
+        	"font_size": { "Value": 12 }
+        }
+    },
+    "text_intro": {
+        "Text": {
+        	"font_name": "Courrier",
+        	"font_size": { "Value": 16 }
         }
     }
 }
