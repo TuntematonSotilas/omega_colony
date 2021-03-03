@@ -1,5 +1,7 @@
 use oxygengine::prelude::*;
 
+use crate::states::planet::PlanetState;
+
 #[derive(Default)]
 pub struct IntroState;
 
@@ -12,7 +14,11 @@ impl State for IntroState {
             .unwrap();
     }
 
-    fn on_process(&mut self, _world: &mut World) -> StateChange {
-        StateChange::None
+    fn on_process(&mut self, world: &mut World) -> StateChange {
+        let input = &world.read_resource::<InputController>();
+        if input.trigger_or_default("enter") == TriggerState::Pressed {
+            return StateChange::Swap(Box::new(PlanetState));
+        }
+		StateChange::None
     }
 }
