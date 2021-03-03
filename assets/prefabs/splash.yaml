@@ -3,6 +3,7 @@ entities:
   - Data:
       components:
         Name: camera_ui
+        NonPersistent: ~
         CompositeCamera:
           scaling: CenterAspect
           tags:
@@ -11,7 +12,6 @@ entities:
           scale:
             x: 640
             y: 480
-        NonPersistent: ~
   #Stars
   - Data:
       components:

@@ -10,6 +10,13 @@ impl State for PlanetState {
 			.write_resource::<PrefabManager>()
 			.instantiate_world("planet", world)
 			.unwrap()[0];
+
+		// instantiate farm from prefab.
+        world
+            .write_resource::<PrefabManager>()
+            .instantiate_world("farm", world)
+            .unwrap()[0];
+		
     }
 
     fn on_process(&mut self, _world: &mut World) -> StateChange {

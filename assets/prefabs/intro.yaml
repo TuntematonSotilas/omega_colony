@@ -3,6 +3,7 @@ entities:
   - Data:
       components:
         Name: camera_ui
+        NonPersistent: ~
         CompositeCamera:
           scaling: CenterAspect
           tags:
@@ -11,7 +12,6 @@ entities:
           scale:
             x: 640
             y: 480
-        NonPersistent: ~
   # Background Img
   - Data:
       components:
@@ -40,6 +40,7 @@ entities:
   - Data:
       components:
         Tag: ui
+        NonPersistent: ~
         CompositeRenderable: None
         CompositeTransform: {}
         CompositeTransform:
@@ -74,4 +75,3 @@ entities:
             g: 4
             b: 37
             a: 255
-        NonPersistent: ~

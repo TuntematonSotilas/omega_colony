@@ -1,0 +1,15 @@
+template_name: farm
+entities:
+  - Data:
+      components:
+        Tag: world
+        CompositeRenderable: None
+        CompositeTransform:
+          translation:
+            x: 32
+            y: 32
+        CompositeRenderDepth: 100
+        CompositeSprite:
+          sheet_frame:
+            - "sprites.0.json"
+            - "farm.png"

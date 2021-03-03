@@ -4,22 +4,22 @@ entities:
   - Data:
       components:
         Name: camera
+        NonPersistent: ~
         CompositeCamera:
           scaling: CenterAspect
           tags:
             - world
         CompositeTransform:
           scale:
-            x: 640
-            y: 640
-        NonPersistent: ~
+            x: 480
+            y: 480
   # Ground
   - Data:
       components:
         Tag: world
+        NonPersistent: ~
         CompositeRenderable: None
         CompositeTransform: {}
         CompositeMapChunk:
           map_name: planet.map
           layer_name: ground
-        NonPersistent: ~
