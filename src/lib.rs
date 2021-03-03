@@ -4,6 +4,7 @@ extern crate oxygengine;
 mod states;
 mod components;
 mod systems;
+mod resources;
 
 use crate::{
     states::loading::LoadingState,
@@ -16,7 +17,9 @@ use crate::{
 		flash::FlashSystem,
 		grow::GrowSystem,
         text_ani::TextAniSystem,
+		camera_control::CameraControlSystem,
 	},
+	resources::camera::Camera,
 };
 use oxygengine::prelude::*;
 use wasm_bindgen::prelude::*;
@@ -96,9 +99,11 @@ pub fn main_js() -> Result<(), JsValue> {
         )
         // install web storage engine resource.
         .with_resource(WebStorageEngine)
+		.with_resource(Camera::default())
 		.with_system(FlashSystem, "flash", &[])
 		.with_system(GrowSystem, "grow", &[])
         .with_system(TextAniSystem, "text_ani", &[])
+		.with_system(CameraControlSystem, "camera_control", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.
