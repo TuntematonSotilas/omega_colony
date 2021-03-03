@@ -70,8 +70,8 @@ entities:
               element_type:
                 Image: {}
               scale:
-                x: 1
-                y: 1
+                x: 0
+                y: 0
         Grow:
           phase: 0
           max: 1.5
