@@ -66,10 +66,10 @@ entities:
           phase: 0
           interval: 1
           texts:
-            - In the near future, life in our planet earth 
-            - was no longer sustainable.
-            - 'So humans found a new home : Omega'
-            - And the colonization begins.
+            - Long ago, life on earth was no longer sustainable.
+            - So, human beings looked for a new home.
+            - They set their sights on the planet Omega,
+            - and the colonization begins.
           color:
             r: 16
             g: 4
