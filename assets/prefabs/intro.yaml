@@ -66,8 +66,8 @@ entities:
           phase: 0
           interval: 1
           texts:
-            - Long ago, life on earth was no longer sustainable.
-            - So, human beings looked for a new home.
+            - Long ago, life on earth was no longer sustainable,
+            - so human beings looked for a new home.
             - They set their sights on the planet Omega,
             - and the colonization begins.
           color:

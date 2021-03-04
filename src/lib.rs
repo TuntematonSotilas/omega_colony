@@ -71,6 +71,8 @@ pub fn main_js() -> Result<(), JsValue> {
             input.register(WebMouseInputDevice::new(get_event_target_by_id("screen")));
             // map input axes and triggers to devices.
             input.map_trigger("enter", "keyboard", "Enter");
+			input.map_axis("mouse-x", "mouse", "x");
+            input.map_axis("mouse-y", "mouse", "y");
         })
         // install composite renderer.
         .with_bundle(
