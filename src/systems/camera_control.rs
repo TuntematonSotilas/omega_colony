@@ -66,5 +66,6 @@ impl<'s> System<'s> for CameraControlSystem {
 		}
 
 		camera_res.prev_x = x;
+		camera_res.prev_y = y;
     }
 }
