@@ -30,42 +30,66 @@ impl<'s> System<'s> for CameraControlSystem {
 		let y = input.axis_or_default("mouse-y");
 		
 		//when mouse move
-		if x != camera_res.prev_x {
-			
-			let x_min = 0.;
-			let x_max = screen_size.x;
-			
-			let x_left = screen_size.x / PIXL_BORDER;
-			let x_right = screen_size.x - x_left; 
+		if x != camera_res.prev_x || y != camera_res.prev_y {
 
-			//when border
-			if x > x_min && x < x_max && (x < x_left || x > x_right) {
-				debug!("------");
-				let entity = camera_res.camera.unwrap();
-				let view_box = if let Some(transform) = transforms.get(entity) {
-					if let Some(camera) = cameras.get(entity) {
-						camera.view_box(transform, screen_size)
-					} else {
-						None
-					}
-				} else {
-					None
+			//when borders left or right
+			let left = screen_size.x / PIXL_BORDER;
+			let right = screen_size.x - left; 
+			let mut x_inc = 0.;
+			if x < left || x > right {
+				x_inc = match x > right {
+					true => 1.,
+					false => -1.,
 				};
-				if let Some(mut view_box) = view_box {
-					let x_inc = match x > x_right {
-						true => 1.,
-						false => -1.,
-					};
-					view_box.x += x_inc;
-					transforms
-						.get_mut(entity)
-						.unwrap()
-						.set_translation(view_box.center());
-				}
+			}
+			
+			//when borders top or bottom
+			let top = screen_size.y / PIXL_BORDER;
+			let bottom = screen_size.y - top; 
+			let mut y_inc = 0.;
+			if y < top || y > bottom {
+				y_inc = match y > bottom {
+					true => 1.,
+					false => -1.,
+				};
+			}
+			if x_inc != 0. || y_inc != 0. {
+				debug!("------");
+				self.apply_transform(&camera_res, cameras, screen_size, &mut transforms, x_inc, y_inc);
 			}
 		}
-
 		camera_res.prev_x = x;
 		camera_res.prev_y = y;
     }
+}
+
+impl<'s> CameraControlSystem {
+	fn apply_transform(
+		&self,
+		camera_res: &Write<'s, Camera>,
+		cameras: ReadStorage<'s, CompositeCamera>,
+		screen_size: Vec2,
+		transforms: &mut WriteStorage<'s, CompositeTransform>,
+		x_inc: f32,
+		y_inc: f32,
+	) {
+		let entity = camera_res.camera.unwrap();
+		let view_box = if let Some(transform) = transforms.get(entity) {
+			if let Some(camera) = cameras.get(entity) {
+				camera.view_box(transform, screen_size)
+			} else {
+				None
+			}
+		} else {
+			None
+		};
+		if let Some(mut view_box) = view_box {
+			view_box.x += x_inc;
+			view_box.y += y_inc;
+			transforms
+				.get_mut(entity)
+				.unwrap()
+				.set_translation(view_box.center());
+		}
+	}
 }
