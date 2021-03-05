@@ -54,7 +54,6 @@ impl<'s> System<'s> for CameraControlSystem {
 				};
 			}
 			if x_inc != 0. || y_inc != 0. {
-				debug!("------");
 				self.apply_transform(&camera_res, cameras, screen_size, &mut transforms, x_inc, y_inc);
 			}
 		}

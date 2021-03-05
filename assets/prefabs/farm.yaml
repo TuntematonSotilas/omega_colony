@@ -13,3 +13,5 @@ entities:
           sheet_frame:
             - "sprites.0.json"
             - "farm.png"
+        Clickable:
+          is: true

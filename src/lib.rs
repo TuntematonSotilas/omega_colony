@@ -12,12 +12,14 @@ use crate::{
 		flash::Flash,
 		grow::Grow,
         text_ani::TextAni,
+		clickable::Clickable,
 	},
 	systems::{
 		flash::FlashSystem,
 		grow::GrowSystem,
         text_ani::TextAniSystem,
 		camera_control::CameraControlSystem,
+		sprite_click::SpriteClickSystem,
 	},
 	resources::camera::Camera,
 };
@@ -63,6 +65,7 @@ pub fn main_js() -> Result<(), JsValue> {
 			prefabs.register_component_factory::<Flash>("Flash");
 			prefabs.register_component_factory::<Grow>("Grow");
 			prefabs.register_component_factory::<TextAni>("TextAni");
+			prefabs.register_component_factory::<Clickable>("Clickable");
         })
         // install input managment.
         .with_bundle(oxygengine::input::bundle_installer, |input| {
@@ -73,6 +76,7 @@ pub fn main_js() -> Result<(), JsValue> {
             input.map_trigger("enter", "keyboard", "Enter");
 			input.map_axis("mouse-x", "mouse", "x");
             input.map_axis("mouse-y", "mouse", "y");
+			input.map_trigger("mouse-left", "mouse", "left");
         })
         // install composite renderer.
         .with_bundle(
@@ -106,6 +110,7 @@ pub fn main_js() -> Result<(), JsValue> {
 		.with_system(GrowSystem, "grow", &[])
         .with_system(TextAniSystem, "text_ani", &[])
 		.with_system(CameraControlSystem, "camera_control", &[])
+		.with_system(SpriteClickSystem, "sprite_clic", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.

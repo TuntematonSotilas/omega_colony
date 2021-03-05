@@ -13,6 +13,16 @@ entities:
           scale:
             x: 480
             y: 480
+  # Rocks
+  - Data:
+      components:
+        Tag: world
+        NonPersistent: ~
+        CompositeRenderable: None
+        CompositeTransform: {}
+        CompositeMapChunk:
+          map_name: planet.map
+          layer_name: rocks
   # Ground
   - Data:
       components:
@@ -23,3 +33,4 @@ entities:
         CompositeMapChunk:
           map_name: planet.map
           layer_name: ground
+  

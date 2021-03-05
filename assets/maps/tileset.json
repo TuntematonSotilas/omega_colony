@@ -16,13 +16,19 @@
  "margin":0,
  "name":"tileset",
  "spacing":0,
- "tilecount":1,
+ "tilecount":2,
  "tiledversion":"1.3.3",
  "tileheight":32,
  "tiles":[
         {
          "id":1,
          "image":"..\/images\/sprites\/earth.png",
+         "imageheight":32,
+         "imagewidth":32
+        }, 
+        {
+         "id":2,
+         "image":"..\/images\/sprites\/rocks.png",
          "imageheight":32,
          "imagewidth":32
         }],

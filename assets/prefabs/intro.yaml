@@ -42,7 +42,6 @@ entities:
         Tag: ui
         NonPersistent: ~
         CompositeRenderable: None
-        CompositeTransform: {}
         CompositeTransform:
           scale:
             x: 1
