@@ -12,7 +12,7 @@ use crate::{
 		flash::Flash,
 		grow::Grow,
         text_ani::TextAni,
-		clickable::Clickable,
+		interactive_sprite::InteractiveSprite,
 	},
 	systems::{
 		flash::FlashSystem,
@@ -65,7 +65,7 @@ pub fn main_js() -> Result<(), JsValue> {
 			prefabs.register_component_factory::<Flash>("Flash");
 			prefabs.register_component_factory::<Grow>("Grow");
 			prefabs.register_component_factory::<TextAni>("TextAni");
-			prefabs.register_component_factory::<Clickable>("Clickable");
+			prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
         })
         // install input managment.
         .with_bundle(oxygengine::input::bundle_installer, |input| {
