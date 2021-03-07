@@ -13,6 +13,7 @@ use crate::{
 		grow::Grow,
         text_ani::TextAni,
 		interactive_sprite::InteractiveSprite,
+		selector::Selector,
 	},
 	systems::{
 		flash::FlashSystem,
@@ -20,8 +21,12 @@ use crate::{
         text_ani::TextAniSystem,
 		camera_control::CameraControlSystem,
 		sprite_click::SpriteClickSystem,
+		selector::SelectorSystem,
 	},
-	resources::camera::Camera,
+	resources::{
+		camera::Camera,
+		selector::SelectorPos,
+	},
 };
 use oxygengine::prelude::*;
 use wasm_bindgen::prelude::*;
@@ -66,6 +71,7 @@ pub fn main_js() -> Result<(), JsValue> {
 			prefabs.register_component_factory::<Grow>("Grow");
 			prefabs.register_component_factory::<TextAni>("TextAni");
 			prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
+			prefabs.register_component_factory::<Selector>("Selector");
         })
         // install input managment.
         .with_bundle(oxygengine::input::bundle_installer, |input| {
@@ -106,11 +112,13 @@ pub fn main_js() -> Result<(), JsValue> {
         // install web storage engine resource.
         .with_resource(WebStorageEngine)
 		.with_resource(Camera::default())
+		.with_resource(Selector::default())
 		.with_system(FlashSystem, "flash", &[])
 		.with_system(GrowSystem, "grow", &[])
         .with_system(TextAniSystem, "text_ani", &[])
 		.with_system(CameraControlSystem, "camera_control", &[])
 		.with_system(SpriteClickSystem, "sprite_clic", &[])
+		.with_system(SelectorSystem, "selector", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.

@@ -3,6 +3,7 @@ prefab://prefabs/splash.yaml
 prefab://prefabs/intro.yaml
 prefab://prefabs/planet.yaml
 prefab://prefabs/farm.yaml
+prefab://prefabs/selector.yaml
 ui-theme://themes/texts.json
 ui-theme://themes/images.json
 png://ui/stars.png

@@ -1,4 +1,4 @@
-template_name: farm
+template_name: selector
 entities:
   - Data:
       components:
@@ -6,12 +6,12 @@ entities:
         CompositeRenderable: None
         CompositeTransform:
           translation:
-            x: 160
-            y: 160
+            x: 320
+            y: 320
         CompositeRenderDepth: 1
         CompositeSprite:
           sheet_frame:
             - "sprites.0.json"
-            - "farm.png"
-        InteractiveSprite:
-          size: 32
+            - "selector.png"
+        Selector:
+          is: true

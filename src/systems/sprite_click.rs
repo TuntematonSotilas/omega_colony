@@ -1,7 +1,12 @@
 use oxygengine::prelude::*;
 
-use crate::resources::camera::Camera;
-use crate::components::interactive_sprite::InteractiveSprite;
+use crate::{
+	components::interactive_sprite::InteractiveSprite,
+	resources::{
+		camera::Camera,
+		selector::SelectorPos,
+	},
+};
 
 pub struct SpriteClickSystem;
 
@@ -12,11 +17,12 @@ impl<'s> System<'s> for SpriteClickSystem {
 		Read<'s, Camera>,
 		ReadStorage<'s, InteractiveSprite>,
 		ReadStorage<'s, CompositeTransform>,
+		Write<'s, SelectorPos>,
     );
 
     fn run(
         &mut self, 
-		(input, camera_cache, camera_res, interactive_sprites, transforms)
+		(input, camera_cache, camera_res, interactive_sprites, transforms, mut selector_pos)
 		: Self::SystemData,
     ) {
         if input.trigger_or_default("mouse-left") == TriggerState::Pressed {
@@ -27,8 +33,6 @@ impl<'s> System<'s> for SpriteClickSystem {
 			if let Some(camera_entity) = camera_res.camera {
 				if let Some(pos) = camera_cache.screen_to_world_space(camera_entity, point) {
 
-					debug!("clic");
-
 					for (transform, interactive_sprite) in (&transforms, &interactive_sprites).join() {	
 						if let Some(inv_mat) = transform.matrix().inverse() {
 							let pos_inv = pos * inv_mat;
@@ -36,6 +40,7 @@ impl<'s> System<'s> for SpriteClickSystem {
 								pos_inv.x <= interactive_sprite.size && 
 								pos_inv.y >= 0.0 && 
 								pos_inv.y < interactive_sprite.size {
+									selector_pos.pos = pos;
 									debug!("clic sprite");
 							}
 						}
