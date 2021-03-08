@@ -13,10 +13,10 @@ impl State for PlanetState {
 			.instantiate_world("planet", world)
 			.unwrap()[0];
 
-		// instantiate farm from prefab.
+		// instantiate base from prefab.
         world
             .write_resource::<PrefabManager>()
-            .instantiate_world("farm", world)
+            .instantiate_world("base", world)
             .unwrap()[0];
 
 		// instantiate selector from prefab.

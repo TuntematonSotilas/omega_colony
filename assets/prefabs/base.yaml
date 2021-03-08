@@ -1,4 +1,4 @@
-template_name: farm
+template_name: base
 entities:
   - Data:
       components:
@@ -12,6 +12,6 @@ entities:
         CompositeSprite:
           sheet_frame:
             - "sprites.0.json"
-            - "farm.png"
+            - "base.png"
         InteractiveSprite:
           size: 32
