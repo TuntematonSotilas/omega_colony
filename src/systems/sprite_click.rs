@@ -34,14 +34,15 @@ impl<'s> System<'s> for SpriteClickSystem {
 				if let Some(pos) = camera_cache.screen_to_world_space(camera_entity, point) {
 
 					for (transform, interactive_sprite) in (&transforms, &interactive_sprites).join() {	
-						if let Some(inv_mat) = transform.matrix().inverse() {
+						let matrix = transform.matrix();
+						if let Some(inv_mat) = matrix.inverse() {
 							let pos_inv = pos * inv_mat;
 							if pos_inv.x >= 0.0 && 
 								pos_inv.x <= interactive_sprite.size && 
 								pos_inv.y >= 0.0 && 
 								pos_inv.y < interactive_sprite.size {
-									selector_pos.pos = pos;
-									debug!("clic sprite");
+									let tile_pos = matrix * Vec2::new(0.,0.);
+									selector_pos.pos = tile_pos;
 							}
 						}
 					}

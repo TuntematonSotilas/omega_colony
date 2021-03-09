@@ -11,25 +11,24 @@ impl<'s> System<'s> for SelectorSystem {
     type SystemData = (
         ReadStorage<'s, Selector>,
 		WriteStorage<'s, CompositeTransform>,
-		Write<'s, SelectorPos>,
+		WriteStorage<'s, CompositeVisibility>,
+		Read<'s, SelectorPos>,
     );
 
     fn run(
         &mut self, 
-		(selectors, mut transforms, mut selector_pos)
+		(selectors, mut transforms, mut visibilties, selector_pos)
 		: Self::SystemData,
     ) {
        
-		for (transform, selector) in (&mut transforms, &selectors).join() {	
+		for (transform, visibilty, _selector) in (&mut transforms, &mut visibilties, &selectors).join() {	
 			let tr_pos = transform.get_translation();
-			if transform.get_translation() != selector_pos.pos {
+			if tr_pos != selector_pos.pos {
 				transform.set_translation(selector_pos.pos);
-				selector_pos.pos = tr_pos;
-
+				if visibilty.0 == false {
+					visibilty.0 = true;
+				}
 			}
 		}
-	
-			
-        
 	}	
 }

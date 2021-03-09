@@ -72,6 +72,7 @@ pub fn main_js() -> Result<(), JsValue> {
 			prefabs.register_component_factory::<TextAni>("TextAni");
 			prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
 			prefabs.register_component_factory::<Selector>("Selector");
+            prefabs.register_component_factory::<CompositeVisibility>("CompositeVisibility");
         })
         // install input managment.
         .with_bundle(oxygengine::input::bundle_installer, |input| {
@@ -113,6 +114,7 @@ pub fn main_js() -> Result<(), JsValue> {
         .with_resource(WebStorageEngine)
 		.with_resource(Camera::default())
 		.with_resource(Selector::default())
+        .with_resource(SelectorPos::default())
 		.with_system(FlashSystem, "flash", &[])
 		.with_system(GrowSystem, "grow", &[])
         .with_system(TextAniSystem, "text_ani", &[])

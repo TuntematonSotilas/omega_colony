@@ -6,12 +6,12 @@ entities:
         CompositeRenderable: None
         CompositeTransform:
           translation:
-            x: 320
-            y: 320
+            x: 0
+            y: 0
         CompositeRenderDepth: 1
+        CompositeVisibility: false
         CompositeSprite:
           sheet_frame:
             - "sprites.0.json"
             - "selector.png"
-        Selector:
-          is: true
+        Selector: true
