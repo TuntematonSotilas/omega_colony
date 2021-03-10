@@ -1,0 +1,38 @@
+template_name: panel
+entities:
+  #Camera UI
+  - Data:
+      components:
+        Name: camera_panel
+        NonPersistent: ~
+        CompositeCamera:
+          scaling: CenterAspect
+          tags:
+            - ui
+        CompositeTransform:
+          scale:
+            x: 640
+            y: 480
+  - Data:
+      components:
+        Tag: ui
+        CompositeRenderable: None
+        CompositeTransform: {}
+        CompositeUiElement:
+          camera_name: camera_panel
+          theme: panel_bkg
+          right_anchor:
+             Value: 1
+          alignment:
+            x:
+              Value: 0
+            y:
+              Value: 0.5
+          fixed_width:
+            Value: 200
+          fixed_height:
+            Value: 20
+          element_type:
+            Image: {}
+        NonPersistent: ~
+        CompositeRenderDepth: 30

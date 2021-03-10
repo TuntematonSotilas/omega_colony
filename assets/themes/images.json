@@ -50,5 +50,31 @@
                 "h": 480
             }
         }
+    },
+	"panel_bkg": {
+        "Image": {
+            "image_path": {
+                "Single": "ui/panel_bkg.png"
+            },
+            "source_rect": {
+                "x": 0,
+                "y": 0,
+                "w": 1,
+                "h": 1
+            }
+        }
+    },
+	"panel_brd_left": {
+        "Image": {
+            "image_path": {
+                "Single": "ui/panel_brd_left.png"
+            },
+            "source_rect": {
+                "x": 0,
+                "y": 0,
+                "w": 3,
+                "h": 1
+            }
+        }
     }
 }
