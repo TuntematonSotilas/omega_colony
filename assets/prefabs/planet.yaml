@@ -33,4 +33,40 @@ entities:
         CompositeMapChunk:
           map_name: planet.map
           layer_name: ground
-  
+  #Camera UI
+  - Data:
+      components:
+        Name: camera_ui
+        NonPersistent: ~
+        CompositeCamera:
+          scaling: CenterAspect
+          tags:
+            - ui
+        CompositeTransform:
+          scale:
+            x: 640
+            y: 480
+  #Stars
+  - Data:
+      components:
+        Tag: ui
+        NonPersistent: ~
+        CompositeRenderable: None
+        CompositeTransform:
+          scale:
+            x: 2.1
+            y: 1.5
+        CompositeUiElement:
+          camera_name: camera_ui
+          theme: stars
+          fixed_width:
+            Value: 640
+          fixed_height:
+            Value: 480
+          alignment:
+            x:
+              Value: 0.5
+            y:
+              Value: 0.5
+          element_type:
+            Image: {}

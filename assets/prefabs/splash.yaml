@@ -1,5 +1,6 @@
 template_name: splash
 entities:
+  #Camera UI
   - Data:
       components:
         Name: camera_ui
