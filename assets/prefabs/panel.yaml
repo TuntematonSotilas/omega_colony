@@ -1,23 +1,12 @@
 template_name: panel
 entities:
-  #Camera UI
   - Data:
       components:
-        Name: camera_panel
+        Tag: ui_panel
         NonPersistent: ~
-        CompositeCamera:
-          scaling: CenterAspect
-          tags:
-            - ui
-        CompositeTransform:
-          scale:
-            x: 640
-            y: 480
-  - Data:
-      components:
-        Tag: ui
         CompositeRenderable: None
         CompositeTransform: {}
+        CompositeRenderDepth: 100
         CompositeUiElement:
           camera_name: camera_panel
           theme: panel_bkg
@@ -34,5 +23,3 @@ entities:
             Value: 20
           element_type:
             Image: {}
-        NonPersistent: ~
-        CompositeRenderDepth: 30

@@ -1,5 +1,19 @@
 template_name: planet
 entities:
+  #Camera Bckg
+  - Data:
+      components:
+        Name: camera_bkg
+        NonPersistent: ~
+        CompositeCamera:
+          scaling: CenterAspect
+          tags:
+            - ui_bkg
+        CompositeTransform:
+          scale:
+            x: 640
+            y: 480
+        CompositeRenderDepth: 1
   # Camera
   - Data:
       components:
@@ -13,43 +27,25 @@ entities:
           scale:
             x: 480
             y: 480
-  # Rocks
+        CompositeRenderDepth: 2
+  #Camera Panel
   - Data:
       components:
-        Tag: world
-        NonPersistent: ~
-        CompositeRenderable: None
-        CompositeTransform: {}
-        CompositeMapChunk:
-          map_name: planet.map
-          layer_name: rocks
-  # Ground
-  - Data:
-      components:
-        Tag: world
-        NonPersistent: ~
-        CompositeRenderable: None
-        CompositeTransform: {}
-        CompositeMapChunk:
-          map_name: planet.map
-          layer_name: ground
-  #Camera UI
-  - Data:
-      components:
-        Name: camera_ui
+        Name: camera_panel
         NonPersistent: ~
         CompositeCamera:
           scaling: CenterAspect
           tags:
-            - ui
+            - ui_panel
         CompositeTransform:
           scale:
             x: 640
             y: 480
+        CompositeRenderDepth: 10
   #Stars
   - Data:
       components:
-        Tag: ui
+        Tag: ui_bkg
         NonPersistent: ~
         CompositeRenderable: None
         CompositeTransform:
@@ -57,7 +53,7 @@ entities:
             x: 2.1
             y: 1.5
         CompositeUiElement:
-          camera_name: camera_ui
+          camera_name: camera_bkg
           theme: stars
           fixed_width:
             Value: 640
@@ -70,3 +66,25 @@ entities:
               Value: 0.5
           element_type:
             Image: {}
+  # Ground
+  - Data:
+      components:
+        Tag: world
+        NonPersistent: ~
+        CompositeRenderable: None
+        CompositeTransform: {}
+        CompositeMapChunk:
+          map_name: planet.map
+          layer_name: ground
+        CompositeRenderDepth: 2
+  # Rocks
+  - Data:
+      components:
+        Tag: world
+        NonPersistent: ~
+        CompositeRenderable: None
+        CompositeTransform: {}
+        CompositeMapChunk:
+          map_name: planet.map
+          layer_name: rocks
+        CompositeRenderDepth: 3

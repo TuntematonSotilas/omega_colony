@@ -24,6 +24,12 @@ impl State for PlanetState {
             .write_resource::<PrefabManager>()
             .instantiate_world("selector", world)
             .unwrap()[0];
+
+        // instantiate panel from prefab.
+        world
+             .write_resource::<PrefabManager>()
+             .instantiate_world("panel", world)
+             .unwrap()[0];
 		
     }
 

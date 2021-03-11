@@ -8,10 +8,10 @@ entities:
           translation:
             x: 160
             y: 160
-        CompositeRenderDepth: 1
         CompositeSprite:
           sheet_frame:
             - "sprites.0.json"
             - "base.png"
         InteractiveSprite:
           size: 32
+        CompositeRenderDepth: 3
