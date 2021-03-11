@@ -11,15 +11,34 @@ entities:
           camera_name: camera_panel
           theme: panel_bkg
           right_anchor:
-             Value: 1
+            Value: 1.5
+          top_anchor: 
+            Value: 0
           alignment:
-            x:
-              Value: 0
-            y:
-              Value: 0.5
+             x:
+               Value: 0
+             y:
+               Value: 0.5
           fixed_width:
-            Value: 200
+            Value: 100
           fixed_height:
-            Value: 20
+            Value: 480
           element_type:
             Image: {}
+          children:
+            - left_anchor:
+                Value: 0
+              # top_anchor: 
+              #   Value: 0
+              # alignment:
+              #   x:
+              #     Value: 1
+              #   y:
+              #     Value: 0
+              theme: panel_brd_left
+              fixed_width:
+                Value: 3
+              fixed_height:
+                Value: 480
+              element_type:
+                Image: {}
