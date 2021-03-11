@@ -28,13 +28,6 @@ entities:
           children:
             - left_anchor:
                 Value: 0
-              # top_anchor: 
-              #   Value: 0
-              # alignment:
-              #   x:
-              #     Value: 1
-              #   y:
-              #     Value: 0
               theme: panel_brd_left
               fixed_width:
                 Value: 3
