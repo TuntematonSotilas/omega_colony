@@ -52,16 +52,12 @@ pub fn main_js() -> Result<(), JsValue> {
                 assets.register_error_reporter(LoggerAssetsDatabaseErrorReporter);
                 // register assets protocols from composite renderer module.
                 oxygengine::composite_renderer::protocols_installer(assets);
-                // register assets protocols from audio module.
-                //oxygengine::audio::protocols_installer(assets);
             }),
         )
         // install core module prefabs management.
         .with_bundle(oxygengine::core::prefab::bundle_installer, |prefabs| {
             // install composite renderer prefabs.
             oxygengine::composite_renderer::prefabs_installer(prefabs);
-            // install audio prefabs.
-            //oxygengine::audio::prefabs_installer(prefabs);
             // install 2d physics prefabs.
             oxygengine::physics_2d::prefabs_installer(prefabs);
             // install prefabs for integration between 2D physics and composite rendering.
@@ -95,8 +91,6 @@ pub fn main_js() -> Result<(), JsValue> {
 				//.image_source_inner_margin(0.5) 
             ),
         )
-        // install audio support.
-        //.with_bundle(oxygengine::audio::bundle_installer, WebAudio::default())
         // install 2D physics with default gravity force vector.
         .with_bundle(
             oxygengine::physics_2d::bundle_installer,
@@ -110,9 +104,7 @@ pub fn main_js() -> Result<(), JsValue> {
             oxygengine::integration_physics_2d_composite_renderer::bundle_installer,
             (),
         )
-        // install web storage engine resource.
-        .with_resource(WebStorageEngine)
-		.with_resource(Camera::default())
+        .with_resource(Camera::default())
 		.with_resource(Selector::default())
         .with_resource(SelectorPos::default())
 		.with_system(FlashSystem, "flash", &[])
