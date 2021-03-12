@@ -42,7 +42,7 @@ entities:
                 top: 800
               element_type:
                 Text:
-                  text: Jan 01, 0000 
+                  text: 001
                   color:
                     r: 255
                     g: 220
