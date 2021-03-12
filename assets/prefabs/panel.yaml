@@ -26,12 +26,25 @@ entities:
           element_type:
             Image: {}
           children:
-            - left_anchor:
-                Value: 0
-              theme: panel_brd_left
+            - theme: panel_brd_left
               fixed_width:
                 Value: 3
               fixed_height:
                 Value: 480
               element_type:
                 Image: {}
+            - theme: text
+              fixed_width:
+                Value: 100
+              fixed_height:
+                Value: 10
+              padding:
+                top: 800
+              element_type:
+                Text:
+                  text: Jan 01, 0000 
+                  color:
+                    r: 255
+                    g: 220
+                    b: 78
+                    a: 255
