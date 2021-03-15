@@ -33,7 +33,8 @@ entities:
                 Value: 480
               element_type:
                 Image: {}
-            - theme: text
+            - id: day 
+              theme: text
               fixed_width:
                 Value: 100
               fixed_height:
@@ -42,9 +43,10 @@ entities:
                 top: 800
               element_type:
                 Text:
-                  text: 001
+                  text: 000
                   color:
                     r: 255
                     g: 220
                     b: 78
                     a: 255
+        Panel: true

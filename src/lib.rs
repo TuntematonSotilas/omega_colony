@@ -9,11 +9,12 @@ mod resources;
 use crate::{
     states::loading::LoadingState,
 	components::{
-		flash::Flash,
+        flash::Flash,
 		grow::Grow,
         text_ani::TextAni,
 		interactive_sprite::InteractiveSprite,
 		selector::Selector,
+        panel::Panel,
 	},
 	systems::{
 		flash::FlashSystem,
@@ -22,9 +23,11 @@ use crate::{
 		camera_control::CameraControlSystem,
 		sprite_click::SpriteClickSystem,
 		selector::SelectorSystem,
+        day::DaySystem,
 	},
 	resources::{
-		camera::Camera,
+		day::Day,
+        camera::Camera,
 		selector::SelectorPos,
 	},
 };
@@ -63,7 +66,8 @@ pub fn main_js() -> Result<(), JsValue> {
             // install prefabs for integration between 2D physics and composite rendering.
             oxygengine::integration_physics_2d_composite_renderer::prefabs_installer(prefabs);
             // register game prefabs component factories.
-			prefabs.register_component_factory::<Flash>("Flash");
+			prefabs.register_component_factory::<Panel>("Panel");
+            prefabs.register_component_factory::<Flash>("Flash");
 			prefabs.register_component_factory::<Grow>("Grow");
 			prefabs.register_component_factory::<TextAni>("TextAni");
 			prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
@@ -104,6 +108,7 @@ pub fn main_js() -> Result<(), JsValue> {
             oxygengine::integration_physics_2d_composite_renderer::bundle_installer,
             (),
         )
+        .with_resource(Day::default())
         .with_resource(Camera::default())
 		.with_resource(Selector::default())
         .with_resource(SelectorPos::default())
@@ -113,6 +118,7 @@ pub fn main_js() -> Result<(), JsValue> {
 		.with_system(CameraControlSystem, "camera_control", &[])
 		.with_system(SpriteClickSystem, "sprite_clic", &[])
 		.with_system(SelectorSystem, "selector", &[])
+        .with_system(DaySystem, "day", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.

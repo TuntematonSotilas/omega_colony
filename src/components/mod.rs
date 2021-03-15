@@ -3,3 +3,4 @@ pub mod grow;
 pub mod text_ani;
 pub mod interactive_sprite;
 pub mod selector;
+pub mod panel;
