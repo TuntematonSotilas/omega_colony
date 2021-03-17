@@ -23,10 +23,10 @@ use crate::{
 		camera_control::CameraControlSystem,
 		sprite_click::SpriteClickSystem,
 		selector::SelectorSystem,
-        day::DaySystem,
+        time::TimeSystem,
 	},
 	resources::{
-		day::Day,
+		time::Time,
         camera::Camera,
 		selector::SelectorPos,
 	},
@@ -108,7 +108,7 @@ pub fn main_js() -> Result<(), JsValue> {
             oxygengine::integration_physics_2d_composite_renderer::bundle_installer,
             (),
         )
-        .with_resource(Day::default())
+        .with_resource(Time::default())
         .with_resource(Camera::default())
 		.with_resource(Selector::default())
         .with_resource(SelectorPos::default())
@@ -118,7 +118,7 @@ pub fn main_js() -> Result<(), JsValue> {
 		.with_system(CameraControlSystem, "camera_control", &[])
 		.with_system(SpriteClickSystem, "sprite_clic", &[])
 		.with_system(SelectorSystem, "selector", &[])
-        .with_system(DaySystem, "day", &[])
+        .with_system(TimeSystem, "time", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.

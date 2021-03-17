@@ -2,44 +2,49 @@ use oxygengine::prelude::*;
 
 use crate::{
 	components::panel::Panel,
-	resources::day::Day,
+	resources::time::Time,
 };
 
-pub struct DaySystem;
+pub struct TimeSystem;
 
-impl<'s> System<'s> for DaySystem {
+impl<'s> System<'s> for TimeSystem {
     type SystemData = (
         ReadExpect<'s, AppLifeCycle>,
 		WriteStorage<'s, CompositeUiElement>,
         ReadStorage<'s, Panel>,
-		Write<'s, Day>,
+		Write<'s, Time>,
     );
 
     fn run(
         &mut self, 
-		(lifecycle, mut ui_elements, panels, mut day)
+		(lifecycle, mut ui_elements, panels, mut time)
 		: Self::SystemData,
     ) {
         let delta_time = lifecycle.delta_time_seconds();
-        day.phase += delta_time;
-        if day.phase > 60. {
-            day.day += 1.;
+        time.phase += delta_time;
+        if time.phase > 10. {
+            
+			if time.hour == 24 {
+				time.hour = 0;
+				time.day += 1;
+			}
+			time.hour += 1;
+			
+
             for (ui_element, _panel) in (&mut ui_elements, &panels).join() {	
                 for child in &mut ui_element.children {
                    
                     if let Some(id) = &child.id {
-                        if id == "day" {
+                        if id == "time" {
                             if let UiElementType::Text(text) = &mut child.element_type {
-                                let day_fmt = format!("{:04}", day.day);
+                                let day_fmt = format!("{:04} H {:02}", time.day, time.hour);
                                 text.text = day_fmt.clone().into();
-                                debug!("{0}", day_fmt.clone());
                             }
                         }
                     }
                 }
             }
-
-            day.phase = 0.;
+            time.phase = 0.;
         }
 		
 	}	
