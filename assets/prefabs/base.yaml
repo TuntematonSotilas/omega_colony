@@ -11,7 +11,21 @@ entities:
         CompositeSprite:
           sheet_frame:
             - "sprites.0.json"
-            - "base.png"
+            - "base_0.png"
+        CompositeSpriteAnimation:
+          animations:
+            close:
+              sheet: "sprites.0.json"
+              frames:
+                - "base_0.png"
+            opening:
+              sheet: "sprites.0.json"
+              frames:
+                - "base_1.png"
+            open:
+              sheet: "sprites.0.json"
+              frames:
+                - "base_2.png"    
         InteractiveSprite:
           size: 32
         CompositeRenderDepth: 3

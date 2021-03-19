@@ -9,6 +9,7 @@ entities:
         CompositeRenderDepth: 100
         CompositeUiElement:
           camera_name: camera_panel
+          interactive: panel
           theme: panel_bkg
           right_anchor:
             Value: 1.5
@@ -50,4 +51,18 @@ entities:
                     g: 220
                     b: 78
                     a: 255
-        Panel: true
+            - theme: unit_border
+              fixed_width:
+                Value: 32
+              fixed_height:
+                Value: 32
+              alignment:
+                x:
+                  Value: -0.5
+                y:
+                  Value: -5
+              scale:
+                x: 1.3
+                y: 1
+              element_type:
+                Image: {}

@@ -76,5 +76,18 @@
                 "h": 1
             }
         }
+    },
+	"unit_border": {
+        "Image": {
+            "image_path": {
+                "Single": "ui/ui_unit_border.png"
+            },
+            "source_rect": {
+                "x": 0,
+                "y": 0,
+                "w": 32,
+                "h": 32
+            }
+        }
     }
 }

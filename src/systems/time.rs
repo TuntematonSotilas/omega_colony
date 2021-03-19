@@ -2,10 +2,7 @@ use oxygengine::prelude::*;
 use serde_json;
 use web_sys::window;
 
-use crate::{
-	components::panel::Panel,
-	resources::time::{Time, TIME_STORAGE},
-};
+use crate::resources::time::{Time, TIME_STORAGE};
 
 pub struct TimeSystem;
 
@@ -13,13 +10,12 @@ impl<'s> System<'s> for TimeSystem {
     type SystemData = (
         ReadExpect<'s, AppLifeCycle>,
 		WriteStorage<'s, CompositeUiElement>,
-        ReadStorage<'s, Panel>,
 		Write<'s, Time>,
     );
 
     fn run(
         &mut self, 
-		(lifecycle, mut ui_elements, panels, mut time)
+		(lifecycle, mut ui_elements, mut time)
 		: Self::SystemData,
     ) {
         let delta_time = lifecycle.delta_time_seconds();
@@ -32,7 +28,7 @@ impl<'s> System<'s> for TimeSystem {
 			}
 			time.hour += 1;
 			
-            for (ui_element, _panel) in (&mut ui_elements, &panels).join() {	
+            for ui_element in (&mut ui_elements).join() {	
                 for child in &mut ui_element.children {
                    
                     if let Some(id) = &child.id {

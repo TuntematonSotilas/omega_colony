@@ -14,7 +14,6 @@ use crate::{
         text_ani::TextAni,
 		interactive_sprite::InteractiveSprite,
 		selector::Selector,
-        panel::Panel,
 	},
 	systems::{
 		flash::FlashSystem,
@@ -24,6 +23,7 @@ use crate::{
 		sprite_click::SpriteClickSystem,
 		selector::SelectorSystem,
         time::TimeSystem,
+		builder_click::BuilderClickSystem,
 	},
 	resources::{
 		time::Time,
@@ -66,7 +66,6 @@ pub fn main_js() -> Result<(), JsValue> {
             // install prefabs for integration between 2D physics and composite rendering.
             oxygengine::integration_physics_2d_composite_renderer::prefabs_installer(prefabs);
             // register game prefabs component factories.
-			prefabs.register_component_factory::<Panel>("Panel");
             prefabs.register_component_factory::<Flash>("Flash");
 			prefabs.register_component_factory::<Grow>("Grow");
 			prefabs.register_component_factory::<TextAni>("TextAni");
@@ -116,9 +115,10 @@ pub fn main_js() -> Result<(), JsValue> {
 		.with_system(GrowSystem, "grow", &[])
         .with_system(TextAniSystem, "text_ani", &[])
 		.with_system(CameraControlSystem, "camera_control", &[])
-		.with_system(SpriteClickSystem, "sprite_clic", &[])
+		.with_system(SpriteClickSystem, "sprite_click", &[])
 		.with_system(SelectorSystem, "selector", &[])
         .with_system(TimeSystem, "time", &[])
+		.with_system(BuilderClickSystem, "builder_click", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.
