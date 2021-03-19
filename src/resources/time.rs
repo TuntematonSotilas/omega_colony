@@ -1,6 +1,9 @@
 use oxygengine::prelude::*;
+use serde::{Deserialize, Serialize};
 
-#[derive(Default)]
+pub const TIME_STORAGE: &str = "time";
+
+#[derive(Default, Serialize, Deserialize, Clone)]
 pub struct Time {
     pub day: u32,
 	pub hour: u32,
