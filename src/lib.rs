@@ -23,7 +23,7 @@ use crate::{
 		sprite_click::SpriteClickSystem,
 		selector::SelectorSystem,
         time::TimeSystem,
-		builder_click::BuilderClickSystem,
+		panel_click::PanelClickSystem,
 	},
 	resources::{
 		time::Time,
@@ -118,7 +118,7 @@ pub fn main_js() -> Result<(), JsValue> {
 		.with_system(SpriteClickSystem, "sprite_click", &[])
 		.with_system(SelectorSystem, "selector", &[])
         .with_system(TimeSystem, "time", &[])
-		.with_system(BuilderClickSystem, "builder_click", &[])
+		.with_system(PanelClickSystem, "panel_click", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.
