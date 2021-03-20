@@ -77,10 +77,10 @@
             }
         }
     },
-	"unit_border": {
+	"item_border": {
         "Image": {
             "image_path": {
-                "Single": "ui/ui_unit_border.png"
+                "Single": "ui/ui_item_border.png"
             },
             "source_rect": {
                 "x": 0,

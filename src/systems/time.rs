@@ -29,8 +29,7 @@ impl<'s> System<'s> for TimeSystem {
 			time.hour += 1;
 			
             for ui_element in (&mut ui_elements).join() {	
-                for child in &mut ui_element.children {
-                   
+                for child in &mut ui_element.children {  
                     if let Some(id) = &child.id {
                         if id == "time" {
                             if let UiElementType::Text(text) = &mut child.element_type {
