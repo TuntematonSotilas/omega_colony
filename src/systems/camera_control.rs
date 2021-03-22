@@ -20,11 +20,20 @@ impl<'s> System<'s> for CameraControlSystem {
 		(renderer, mut camera_res, input, cameras, mut transforms)
 		: Self::SystemData
 	) {
-        if camera_res.camera.is_none() {
+
+		if camera_res.camera.is_none() {
             return;
         }
 
 		let screen_size = renderer.view_size();
+
+		//Center camera
+		if !camera_res.is_centered {
+            self.apply_transform(&camera_res, cameras, screen_size, &mut transforms, 224., 224.);
+			camera_res.is_centered = true;
+			return;
+        }
+
 		
 		let x = input.axis_or_default("mouse-x");
 		let y = input.axis_or_default("mouse-y");

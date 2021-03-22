@@ -50,29 +50,29 @@ entities:
                     g: 220
                     b: 78
                     a: 255
-  - Data:
-      components:
-        Tag: ui_panel
-        NonPersistent: ~
-        CompositeRenderable: None
-        CompositeTransform: {}
-        CompositeRenderDepth: 100
-        CompositeUiElement:
-          camera_name: camera_panel
-          interactive: item
-          theme: item_border
-          right_anchor:
-            Value: 1.5
-          top_anchor: 
-            Value: 0
-          alignment:
-              x:
-                Value: 0
-              y:
-                Value: 0.5
-          fixed_width:
-            Value: 32
-          fixed_height:
-            Value: 32
-          element_type:
-            Image: {}
+  # - Data:
+  #     components:
+  #       Tag: ui_panel
+  #       NonPersistent: ~
+  #       CompositeRenderable: None
+  #       CompositeTransform: {}
+  #       CompositeRenderDepth: 100
+  #       CompositeUiElement:
+  #         camera_name: camera_panel
+  #         interactive: item
+  #         theme: item_border
+  #         right_anchor:
+  #           Value: 1.5
+  #         top_anchor: 
+  #           Value: 0
+  #         alignment:
+  #             x:
+  #               Value: 0
+  #             y:
+  #               Value: 0.5
+  #         fixed_width:
+  #           Value: 32
+  #         fixed_height:
+  #           Value: 32
+  #         element_type:
+  #           Image: {}
