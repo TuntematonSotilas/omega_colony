@@ -13,5 +13,5 @@ png://ui/planet.png
 png://ui/landscape.png
 png://ui/panel_bkg.png
 png://ui/panel_brd_left.png
-png://ui/ui_item_border.png
-png://ui/tab.png
+png://ui/panel_title.png
+png://ui/panel_tab.png

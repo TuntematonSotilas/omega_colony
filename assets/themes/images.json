@@ -90,16 +90,29 @@
             }
         }
     },
-    "tab": {
+    "panel_tab": {
         "Image": {
             "image_path": {
-                "Single": "ui/tab.png"
+                "Single": "ui/panel_tab.png"
             },
             "source_rect": {
                 "x": 0,
                 "y": 0,
                 "w": 60,
                 "h": 20
+            }
+        }
+    },
+    "panel_title": {
+        "Image": {
+            "image_path": {
+                "Single": "ui/panel_title.png"
+            },
+            "source_rect": {
+                "x": 0,
+                "y": 0,
+                "w": 1,
+                "h": 25
             }
         }
     }

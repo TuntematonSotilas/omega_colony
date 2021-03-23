@@ -1,5 +1,6 @@
 template_name: panel
 entities:
+  #Background, Time, Title
   - Data:
       components:
         Tag: ui_panel
@@ -11,37 +12,28 @@ entities:
           camera_name: camera_panel
           theme: panel_bkg
           right_anchor:
-            Value: 1.5
-          top_anchor: 
-            Value: 0
+            Value: 1.3
           alignment:
-             x:
-               Value: 0
-             y:
-               Value: 0.5
+            x:
+              Value: 0
+            y:
+              Value: 0.5
           fixed_width:
-            Value: 200
+            Value: 250
           fixed_height:
             Value: 480
           element_type:
             Image: {}
           children:
-            - theme: panel_brd_left
-              fixed_width:
-                Value: 3
-              fixed_height:
-                Value: 480
-              element_type:
-                Image: {}
             - id: time 
               theme: text
               fixed_width:
-                Value: 200
+                Value: 250
               fixed_height:
                 Value: 10
               padding:
-                top: 10
-                left: 50
+                top: 20
+                left: 100
               element_type:
                 Text:
                   text: 0000 H 00
@@ -50,6 +42,24 @@ entities:
                     g: 187
                     b: 187
                     a: 255
+            - id: title 
+              theme: panel_title
+              fixed_width:
+                Value: 250
+              fixed_height:
+                Value: 25
+              top_anchor: 
+                Value: 0.15
+              element_type:
+                Image: {}
+            - theme: panel_brd_left
+              fixed_width:
+                Value: 3
+              fixed_height:
+                Value: 480
+              element_type:
+                Image: {}
+  #Units tab
   - Data:
       components:
         Tag: ui_panel
@@ -60,11 +70,11 @@ entities:
         CompositeUiElement:
           camera_name: camera_panel
           interactive: tab_units
-          theme: tab
+          theme: panel_tab
           right_anchor:
-            Value: 1.52
+            Value: 1.4
           top_anchor: 
-            Value: -1.4
+            Value: -1.48
           fixed_width:
             Value: 60
           fixed_height:
@@ -88,6 +98,7 @@ entities:
                     g: 0
                     b: 0
                     a: 255
+  #Upgrades tab
   - Data:
       components:
         Tag: ui_panel
@@ -98,11 +109,11 @@ entities:
         CompositeUiElement:
           camera_name: camera_panel
           interactive: tab_upgrades
-          theme: tab
+          theme: panel_tab
           right_anchor:
-            Value: 1.76
+            Value: 1.7
           top_anchor: 
-            Value: -1.4
+            Value: -1.48
           fixed_width:
             Value: 60
           fixed_height:
