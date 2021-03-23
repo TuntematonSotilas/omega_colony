@@ -5,6 +5,12 @@
         	"font_size": { "Value": 12 }
         }
     },
+    "text_tab": {
+        "Text": {
+        	"font_name": "Orbitron",
+        	"font_size": { "Value": 9 }
+        }
+    },
     "text_intro": {
         "Text": {
         	"font_name": "Orbitron",

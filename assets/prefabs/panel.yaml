@@ -46,9 +46,9 @@ entities:
                 Text:
                   text: 0000 H 00
                   color:
-                    r: 255
-                    g: 220
-                    b: 78
+                    r: 187
+                    g: 187
+                    b: 187
                     a: 255
   - Data:
       components:
@@ -71,6 +71,23 @@ entities:
             Value: 20
           element_type:
             Image: {}
+          children:
+            - theme: text_tab
+              fixed_width:
+                Value: 60
+              fixed_height:
+                Value: 20
+              padding:
+                top: 10
+                left: 25
+              element_type:
+                Text:
+                  text: UNITS
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    a: 255
   - Data:
       components:
         Tag: ui_panel
@@ -92,3 +109,20 @@ entities:
             Value: 20
           element_type:
             Image: {}
+          children:
+            - theme: text_tab
+              fixed_width:
+                Value: 60
+              fixed_height:
+                Value: 20
+              padding:
+                top: 10
+                left: 10
+              element_type:
+                Text:
+                  text: UPGRADE
+                  color:
+                    r: 0
+                    g: 0
+                    b: 0
+                    a: 255
