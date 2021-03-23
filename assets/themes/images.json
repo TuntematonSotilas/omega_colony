@@ -59,34 +59,8 @@
             "source_rect": {
                 "x": 0,
                 "y": 0,
-                "w": 1,
+                "w": 200,
                 "h": 1
-            }
-        }
-    },
-	"panel_brd_left": {
-        "Image": {
-            "image_path": {
-                "Single": "ui/panel_brd_left.png"
-            },
-            "source_rect": {
-                "x": 0,
-                "y": 0,
-                "w": 3,
-                "h": 1
-            }
-        }
-    },
-	"item_border": {
-        "Image": {
-            "image_path": {
-                "Single": "ui/ui_item_border.png"
-            },
-            "source_rect": {
-                "x": 0,
-                "y": 0,
-                "w": 32,
-                "h": 32
             }
         }
     },
