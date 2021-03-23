@@ -14,3 +14,4 @@ png://ui/landscape.png
 png://ui/panel_bkg.png
 png://ui/panel_brd_left.png
 png://ui/ui_item_border.png
+png://ui/tab.png
