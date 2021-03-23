@@ -52,6 +52,23 @@ entities:
                 Value: 0.15
               element_type:
                 Image: {}
+              children:
+                - theme: text
+                  fixed_width:
+                    Value: 250
+                  fixed_height:
+                    Value: 20
+                  padding:
+                    top: 12
+                    left: 150
+                  element_type:
+                    Text:
+                      text: TITLE
+                      color:
+                        r: 0
+                        g: 0
+                        b: 0
+                        a: 255
             - theme: panel_brd_left
               fixed_width:
                 Value: 3
