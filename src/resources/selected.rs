@@ -1,6 +1,7 @@
 use oxygengine::prelude::*;
 
 #[derive(Default)]
-pub struct SelectorPos {
+pub struct Selected {
 	pub pos: Vec2,
+	pub name: String,
 }

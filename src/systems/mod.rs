@@ -6,3 +6,4 @@ pub mod sprite_click;
 pub mod selector;
 pub mod time;
 pub mod panel_click;
+pub mod panel;

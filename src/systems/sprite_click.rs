@@ -4,7 +4,7 @@ use crate::{
 	components::interactive_sprite::InteractiveSprite,
 	resources::{
 		camera::Camera,
-		selector::SelectorPos,
+		selected::Selected,
 	},
 };
 
@@ -17,12 +17,12 @@ impl<'s> System<'s> for SpriteClickSystem {
 		Read<'s, Camera>,
 		ReadStorage<'s, InteractiveSprite>,
 		ReadStorage<'s, CompositeTransform>,
-		Write<'s, SelectorPos>,
+		Write<'s, Selected>,
     );
 
     fn run(
         &mut self, 
-		(input, camera_cache, camera_res, interactive_sprites, transforms, mut selector_pos)
+		(input, camera_cache, camera_res, interactive_sprites, transforms, mut selected)
 		: Self::SystemData,
     ) {
         if input.trigger_or_default("mouse-left") == TriggerState::Pressed {
@@ -42,7 +42,8 @@ impl<'s> System<'s> for SpriteClickSystem {
 								pos_inv.y >= 0.0 && 
 								pos_inv.y < interactive_sprite.size {
 									let tile_pos = matrix * Vec2::new(0.,0.);
-									selector_pos.pos = tile_pos;
+									selected.pos = tile_pos;
+									selected.name = interactive_sprite.name.clone();
 							}
 						}
 					}

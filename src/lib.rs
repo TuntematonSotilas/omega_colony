@@ -24,11 +24,12 @@ use crate::{
 		selector::SelectorSystem,
         time::TimeSystem,
 		panel_click::PanelClickSystem,
+		panel::PanelSystem,
 	},
 	resources::{
 		time::Time,
         camera::Camera,
-		selector::SelectorPos,
+		selected::Selected,
 	},
 };
 use oxygengine::prelude::*;
@@ -109,8 +110,7 @@ pub fn main_js() -> Result<(), JsValue> {
         )
         .with_resource(Time::default())
         .with_resource(Camera::default())
-		.with_resource(Selector::default())
-        .with_resource(SelectorPos::default())
+		.with_resource(Selected::default())
 		.with_system(FlashSystem, "flash", &[])
 		.with_system(GrowSystem, "grow", &[])
         .with_system(TextAniSystem, "text_ani", &[])
@@ -119,6 +119,7 @@ pub fn main_js() -> Result<(), JsValue> {
 		.with_system(SelectorSystem, "selector", &[])
         .with_system(TimeSystem, "time", &[])
 		.with_system(PanelClickSystem, "panel_click", &[])
+		.with_system(PanelSystem, "panel", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.

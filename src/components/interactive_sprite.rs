@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct InteractiveSprite {
     pub size: Scalar,
+	pub name: String,
 }
 
 impl Component for InteractiveSprite {
