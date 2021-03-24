@@ -12,7 +12,7 @@ entities:
           camera_name: camera_panel
           theme: panel_bkg
           right_anchor:
-            Value: 1.3
+            Value: 1.2
           alignment:
             x:
               Value: 0
@@ -63,7 +63,7 @@ entities:
                     left: 150
                   element_type:
                     Text:
-                      text: TITLE
+                      text: ""
                       color:
                         r: 0
                         g: 0
@@ -82,16 +82,16 @@ entities:
           interactive: tab_units
           theme: panel_tab
           right_anchor:
-            Value: 1.3
+            Value: 1.2
           top_anchor: 
             Value: -1.48
           alignment:
             x:
-              Value: -0.05
+              Value: -0.1
             y:
               Value: 0
           fixed_width:
-            Value: 90
+            Value: 80
           fixed_height:
             Value: 20
           element_type:
@@ -99,7 +99,7 @@ entities:
           children:
             - theme: text_tab
               fixed_width:
-                Value: 90
+                Value: 80
               fixed_height:
                 Value: 20
               padding:
@@ -126,16 +126,16 @@ entities:
           interactive: tab_upgrades
           theme: panel_tab
           right_anchor:
-            Value: 1.3
+            Value: 1.2
           top_anchor: 
             Value: -1.48
           alignment:
             x:
-              Value: -1.1
+              Value: -1.2
             y:
               Value: 0
           fixed_width:
-            Value: 90
+            Value: 80
           fixed_height:
             Value: 20
           element_type:
@@ -143,12 +143,12 @@ entities:
           children:
             - theme: text_tab
               fixed_width:
-                Value: 90
+                Value: 80
               fixed_height:
                 Value: 20
               padding:
                 top: 10
-                left: 40
+                left: 30
               element_type:
                 Text:
                   text: UPGRADE
