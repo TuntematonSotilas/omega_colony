@@ -30,6 +30,7 @@ use crate::{
 		time::Time,
         camera::Camera,
 		selected::Selected,
+        referential::Referential,
 	},
 };
 use oxygengine::prelude::*;
@@ -111,6 +112,7 @@ pub fn main_js() -> Result<(), JsValue> {
         .with_resource(Time::default())
         .with_resource(Camera::default())
 		.with_resource(Selected::default())
+        .with_resource(Referential::default())
 		.with_system(FlashSystem, "flash", &[])
 		.with_system(GrowSystem, "grow", &[])
         .with_system(TextAniSystem, "text_ani", &[])

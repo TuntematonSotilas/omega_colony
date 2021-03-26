@@ -1,6 +1,9 @@
 use oxygengine::prelude::*;
 
-use crate::resources::camera::Camera;
+use crate::resources::{
+    camera::Camera,
+    referential::Referential,
+};
 
 #[derive(Default)]
 pub struct PlanetState;
@@ -30,7 +33,6 @@ impl State for PlanetState {
              .write_resource::<PrefabManager>()
              .instantiate_world("panel", world)
              .unwrap()[0];
-		
     }
 
     fn on_process(&mut self, world: &mut World) -> StateChange {
