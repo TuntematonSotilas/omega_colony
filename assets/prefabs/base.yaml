@@ -28,5 +28,5 @@ entities:
                 - "base_2.png"    
         InteractiveSprite:
           size: 32
-          name: "BASE"
+          code: "base"
         CompositeRenderDepth: 3

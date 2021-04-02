@@ -43,7 +43,7 @@ impl<'s> System<'s> for SpriteClickSystem {
 								pos_inv.y < interactive_sprite.size {
 									let tile_pos = matrix * Vec2::new(0.,0.);
 									selected.pos = tile_pos;
-									selected.name = interactive_sprite.name.clone();
+									selected.code = interactive_sprite.code.clone();
 							}
 						}
 					}

@@ -18,9 +18,11 @@ impl State for SplashState {
     }
 
     fn on_process(&mut self, world: &mut World) -> StateChange {
-
-		world.write_resource::<Referential>().init();
-
+        let mut refe = world.write_resource::<Referential>();
+        if !refe.is_init {
+            debug!("init");
+            refe.init();
+        }
         let input = &world.read_resource::<InputController>();
         if input.trigger_or_default("enter") == TriggerState::Pressed {
             return StateChange::Swap(Box::new(IntroState));

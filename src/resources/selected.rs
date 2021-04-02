@@ -3,5 +3,5 @@ use oxygengine::prelude::*;
 #[derive(Default)]
 pub struct Selected {
 	pub pos: Vec2,
-	pub name: String,
+	pub code: String,
 }

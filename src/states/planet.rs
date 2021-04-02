@@ -1,9 +1,6 @@
 use oxygengine::prelude::*;
 
-use crate::resources::{
-    camera::Camera,
-    referential::Referential,
-};
+use crate::resources::camera::Camera;
 
 #[derive(Default)]
 pub struct PlanetState;
@@ -36,7 +33,6 @@ impl State for PlanetState {
     }
 
     fn on_process(&mut self, world: &mut World) -> StateChange {
-
 		// Set cameras
 		if world.read_resource::<Camera>().camera.is_none() {
 			let camera = entity_find_world("camera", world);
@@ -46,7 +42,6 @@ impl State for PlanetState {
 			let camera_panel = entity_find_world("camera_panel", world);
 			world.write_resource::<Camera>().camera_panel = camera_panel;
 		}
-
 		StateChange::None
     }
 }

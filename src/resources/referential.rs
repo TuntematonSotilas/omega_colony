@@ -20,7 +20,8 @@ pub struct RefeItem  {
 
 #[derive(Default, Clone)]
 pub struct Referential {
-	pub refes: HashMap<String, RefeItem>
+	pub is_init: bool,
+	pub refes: HashMap<String, RefeItem>,
 }
 
 impl Referential {
@@ -33,5 +34,6 @@ impl Referential {
 		};
 		self.refes = HashMap::new();
 		self.refes.insert("base".to_string(), base);
+		self.is_init = true;
 	}
 }
