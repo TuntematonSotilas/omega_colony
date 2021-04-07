@@ -20,7 +20,6 @@ impl State for SplashState {
     fn on_process(&mut self, world: &mut World) -> StateChange {
         let mut refe = world.write_resource::<Referential>();
         if !refe.is_init {
-            debug!("init");
             refe.init();
         }
         let input = &world.read_resource::<InputController>();
