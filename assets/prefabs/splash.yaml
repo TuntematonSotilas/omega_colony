@@ -1,4 +1,4 @@
-template_name: intro
+template_name: splash
 entities:
   - Data:
       components:
