@@ -27,6 +27,6 @@ web-sys = { version = "0.3.49", features = [
 ]}
 
 [dependencies.oxygengine]
-version = "0.16"
+version = "0.17"
 features = ["web-composite-game"]
 

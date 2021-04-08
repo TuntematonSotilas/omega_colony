@@ -12,9 +12,6 @@ Oxygengine :
 ### Install Rustup + Cargo
 https://www.rust-lang.org/learn/get-started
 
-### Install wasm-pack
-https://rustwasm.github.io/wasm-pack/installer/
-
 ### Install oxygengine-ignite
 	$ cargo install oxygengine-ignite
 
