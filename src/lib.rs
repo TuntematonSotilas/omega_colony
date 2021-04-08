@@ -58,6 +58,10 @@ pub fn main_js() -> Result<(), JsValue> {
         .with_bundle(oxygengine::core::prefab::bundle_installer, |prefabs| {
             // install composite renderer prefabs.
             oxygengine::composite_renderer::prefabs_installer(prefabs);
+            // install UI prefabs.
+            oxygengine::user_interface::prefabs_installer(prefabs);
+            // install prefabs for integration between UI and composite rendering.
+            oxygengine::integration_user_interface_composite_renderer::prefabs_installer(prefabs);
             // register game prefabs component factories.
 			prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
 			prefabs.register_component_factory::<Selector>("Selector");
