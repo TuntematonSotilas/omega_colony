@@ -1,159 +1,159 @@
 template_name: panel
 entities:
   #Background, Time, Title
-  - Data:
-      components:
-        Tag: ui_panel
-        NonPersistent: ~
-        CompositeRenderable: None
-        CompositeTransform: {}
-        CompositeRenderDepth: 100
-        CompositeUiElement:
-          camera_name: camera_panel
-          theme: panel_bkg
-          right_anchor:
-            Value: 1.2
-          alignment:
-            x:
-              Value: 0
-            y:
-              Value: 0.5
-          fixed_width:
-            Value: 200
-          fixed_height:
-            Value: 480
-          element_type:
-            Image: {}
-          children:
-            - id: time 
-              theme: text
-              fixed_width:
-                Value: 200
-              fixed_height:
-                Value: 10
-              padding:
-                top: 20
-                left: 100
-              element_type:
-                Text:
-                  text: 0000 H 00
-                  color:
-                    r: 187
-                    g: 187
-                    b: 187
-                    a: 255
-            - id: title 
-              theme: panel_title
-              fixed_width:
-                Value: 200
-              fixed_height:
-                Value: 25
-              top_anchor: 
-                Value: 0.15
-              element_type:
-                Image: {}
-              children:
-                - theme: text
-                  fixed_width:
-                    Value: 200
-                  fixed_height:
-                    Value: 20
-                  padding:
-                    top: 12
-                    left: 150
-                  element_type:
-                    Text:
-                      text: ""
-                      color:
-                        r: 0
-                        g: 0
-                        b: 0
-                        a: 255
+  # - Data:
+  #     components:
+  #       Tag: ui_panel
+  #       NonPersistent: ~
+  #       CompositeRenderable: None
+  #       CompositeTransform: {}
+  #       CompositeRenderDepth: 100
+  #       CompositeUiElement:
+  #         camera_name: camera_panel
+  #         theme: panel_bkg
+  #         right_anchor:
+  #           Value: 1.2
+  #         alignment:
+  #           x:
+  #             Value: 0
+  #           y:
+  #             Value: 0.5
+  #         fixed_width:
+  #           Value: 200
+  #         fixed_height:
+  #           Value: 480
+  #         element_type:
+  #           Image: {}
+  #         children:
+  #           - id: time 
+  #             theme: text
+  #             fixed_width:
+  #               Value: 200
+  #             fixed_height:
+  #               Value: 10
+  #             padding:
+  #               top: 20
+  #               left: 100
+  #             element_type:
+  #               Text:
+  #                 text: 0000 H 00
+  #                 color:
+  #                   r: 187
+  #                   g: 187
+  #                   b: 187
+  #                   a: 255
+  #           - id: title 
+  #             theme: panel_title
+  #             fixed_width:
+  #               Value: 200
+  #             fixed_height:
+  #               Value: 25
+  #             top_anchor: 
+  #               Value: 0.15
+  #             element_type:
+  #               Image: {}
+  #             children:
+  #               - theme: text
+  #                 fixed_width:
+  #                   Value: 200
+  #                 fixed_height:
+  #                   Value: 20
+  #                 padding:
+  #                   top: 12
+  #                   left: 150
+  #                 element_type:
+  #                   Text:
+  #                     text: ""
+  #                     color:
+  #                       r: 0
+  #                       g: 0
+  #                       b: 0
+  #                       a: 255
   #Units tab
-  - Data:
-      components:
-        Tag: ui_panel
-        NonPersistent: ~
-        CompositeRenderable: None
-        CompositeTransform: {}
-        CompositeRenderDepth: 100
-        CompositeUiElement:
-          camera_name: camera_panel
-          interactive: tab_units
-          theme: panel_tab
-          right_anchor:
-            Value: 1.2
-          top_anchor: 
-            Value: -1.48
-          alignment:
-            x:
-              Value: -0.1
-            y:
-              Value: 0
-          fixed_width:
-            Value: 80
-          fixed_height:
-            Value: 20
-          element_type:
-            Image: {}
-          children:
-            - theme: text_tab
-              fixed_width:
-                Value: 80
-              fixed_height:
-                Value: 20
-              padding:
-                top: 10
-                left: 50
-              element_type:
-                Text:
-                  text: UNITS
-                  color:
-                    r: 0
-                    g: 0
-                    b: 0
-                    a: 255
+  # - Data:
+  #     components:
+  #       Tag: ui_panel
+  #       NonPersistent: ~
+  #       CompositeRenderable: None
+  #       CompositeTransform: {}
+  #       CompositeRenderDepth: 100
+  #       CompositeUiElement:
+  #         camera_name: camera_panel
+  #         interactive: tab_units
+  #         theme: panel_tab
+  #         right_anchor:
+  #           Value: 1.2
+  #         top_anchor: 
+  #           Value: -1.48
+  #         alignment:
+  #           x:
+  #             Value: -0.1
+  #           y:
+  #             Value: 0
+  #         fixed_width:
+  #           Value: 80
+  #         fixed_height:
+  #           Value: 20
+  #         element_type:
+  #           Image: {}
+  #         children:
+  #           - theme: text_tab
+  #             fixed_width:
+  #               Value: 80
+  #             fixed_height:
+  #               Value: 20
+  #             padding:
+  #               top: 10
+  #               left: 50
+  #             element_type:
+  #               Text:
+  #                 text: UNITS
+  #                 color:
+  #                   r: 0
+  #                   g: 0
+  #                   b: 0
+  #                   a: 255
   #Upgrades tab
-  - Data:
-      components:
-        Tag: ui_panel
-        NonPersistent: ~
-        CompositeRenderable: None
-        CompositeTransform: {}
-        CompositeRenderDepth: 100
-        CompositeUiElement:
-          camera_name: camera_panel
-          interactive: tab_upgrades
-          theme: panel_tab
-          right_anchor:
-            Value: 1.2
-          top_anchor: 
-            Value: -1.48
-          alignment:
-            x:
-              Value: -1.2
-            y:
-              Value: 0
-          fixed_width:
-            Value: 80
-          fixed_height:
-            Value: 20
-          element_type:
-            Image: {}
-          children:
-            - theme: text_tab
-              fixed_width:
-                Value: 80
-              fixed_height:
-                Value: 20
-              padding:
-                top: 10
-                left: 30
-              element_type:
-                Text:
-                  text: UPGRADE
-                  color:
-                    r: 0
-                    g: 0
-                    b: 0
-                    a: 255
+  # - Data:
+  #     components:
+  #       Tag: ui_panel
+  #       NonPersistent: ~
+  #       CompositeRenderable: None
+  #       CompositeTransform: {}
+  #       CompositeRenderDepth: 100
+  #       CompositeUiElement:
+  #         camera_name: camera_panel
+  #         interactive: tab_upgrades
+  #         theme: panel_tab
+  #         right_anchor:
+  #           Value: 1.2
+  #         top_anchor: 
+  #           Value: -1.48
+  #         alignment:
+  #           x:
+  #             Value: -1.2
+  #           y:
+  #             Value: 0
+  #         fixed_width:
+  #           Value: 80
+  #         fixed_height:
+  #           Value: 20
+  #         element_type:
+  #           Image: {}
+  #         children:
+  #           - theme: text_tab
+  #             fixed_width:
+  #               Value: 80
+  #             fixed_height:
+  #               Value: 20
+  #             padding:
+  #               top: 10
+  #               left: 30
+  #             element_type:
+  #               Text:
+  #                 text: UPGRADE
+  #                 color:
+  #                   r: 0
+  #                   g: 0
+  #                   b: 0
+  #                   a: 255

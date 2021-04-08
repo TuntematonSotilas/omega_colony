@@ -1,30 +1,21 @@
 #[macro_use]
 extern crate oxygengine;
 
-mod states;
-mod components;
-mod systems;
-mod resources;
+use oxygengine::prelude::*;
+use wasm_bindgen::prelude::*;
+use std::marker::PhantomData;
 
 use crate::{
     states::loading::LoadingState,
 	components::{
-        flash::Flash,
-		grow::Grow,
-        text_ani::TextAni,
 		interactive_sprite::InteractiveSprite,
 		selector::Selector,
 	},
 	systems::{
-		flash::FlashSystem,
-		grow::GrowSystem,
-        text_ani::TextAniSystem,
 		camera_control::CameraControlSystem,
 		sprite_click::SpriteClickSystem,
 		selector::SelectorSystem,
-        time::TimeSystem,
-		panel_click::PanelClickSystem,
-		panel::PanelSystem,
+        //time::TimeSystem
 	},
 	resources::{
 		time::Time,
@@ -33,8 +24,12 @@ use crate::{
         referential::Referential,
 	},
 };
-use oxygengine::prelude::*;
-use wasm_bindgen::prelude::*;
+
+mod states;
+mod components;
+mod systems;
+mod resources;
+mod ui;
 
 #[wasm_bindgen(start)]
 pub fn main_js() -> Result<(), JsValue> {
@@ -63,14 +58,7 @@ pub fn main_js() -> Result<(), JsValue> {
         .with_bundle(oxygengine::core::prefab::bundle_installer, |prefabs| {
             // install composite renderer prefabs.
             oxygengine::composite_renderer::prefabs_installer(prefabs);
-            // install 2d physics prefabs.
-            oxygengine::physics_2d::prefabs_installer(prefabs);
-            // install prefabs for integration between 2D physics and composite rendering.
-            oxygengine::integration_physics_2d_composite_renderer::prefabs_installer(prefabs);
             // register game prefabs component factories.
-            prefabs.register_component_factory::<Flash>("Flash");
-			prefabs.register_component_factory::<Grow>("Grow");
-			prefabs.register_component_factory::<TextAni>("TextAni");
 			prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
 			prefabs.register_component_factory::<Selector>("Selector");
             prefabs.register_component_factory::<CompositeVisibility>("CompositeVisibility");
@@ -96,32 +84,23 @@ pub fn main_js() -> Result<(), JsValue> {
 				//.image_source_inner_margin(0.5) 
             ),
         )
-        // install 2D physics with default gravity force vector.
+        // install UI support.
         .with_bundle(
-            oxygengine::physics_2d::bundle_installer,
-            (
-                Vector::y() * 9.81,
-                Physics2dWorldSimulationMode::FixedTimestepMaxIterations(3),
-            ),
+            oxygengine::user_interface::bundle_installer,
+            UserInterfaceRes::new(ui::setup)
         )
-        // install integration between 2D physics and composite rendering.
+        // install integration between UI and composite rendering.
         .with_bundle(
-            oxygengine::integration_physics_2d_composite_renderer::bundle_installer,
-            (),
+            oxygengine::integration_user_interface_composite_renderer::bundle_installer,
+            PhantomData::<WebCompositeRenderer>::default(),
         )
         .with_resource(Time::default())
         .with_resource(Camera::default())
 		.with_resource(Selected::default())
         .with_resource(Referential::default())
-		.with_system(FlashSystem, "flash", &[])
-		.with_system(GrowSystem, "grow", &[])
-        .with_system(TextAniSystem, "text_ani", &[])
 		.with_system(CameraControlSystem, "camera_control", &[])
 		.with_system(SpriteClickSystem, "sprite_click", &[])
 		.with_system(SelectorSystem, "selector", &[])
-        .with_system(TimeSystem, "time", &[])
-		.with_system(PanelClickSystem, "panel_click", &[])
-		.with_system(PanelSystem, "panel", &[])
         .build(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.

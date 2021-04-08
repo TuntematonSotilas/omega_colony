@@ -4,7 +4,7 @@ use std::collections::HashMap;
 pub enum RefeCateg {
 	Unit,
 	Building,
-	Upgrade
+	//Upgrade
 }
 
 impl Default for RefeCateg {

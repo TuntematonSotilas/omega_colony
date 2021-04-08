@@ -43,29 +43,29 @@ entities:
             y: 480
         CompositeRenderDepth: 10
   #Stars
-  - Data:
-      components:
-        Tag: ui_bkg
-        NonPersistent: ~
-        CompositeRenderable: None
-        CompositeTransform:
-          scale:
-            x: 2.1
-            y: 1.5
-        CompositeUiElement:
-          camera_name: camera_bkg
-          theme: stars
-          fixed_width:
-            Value: 640
-          fixed_height:
-            Value: 480
-          alignment:
-            x:
-              Value: 0.5
-            y:
-              Value: 0.5
-          element_type:
-            Image: {}
+  # - Data:
+  #     components:
+  #       Tag: ui_bkg
+  #       NonPersistent: ~
+  #       CompositeRenderable: None
+  #       CompositeTransform:
+  #         scale:
+  #           x: 2.1
+  #           y: 1.5
+  #       CompositeUiElement:
+  #         camera_name: camera_bkg
+  #         theme: stars
+  #         fixed_width:
+  #           Value: 640
+  #         fixed_height:
+  #           Value: 480
+  #         alignment:
+  #           x:
+  #             Value: 0.5
+  #           y:
+  #             Value: 0.5
+  #         element_type:
+  #           Image: {}
   # Ground
   - Data:
       components:
