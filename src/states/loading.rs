@@ -22,7 +22,7 @@ impl State for LoadingState {
 		world
 			.create_entity()
 			.with(CompositeRenderable(
-				Text::new("Orbitron", "Loading")
+				Text::new("fonts/orbitron", "Loading")
 					.color(Color::rgb(255,220,78))
 					.align(TextAlign::Center)
 					.size(20.0)
