@@ -11,12 +11,17 @@ pub fn setup(app: &mut Application) {
 }
 
 pub fn new_theme() -> ThemeProps {
-    let mut theme = new_dark_theme();
+    let mut theme = make_default_theme(
+        color_from_rgba(255,220,78, 1.0),
+        color_from_rgba(255, 255, 255, 1.0),
+        color_from_rgba(255, 255, 255, 1.0),
+        color_from_rgba(255, 255, 255, 1.0),
+    );
     make_text_variants(
-        "orbitron",
+        "",
         ThemedTextMaterial {
             font: TextBoxFont {
-                name: "fonts/orbitron".to_owned(),
+                name: "fonts/orbitron.json".to_owned(),
                 size: 16.0,
             },
             alignment: TextBoxAlignment::Center,
