@@ -8,7 +8,9 @@ use serde::{Deserialize, Serialize};
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct TextProps {
     #[serde(default)]
-    pub label: String,
+    pub press_label: String,
+    #[serde(default)]
+    pub title: String,
 }
 implement_props_data!(TextProps);
 
@@ -27,8 +29,14 @@ widget_component! {
             ..Default::default()
         });
         let text_prop = props.read_cloned_or_default::<TextProps>();
-        let label_props = TextPaperProps {
-            text: text_prop.label.to_owned(),
+        let title = TextPaperProps {
+            text: text_prop.title.to_owned(),
+           	use_main_color: true,
+            alignment_override: Some(TextBoxAlignment::Center),
+            ..Default::default()
+        };
+        let press_label = TextPaperProps {
+            text: text_prop.press_label.to_owned(),
            	use_main_color: true,
             alignment_override: Some(TextBoxAlignment::Center),
             ..Default::default()
@@ -36,7 +44,10 @@ widget_component! {
         widget! {
             (#{key} content_box: {props.clone()} [
                 (#{"background"} image_box: {background_props})
-                (#{"label"} text_paper: {label_props})
+                (#{key} vertical_box: {props.clone()} [
+                    (#{"title"} text_paper: {title})
+                    (#{"press_label"} text_paper: {press_label})
+                ])
             ])
         }
     }
@@ -45,7 +56,10 @@ widget_component! {
 widget_component! {
     pub splash(key) {
         widget! {
-            (#{key} splash_comp: {TextProps { label: "Splash".to_owned() }})
+            (#{key} splash_comp: { TextProps { 
+                title: "Omega Colony".to_owned(),
+                press_label: "Press enter".to_owned() 
+            }})
         }
     }
 }
