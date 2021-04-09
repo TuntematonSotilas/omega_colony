@@ -17,7 +17,7 @@ implement_props_data!(TextProps);
 
 widget_component! {
     pub splash_comp(key, props) {
-        let background_props = Props::new(ImageBoxProps {
+        let stars = Props::new(ImageBoxProps {
             content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
                 horizontal_alignment: 0.5,
                 vertical_alignment: 0.5,
@@ -26,6 +26,23 @@ widget_component! {
                 id: "ui/stars.png".to_owned(),
                 ..Default::default()
             }),
+            ..Default::default()
+        });
+        let planet = Props::new(ImageBoxProps {
+            content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
+                horizontal_alignment: 0.5,
+                vertical_alignment: 0.5,
+            }),
+            material: ImageBoxMaterial::Image(ImageBoxImage {
+                id: "ui/planet.png".to_owned(),
+                ..Default::default()
+            }),
+            ..Default::default()
+        }).with(ContentBoxItemLayout {
+            margin: Rect {
+                top: 320.0,
+                ..Default::default()
+            },
             ..Default::default()
         });
         let text_prop = props.read_cloned_or_default::<TextProps>();
@@ -43,7 +60,8 @@ widget_component! {
         };
         widget! {
             (#{key} content_box: {props.clone()} [
-                (#{"background"} image_box: {background_props})
+                (#{"stars"} image_box: {stars})
+                (#{"planet"} image_box: {planet})
                 (#{key} vertical_box: {props.clone()} [
                     (#{"title"} text_paper: {title})
                     (#{"press_label"} text_paper: {press_label})
