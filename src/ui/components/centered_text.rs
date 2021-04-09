@@ -18,9 +18,8 @@ widget_component! {
         let spl_props = props.read_cloned_or_default::<CenteredTextProps>();
         let label_props = TextPaperProps {
             text: spl_props.label.to_owned(),
-            //variant: "".to_owned(),
            	use_main_color: true,
-            alignment_override: Some(TextBoxAlignment::Left),
+            alignment_override: Some(TextBoxAlignment::Center),
             ..Default::default()
         };
 
