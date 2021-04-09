@@ -14,7 +14,18 @@ implement_props_data!(CenteredTextProps);
 
 
 widget_component! {
-    pub centered_text(key, props) {
+    pub splash_comp(key, props) {
+        let background_props = Props::new(ImageBoxProps {
+            content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
+                horizontal_alignment: 0.5,
+                vertical_alignment: 0.5,
+            }),
+            material: ImageBoxMaterial::Image(ImageBoxImage {
+                id: "ui/stars.png".to_owned(),
+                ..Default::default()
+            }),
+            ..Default::default()
+        });
         let spl_props = props.read_cloned_or_default::<CenteredTextProps>();
         let label_props = TextPaperProps {
             text: spl_props.label.to_owned(),
@@ -22,9 +33,9 @@ widget_component! {
             alignment_override: Some(TextBoxAlignment::Center),
             ..Default::default()
         };
-
         widget! {
-            (#{key} horizontal_box: {props.clone()} [
+            (#{key} content_box: {props.clone()} [
+                (#{"background"} image_box: {background_props})
                 (#{"label"} text_paper: {label_props})
             ])
         }
@@ -34,7 +45,7 @@ widget_component! {
 widget_component! {
     pub splash(key) {
         widget! {
-            (#{key} centered_text: {CenteredTextProps { label: "Splash".to_owned() }})
+            (#{key} splash_comp: {CenteredTextProps { label: "Splash".to_owned() }})
         }
     }
 }

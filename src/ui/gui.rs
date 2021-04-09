@@ -2,7 +2,7 @@ use oxygengine::user_interface::raui::core::prelude::*;
 
 use crate::ui::{
     new_theme,
-    components::centered_text::splash,
+    components::splash::splash,
 };
 
 widget_component! {

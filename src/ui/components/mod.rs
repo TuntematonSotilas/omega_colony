@@ -1,1 +1,1 @@
-pub mod centered_text;
+pub mod splash;
