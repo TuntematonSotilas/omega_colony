@@ -6,6 +6,7 @@ pub mod gui;
 pub mod components;
 
 pub fn setup(app: &mut Application) {
+	app.register_props::<components::splash::SplashState>("SplashState");
     app.register_props::<components::splash::TextProps>("TextProps");
     app.register_component("gui", gui::gui);
 }
