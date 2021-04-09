@@ -6,11 +6,11 @@ use serde::{Deserialize, Serialize};
 
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
-pub struct CenteredTextProps {
+pub struct TextProps {
     #[serde(default)]
     pub label: String,
 }
-implement_props_data!(CenteredTextProps);
+implement_props_data!(TextProps);
 
 
 widget_component! {
@@ -26,7 +26,7 @@ widget_component! {
             }),
             ..Default::default()
         });
-        let spl_props = props.read_cloned_or_default::<CenteredTextProps>();
+        let spl_props = props.read_cloned_or_default::<TextProps>();
         let label_props = TextPaperProps {
             text: spl_props.label.to_owned(),
            	use_main_color: true,
@@ -45,7 +45,7 @@ widget_component! {
 widget_component! {
     pub splash(key) {
         widget! {
-            (#{key} splash_comp: {CenteredTextProps { label: "Splash".to_owned() }})
+            (#{key} splash_comp: {TextProps { label: "Splash".to_owned() }})
         }
     }
 }
