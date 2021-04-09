@@ -1,3 +1,7 @@
+font://fonts/deadspace.ttf
+font://fonts/orbitron.ttf
+fontface://fonts/deadspace.json
+fontface://fonts/orbitron.json
 map://planet.map
 prefab://prefabs/splash.yaml
 prefab://prefabs/intro.yaml
@@ -8,5 +12,3 @@ png://ui/stars.png
 png://ui/title.png
 png://ui/planet.png
 png://ui/landscape.png
-font://fonts/orbitron.ttf
-fontface://fonts/orbitron.json

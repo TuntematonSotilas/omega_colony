@@ -4,7 +4,6 @@ use oxygengine::user_interface::raui::{
 };
 use serde::{Deserialize, Serialize};
 
-
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct TextProps {
     #[serde(default)]
@@ -12,8 +11,8 @@ pub struct TextProps {
     #[serde(default)]
     pub title: String,
 }
-implement_props_data!(TextProps);
 
+implement_props_data!(TextProps);
 
 widget_component! {
     pub splash_comp(key, props) {
@@ -46,24 +45,28 @@ widget_component! {
             ..Default::default()
         });
         let text_prop = props.read_cloned_or_default::<TextProps>();
-        let title = TextPaperProps {
-            text: text_prop.title.to_owned(),
-           	use_main_color: true,
-            alignment_override: Some(TextBoxAlignment::Center),
-            ..Default::default()
-        };
         let press_label = TextPaperProps {
             text: text_prop.press_label.to_owned(),
            	use_main_color: true,
             alignment_override: Some(TextBoxAlignment::Center),
             ..Default::default()
         };
+		let title = Props::new(TextBoxProps {
+            text: text_prop.title,
+            alignment: TextBoxAlignment::Center,
+            font: TextBoxFont {
+                name: "fonts/deadspace.json".to_owned(),
+                size: 50.,
+            },
+            color: color_from_rgba(0, 153, 255, 1.),
+            ..Default::default()
+        });
         widget! {
             (#{key} content_box: {props.clone()} [
                 (#{"stars"} image_box: {stars})
                 (#{"planet"} image_box: {planet})
                 (#{key} vertical_box: {props.clone()} [
-                    (#{"title"} text_paper: {title})
+                    (#{"title"} text_box: {title})
                     (#{"press_label"} text_paper: {press_label})
                 ])
             ])
