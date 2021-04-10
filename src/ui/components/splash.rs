@@ -29,7 +29,9 @@ widget_hook! {
 			let mut state = context.state.read_cloned_or_default::<SplashState>();
 			state.0 += 1.;
 			// debug!("state {0}", state.0);
-			drop(context.state.write(state));
+			if state.0 < 20. {
+				drop(context.state.write(state));
+			}
 		});
 	}
 }
