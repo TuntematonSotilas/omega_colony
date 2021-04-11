@@ -62,13 +62,14 @@ widget_component! {
 					..Default::default()
 				}),
 				..Default::default()
-			}).with(ContentBoxItemLayout {
+			});
+			/*.with(ContentBoxItemLayout {
 				margin: Rect {
 					top: 320.0,
 					..Default::default()
 				},
 				..Default::default()
-			});
+			});*/
 			let text_prop = props.read_cloned_or_default::<TextProps>();
 			let press_label = TextPaperProps {
 				text: text_prop.press_label.to_owned(),
@@ -90,9 +91,9 @@ widget_component! {
 			widget! {
 				(#{key} content_box: {props.clone()} [
 					(#{"stars"} image_box: {stars})
-					(#{"planet"} image_box: {planet})
 					(#{key} vertical_box: {props.clone()} [
 						(#{"title"} text_box: {title})
+						(#{"planet"} image_box: {planet})
 						(#{"press_label"} text_paper: {press_label})
 					])
 				])
