@@ -39,8 +39,6 @@ widget_hook! {
 widget_component! {
     pub splash_comp(key, props, state) [use_splash] {
 		if let Ok(state) = state.read::<SplashState>() {
-			//debug!("state {0}", state.0);
-		
 			let stars = Props::new(ImageBoxProps {
 				content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
 					horizontal_alignment: 0.5,
@@ -50,6 +48,17 @@ widget_component! {
 					id: "ui/stars.png".to_owned(),
 					..Default::default()
 				}),
+				..Default::default()
+			});
+			let text_prop = props.read_cloned_or_default::<TextProps>();
+			let title = Props::new(TextBoxProps {
+				text: text_prop.title,
+				alignment: TextBoxAlignment::Center,
+				font: TextBoxFont {
+					name: "fonts/deadspace.json".to_owned(),
+					size: state.0,
+				},
+				color: color_from_rgba(0, 153, 255, 1.),
 				..Default::default()
 			});
 			let planet = Props::new(ImageBoxProps {
@@ -63,31 +72,12 @@ widget_component! {
 				}),
 				..Default::default()
 			});
-			/*.with(ContentBoxItemLayout {
-				margin: Rect {
-					top: 320.0,
-					..Default::default()
-				},
-				..Default::default()
-			});*/
-			let text_prop = props.read_cloned_or_default::<TextProps>();
 			let press_label = TextPaperProps {
 				text: text_prop.press_label.to_owned(),
 				use_main_color: true,
 				alignment_override: Some(TextBoxAlignment::Center),
 				..Default::default()
 			};
-			let title = Props::new(TextBoxProps {
-				width: TextBoxSizeValue::Exact(state.0),
-				text: text_prop.title,
-				alignment: TextBoxAlignment::Center,
-				font: TextBoxFont {
-					name: "fonts/deadspace.json".to_owned(),
-					size: 50.,
-				},
-				color: color_from_rgba(0, 153, 255, 1.),
-				..Default::default()
-			});
 			widget! {
 				(#{key} content_box: {props.clone()} [
 					(#{"stars"} image_box: {stars})
