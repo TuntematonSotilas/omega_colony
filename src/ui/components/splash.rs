@@ -85,7 +85,7 @@ widget_component! {
 				},
 				color: color_from_rgba(0, 153, 255, 1.),
 				transform: Transform {
-					pivot: Vec2 { x: 0.5, y: 0. },
+					pivot: Vec2 { x: 0.5, y: 0.5 },
 					scale: Vec2 { x: state.text_size, y: 1. },
 					..Default::default()
 				},
@@ -104,7 +104,7 @@ widget_component! {
 					size: 18.,
 				},
 				transform: Transform {
-					pivot: Vec2 { x: 0.5, y: 0. },
+					pivot: Vec2 { x: 0.5, y: 0.5 },
 					scale: Vec2 { x: state.text_size, y: 1.},
 					..Default::default()
 				},
