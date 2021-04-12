@@ -27,9 +27,9 @@ widget_hook! {
 
 		life_cycle.change(|context| {
 			let mut state = context.state.read_cloned_or_default::<SplashState>();
-			state.0 += 1.;
 			// debug!("state {0}", state.0);
-			if state.0 < 20. {
+			if state.0 < 50. {
+				state.0 += 2.;
 				drop(context.state.write(state));
 			}
 		});
