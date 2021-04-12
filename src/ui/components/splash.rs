@@ -4,6 +4,8 @@ use oxygengine::user_interface::raui::{
 };
 use serde::{Deserialize, Serialize};
 
+const FRAMES: Scalar = 50.;
+
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct SplashState {
 	pub title_size: Scalar,
@@ -11,6 +13,7 @@ pub struct SplashState {
 	pub img_size: Scalar,
 	pub press_y: Scalar,
 	pub press_size: Scalar,
+	pub alpha: Scalar,
 }
 implement_props_data!(SplashState);
 
@@ -30,29 +33,33 @@ widget_hook! {
 		life_cycle.mount(|context| {
             drop(context.state.write(SplashState {
 				img_size: 0.,
-				title_y: 0.4,
+				title_y: 0.5,
 				title_size: 0.,
 				press_y: 0.5,
 				press_size: 0.,
+				alpha: 0.,
 			}));
         });
 
 		life_cycle.change(|context| {
 			let mut state = context.state.read_cloned_or_default::<SplashState>();
 			if state.title_size < 50. {
-				state.title_size += 1.;
+				state.title_size += 50. / FRAMES;
 			}
 			if state.img_size < 300. {
-				state.img_size += 6.;
+				state.img_size += 300. / FRAMES;
 			}
 			if state.title_y > 0.1 {
-				state.title_y -= 0.01;
+				state.title_y -= 0.5 / FRAMES;
 			}
 			if state.press_y < 0.8 {
-				state.press_y += 0.01;
+				state.press_y += 0.5 / FRAMES;
 			}
 			if state.press_size < 18. {
-				state.press_size += 1.;
+				state.press_size += 18. / FRAMES;
+			}
+			if state.alpha < 1. {
+				state.alpha += 1. / FRAMES;
 			}
 			drop(context.state.write(state));
 		});
@@ -120,8 +127,8 @@ widget_component! {
 				(#{key} content_box: {props.clone()} [
 					(#{"stars"} image_box: {stars})
 					(#{key} content_box: {props.clone()} [
-						(#{"title"} text_box: {title})
-						(#{"press_label"} text_box: {press_label})
+						(#{"title"} text_box: {title} | {WidgetAlpha(state.alpha)})
+						(#{"press_label"} text_box: {press_label} | {WidgetAlpha(state.alpha)})
 						(#{"planet"} image_box: {planet})
 					])
 				])
