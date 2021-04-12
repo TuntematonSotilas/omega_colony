@@ -40,8 +40,8 @@ widget_hook! {
 
 		life_cycle.change(|context| {
 			let mut state = context.state.read_cloned_or_default::<SplashState>();
-			if state.img_size < 0.5 {
-				state.img_size += 0.5 / FRAMES;
+			if state.img_size < 0.4 {
+				state.img_size += 0.4 / FRAMES;
 			}
 			if state.title_y > 0.1 {
 				state.title_y -= 0.5 / FRAMES;
