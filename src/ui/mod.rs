@@ -13,7 +13,7 @@ pub fn setup(app: &mut Application) {
 
 pub fn new_theme() -> ThemeProps {
     let mut theme = make_default_theme(
-        color_from_rgba(255,220,78, 1.),
+        color_from_rgba(255,255,255, 1.),
         color_from_rgba(255, 255, 255, 1.),
         color_from_rgba(255, 255, 255, 1.),
         color_from_rgba(255, 255, 255, 1.),

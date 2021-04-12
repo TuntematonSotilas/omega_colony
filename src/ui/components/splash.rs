@@ -5,7 +5,13 @@ use oxygengine::user_interface::raui::{
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
-pub struct SplashState(pub Scalar);
+pub struct SplashState {
+	pub title_size: Scalar,
+	pub title_y: Scalar,
+	pub img_size: Scalar,
+	pub press_y: Scalar,
+	pub press_size: Scalar,
+}
 implement_props_data!(SplashState);
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
@@ -22,16 +28,33 @@ implement_props_data!(TextProps);
 widget_hook! {
     pub use_splash(life_cycle) {
 		life_cycle.mount(|context| {
-            drop(context.state.write(SplashState::default()));
+            drop(context.state.write(SplashState {
+				img_size: 0.,
+				title_y: 0.4,
+				title_size: 0.,
+				press_y: 0.5,
+				press_size: 0.,
+			}));
         });
 
 		life_cycle.change(|context| {
 			let mut state = context.state.read_cloned_or_default::<SplashState>();
-			// debug!("state {0}", state.0);
-			if state.0 < 50. {
-				state.0 += 2.;
-				drop(context.state.write(state));
+			if state.title_size < 50. {
+				state.title_size += 1.;
 			}
+			if state.img_size < 300. {
+				state.img_size += 6.;
+			}
+			if state.title_y > 0.1 {
+				state.title_y -= 0.01;
+			}
+			if state.press_y < 0.8 {
+				state.press_y += 0.01;
+			}
+			if state.press_size < 18. {
+				state.press_size += 1.;
+			}
+			drop(context.state.write(state));
 		});
 	}
 }
@@ -52,39 +75,54 @@ widget_component! {
 			});
 			let text_prop = props.read_cloned_or_default::<TextProps>();
 			let title = Props::new(TextBoxProps {
+				height: TextBoxSizeValue::Exact(1.),
 				text: text_prop.title,
 				alignment: TextBoxAlignment::Center,
 				font: TextBoxFont {
 					name: "fonts/deadspace.json".to_owned(),
-					size: state.0,
+					size: state.title_size,
 				},
 				color: color_from_rgba(0, 153, 255, 1.),
 				..Default::default()
-			});
+			})
+			.with(ContentBoxItemLayout {
+                align: Vec2 { x: 0.5, y: state.title_y },
+                ..Default::default()
+            });
+			let press_label = Props::new(TextBoxProps {
+				height: TextBoxSizeValue::Exact(1.),
+				text: text_prop.press_label,
+				alignment: TextBoxAlignment::Center,
+				font: TextBoxFont {
+					name: "fonts/orbitron.json".to_owned(),
+					size: state.press_size,
+				},
+				..Default::default()
+			})
+			.with(ContentBoxItemLayout {
+                align: Vec2 { x: 0.5, y: state.press_y },
+                ..Default::default()
+            });
 			let planet = Props::new(ImageBoxProps {
-				content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
-					horizontal_alignment: 0.5,
-					vertical_alignment: 0.5,
-				}),
+				width: ImageBoxSizeValue::Exact(state.img_size),
+				height: ImageBoxSizeValue::Exact(state.img_size),
 				material: ImageBoxMaterial::Image(ImageBoxImage {
 					id: "ui/planet.png".to_owned(),
 					..Default::default()
 				}),
 				..Default::default()
-			});
-			let press_label = TextPaperProps {
-				text: text_prop.press_label.to_owned(),
-				use_main_color: true,
-				alignment_override: Some(TextBoxAlignment::Center),
-				..Default::default()
-			};
+			})
+			.with(ContentBoxItemLayout {
+                align: Vec2 { x: 0.5, y: 0.5 },
+                ..Default::default()
+            });
 			widget! {
 				(#{key} content_box: {props.clone()} [
 					(#{"stars"} image_box: {stars})
-					(#{key} vertical_box: {props.clone()} [
+					(#{key} content_box: {props.clone()} [
 						(#{"title"} text_box: {title})
+						(#{"press_label"} text_box: {press_label})
 						(#{"planet"} image_box: {planet})
-						(#{"press_label"} text_paper: {press_label})
 					])
 				])
 			}
