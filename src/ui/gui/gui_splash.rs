@@ -6,7 +6,7 @@ use crate::ui::{
 };
 
 widget_component! {
-    pub gui(key, named_slots) {
+    pub gui_splash(key, named_slots) {
         widget! {
             (#{key} content_box | {new_theme()} [
                 (#{"splash"} splash)

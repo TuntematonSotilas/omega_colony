@@ -8,6 +8,24 @@ entities:
             - ui
         CompositeTransform: {}
         NonPersistent: ~
+  - Data:
+      components:
+        Tag: ui
+        CompositeRenderable: None
+        CompositeTransform: {}
+        UserInterfaceView:
+          root:
+            Component:
+              type_name: gui_intro
+              key: gui_intro
+        UserInterfaceViewSyncCompositeRenderable:
+          camera_name: camera_ui
+          mapping_scaling:
+            FitMaximum:
+              - 640
+              - 640
+          approx_rect_values: Round
+        NonPersistent: ~
   #         texts:
   #           - Long ago, life on earth was no longer sustainable,
   #           - so human beings looked for a new home.

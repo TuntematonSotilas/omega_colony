@@ -1,12 +1,21 @@
-use oxygengine::user_interface::raui::core::prelude::*;
+use oxygengine::user_interface::raui::{
+    core::{implement_props_data, prelude::*},
+};
+use serde::{Deserialize, Serialize};
+
+#[derive(Default, Debug, Clone, Serialize, Deserialize)]
+pub struct IntroTextProps {
+    #[serde(default)]
+    pub title: String,
+}
+
+implement_props_data!(IntroTextProps);
 
 widget_component! {
     pub intro_comp(key, props, state) {
         let landscape = Props::new(ImageBoxProps {
-            content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
-                horizontal_alignment: 0.5,
-                vertical_alignment: 0.5,
-            }),
+            width: ImageBoxSizeValue::Fill,
+            height: ImageBoxSizeValue::Fill,
             material: ImageBoxMaterial::Image(ImageBoxImage {
                 id: "ui/landscape.png".to_owned(),
                 ..Default::default()
@@ -22,9 +31,11 @@ widget_component! {
 }
 
 widget_component! {
-    pub intro(key){
+    pub intro(key) {
         widget! {
-            (#{key} intro_comp )
+            (#{key} intro_comp : { IntroTextProps { 
+                title: "Intro".to_owned()
+            }})
         }
     }
 }

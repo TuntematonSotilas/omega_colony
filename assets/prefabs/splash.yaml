@@ -16,8 +16,8 @@ entities:
         UserInterfaceView:
           root:
             Component:
-              type_name: gui
-              key: gui
+              type_name: gui_splash
+              key: gui_splash
         UserInterfaceViewSyncCompositeRenderable:
           camera_name: camera_ui
           mapping_scaling:

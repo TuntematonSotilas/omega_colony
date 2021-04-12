@@ -64,10 +64,8 @@ widget_component! {
     pub splash_comp(key, props, state) [use_splash] {
 		if let Ok(state) = state.read::<SplashState>() {
 			let stars = Props::new(ImageBoxProps {
-				content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
-					horizontal_alignment: 0.5,
-					vertical_alignment: 0.5,
-				}),
+				width: ImageBoxSizeValue::Fill,
+            	height: ImageBoxSizeValue::Fill,
 				material: ImageBoxMaterial::Image(ImageBoxImage {
 					id: "ui/stars.png".to_owned(),
 					..Default::default()
