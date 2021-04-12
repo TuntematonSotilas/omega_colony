@@ -8,25 +8,23 @@ const FRAMES: Scalar = 50.;
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct SplashState {
-	pub title_size: Scalar,
-	pub title_y: Scalar,
 	pub img_size: Scalar,
+	pub text_size: Scalar,
+	pub title_y: Scalar,
 	pub press_y: Scalar,
-	pub press_size: Scalar,
 	pub alpha: Scalar,
 }
 implement_props_data!(SplashState);
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
-pub struct TextProps {
+pub struct SplashTextProps {
     #[serde(default)]
     pub press_label: String,
     #[serde(default)]
     pub title: String,
 }
 
-implement_props_data!(TextProps);
-
+implement_props_data!(SplashTextProps);
 
 widget_hook! {
     pub use_splash(life_cycle) {
@@ -34,20 +32,16 @@ widget_hook! {
             drop(context.state.write(SplashState {
 				img_size: 0.,
 				title_y: 0.5,
-				title_size: 0.,
 				press_y: 0.5,
-				press_size: 0.,
+				text_size: 0.,
 				alpha: 0.,
 			}));
         });
 
 		life_cycle.change(|context| {
 			let mut state = context.state.read_cloned_or_default::<SplashState>();
-			if state.title_size < 50. {
-				state.title_size += 50. / FRAMES;
-			}
-			if state.img_size < 300. {
-				state.img_size += 300. / FRAMES;
+			if state.img_size < 0.5 {
+				state.img_size += 0.5 / FRAMES;
 			}
 			if state.title_y > 0.1 {
 				state.title_y -= 0.5 / FRAMES;
@@ -55,8 +49,8 @@ widget_hook! {
 			if state.press_y < 0.8 {
 				state.press_y += 0.5 / FRAMES;
 			}
-			if state.press_size < 18. {
-				state.press_size += 18. / FRAMES;
+			if state.text_size < 1. {
+				state.text_size += 1. / FRAMES;
 			}
 			if state.alpha < 1. {
 				state.alpha += 1. / FRAMES;
@@ -80,16 +74,21 @@ widget_component! {
 				}),
 				..Default::default()
 			});
-			let text_prop = props.read_cloned_or_default::<TextProps>();
+			let text_prop = props.read_cloned_or_default::<SplashTextProps>();
 			let title = Props::new(TextBoxProps {
 				height: TextBoxSizeValue::Exact(1.),
 				text: text_prop.title,
 				alignment: TextBoxAlignment::Center,
 				font: TextBoxFont {
 					name: "fonts/deadspace.json".to_owned(),
-					size: state.title_size,
+					size: 50.,
 				},
 				color: color_from_rgba(0, 153, 255, 1.),
+				transform: Transform {
+					pivot: Vec2 { x: 0.5, y: 0. },
+					scale: Vec2 { x: state.text_size, y: 1. },
+					..Default::default()
+				},
 				..Default::default()
 			})
 			.with(ContentBoxItemLayout {
@@ -102,7 +101,12 @@ widget_component! {
 				alignment: TextBoxAlignment::Center,
 				font: TextBoxFont {
 					name: "fonts/orbitron.json".to_owned(),
-					size: state.press_size,
+					size: 18.,
+				},
+				transform: Transform {
+					pivot: Vec2 { x: 0.5, y: 0. },
+					scale: Vec2 { x: state.text_size, y: 1.},
+					..Default::default()
 				},
 				..Default::default()
 			})
@@ -111,12 +115,19 @@ widget_component! {
                 ..Default::default()
             });
 			let planet = Props::new(ImageBoxProps {
-				width: ImageBoxSizeValue::Exact(state.img_size),
-				height: ImageBoxSizeValue::Exact(state.img_size),
+				content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
+					horizontal_alignment: 0.5,
+					vertical_alignment: 0.5,
+				}),
 				material: ImageBoxMaterial::Image(ImageBoxImage {
 					id: "ui/planet.png".to_owned(),
 					..Default::default()
 				}),
+				transform: Transform {
+					pivot: Vec2 { x: 0.5, y: 0.5},
+					scale: Vec2 { x: state.img_size, y: state.img_size},
+					..Default::default()
+				},
 				..Default::default()
 			})
 			.with(ContentBoxItemLayout {
@@ -142,7 +153,7 @@ widget_component! {
 widget_component! {
     pub splash(key) [use_splash]{
         widget! {
-            (#{key} splash_comp: { TextProps { 
+            (#{key} splash_comp: { SplashTextProps { 
                 title: "Omega Colony".to_owned(),
                 press_label: "Press enter".to_owned() 
             }})
