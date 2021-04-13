@@ -26,7 +26,7 @@ widget_component! {
         widget! {
             (#{key} content_box: {props.clone()} [
                 (#{"stars"} stars::stars)           
-                (#{"content"} horizontal_box: {props.clone()} [
+                (#{"content"} vertical_box: {props.clone()} [
                     (#{"title"} text_paper: {title})
                     (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
                         id: "new_game".to_string(),
