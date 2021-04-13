@@ -22,7 +22,7 @@ pub fn new_theme() -> ThemeProps {
         color_from_rgba(255, 255, 255, 1.),
     );
     make_text_variants(
-        String::new(),
+        "",
         ThemedTextMaterial {
             font: TextBoxFont {
                 name: "fonts/orbitron.json".to_owned(),
