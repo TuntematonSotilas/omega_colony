@@ -40,7 +40,7 @@ widget_component! {
         });
         
         let text_props = Props::new(TextBoxProps {
-            height: TextBoxSizeValue::Exact(60.),
+            height: TextBoxSizeValue::Exact(50.),
             text: menu_btn_props.label,
             alignment: TextBoxAlignment::Center,
             font: TextBoxFont {
@@ -48,19 +48,23 @@ widget_component! {
                 size: 18.0,
             },
             ..Default::default()
-        }).with(ContentBoxItemLayout {
+        });
+        let cont_box = Props::new(ContentBoxItemLayout {
             margin: Rect {
-                top: 30.,
-                ..Default::default()
+                left: 0.,
+                right: 0.,
+                top: 50.0,
+                bottom: 50.0,
             },
             ..Default::default()
         });
-        
         widget! {
             (#{key} button: {btn_props} {
                 content = (#{"content"} content_box [
                     (#{"background"} image_box: {background_props})
-                    //(#{"label"} text_box: {text_props})
+                    (#{"content"} content_box: {cont_box} [
+                        (#{"label"} text_box: {text_props.clone()})
+                    ])
                 ])
             })
         }
