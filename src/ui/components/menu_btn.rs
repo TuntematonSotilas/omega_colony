@@ -15,7 +15,7 @@ widget_component! {
         let btn_props = props.clone()
             .with(NavItemActive)
             .with(ButtonNotifyProps(id.to_owned().into()));
-        let main_menu_button_props = props.read_cloned_or_default::<MenuBtnProps>();
+        let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
         let ButtonProps { selected, ..} = state.read_cloned_or_default();
 
         let background_props = Props::new(ImageBoxProps {
@@ -31,34 +31,28 @@ widget_component! {
                 },
                 ..Default::default()
             }),
+            transform: Transform {
+                pivot: Vec2 { x: 0.5, y: 0.5 },
+                scale: Vec2 { x: 0.3, y: 0.3 },
+                ..Default::default()
+            },
             ..Default::default()
         });
         
         let text_props = Props::new(TextBoxProps {
-            text: main_menu_button_props.label,
-            height: TextBoxSizeValue::Exact(16.0),
+            height: TextBoxSizeValue::Exact(60.),
+            text: menu_btn_props.label,
             alignment: TextBoxAlignment::Center,
             font: TextBoxFont {
                 name: "fonts/orbitron.json".to_owned(),
-                size: 16.0,
+                size: 18.0,
             },
-            /*color: if selected {
-                Color { r: 0.0, g: 0.0, b: 0.0, a: 1.0 }
-            } else {
-                Color { r: 1.0, g: 1.0, b: 1.0, a: 1.0 }
-            },*/
             ..Default::default()
         }).with(ContentBoxItemLayout {
-            anchors: Rect {
-                left: 0.0,
-                right: 1.0,
-                top: 1.0,
-                bottom: 1.0,
-            },
-            /*margin: Rect {
-                top: -16.0,
+            margin: Rect {
+                top: 30.,
                 ..Default::default()
-            },*/
+            },
             ..Default::default()
         });
         
@@ -66,7 +60,7 @@ widget_component! {
             (#{key} button: {btn_props} {
                 content = (#{"content"} content_box [
                     (#{"background"} image_box: {background_props})
-                    (#{"label"} text_box: {text_props})
+                    //(#{"label"} text_box: {text_props})
                 ])
             })
         }

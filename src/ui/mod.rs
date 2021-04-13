@@ -28,7 +28,7 @@ pub fn new_theme() -> ThemeProps {
         ThemedTextMaterial {
             font: TextBoxFont {
                 name: "fonts/orbitron.json".to_owned(),
-                size: 12.,
+                size: 18.,
             },
             alignment: TextBoxAlignment::Center,
             ..Default::default()
