@@ -4,6 +4,7 @@ use oxygengine::user_interface::raui::{
 };
 use serde::{Deserialize, Serialize};
 use crate::ui::components::stars;
+use crate::ui::components::menu_btn;
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct MenuTextProps {
@@ -24,8 +25,14 @@ widget_component! {
         };
         widget! {
             (#{key} content_box: {props.clone()} [
-                (#{"stars"} stars::stars)
-                (#{"title"} text_paper: {title})
+                (#{"stars"} stars::stars)           
+                (#{"content"} horizontal_box: {props.clone()} [
+                    (#{"title"} text_paper: {title})
+                    (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                        id: "new_game".to_string(),
+                        label: "New Game".to_string(),
+                    }})
+                ])
             ])
         }
 	}

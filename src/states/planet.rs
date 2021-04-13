@@ -25,11 +25,6 @@ impl State for PlanetState {
             .instantiate_world("selector", world)
             .unwrap()[0];
 
-        // instantiate panel from prefab.
-        world
-             .write_resource::<PrefabManager>()
-             .instantiate_world("panel", world)
-             .unwrap()[0];
     }
 
     fn on_process(&mut self, world: &mut World) -> StateChange {

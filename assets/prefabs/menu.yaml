@@ -22,7 +22,7 @@ entities:
           camera_name: camera_ui
           mapping_scaling:
             FitMaximum:
-              - 640
-              - 640
+              - 180
+              - 180
           approx_rect_values: Round
         NonPersistent: ~
