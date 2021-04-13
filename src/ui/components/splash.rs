@@ -3,6 +3,7 @@ use oxygengine::user_interface::raui::{
     material::prelude::*,
 };
 use serde::{Deserialize, Serialize};
+use crate::ui::components::stars;
 
 const FRAMES: Scalar = 50.;
 
@@ -63,15 +64,6 @@ widget_hook! {
 widget_component! {
     pub splash_comp(key, props, state) [use_splash] {
 		if let Ok(state) = state.read::<SplashState>() {
-			let stars = Props::new(ImageBoxProps {
-				width: ImageBoxSizeValue::Fill,
-            	height: ImageBoxSizeValue::Fill,
-				material: ImageBoxMaterial::Image(ImageBoxImage {
-					id: "ui/stars.png".to_owned(),
-					..Default::default()
-				}),
-				..Default::default()
-			});
 			let text_prop = props.read_cloned_or_default::<SplashTextProps>();
 			let title = Props::new(TextBoxProps {
 				height: TextBoxSizeValue::Exact(1.),
@@ -134,7 +126,7 @@ widget_component! {
             });
 			widget! {
 				(#{key} content_box: {props.clone()} [
-					(#{"stars"} image_box: {stars})
+					(#{"stars"} stars::stars)
 					(#{key} content_box: {props.clone()} [
 						(#{"title"} text_box: {title} | {WidgetAlpha(state.alpha)})
 						(#{"press_label"} text_box: {press_label} | {WidgetAlpha(state.alpha)})

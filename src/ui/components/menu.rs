@@ -3,6 +3,7 @@ use oxygengine::user_interface::raui::{
     material::prelude::*,
 };
 use serde::{Deserialize, Serialize};
+use crate::ui::components::stars;
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct MenuTextProps {
@@ -23,6 +24,7 @@ widget_component! {
         };
         widget! {
             (#{key} content_box: {props.clone()} [
+                (#{"stars"} stars::stars)
                 (#{"title"} text_paper: {title})
             ])
         }
