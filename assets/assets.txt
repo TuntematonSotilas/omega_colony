@@ -4,11 +4,10 @@ fontface://fonts/deadspace.json
 fontface://fonts/orbitron.json
 map://planet.map
 prefab://prefabs/splash.yaml
-prefab://prefabs/intro.yaml
+prefab://prefabs/menu.yaml
 prefab://prefabs/planet.yaml
 prefab://prefabs/base.yaml
 prefab://prefabs/selector.yaml
 png://ui/stars.png
 png://ui/title.png
 png://ui/planet.png
-png://ui/landscape.png

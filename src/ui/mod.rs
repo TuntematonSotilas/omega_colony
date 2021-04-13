@@ -10,8 +10,8 @@ pub fn setup(app: &mut Application) {
     app.register_props::<components::splash::SplashTextProps>("SplashTextProps");
     app.register_component("gui_splash", gui::gui_splash::gui_splash);
 
-    app.register_props::<components::intro::IntroTextProps>("IntroTextProps");
-    app.register_component("gui_intro", gui::gui_intro::gui_intro);
+    app.register_props::<components::menu::MenuTextProps>("MenuTextProps");
+    app.register_component("gui_menu", gui::gui_menu::gui_menu);
 }
 
 pub fn new_theme() -> ThemeProps {
@@ -22,7 +22,7 @@ pub fn new_theme() -> ThemeProps {
         color_from_rgba(255, 255, 255, 1.),
     );
     make_text_variants(
-        "",
+        String::new(),
         ThemedTextMaterial {
             font: TextBoxFont {
                 name: "fonts/orbitron.json".to_owned(),

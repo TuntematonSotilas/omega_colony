@@ -1,7 +1,7 @@
 use oxygengine::prelude::*;
 
 use crate::{
-	states::intro::IntroState,
+	states::menu::MenuState,
 	resources::referential::Referential,
 };
 
@@ -24,7 +24,7 @@ impl State for SplashState {
         }
         let input = &world.read_resource::<InputController>();
         if input.trigger_or_default("enter") == TriggerState::Pressed {
-            return StateChange::Swap(Box::new(IntroState));
+            return StateChange::Swap(Box::new(MenuState));
         }
         StateChange::None
     }

@@ -1,4 +1,4 @@
-template_name: intro
+template_name: menu
 entities:
   - Data:
       components:
@@ -16,8 +16,8 @@ entities:
         UserInterfaceView:
           root:
             Component:
-              type_name: gui_intro
-              key: gui_intro
+              type_name: gui_menu
+              key: gui_menu
         UserInterfaceViewSyncCompositeRenderable:
           camera_name: camera_ui
           mapping_scaling:
@@ -26,8 +26,3 @@ entities:
               - 640
           approx_rect_values: Round
         NonPersistent: ~
-  #         texts:
-  #           - Long ago, life on earth was no longer sustainable,
-  #           - so human beings looked for a new home.
-  #           - They set their sights on the planet Omega,
-  #           - and the colonization begins.

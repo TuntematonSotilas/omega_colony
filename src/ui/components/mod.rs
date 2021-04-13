@@ -1,2 +1,2 @@
 pub mod splash;
-pub mod intro;
+pub mod menu;
