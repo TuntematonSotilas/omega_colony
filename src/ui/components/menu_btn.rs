@@ -17,6 +17,7 @@ widget_component! {
             .with(ButtonNotifyProps(id.to_owned().into()));
         let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
         let ButtonProps { selected, ..} = state.read_cloned_or_default();
+        
         let background_props = Props::new(ImageBoxProps {
             width: ImageBoxSizeValue::Fill,
             height: ImageBoxSizeValue::Fill,

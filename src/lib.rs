@@ -92,6 +92,8 @@ pub fn main_js() -> Result<(), JsValue> {
         .with_bundle(
             oxygengine::user_interface::bundle_installer,
             UserInterfaceRes::new(ui::setup)
+                .with_pointer_axis("mouse-x", "mouse-y")
+                .with_pointer_trigger("pointer-action", "pointer-context"),
         )
         // install integration between UI and composite rendering.
         .with_bundle(

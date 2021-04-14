@@ -33,7 +33,7 @@ widget_component! {
             ..Default::default()
         });
         widget! {
-            (#{key} content_box: {props.clone()} [
+            (#{key} nav_content_box [
                 (#{"stars"} stars::stars)
                 (#{"content"} content_box: {cont_box} [
                    (#{"v-box"} vertical_box [
