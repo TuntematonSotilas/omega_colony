@@ -27,8 +27,8 @@ widget_component! {
             margin: Rect {
                 left: 0.,
                 right: 0.,
-                top: 50.0,
-                bottom: 50.0,
+                top: 200.0,
+                bottom: 200.0,
             },
             ..Default::default()
         });
@@ -41,6 +41,10 @@ widget_component! {
                         (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
                             id: "new_game".to_string(),
                             label: "New Game".to_string(),
+                        }})
+                        (#{"continue_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                            id: "continue".to_string(),
+                            label: "Continue".to_string(),
                         }})
                     ])
                 ])
