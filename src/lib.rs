@@ -77,6 +77,7 @@ pub fn main_js() -> Result<(), JsValue> {
 			input.map_axis("mouse-x", "mouse", "x");
             input.map_axis("mouse-y", "mouse", "y");
 			input.map_trigger("mouse-left", "mouse", "left");
+            input.map_trigger("mouse-right", "mouse", "right");
         })
         // install composite renderer.
         .with_bundle(
@@ -93,7 +94,7 @@ pub fn main_js() -> Result<(), JsValue> {
             oxygengine::user_interface::bundle_installer,
             UserInterfaceRes::new(ui::setup)
                 .with_pointer_axis("mouse-x", "mouse-y")
-                .with_pointer_trigger("pointer-action", "pointer-context"),
+                .with_pointer_trigger("mouse-left", "mouse-right"),
         )
         // install integration between UI and composite rendering.
         .with_bundle(
