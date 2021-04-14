@@ -17,12 +17,9 @@ widget_component! {
             .with(ButtonNotifyProps(id.to_owned().into()));
         let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
         let ButtonProps { selected, ..} = state.read_cloned_or_default();
-
         let background_props = Props::new(ImageBoxProps {
-            content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
-                horizontal_alignment: 0.5,
-                vertical_alignment: 0.5,
-            }),
+            width: ImageBoxSizeValue::Fill,
+            height: ImageBoxSizeValue::Fill,
             material: ImageBoxMaterial::Image(ImageBoxImage {
                 id: if selected {
                     "ui/menu_btn_1.png".to_owned()
@@ -31,16 +28,10 @@ widget_component! {
                 },
                 ..Default::default()
             }),
-            transform: Transform {
-                pivot: Vec2 { x: 0.5, y: 0.5 },
-                scale: Vec2 { x: 0.3, y: 0.3 },
-                ..Default::default()
-            },
             ..Default::default()
         });
-        
         let text_props = Props::new(TextBoxProps {
-            height: TextBoxSizeValue::Exact(50.),
+            height: TextBoxSizeValue::Exact(1.),
             text: menu_btn_props.label,
             alignment: TextBoxAlignment::Center,
             font: TextBoxFont {
@@ -48,24 +39,31 @@ widget_component! {
                 size: 18.0,
             },
             ..Default::default()
-        });
-        let cont_box = Props::new(ContentBoxItemLayout {
+        })
+        .with(ContentBoxItemLayout {
             margin: Rect {
-                left: 0.,
-                right: 0.,
-                top: 50.0,
-                bottom: 50.0,
+                top: 20.0,
+                ..Default::default()
             },
+            /*anchors: Rect {
+                top: 
+                bottom
+            }*/
             ..Default::default()
         });
+        let btn_size = SizeBoxProps {
+            width: SizeBoxSizeValue::Exact(200.), 
+            height: SizeBoxSizeValue::Exact(50.),
+            ..Default::default()
+        };
         widget! {
-            (#{key} button: {btn_props} {
-                content = (#{"content"} content_box [
-                    (#{"background"} image_box: {background_props})
-                    (#{"content"} content_box: {cont_box} [
+            (#{key} size_box: {btn_size} {
+                content = (#{key} button: {btn_props} {
+                    content = (#{"content"} content_box [
+                        (#{"background"} image_box: {background_props})
                         (#{"label"} text_box: {text_props.clone()})
                     ])
-                ])
+                })
             })
         }
     }
