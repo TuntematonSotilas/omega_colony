@@ -42,18 +42,18 @@ widget_component! {
         })
         .with(ContentBoxItemLayout {
             margin: Rect {
-                top: 20.0,
+                top: 15.0,
                 ..Default::default()
             },
-            /*anchors: Rect {
-                top: 
-                bottom
-            }*/
             ..Default::default()
         });
         let btn_size = SizeBoxProps {
             width: SizeBoxSizeValue::Exact(200.), 
             height: SizeBoxSizeValue::Exact(50.),
+            margin: Rect {
+                left: 370.0,
+                ..Default::default()
+            },
             ..Default::default()
         };
         widget! {
