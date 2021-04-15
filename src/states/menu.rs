@@ -1,5 +1,8 @@
 use oxygengine::prelude::*;
-use crate::ui::components::menu_btn::MenuBtnSignal;
+use crate::{
+    states::planet::PlanetState,
+    ui::components::menu_btn::MenuBtnSignal
+};
 
 #[derive(Default)]
 pub struct MenuState;
@@ -19,9 +22,8 @@ impl State for MenuState {
         if let Some(app) = ui.application_mut("") {
             for (_caller, msg) in app.consume_signals() {
                 if let Some(msg) = msg.as_any().downcast_ref::<MenuBtnSignal>() {
-                    match msg {
-                        MenuBtnSignal::NewGame => debug!("NewGame"),
-                        _ => (),
+                    if msg == &MenuBtnSignal::NewGame {
+                        return StateChange::Swap(Box::new(PlanetState))
                     }
                 }
             }
