@@ -102,13 +102,25 @@ widget_component! {
         });
 
         widget! {
+           /*
+           (#{key} button: {btn_props} {
+                content = (#{"content"} content_box [
+                    (#{"background"} image_box: {background_props})
+                    (#{"content"} content_box: {cont_box} [
+                        (#{"label"} text_box: {text_props.clone()})
+                    ])
+                ])
+            })
+           */
             (#{key} content_box [
                 (#{"margin"} content_box: {margin} [
                     (#{"size"} size_box: {btn_size} {
-                        content = (#{"content"} content_box [
-                            (#{"background"} image_box: {background_props})
-                            (#{"label"} text_box: {text_props.clone()})
-                        ])
+                        content = (#{"button"} button: {btn_props} {
+                            content = (#{"content"} content_box [
+                                (#{"background"} image_box: {background_props})
+                                (#{"label"} text_box: {text_props.clone()})
+                            ])
+                        })
                     })
                 ])
             ])
