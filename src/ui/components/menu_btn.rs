@@ -79,20 +79,48 @@ widget_component! {
             },
             ..Default::default()
         });
-        let btn_size = SizeBoxProps {
+        let btn_size = Props::new(SizeBoxProps {
             width: SizeBoxSizeValue::Exact(200.), 
             height: SizeBoxSizeValue::Exact(50.),
+            /*margin: Rect {
+                left: 100.,
+                right: 100.,
+                ..Default::default()
+            },*/
             ..Default::default()
-        };
+        });
+
+        let margin = Props::new(ContentBoxItemLayout {
+            /*margin: Rect {
+                left: 200.,
+                right: 200.,
+                ..Default::default()    
+            },*/
+            //align: Vec2 { x: 0.5, y: 0.5},
+            ..Default::default()
+        });
+
         widget! {
-            (#{key} size_box: {btn_size} {
-                content = (#{key} button: {btn_props} {
+            /*(#{key} size_box: {btn_size} {
+                content = (#{"button"} button: {btn_props} {
                     content = (#{"content"} content_box [
                         (#{"background"} image_box: {background_props})
                         (#{"label"} text_box: {text_props.clone()})
                     ])
                 })
-            })
+            })*/
+            
+            (#{key} content_box [
+                (#{"content"} content_box: {margin} [
+                    (#{"size_box"} size_box: {btn_size} {
+                        content = (#{"content"} content_box [
+                            (#{"background"} image_box: {background_props})
+                            (#{"label"} text_box: {text_props.clone()})
+                        ])
+                    })
+                ])
+            ])
+                    
         }
     }
 }

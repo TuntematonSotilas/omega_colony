@@ -25,11 +25,17 @@ widget_component! {
         };
         let cont_box = Props::new(ContentBoxItemLayout {
             margin: Rect {
-                left: 0.,
-                right: 0.,
-                top: 200.0,
-                bottom: 200.0,
+                top: 200.,
+                bottom: 200.,
+                //left: 200.,
+                //right: 200.,
+                ..Default::default()
             },
+            /*anchors: Rect {
+                left: 0.5,
+                right: 0.5,
+                ..Default::default()
+            },*/
             ..Default::default()
         });
         widget! {
