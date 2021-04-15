@@ -47,6 +47,7 @@ widget_component! {
         } = state.read_cloned_or_default();
 
         let background_props = Props::new(ImageBoxProps {
+            //content_keep_aspect_ratio: Some(ImageBoxAspectRatio { horizontal_alignment: 0.5 , vertical_alignment: 0.5}),
             width: ImageBoxSizeValue::Fill,
             height: ImageBoxSizeValue::Fill,
             material: ImageBoxMaterial::Image(ImageBoxImage {
@@ -82,37 +83,28 @@ widget_component! {
         let btn_size = Props::new(SizeBoxProps {
             width: SizeBoxSizeValue::Exact(200.), 
             height: SizeBoxSizeValue::Exact(50.),
-            /*margin: Rect {
-                left: 100.,
-                right: 100.,
-                ..Default::default()
-            },*/
             ..Default::default()
         });
 
         let margin = Props::new(ContentBoxItemLayout {
             /*margin: Rect {
-                left: 200.,
-                right: 200.,
+                left: 320.,
+                right: 320.,
                 ..Default::default()    
             },*/
-            //align: Vec2 { x: 0.5, y: 0.5},
+            anchors: Rect {
+                left: 0.5,
+                //right: 0.5,
+                ..Default::default()
+            },
+            //align: Vec2 { x: 0.5, y:0. },
             ..Default::default()
         });
 
         widget! {
-            /*(#{key} size_box: {btn_size} {
-                content = (#{"button"} button: {btn_props} {
-                    content = (#{"content"} content_box [
-                        (#{"background"} image_box: {background_props})
-                        (#{"label"} text_box: {text_props.clone()})
-                    ])
-                })
-            })*/
-            
             (#{key} content_box [
-                (#{"content"} content_box: {margin} [
-                    (#{"size_box"} size_box: {btn_size} {
+                (#{"margin"} content_box: {margin} [
+                    (#{"size"} size_box: {btn_size} {
                         content = (#{"content"} content_box [
                             (#{"background"} image_box: {background_props})
                             (#{"label"} text_box: {text_props.clone()})
@@ -120,7 +112,6 @@ widget_component! {
                     })
                 ])
             ])
-                    
         }
     }
 }

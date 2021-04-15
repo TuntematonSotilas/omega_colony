@@ -23,26 +23,20 @@ widget_component! {
             use_main_color: true,
             ..Default::default()
         };
-        let cont_box = Props::new(ContentBoxItemLayout {
+        let margin = Props::new(ContentBoxItemLayout {
             margin: Rect {
                 top: 200.,
                 bottom: 200.,
-                //left: 200.,
-                //right: 200.,
                 ..Default::default()
             },
-            /*anchors: Rect {
-                left: 0.5,
-                right: 0.5,
-                ..Default::default()
-            },*/
             ..Default::default()
         });
+
         widget! {
             (#{key} nav_content_box [
                 (#{"stars"} stars::stars)
-                (#{"content"} content_box: {cont_box} [
-                   (#{"v-box"} vertical_box [
+                (#{"margin"} content_box: {margin} [
+                    (#{"v-box"} vertical_box [
                         (#{"title"} text_paper: {title})
                         (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
                             id: "new_game".to_string(),
