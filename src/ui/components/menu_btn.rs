@@ -25,6 +25,7 @@ widget_hook! {
         life_cycle.change(|context| {
             for msg in context.messenger.messages {
                 if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
+					debug!("{0}", msg.sender.key());
                     if msg.trigger_start() {
                         context.signals.write(MenuBtnSignal::NewGame);
                     }
