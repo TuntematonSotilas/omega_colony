@@ -47,7 +47,6 @@ widget_component! {
         } = state.read_cloned_or_default();
 
         let background_props = Props::new(ImageBoxProps {
-            //content_keep_aspect_ratio: Some(ImageBoxAspectRatio { horizontal_alignment: 0.5 , vertical_alignment: 0.5}),
             width: ImageBoxSizeValue::Fill,
             height: ImageBoxSizeValue::Fill,
             material: ImageBoxMaterial::Image(ImageBoxImage {
@@ -80,12 +79,11 @@ widget_component! {
             },
             ..Default::default()
         });
-        let btn_size = Props::new(SizeBoxProps {
+        let size = Props::new(SizeBoxProps {
             width: SizeBoxSizeValue::Exact(200.), 
             height: SizeBoxSizeValue::Exact(50.),
             ..Default::default()
         });
-
         let margin = Props::new(ContentBoxItemLayout {
             /*margin: Rect {
                 left: 320.,
@@ -104,7 +102,7 @@ widget_component! {
         widget! {
             (#{key} content_box [
                 (#{"margin"} content_box: {margin} [
-                    (#{"size"} size_box: {btn_size} {
+                    (#{"size"} size_box: {size} {
                         content = (#{"button"} button: {btn_props} {
                             content = (#{"content"} content_box [
                                 (#{"background"} image_box: {background_props})
