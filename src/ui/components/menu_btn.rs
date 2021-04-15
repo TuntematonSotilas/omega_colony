@@ -16,16 +16,25 @@ widget_component! {
             .with(NavItemActive)
             .with(ButtonNotifyProps(id.to_owned().into()));
         let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
-        let ButtonProps { selected, ..} = state.read_cloned_or_default();
-        
+        let ButtonProps {
+            selected,
+            trigger,
+            context,
+            ..
+        } = state.read_cloned_or_default();
+
+        //debug!("{0},{1},{2}", selected, trigger, context);
         let background_props = Props::new(ImageBoxProps {
             width: ImageBoxSizeValue::Fill,
             height: ImageBoxSizeValue::Fill,
             material: ImageBoxMaterial::Image(ImageBoxImage {
-                id: if selected {
-                    "ui/menu_btn_1.png".to_owned()
+                id: "ui/menu_btn.png".to_owned(),
+                tint: if trigger {
+                    Color { r: 0.0, g: 0.0, b: 0.0, a: 0.8 }
+                } else if selected {
+                    Color { r: 0.0, g: 0.0, b: 0.0, a: 0.9 }
                 } else {
-                    "ui/menu_btn_0.png".to_owned()
+                    Color::default()
                 },
                 ..Default::default()
             }),
@@ -51,10 +60,6 @@ widget_component! {
         let btn_size = SizeBoxProps {
             width: SizeBoxSizeValue::Exact(200.), 
             height: SizeBoxSizeValue::Exact(50.),
-            margin: Rect {
-                left: 370.0,
-                ..Default::default()
-            },
             ..Default::default()
         };
         widget! {
