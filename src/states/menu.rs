@@ -1,8 +1,5 @@
-use oxygengine::{
-    prelude::*, 
-    user_interface::raui::core::prelude::NavSignal, 
-    widget::WidgetIdOrRef
-};
+use oxygengine::prelude::*;
+use crate::ui::components::menu_btn::MenuBtnSignal;
 
 #[derive(Default)]
 pub struct MenuState;
@@ -20,19 +17,10 @@ impl State for MenuState {
 	    
         let mut ui = world.write_resource::<UserInterfaceRes>();
         if let Some(app) = ui.application_mut("") {
-            for (caller, msg) in app.consume_signals() {
-
-                debug!("caller={0}", caller.as_ref());
-                
-                if let Some(msg) = msg.as_any().downcast_ref::<NavSignal>() {
-                    debug!("NavSignal");
+            for (_caller, msg) in app.consume_signals() {
+                if let Some(msg) = msg.as_any().downcast_ref::<MenuBtnSignal>() {
                     match msg {
-                        NavSignal::Select(id_ref) => {
-                            if let Some(id) = id_ref.read() {
-                                debug!("id={0}", id.as_ref());
-                            }
-                            
-                        },
+                        MenuBtnSignal::NewGame => debug!("NewGame"),
                         _ => (),
                     }
                 }

@@ -1,5 +1,15 @@
-use oxygengine::user_interface::raui::core::{implement_props_data, prelude::*};
+use oxygengine::user_interface::raui::core::{
+    implement_message_data, 
+    implement_props_data, 
+    prelude::*};
 use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum MenuBtnSignal {
+    NewGame,
+    Continue,
+}
+implement_message_data!(MenuBtnSignal);
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct MenuBtnProps {
@@ -10,8 +20,22 @@ pub struct MenuBtnProps {
 }
 implement_props_data!(MenuBtnProps);
 
+widget_hook! {
+    pub use_menu_btn(life_cycle) {
+        life_cycle.change(|context| {
+            for msg in context.messenger.messages {
+                if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
+                    if msg.trigger_start() {
+                        context.signals.write(MenuBtnSignal::NewGame);
+                    }
+                }
+            }
+        });
+    }
+}
+
 widget_component! {
-    pub menu_btn(id, key, props, state) [use_button_notified_state] {
+    pub menu_btn(id, key, props, state) [use_button_notified_state, use_menu_btn] {
         let btn_props = props.clone()
             .with(NavItemActive)
             .with(ButtonNotifyProps(id.to_owned().into()));
@@ -19,11 +43,9 @@ widget_component! {
         let ButtonProps {
             selected,
             trigger,
-            context,
             ..
         } = state.read_cloned_or_default();
 
-        //debug!("{0},{1},{2}", selected, trigger, context);
         let background_props = Props::new(ImageBoxProps {
             width: ImageBoxSizeValue::Fill,
             height: ImageBoxSizeValue::Fill,

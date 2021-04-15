@@ -141,7 +141,7 @@ widget_component! {
 }
 
 widget_component! {
-    pub splash(key) [use_splash]{
+    pub splash(key) {
         widget! {
             (#{key} splash_comp: { SplashTextProps { 
                 title: "Omega Colony".to_owned(),
