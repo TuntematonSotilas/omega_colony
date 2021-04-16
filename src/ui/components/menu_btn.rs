@@ -25,9 +25,13 @@ widget_hook! {
         life_cycle.change(|context| {
             for msg in context.messenger.messages {
                 if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
-					debug!("{0}", msg.sender.key());
-                    if msg.trigger_start() {
-                        context.signals.write(MenuBtnSignal::NewGame);
+					if msg.trigger_start() {
+                        let props = context.props.read_cloned_or_default::<MenuBtnProps>();
+                        let signal = match props.id.as_str() {
+                            "new_game" => MenuBtnSignal::NewGame,
+                            _ => MenuBtnSignal::Continue,
+                        };
+                        context.signals.write(signal);
                     }
                 }
             }
