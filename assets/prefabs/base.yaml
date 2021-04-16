@@ -6,8 +6,8 @@ entities:
         CompositeRenderable: None
         CompositeTransform:
           translation:
-            x: 224
-            y: 224
+            x: 64
+            y: 64
         CompositeSprite:
           sheet_frame:
             - "sprites.0.json"

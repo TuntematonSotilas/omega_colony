@@ -8,7 +8,7 @@
  "margin":0,
  "name":"ground",
  "spacing":0,
- "tilecount":3,
+ "tilecount":6,
  "tiledversion":"1.3.3",
  "tileheight":16,
  "tiles":[
@@ -27,6 +27,24 @@
         {
          "id":2,
          "image":"..\/images\/sprites\/ground_3.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":3,
+         "image":"..\/images\/sprites\/ground_4.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":4,
+         "image":"..\/images\/sprites\/ground_5.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":5,
+         "image":"..\/images\/sprites\/ground_6.png",
          "imageheight":16,
          "imagewidth":16
         }],

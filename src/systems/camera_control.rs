@@ -29,7 +29,7 @@ impl<'s> System<'s> for CameraControlSystem {
 
 		//Center camera
 		if !camera_res.is_centered {
-            self.apply_transform(&camera_res, cameras, screen_size, &mut transforms, 224., 224.);
+            self.apply_transform(&camera_res, cameras, screen_size, &mut transforms, 64., 64.);
 			camera_res.is_centered = true;
 			return;
         }
