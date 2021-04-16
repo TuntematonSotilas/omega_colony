@@ -38,10 +38,10 @@ impl<'s> System<'s> for SpriteClickSystem {
 						if let Some(inv_mat) = matrix.inverse() {
 							let pos_inv = pos * inv_mat;
 							if pos_inv.x >= 0.0 && 
-								pos_inv.x <= interactive_sprite.size && 
+								pos_inv.x <= interactive_sprite.w && 
 								pos_inv.y >= 0.0 && 
-								pos_inv.y < interactive_sprite.size {
-									let tile_pos = matrix * Vec2::new(0.,0.);
+								pos_inv.y < interactive_sprite.h {
+									let tile_pos = matrix * Vec2::new(16.,0.);
 									selected.pos = tile_pos;
 									selected.code = interactive_sprite.code.clone();
 							}

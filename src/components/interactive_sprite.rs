@@ -3,7 +3,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct InteractiveSprite {
-    pub size: Scalar,
+    pub w: Scalar,
+	pub h: Scalar,
 	pub code: String,
 }
 
