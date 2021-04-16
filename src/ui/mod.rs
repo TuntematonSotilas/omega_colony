@@ -6,12 +6,12 @@ pub mod gui;
 pub mod components;
 
 pub fn setup(app: &mut Application) {
-    app.register_props::<components::menu_btn::MenuBtnProps>("MenuBtnProps");
-    
     app.register_props::<components::splash::SplashState>("SplashState");
     app.register_props::<components::splash::SplashTextProps>("SplashTextProps");
     app.register_component("gui_splash", gui::gui_splash::gui_splash);
 
+    app.register_props::<components::menu_btn::MenuBtnProps>("MenuBtnProps");
+    app.register_props::<components::menu::MenuState>("MenuState");
     app.register_props::<components::menu::MenuTextProps>("MenuTextProps");
     app.register_component("gui_menu", gui::gui_menu::gui_menu);
 }
