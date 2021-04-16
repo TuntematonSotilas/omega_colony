@@ -90,17 +90,10 @@ widget_component! {
             ..Default::default()
         });
         let margin = Props::new(ContentBoxItemLayout {
-            /*margin: Rect {
-                left: 320.,
-                right: 320.,
-                ..Default::default()    
-            },*/
             anchors: Rect {
-                left: 0.5,
-                //right: 0.5,
+                left: 0.42,
                 ..Default::default()
             },
-            //align: Vec2 { x: 0.5, y:0. },
             ..Default::default()
         });
 
