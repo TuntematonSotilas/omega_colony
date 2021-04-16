@@ -18,6 +18,20 @@ impl State for LoadingState {
             .with(NonPersistent(token))
 			.build();
         
+        //Background
+		world
+        .create_entity()
+        .with(CompositeRenderable(
+            Rectangle {
+                color: Color::black(),
+                rect: Rect::with_size([2000.0, 2000.0].into()).align(0.5.into()),
+            }
+            .into(),
+        ))
+        .with(CompositeTransform::translation([0., 0.].into()))
+        .with(NonPersistent(token))
+        .build();
+
         //Text
 		world
 			.create_entity()
