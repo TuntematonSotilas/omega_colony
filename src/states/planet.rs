@@ -33,10 +33,6 @@ impl State for PlanetState {
 			let camera = entity_find_world("camera", world);
 			world.write_resource::<Camera>().camera = camera;
 		}
-		if world.read_resource::<Camera>().camera_panel.is_none() {
-			let camera_panel = entity_find_world("camera_panel", world);
-			world.write_resource::<Camera>().camera_panel = camera_panel;
-		}
 		StateChange::None
     }
 }

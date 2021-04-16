@@ -4,7 +4,6 @@ use oxygengine::prelude::*;
 pub struct Camera {
 	pub is_centered: bool,
 	pub camera: Option<Entity>,
-	pub camera_panel: Option<Entity>,
 	pub prev_x: f32,
 	pub prev_y: f32,
 }
