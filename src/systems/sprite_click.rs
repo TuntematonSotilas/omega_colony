@@ -8,6 +8,8 @@ use crate::{
 	},
 };
 
+const HALF_TILE_W: Scalar = 8.;
+
 pub struct SpriteClickSystem;
 
 impl<'s> System<'s> for SpriteClickSystem {
@@ -41,7 +43,8 @@ impl<'s> System<'s> for SpriteClickSystem {
 								pos_inv.x <= interactive_sprite.w && 
 								pos_inv.y >= 0.0 && 
 								pos_inv.y < interactive_sprite.h {
-									let tile_pos = matrix * Vec2::new(16.,0.);
+									let x = interactive_sprite.w / 2. - HALF_TILE_W;
+									let tile_pos = matrix * Vec2::new(x,0.);
 									selected.pos = tile_pos;
 									selected.code = interactive_sprite.code.clone();
 							}
