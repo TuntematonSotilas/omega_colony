@@ -28,8 +28,11 @@ implement_props_data!(MenuTextProps);
 widget_hook! {
     pub use_menu(life_cycle) {
 		life_cycle.mount(|context| {
-            let _ = get_time();
-
+            let time_opt = get_time();
+			if let Some(time) = time_opt {
+				debug!("{0}", time.sec);
+			}
+			
             drop(context.state.write(MenuState {
 				alpha: 0.,
 			}));
@@ -105,7 +108,7 @@ fn get_time() -> Option<Time> {
             if let Some(sto) = sto_opt {
                 let obj_res = serde_json::from_str::<Time>(sto.as_str());
                 if let Ok(obj) = obj_res {
-                    debug!("{:?}", obj);
+					return Some(obj);
                 }
             }
         }

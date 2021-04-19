@@ -19,8 +19,8 @@ impl<'s> System<'s> for TimeSystem {
     ) {
         let delta_time = lifecycle.delta_time_seconds();
         time.phase += delta_time;
-		time.timestamp += delta_time;
-        if time.phase > 10. {
+		if time.phase > 10. {
+			time.sec += 10; 
 			self.save(time.clone());
             time.phase = 0.;
         }
