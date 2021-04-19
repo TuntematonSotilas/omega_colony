@@ -16,7 +16,7 @@ pub fn setup(app: &mut Application) {
     app.register_component("gui_menu", gui::gui_menu::gui_menu);
 }
 
-pub fn new_theme() -> ThemeProps {
+pub fn menu_theme() -> ThemeProps {
     let mut theme = make_default_theme(
         color_from_rgba(255,255,255, 1.),
         color_from_rgba(255, 255, 255, 1.),

@@ -1,14 +1,14 @@
 use oxygengine::user_interface::raui::core::prelude::*;
 
 use crate::ui::{
-    new_theme,
+    menu_theme,
     components::menu::menu,
 };
 
 widget_component! {
     pub gui_menu(key, named_slots) {
         widget! {
-            (#{key} content_box | {new_theme()} [
+            (#{key} content_box | {menu_theme()} [
                 (#{"menu"} menu)
             ])
         }

@@ -1,14 +1,11 @@
 use oxygengine::user_interface::raui::core::prelude::*;
 
-use crate::ui::{
-    new_theme,
-    components::splash::splash,
-};
+use crate::ui::components::splash::splash;
 
 widget_component! {
     pub gui_splash(key, named_slots) {
         widget! {
-            (#{key} content_box | {new_theme()} [
+            (#{key} content_box [
                 (#{"splash"} splash)
             ])
         }
