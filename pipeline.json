@@ -9,6 +9,7 @@
 			{
 			  "Copy": {
 				"from": [
+				  "audio/",
 				  "prefabs/",
 				  "fonts/",
 				  "images/ui",

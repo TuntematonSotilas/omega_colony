@@ -14,6 +14,10 @@ entities:
             x: 320
             y: 320
         CompositeRenderDepth: 2
+        AudioSource:
+          audio: audio/brahms-vals3-synth.ogg
+          streaming: true
+          play: true
   # Ground
   - Data:
       components:

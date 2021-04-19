@@ -52,6 +52,8 @@ pub fn main_js() -> Result<(), JsValue> {
                 assets.register_error_reporter(LoggerAssetsDatabaseErrorReporter);
                 // register assets protocols from composite renderer module.
                 oxygengine::composite_renderer::protocols_installer(assets);
+                // register assets protocols from audio module.
+                oxygengine::audio::protocols_installer(assets);
             }),
         )
         // install core module prefabs management.
@@ -62,6 +64,8 @@ pub fn main_js() -> Result<(), JsValue> {
             oxygengine::user_interface::prefabs_installer(prefabs);
             // install prefabs for integration between UI and composite rendering.
             oxygengine::integration_user_interface_composite_renderer::prefabs_installer(prefabs);
+            // install audio prefabs.
+            oxygengine::audio::prefabs_installer(prefabs);
             // register game prefabs component factories.
 			prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
 			prefabs.register_component_factory::<Selector>("Selector");
@@ -89,6 +93,8 @@ pub fn main_js() -> Result<(), JsValue> {
 				//.image_source_inner_margin(0.5) 
             ),
         )
+         // install audio support.
+        .with_bundle(oxygengine::audio::bundle_installer, WebAudio::default())
         // install UI support.
         .with_bundle(
             oxygengine::user_interface::bundle_installer,

@@ -1,3 +1,4 @@
+audio://audio/brahms-vals3-synth.ogg
 font://fonts/deadspace.ttf
 font://fonts/orbitron.ttf
 fontface://fonts/deadspace.json
