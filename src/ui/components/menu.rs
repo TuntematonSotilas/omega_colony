@@ -14,6 +14,7 @@ const FRAMES: Scalar = 10.;
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct MenuState {
 	pub alpha: Scalar,
+    pub time: Option<Time>,
 }
 implement_props_data!(MenuState);
 
@@ -29,12 +30,9 @@ widget_hook! {
     pub use_menu(life_cycle) {
 		life_cycle.mount(|context| {
             let time_opt = get_time();
-			if let Some(time) = time_opt {
-				debug!("{0}", time.sec);
-			}
-			
-            drop(context.state.write(MenuState {
+			drop(context.state.write(MenuState {
 				alpha: 0.,
+                time: time_opt,
 			}));
         });
 
@@ -49,6 +47,7 @@ widget_hook! {
 }
 
 widget_component! {
+    
     pub menu_comp(key, props, state) [use_menu] {
         if let Ok(state) = state.read::<MenuState>() {
             let text_prop = props.read_cloned_or_default::<MenuTextProps>();
@@ -66,22 +65,60 @@ widget_component! {
                 },
                 ..Default::default()
             });
+            
+            let list_items = match &state.time {
+                Some(time) => {
+                    let time_props = Props::new(TextBoxProps {
+                        height: TextBoxSizeValue::Exact(10.),
+                        text: format!("Time played : {0}s", time.sec.to_owned()),
+                        alignment: TextBoxAlignment::Center,
+                        font: TextBoxFont {
+                            name: "fonts/orbitron.json".to_owned(),
+                            size: 14.0,
+                        },
+                        color: color_from_rgba(0, 153, 255, 1.),
+                        ..Default::default()
+                    });
+
+                    vec![
+                        widget! {
+                            (#{"title"} text_paper: {title})
+                        },
+                        widget! {
+                            (#{"continue_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                                id: "continue".to_string(),
+                                label: "Continue".to_string(),
+                            }})
+                        },
+                        widget! {
+                            (#{"time"} text_box: {time_props})
+                        },
+                        widget! {
+                            (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                                id: "new_game".to_string(),
+                                label: "New Game".to_string(),
+                            }})
+                        },
+                    ]
+                },
+                None => vec![
+                    widget! {
+                        (#{"title"} text_paper: {title})
+                    },
+                    widget! {
+                        (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                            id: "new_game".to_string(),
+                            label: "New Game".to_string(),
+                        }})
+                    },
+                ],
+            };
 
             widget! {
                 (#{key} nav_content_box [
                     (#{"stars"} stars::stars)
                     (#{"margin"} content_box: {margin} | {WidgetAlpha(state.alpha)} [
-                        (#{"v-box"} vertical_box [
-                            (#{"title"} text_paper: {title})
-                            (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                                id: "new_game".to_string(),
-                                label: "New Game".to_string(),
-                            }})
-                            (#{"continue_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                                id: "continue".to_string(),
-                                label: "Continue".to_string(),
-                            }})
-                        ])
+                        (#{"v-box"} vertical_box | [ list_items ] |)
                     ])
                 ])
             }
