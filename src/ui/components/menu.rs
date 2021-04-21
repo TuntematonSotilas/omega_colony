@@ -4,7 +4,7 @@ use oxygengine::user_interface::raui::{
 };
 use serde::{Deserialize, Serialize};
 use crate::{
-    resources::time::{Time, TIME_STORAGE}, 
+    resources::time::TIME_STORAGE, 
     ui::components::{stars, menu_btn},
     storage::sto_utils,
 };
@@ -14,7 +14,7 @@ const FRAMES: Scalar = 10.;
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct MenuState {
 	pub alpha: Scalar,
-    pub time: Option<Time>,
+    pub sec: Option<u32>,
 }
 implement_props_data!(MenuState);
 
@@ -29,10 +29,10 @@ implement_props_data!(MenuTextProps);
 widget_hook! {
     pub use_menu(life_cycle) {
 		life_cycle.mount(|context| {
-            let time_opt = sto_utils::get::<Time>(TIME_STORAGE);
+            let sec_opt = sto_utils::get::<u32>(TIME_STORAGE);
 			drop(context.state.write(MenuState {
 				alpha: 0.,
-                time: time_opt,
+                sec: sec_opt,
 			}));
         });
 
@@ -66,11 +66,11 @@ widget_component! {
                 ..Default::default()
             });
             
-            let list_items = match &state.time {
-                Some(time) => {
+            let list_items = match &state.sec {
+                Some(sec) => {
                     let time_props = Props::new(TextBoxProps {
                         height: TextBoxSizeValue::Exact(10.),
-                        text: format!("Time played : {0}s", time.sec.to_owned()),
+                        text: format!("Time played : {0}s", sec.to_owned()),
                         alignment: TextBoxAlignment::Center,
                         font: TextBoxFont {
                             name: "fonts/orbitron.json".to_owned(),

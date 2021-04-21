@@ -18,12 +18,14 @@ impl<'s> System<'s> for TimeSystem {
 		(lifecycle, mut time)
 		: Self::SystemData,
     ) {
-        let delta_time = lifecycle.delta_time_seconds();
-        time.phase += delta_time;
-		if time.phase > 10. {
-			time.sec += 10; 
-			sto_utils::save::<Time>(TIME_STORAGE, time.clone());
-            time.phase = 0.;
-        }
+		if time.launched {
+			let delta_time = lifecycle.delta_time_seconds();
+			time.phase += delta_time;
+			if time.phase > 10. {
+				time.sec += 10; 
+				sto_utils::save::<u32>(TIME_STORAGE, time.sec);
+				time.phase = 0.;
+			}
+		}
 	}	
 }
