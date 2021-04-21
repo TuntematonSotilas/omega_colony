@@ -30,6 +30,7 @@ mod components;
 mod systems;
 mod resources;
 mod ui;
+mod storage;
 
 #[wasm_bindgen(start)]
 pub fn main_js() -> Result<(), JsValue> {

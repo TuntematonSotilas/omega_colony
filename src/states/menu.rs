@@ -22,8 +22,11 @@ impl State for MenuState {
         if let Some(app) = ui.application_mut("") {
             for (_caller, msg) in app.consume_signals() {
                 if let Some(msg) = msg.as_any().downcast_ref::<MenuBtnSignal>() {
-                    if msg == &MenuBtnSignal::NewGame {
-                        return StateChange::Swap(Box::new(PlanetState))
+                    match &msg {
+                        MenuBtnSignal::NewGame => return StateChange::Swap(Box::new(PlanetState)),
+                        MenuBtnSignal::Continue => {
+                            //world.write_resource::<Time>().camera = camera;
+                        }         
                     }
                 }
             }

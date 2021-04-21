@@ -3,10 +3,10 @@ use oxygengine::user_interface::raui::{
     material::prelude::*,
 };
 use serde::{Deserialize, Serialize};
-use web_sys::window;
 use crate::{
     resources::time::{Time, TIME_STORAGE}, 
-    ui::components::{stars, menu_btn}
+    ui::components::{stars, menu_btn},
+    storage::sto_utils,
 };
 
 const FRAMES: Scalar = 10.;
@@ -29,7 +29,7 @@ implement_props_data!(MenuTextProps);
 widget_hook! {
     pub use_menu(life_cycle) {
 		life_cycle.mount(|context| {
-            let time_opt = get_time();
+            let time_opt = sto_utils::get::<Time>(TIME_STORAGE);
 			drop(context.state.write(MenuState {
 				alpha: 0.,
                 time: time_opt,
@@ -136,28 +136,4 @@ widget_component! {
             }})
         }
     }
-}
-
-fn get_time() -> Option<Time> {
-    if let Some(storage) = get_storage() {
-        let sto_res = storage.get_item(TIME_STORAGE);
-        if let Ok(sto_opt) = sto_res {
-            if let Some(sto) = sto_opt {
-                let obj_res = serde_json::from_str::<Time>(sto.as_str());
-                if let Ok(obj) = obj_res {
-					return Some(obj);
-                }
-            }
-        }
-    }
-    None
-}
-
-fn get_storage() -> Option<web_sys::Storage> {
-    if let Some(window) = window() {
-        if let Ok(storage_opt) = window.local_storage() {
-            return storage_opt;
-        }
-    }
-    None
 }
