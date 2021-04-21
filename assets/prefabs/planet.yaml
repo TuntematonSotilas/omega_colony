@@ -1,5 +1,34 @@
 template_name: planet
 entities:
+  # UI
+  - Data:
+      components:
+        Name: camera_ui
+        CompositeCamera:
+          tags:
+            - ui
+        CompositeTransform: {}
+        CompositeRenderDepth: 2
+        NonPersistent: ~
+  - Data:
+      components:
+        Tag: ui
+        CompositeRenderable: None
+        CompositeTransform: {}
+        CompositeRenderDepth: 2
+        UserInterfaceView:
+          root:
+            Component:
+              type_name: gui_game
+              key: gui_menu
+        UserInterfaceViewSyncCompositeRenderable:
+          camera_name: camera_ui
+          mapping_scaling:
+            FitMaximum:
+              - 640
+              - 640
+          approx_rect_values: Round
+        NonPersistent: ~
   # Camera
   - Data:
       components:
@@ -13,7 +42,7 @@ entities:
           scale:
             x: 320
             y: 320
-        CompositeRenderDepth: 2
+        CompositeRenderDepth: 1
         AudioSource:
           audio: audio/brahms-vals3-synth.ogg
           streaming: true
@@ -28,15 +57,5 @@ entities:
         CompositeMapChunk:
           map_name: planet.map
           layer_name: ground
-        CompositeRenderDepth: 2
-  # Rocks
-  # - Data:
-  #     components:
-  #       Tag: world
-  #       NonPersistent: ~
-  #       CompositeRenderable: None
-  #       CompositeTransform: {}
-  #       CompositeMapChunk:
-  #         map_name: planet.map
-  #         layer_name: rocks
-  #       CompositeRenderDepth: 3
+        CompositeRenderDepth: 1
+  

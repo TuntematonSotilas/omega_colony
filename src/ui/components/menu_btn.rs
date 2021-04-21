@@ -89,7 +89,7 @@ widget_component! {
             height: SizeBoxSizeValue::Exact(50.),
             ..Default::default()
         });
-        let margin = Props::new(ContentBoxItemLayout {
+        let anchor = Props::new(ContentBoxItemLayout {
             anchors: Rect {
                 left: 0.42,
                 ..Default::default()
@@ -99,7 +99,7 @@ widget_component! {
 
         widget! {
             (#{key} content_box [
-                (#{"margin"} content_box: {margin} [
+                (#{"anchor"} content_box: {anchor} [
                     (#{"size"} size_box: {size} {
                         content = (#{"button"} button: {btn_props} {
                             content = (#{"content"} content_box [

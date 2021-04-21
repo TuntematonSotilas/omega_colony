@@ -16,4 +16,4 @@ entities:
           w: 48
           h: 64
           code: "base"
-        CompositeRenderDepth: 3
+        CompositeRenderDepth: 1

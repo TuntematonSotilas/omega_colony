@@ -16,6 +16,8 @@ pub fn setup(app: &mut Application) {
     app.register_props::<components::menu::MenuState>("MenuState");
     app.register_props::<components::menu::MenuTextProps>("MenuTextProps");
     app.register_component("gui_menu", gui::gui_menu::gui_menu);
+
+	app.register_component("gui_game", gui::gui_game::gui_game);
 }
 
 fn make_text_variants(

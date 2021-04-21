@@ -8,7 +8,7 @@ entities:
           translation:
             x: 0
             y: 0
-        CompositeRenderDepth: 3
+        CompositeRenderDepth: 1
         CompositeVisibility: false
         CompositeSprite:
           sheet_frame:
