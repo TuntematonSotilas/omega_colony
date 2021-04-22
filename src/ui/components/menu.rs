@@ -88,6 +88,22 @@ widget_component! {
                 use_main_color: true,
                 ..Default::default()
             });
+
+            let size = SizeBoxProps {
+                width: SizeBoxSizeValue::Exact(60.),
+                height: SizeBoxSizeValue::Exact(140.),
+                transform: Transform {
+                    align: Vec2 {x: 1., y:0. },
+                    //translation: Vec2 {x: 290., y:0. },
+                    ..Default::default()    
+                },
+                margin: Rect {
+                    left: 200.,
+                    ..Default::default()    
+                },
+                ..Default::default()
+            };
+            
             widget! {
                 (#{key} nav_content_box [
                     (#{"stars"} stars::stars)
@@ -95,13 +111,18 @@ widget_component! {
                         (#{"v-box"} vertical_box [
                             (#{"text"} text_paper: {title})
                             (#{"time"} text_paper: {time})
-                            (#{"continue_wraper"} content_box [
-                                {continue_btn}
-                            ])
-                            (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                                id: "new_game".to_string(),
-                                label: "New Game".to_string(),
-                            }})
+                            (#{"resize"} size_box: {size} {
+                                content = (#{"v-box-btns"} vertical_box  [
+                                    (#{"continue_wraper"} content_box [
+                                        {continue_btn}
+                                    ])
+                                    (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                                        id: "new_game".to_string(),
+                                        label: "New Game".to_string(),
+                                    }})  
+                                ])
+                            })
+                            
                         ])
                     ])
                 ])
