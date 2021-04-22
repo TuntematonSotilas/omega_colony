@@ -70,6 +70,8 @@ widget_component! {
             });
             
             let mut time_txt = "No save".to_string();
+            let mut continue_btn = widget! {()};
+            
             if let Some(sec) = state.sec
             {
                 time_txt = format!("Time played : {0}s", sec);
@@ -85,7 +87,7 @@ widget_component! {
             widget! {
                 (#{key} nav_content_box [
                     (#{"stars"} stars::stars)
-                    (#{"margin"} content_box: {margin} /*| {WidgetAlpha(state.alpha)}*/ [
+                    (#{"margin"} content_box: {margin} | {WidgetAlpha(state.alpha)} [
                         (#{"v-box"} vertical_box [
                             (#{"text"} text_paper: {title})
                             (#{"time"} text_paper: {time})
