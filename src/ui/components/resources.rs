@@ -3,7 +3,7 @@ use oxygengine::user_interface::raui::core::prelude::*;
 widget_component! {
     pub resources_comp(key, props, state) {
 
-		let background_props2 = Props::new(ImageBoxProps {
+		/*let background_props2 = Props::new(ImageBoxProps {
 			material: ImageBoxMaterial::Image(ImageBoxImage {
 			  id: "image.png".to_owned(),
 			  scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
@@ -17,14 +17,14 @@ widget_component! {
 			  ..Default::default()
 			}),
 			..Default::default()
-		  });
+		  });*/
 
 		let size = Props::new(SizeBoxProps {
             width: SizeBoxSizeValue::Fill, 
             height: SizeBoxSizeValue::Exact(50.),
             ..Default::default()
         });
-		let background_props = Props::new(ImageBoxProps {
+		let background = Props::new(ImageBoxProps {
             width: ImageBoxSizeValue::Fill,
             height: ImageBoxSizeValue::Fill,
             material: ImageBoxMaterial::Image(ImageBoxImage {
@@ -36,7 +36,7 @@ widget_component! {
 		widget!{
 			(#{"size"} size_box: {size} {
 				content = (#{"content"} content_box [
-					(#{"background"} image_box: {background_props})
+					(#{"background"} image_box: {background})
 				])
 			})
 		}

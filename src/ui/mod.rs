@@ -27,3 +27,11 @@ fn make_text_variants(
 ) {
     text_variants.insert(base_id.to_owned(), base_material);
 }
+
+fn make_button_variants(
+    base_id: &str,
+    base_material: ThemedButtonMaterial,
+    btn_variants: &mut HashMap<String, ThemedButtonMaterial>,
+) {
+    btn_variants.insert(base_id.to_owned(), base_material);
+}

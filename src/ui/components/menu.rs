@@ -50,75 +50,54 @@ widget_component! {
     
     pub menu_comp(key, props, state) [use_menu] {
         if let Ok(state) = state.read::<MenuState>() {
-            let text_prop = props.read_cloned_or_default::<MenuTextProps>();
-            let title = TextPaperProps {
-                text: text_prop.title,
-                variant: String::new(),
-                use_main_color: true,
-                ..Default::default()
-            };
             let margin = Props::new(ContentBoxItemLayout {
                 margin: Rect {
                     top: 200.,
                     bottom: 200.,
+                    left: 100.,
+                    right: 100.,
                     ..Default::default()
                 },
                 ..Default::default()
             });
+            let text_prop = props.read_cloned_or_default::<MenuTextProps>();
+            let title = Props::new(TextPaperProps {
+                text: text_prop.title,
+                width: TextBoxSizeValue::Fill,
+                height: TextBoxSizeValue::Fill,
+                use_main_color: true,
+                ..Default::default()
+            });
             
-            let list_items = match &state.sec {
-                Some(sec) => {
-                    let time_props = Props::new(TextBoxProps {
-                        height: TextBoxSizeValue::Exact(10.),
-                        text: format!("Time played : {0}s", sec.to_owned()),
-                        alignment: TextBoxAlignment::Center,
-                        font: TextBoxFont {
-                            name: "fonts/orbitron.json".to_owned(),
-                            size: 14.0,
-                        },
-                        color: color_from_rgba(0, 153, 255, 1.),
-                        ..Default::default()
-                    });
-
-                    vec![
-                        widget! {
-                            (#{"title"} text_paper: {title})
-                        },
-                        widget! {
-                            (#{"continue_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                                id: "continue".to_string(),
-                                label: "Continue".to_string(),
-                            }})
-                        },
-                        widget! {
-                            (#{"time"} text_box: {time_props})
-                        },
-                        widget! {
-                            (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                                id: "new_game".to_string(),
-                                label: "New Game".to_string(),
-                            }})
-                        },
-                    ]
-                },
-                None => vec![
-                    widget! {
-                        (#{"title"} text_paper: {title})
-                    },
-                    widget! {
-                        (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                            id: "new_game".to_string(),
-                            label: "New Game".to_string(),
-                        }})
-                    },
-                ],
-            };
+            let mut time_txt = "No save".to_string();
+            if let Some(sec) = state.sec
+            {
+                time_txt = format!("Time played : {0}s", sec);
+            }
+            let time = Props::new(TextPaperProps {
+                text: time_txt.to_owned(),
+                width: TextBoxSizeValue::Fill,
+                height: TextBoxSizeValue::Fill,
+                use_main_color: true,
+                ..Default::default()
+            });
 
             widget! {
                 (#{key} nav_content_box [
                     (#{"stars"} stars::stars)
-                    (#{"margin"} content_box: {margin} | {WidgetAlpha(state.alpha)} [
-                        (#{"v-box"} vertical_box | [ list_items ] |)
+                    (#{"margin"} content_box: {margin} /*| {WidgetAlpha(state.alpha)}*/ [
+                        (#{"v-box"} vertical_box [
+                            (#{"text"} text_paper: {title})
+                            (#{"time"} text_paper: {time})
+                            (#{"continue_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                                id: "continue".to_string(),
+                                label: "Continue".to_string(),
+                            }})
+                            (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                                id: "new_game".to_string(),
+                                label: "New Game".to_string(),
+                            }})
+                        ])
                     ])
                 ])
             }

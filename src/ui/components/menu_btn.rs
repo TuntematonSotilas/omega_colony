@@ -1,7 +1,11 @@
-use oxygengine::user_interface::raui::core::{
-    implement_message_data, 
-    implement_props_data, 
-    prelude::*};
+use oxygengine::user_interface::raui::{
+    core::{
+        implement_message_data, 
+        implement_props_data, 
+        prelude::*,
+    },
+    material::prelude::*,
+};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -42,48 +46,10 @@ widget_hook! {
 widget_component! {
     pub menu_btn(id, key, props, state) [use_button_notified_state, use_menu_btn] {
         let btn_props = props.clone()
+            .with(PaperProps { frame: None, ..Default::default() })
             .with(NavItemActive)
             .with(ButtonNotifyProps(id.to_owned().into()));
-        let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
-        let ButtonProps {
-            selected,
-            trigger,
-            ..
-        } = state.read_cloned_or_default();
-
-        let background_props = Props::new(ImageBoxProps {
-            width: ImageBoxSizeValue::Fill,
-            height: ImageBoxSizeValue::Fill,
-            material: ImageBoxMaterial::Image(ImageBoxImage {
-                id: "ui/menu_btn.png".to_owned(),
-                tint: if trigger {
-                    Color { r: 0.0, g: 0.0, b: 0.0, a: 0.8 }
-                } else if selected {
-                    Color { r: 0.0, g: 0.0, b: 0.0, a: 0.9 }
-                } else {
-                    Color::default()
-                },
-                ..Default::default()
-            }),
-            ..Default::default()
-        });
-        let text_props = Props::new(TextBoxProps {
-            height: TextBoxSizeValue::Exact(1.),
-            text: menu_btn_props.label,
-            alignment: TextBoxAlignment::Center,
-            font: TextBoxFont {
-                name: "fonts/orbitron.json".to_owned(),
-                size: 18.0,
-            },
-            ..Default::default()
-        })
-        .with(ContentBoxItemLayout {
-            margin: Rect {
-                top: 15.0,
-                ..Default::default()
-            },
-            ..Default::default()
-        });
+        /*
         let size = Props::new(SizeBoxProps {
             width: SizeBoxSizeValue::Exact(200.), 
             height: SizeBoxSizeValue::Exact(50.),
@@ -95,21 +61,24 @@ widget_component! {
                 ..Default::default()
             },
             ..Default::default()
+        });*/
+        let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
+        let text = Props::new(TextPaperProps {
+            text: menu_btn_props.label,
+            width: TextBoxSizeValue::Fill,
+            height: TextBoxSizeValue::Fill,
+            transform: Transform {
+                align: Vec2 { x: 0., y: 0.3},
+                ..Default::default()
+            },
+            use_main_color: true,
+            ..Default::default()
         });
 
         widget! {
-            (#{key} content_box [
-                (#{"anchor"} content_box: {anchor} [
-                    (#{"size"} size_box: {size} {
-                        content = (#{"button"} button: {btn_props} {
-                            content = (#{"content"} content_box [
-                                (#{"background"} image_box: {background_props})
-                                (#{"label"} text_box: {text_props.clone()})
-                            ])
-                        })
-                    })
-                ])
-            ])
+            (#{key} button_paper: {btn_props} {
+                content = (#{"label"} text_paper: {text.clone()})
+            })
         }
     }
 }
