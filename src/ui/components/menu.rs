@@ -91,7 +91,7 @@ widget_component! {
             let size_btns = VerticalBoxProps {
                 transform: Transform {
                     pivot: Vec2 { x: 0.5, y: 0.5 },
-					scale: Vec2 { x: 0.5, y: 0.5 },
+					scale: Vec2 { x: 0.3, y: 1. },
 					..Default::default()
                 },
                 ..Default::default()
