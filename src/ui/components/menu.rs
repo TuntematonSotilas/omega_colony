@@ -88,18 +88,11 @@ widget_component! {
                 use_main_color: true,
                 ..Default::default()
             });
-
-            let size = SizeBoxProps {
-                width: SizeBoxSizeValue::Exact(60.),
-                height: SizeBoxSizeValue::Exact(140.),
+            let size_btns = VerticalBoxProps {
                 transform: Transform {
-                    align: Vec2 {x: 1., y:0. },
-                    //translation: Vec2 {x: 290., y:0. },
-                    ..Default::default()    
-                },
-                margin: Rect {
-                    left: 200.,
-                    ..Default::default()    
+                    pivot: Vec2 { x: 0.5, y: 0.5 },
+					scale: Vec2 { x: 0.5, y: 0.5 },
+					..Default::default()
                 },
                 ..Default::default()
             };
@@ -111,18 +104,15 @@ widget_component! {
                         (#{"v-box"} vertical_box [
                             (#{"text"} text_paper: {title})
                             (#{"time"} text_paper: {time})
-                            (#{"resize"} size_box: {size} {
-                                content = (#{"v-box-btns"} vertical_box  [
-                                    (#{"continue_wraper"} content_box [
-                                        {continue_btn}
-                                    ])
-                                    (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                                        id: "new_game".to_string(),
-                                        label: "New Game".to_string(),
-                                    }})  
+                            (#{"size_btns"} vertical_box: {size_btns}  [
+                                (#{"continue_wraper"} content_box [
+                                    {continue_btn}
                                 ])
-                            })
-                            
+                                (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                                    id: "new_game".to_string(),
+                                    label: "New Game".to_string(),
+                                }})  
+                            ])
                         ])
                     ])
                 ])
