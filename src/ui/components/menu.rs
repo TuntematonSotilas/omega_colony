@@ -54,8 +54,6 @@ widget_component! {
                 margin: Rect {
                     top: 200.,
                     bottom: 200.,
-                    left: 200.,
-                    right: 200.,
                     ..Default::default()
                 },
                 ..Default::default()
@@ -75,7 +73,14 @@ widget_component! {
             if let Some(sec) = state.sec
             {
                 time_txt = format!("Time played : {0}s", sec);
+                continue_btn = widget! {
+                    (#{"continue_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                        id: "continue".to_string(),
+                        label: "Continue".to_string(),
+                    }})
+                };
             }
+
             let time = Props::new(TextPaperProps {
                 text: time_txt.to_owned(),
                 width: TextBoxSizeValue::Fill,
@@ -91,10 +96,9 @@ widget_component! {
                         (#{"v-box"} vertical_box [
                             (#{"text"} text_paper: {title})
                             (#{"time"} text_paper: {time})
-                            (#{"continue_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                                id: "continue".to_string(),
-                                label: "Continue".to_string(),
-                            }})
+                            (#{"continue_btn"} content_box [
+                                {continue_btn}
+                            ])
                             (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
                                 id: "new_game".to_string(),
                                 label: "New Game".to_string(),

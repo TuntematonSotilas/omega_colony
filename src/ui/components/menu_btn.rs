@@ -49,19 +49,7 @@ widget_component! {
             .with(PaperProps { frame: None, ..Default::default() })
             .with(NavItemActive)
             .with(ButtonNotifyProps(id.to_owned().into()));
-        /*
-        let size = Props::new(SizeBoxProps {
-            width: SizeBoxSizeValue::Exact(200.), 
-            height: SizeBoxSizeValue::Exact(50.),
-            ..Default::default()
-        });
-        let anchor = Props::new(ContentBoxItemLayout {
-            anchors: Rect {
-                left: 0.42,
-                ..Default::default()
-            },
-            ..Default::default()
-        });*/
+
         let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
         let text = Props::new(TextPaperProps {
             text: menu_btn_props.label,
@@ -76,9 +64,11 @@ widget_component! {
         });
 
         widget! {
-            (#{key} button_paper: {btn_props} {
-                content = (#{"label"} text_paper: {text.clone()})
-            })
+            (#{key} horizontal_box [
+                (#{"button_paper"} button_paper: {btn_props} {
+                    content = (#{"label"} text_paper: {text.clone()})
+                })
+            ])
         }
     }
 }
