@@ -88,7 +88,6 @@ widget_component! {
                 use_main_color: true,
                 ..Default::default()
             });
-
             widget! {
                 (#{key} nav_content_box [
                     (#{"stars"} stars::stars)
@@ -96,7 +95,7 @@ widget_component! {
                         (#{"v-box"} vertical_box [
                             (#{"text"} text_paper: {title})
                             (#{"time"} text_paper: {time})
-                            (#{"continue_btn"} content_box [
+                            (#{"continue_wraper"} content_box [
                                 {continue_btn}
                             ])
                             (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {

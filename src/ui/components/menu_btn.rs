@@ -64,11 +64,9 @@ widget_component! {
         });
 
         widget! {
-            (#{key} horizontal_box [
-                (#{"button_paper"} button_paper: {btn_props} {
-                    content = (#{"label"} text_paper: {text.clone()})
-                })
-            ])
+            (#{key} button_paper: {btn_props} {
+                content = (#{"label"} text_paper: {text.clone()})
+            })
         }
     }
 }
