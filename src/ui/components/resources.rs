@@ -9,7 +9,7 @@ widget_component! {
             .with(PaperProps { frame: None, ..Default::default() });
 		let size = Props::new(SizeBoxProps {
             width: SizeBoxSizeValue::Fill, 
-            height: SizeBoxSizeValue::Exact(50.),
+            height: SizeBoxSizeValue::Exact(30.),
             ..Default::default()
         });
 		widget!{
