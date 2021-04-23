@@ -71,14 +71,24 @@ widget_component! {
             let mut time_txt = "No save".to_string();
             let mut continue_btn = widget! {()};
             
+            let size_btn = SizeBoxProps {
+                width: SizeBoxSizeValue::Exact(100.),
+                height: SizeBoxSizeValue::Exact(30.),
+                ..Default::default()
+            };
+
             if let Some(sec) = state.sec
             {
                 time_txt = format!("Time played : {0}s", sec);
                 continue_btn = widget! {
-                    (#{"continue_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                        id: "continue".to_string(),
-                        label: "Continue".to_string(),
-                    }})
+                    (#{"box-btn-cont"} content_box [
+                        (#{"size-btn-cont"} size_box: {size_btn.clone()} {
+                            content = (#{"continue_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                                id: "continue".to_string(),
+                                label: "Continue".to_string(),
+                            }})
+                        })
+                    ])
                 };
             }
 
@@ -90,12 +100,6 @@ widget_component! {
                 ..Default::default()
             });
             
-            let size_btn = SizeBoxProps {
-                width: SizeBoxSizeValue::Exact(100.),
-                height: SizeBoxSizeValue::Exact(30.),
-                ..Default::default()
-            };
-
             widget! {
                 (#{key} nav_content_box [
                     (#{"stars"} stars::stars)
@@ -104,14 +108,8 @@ widget_component! {
                             (#{"text"} text_paper: {title})
                             (#{"time"} text_paper: {time})
                             (#{"v-box-btns"} vertical_box [
-                                (#{"box-btn-cont"} content_box [
-                                    (#{"size-btn-cont"} size_box: {size_btn.clone()} {
-                                        content = (#{"continue-wrap"} content_box [
-                                            {continue_btn}
-                                        ])
-                                    })
-                                ])
-                                (#{"box-btn-new"} content_box [
+                                 {continue_btn}
+                                 (#{"box-btn-new"} content_box [
                                     (#{"size-btn-new"} size_box: {size_btn.clone()} {
                                         content = (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
                                             id: "new_game".to_string(),
