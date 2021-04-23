@@ -13,3 +13,4 @@ png://ui/stars.png
 png://ui/title.png
 png://ui/planet.png
 png://ui/menu_btn.png
+png://ui/menu_btn_big.png
