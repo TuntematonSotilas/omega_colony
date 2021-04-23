@@ -125,9 +125,9 @@ widget_component! {
                 ..Default::default()
             });
 			widget! {
-				(#{key} content_box: {props.clone()} [
+				(#{key} content_box [
 					(#{"stars"} stars::stars)
-					(#{key} content_box: {props.clone()} [
+					(#{key} content_box [
 						(#{"title"} text_box: {title} | {WidgetAlpha(state.alpha)})
 						(#{"press_label"} text_box: {press_label} | {WidgetAlpha(state.alpha)})
 						(#{"planet"} image_box: {planet})
