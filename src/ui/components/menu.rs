@@ -88,18 +88,6 @@ widget_component! {
                 use_main_color: true,
                 ..Default::default()
             });
-
-            let size_btns = SizeBoxProps {
-                width: SizeBoxSizeValue::Exact(100.),
-                height: SizeBoxSizeValue::Exact(60.),
-                margin: Rect {
-                    left: 100.,
-                    right: 100.,
-                    top: 0.,
-                    bottom: 0.
-                },
-                ..Default::default()
-            };
             
             widget! {
                 (#{key} nav_content_box [
@@ -108,17 +96,13 @@ widget_component! {
                         (#{"v-box"} vertical_box [
                             (#{"text"} text_paper: {title})
                             (#{"time"} text_paper: {time})
-                            (#{"size_btns"} size_box: {size_btns} {
-                                content = (#{"v-box-btns"} vertical_box [
-                                    (#{"continue_wraper"} content_box [
-                                        {continue_btn}
-                                    ])
-                                    (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                                        id: "new_game".to_string(),
-                                        label: "New Game".to_string(),
-                                    }})  
-                                ])
-                            })
+                            (#{"continue_wraper"} content_box [
+                                {continue_btn}
+                            ])
+                            (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                                id: "new_game".to_string(),
+                                label: "New Game".to_string(),
+                            }})  
                         ])
                     ])
                 ])
