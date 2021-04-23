@@ -20,7 +20,7 @@ pub fn theme_menu() -> ThemeProps {
                 name: "fonts/orbitron.json".to_owned(),
                 size: 18.,
             },
-            alignment: TextBoxAlignment::Center,
+            alignment: TextBoxAlignment::Left,
             ..Default::default()
         },
         &mut theme.text_variants,

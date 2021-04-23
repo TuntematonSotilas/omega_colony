@@ -54,7 +54,8 @@ widget_component! {
                 margin: Rect {
                     top: 200.,
                     bottom: 200.,
-                    ..Default::default()
+                    left: 320.,
+                    right: 0.
                 },
                 ..Default::default()
             });
@@ -89,20 +90,12 @@ widget_component! {
                 ..Default::default()
             });
             
-            let size_btns = SizeBoxProps {
+            let size_btn = SizeBoxProps {
                 width: SizeBoxSizeValue::Exact(100.),
-                height: SizeBoxSizeValue::Exact(70.),
+                height: SizeBoxSizeValue::Exact(30.),
                 ..Default::default()
             };
-    
-            let v_box_btns = VerticalBoxProps {
-                transform: Transform {
-                    align: Vec2 { x: 3., y: 0.},
-                    ..Default::default()
-                },
-                ..Default::default()
-            };
-            
+
             widget! {
                 (#{key} nav_content_box [
                     (#{"stars"} stars::stars)
@@ -110,17 +103,23 @@ widget_component! {
                         (#{"v-box"} vertical_box [
                             (#{"text"} text_paper: {title})
                             (#{"time"} text_paper: {time})
-                            (#{"size-btns"} size_box: {size_btns} {
-                                content = (#{"btns-box"} vertical_box: {v_box_btns} [
-                                    (#{"continue_wrap"} content_box [
-                                        {continue_btn}
-                                    ])
-                                    (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                                        id: "new_game".to_string(),
-                                        label: "New Game".to_string(),
-                                    }})
+                            (#{"v-box-btns"} vertical_box [
+                                (#{"box-btn-cont"} content_box [
+                                    (#{"size-btn-cont"} size_box: {size_btn.clone()} {
+                                        content = (#{"continue-wrap"} content_box [
+                                            {continue_btn}
+                                        ])
+                                    })
                                 ])
-                            })
+                                (#{"box-btn-new"} content_box [
+                                    (#{"size-btn-new"} size_box: {size_btn.clone()} {
+                                        content = (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                                            id: "new_game".to_string(),
+                                            label: "New Game".to_string(),
+                                        }})
+                                    })
+                                ])
+                            ])
                         ])
                     ])
                 ])
