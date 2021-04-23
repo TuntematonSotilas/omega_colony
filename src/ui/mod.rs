@@ -35,3 +35,11 @@ fn make_button_variants(
 ) {
     btn_variants.insert(base_id.to_owned(), base_material);
 }
+
+fn make_bkg_variants(
+    base_id: &str,
+    base_material: ThemedImageMaterial,
+    bkg_variants: &mut HashMap<String, ThemedImageMaterial>,
+) {
+    bkg_variants.insert(base_id.to_owned(), base_material);
+}
