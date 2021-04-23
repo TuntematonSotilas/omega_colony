@@ -89,6 +89,20 @@ widget_component! {
                 ..Default::default()
             });
             
+            let size_btns = SizeBoxProps {
+                width: SizeBoxSizeValue::Exact(100.),
+                height: SizeBoxSizeValue::Exact(70.),
+                ..Default::default()
+            };
+    
+            let v_box_btns = VerticalBoxProps {
+                transform: Transform {
+                    align: Vec2 { x: 3., y: 0.},
+                    ..Default::default()
+                },
+                ..Default::default()
+            };
+            
             widget! {
                 (#{key} nav_content_box [
                     (#{"stars"} stars::stars)
@@ -96,13 +110,17 @@ widget_component! {
                         (#{"v-box"} vertical_box [
                             (#{"text"} text_paper: {title})
                             (#{"time"} text_paper: {time})
-                            (#{"continue_wraper"} content_box [
-                                {continue_btn}
-                            ])
-                            (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                                id: "new_game".to_string(),
-                                label: "New Game".to_string(),
-                            }})  
+                            (#{"size-btns"} size_box: {size_btns} {
+                                content = (#{"btns-box"} vertical_box: {v_box_btns} [
+                                    (#{"continue_wrap"} content_box [
+                                        {continue_btn}
+                                    ])
+                                    (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                                        id: "new_game".to_string(),
+                                        label: "New Game".to_string(),
+                                    }})
+                                ])
+                            })
                         ])
                     ])
                 ])
