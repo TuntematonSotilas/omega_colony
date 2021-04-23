@@ -54,7 +54,7 @@ widget_component! {
                 margin: Rect {
                     top: 200.,
                     bottom: 200.,
-                    left: 320.,
+                    left: 200.,
                     right: 0.
                 },
                 ..Default::default()
