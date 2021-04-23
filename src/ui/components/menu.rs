@@ -98,6 +98,9 @@ widget_component! {
                 height: TextBoxSizeValue::Fill,
                 use_main_color: true,
                 ..Default::default()
+            }).with(ThemedWidgetProps {
+                color: ThemeColor::Secondary,
+                ..Default::default()
             });
             
             widget! {

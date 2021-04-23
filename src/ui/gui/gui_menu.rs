@@ -9,7 +9,7 @@ pub fn theme_menu() -> ThemeProps {
     let mut theme = make_default_theme(
         color_from_rgba(255,255,255, 1.),
         color_from_rgba(255, 255, 255, 1.),
-        color_from_rgba(255, 255, 255, 1.),
+        color_from_rgba(0, 153, 255, 1.),
         color_from_rgba(255, 255, 255, 1.),
     );
 
