@@ -29,15 +29,6 @@ pub fn theme_game() -> ThemeProps {
         &mut theme.text_variants,
     );
 
-    /*make_bkg_variants(
-    "",
-    ThemedImageMaterial::Image(ImageBoxImage {
-            id: "ui/panel_bkg.png".to_owned(),
-            ..Default::default()
-            }),
-    &mut theme.content_backgrounds,
-    );*/
-
     make_bkg_variants(
         "",
         ThemedImageMaterial::Image(ImageBoxImage {
