@@ -40,8 +40,8 @@ entities:
             - world
         CompositeTransform:
           scale:
-            x: 320
-            y: 320
+            x: 480
+            y: 480
         CompositeRenderDepth: 1
         AudioSource:
           audio: audio/brahms-vals3-synth.ogg

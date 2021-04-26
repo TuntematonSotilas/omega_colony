@@ -44,10 +44,20 @@ pub fn theme_menu() -> ThemeProps {
         ThemedButtonMaterial {
             default: ThemedImageMaterial::Image(ImageBoxImage {
                 id: "ui/menu_btn.png".to_owned(),
+				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+					source: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+					destination: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+					..Default::default()
+				  }),
                 ..Default::default()
             }),
              selected: ThemedImageMaterial::Image(ImageBoxImage {
                 id: "ui/menu_btn.png".to_owned(),
+				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+					source: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+					destination: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+					..Default::default()
+				  }),
                 tint: {
                     Color { r: 0.0, g: 0.0, b: 0.0, a: 0.9 }
                 },
@@ -55,6 +65,11 @@ pub fn theme_menu() -> ThemeProps {
             }),
             trigger: ThemedImageMaterial::Image(ImageBoxImage {
                 id: "ui/menu_btn.png".to_owned(),
+				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+					source: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+					destination: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+					..Default::default()
+				  }),
                 tint: {
                     Color { r: 0.0, g: 0.0, b: 0.0, a: 0.8 }
                 },
