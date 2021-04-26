@@ -27,8 +27,8 @@ widget_component! {
 		widget!{
 			(#{"bkg-size"} size_box: {size} {
 				content = (#{"bkg"} paper: {bkg} [
-					(#{"bkg-cnt"} content_box [
-						(#{"bkg-margin"} content_box : {margin} [
+					(#{"cnt"} content_box [
+						(#{"margin"} content_box : {margin} [
 							(#{"h-box"} horizontal_box [
 								(#{"item-1"} res_item::res_item)
 								(#{"item-2"} res_item::res_item)
