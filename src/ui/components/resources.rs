@@ -25,7 +25,7 @@ widget_component! {
 			..Default::default()
 		});
 		widget!{
-			(#{"bkg-size"} size_box: {size} {
+			(#{"size"} size_box: {size} {
 				content = (#{"bkg"} paper: {bkg} [
 					(#{"cnt"} content_box [
 						(#{"margin"} content_box : {margin} [

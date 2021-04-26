@@ -3,7 +3,6 @@ use oxygengine::user_interface::raui::{
     material::prelude::*,
 };
 use serde::{Deserialize, Serialize};
-use crate::ui::components::stars;
 
 const FRAMES: Scalar = 50.;
 
@@ -124,14 +123,16 @@ widget_component! {
                 align: Vec2 { x: 0.5, y: 0.5 },
                 ..Default::default()
             });
+			let bkg = PaperProps { 
+				frame: None, 
+				..Default::default() 
+			};
+
 			widget! {
-				(#{key} content_box [
-					(#{"stars"} stars::stars)
-					(#{key} content_box [
-						(#{"title"} text_box: {title} | {WidgetAlpha(state.alpha)})
-						(#{"press_label"} text_box: {press_label} | {WidgetAlpha(state.alpha)})
-						(#{"planet"} image_box: {planet})
-					])
+				(#{"paper"} paper: {bkg} [
+					(#{"title"} text_box: {title} | {WidgetAlpha(state.alpha)})
+					(#{"press_label"} text_box: {press_label} | {WidgetAlpha(state.alpha)})
+					(#{"planet"} image_box: {planet})
 				])
 			}
 		} else {

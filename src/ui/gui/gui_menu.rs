@@ -3,7 +3,7 @@ use oxygengine::user_interface::raui::{
 	material::prelude::*
 };
 
-use crate::ui::{components::menu::menu, make_text_variants, make_button_variants};
+use crate::ui::{components::menu::menu, make_text_variants, make_button_variants, make_bkg_variants};
 
 pub fn theme_menu() -> ThemeProps {
     let mut theme = make_default_theme(
@@ -71,7 +71,7 @@ pub fn theme_menu() -> ThemeProps {
 					..Default::default()
 				  }),
                 tint: {
-                    Color { r: 0.0, g: 0.0, b: 0.0, a: 0.8 }
+                    Color { r: 0.0, g: 0.0, b: 0.0, a: 0.7 }
                 },
                 ..Default::default()
             }),
@@ -79,6 +79,17 @@ pub fn theme_menu() -> ThemeProps {
         },
         &mut theme.button_backgrounds,
     );
+
+	make_bkg_variants(
+        "",
+        ThemedImageMaterial::Image(ImageBoxImage {
+            id: "ui/stars.png".to_owned(),
+            scaling: ImageBoxImageScaling::Stretch,
+            ..Default::default()
+        }),
+        &mut theme.content_backgrounds,
+    );
+
     theme
 }
 

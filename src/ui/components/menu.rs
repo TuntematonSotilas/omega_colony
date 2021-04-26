@@ -5,7 +5,7 @@ use oxygengine::user_interface::raui::{
 use serde::{Deserialize, Serialize};
 use crate::{
     resources::time::TIME_STORAGE, 
-    ui::components::{stars, menu_btn},
+    ui::components::menu_btn,
     storage::sto_utils,
 };
 
@@ -50,6 +50,10 @@ widget_component! {
     
     pub menu_comp(key, props, state) [use_menu] {
         if let Ok(state) = state.read::<MenuState>() {
+			let bkg = PaperProps { 
+				frame: None, 
+				..Default::default() 
+			};
             let margin = Props::new(ContentBoxItemLayout {
                 margin: Rect {
                     top: 200.,
@@ -76,7 +80,6 @@ widget_component! {
                 height: SizeBoxSizeValue::Exact(30.),
                 ..Default::default()
             });
-
             if let Some(sec) = state.sec
             {
                 time_txt = format!("Time played : {0}s", sec);
@@ -91,7 +94,6 @@ widget_component! {
                     ])
                 };
             }
-
             let time = Props::new(TextPaperProps {
                 text: time_txt.to_owned(),
                 width: TextBoxSizeValue::Fill,
@@ -102,11 +104,10 @@ widget_component! {
                 color: ThemeColor::Secondary,
                 ..Default::default()
             });
-            
+
             widget! {
-                (#{key} nav_content_box [
-                    (#{"stars"} stars::stars)
-                    (#{"margin"} content_box: {margin} | {WidgetAlpha(state.alpha)} [
+				(#{"bkg"} paper: {bkg} [
+					(#{"margin"} nav_content_box: {margin} | {WidgetAlpha(state.alpha)} [
                         (#{"v-box"} vertical_box [
                             (#{"text"} text_paper: {title})
                             (#{"time"} text_paper: {time})
@@ -123,7 +124,7 @@ widget_component! {
                             ])
                         ])
                     ])
-                ])
+				])
             }
         } else {
             widget!{()}
