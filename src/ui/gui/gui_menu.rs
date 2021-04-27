@@ -45,8 +45,8 @@ fn theme_menu() -> ThemeProps {
             default: ThemedImageMaterial::Image(ImageBoxImage {
                 id: "ui/menu_btn.png".to_owned(),
 				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-					source: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
-					destination: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+					source: Rect { left: 3.0, right: 3.0, top: 3.0, bottom: 3.0},
+					destination: Rect { left: 3.0, right: 3.0, top: 3.0, bottom: 3.0},
 					..Default::default()
 				  }),
                 ..Default::default()
@@ -54,8 +54,8 @@ fn theme_menu() -> ThemeProps {
              selected: ThemedImageMaterial::Image(ImageBoxImage {
                 id: "ui/menu_btn.png".to_owned(),
 				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-					source: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
-					destination: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+					source: Rect { left: 3.0, right: 3.0, top: 3.0, bottom: 3.0},
+					destination: Rect { left: 3.0, right: 3.0, top: 3.0, bottom: 3.0},
 					..Default::default()
 				  }),
                 tint: {
@@ -66,8 +66,8 @@ fn theme_menu() -> ThemeProps {
             trigger: ThemedImageMaterial::Image(ImageBoxImage {
                 id: "ui/menu_btn.png".to_owned(),
 				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-					source: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
-					destination: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+					source: Rect { left: 3.0, right: 3.0, top: 3.0, bottom: 3.0},
+					destination: Rect { left: 3.0, right: 3.0, top: 3.0, bottom: 3.0},
 					..Default::default()
 				  }),
                 tint: {
