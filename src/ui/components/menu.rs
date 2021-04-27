@@ -55,8 +55,6 @@ fn menu_comp(mut context: WidgetContext) -> WidgetNode {
 
     if let Ok(state) = state.read::<MenuState>() {
 
-        let left_margin = left_margin();
-        
         let bkg = PaperProps { 
             frame: None, 
             ..Default::default() 
@@ -65,7 +63,7 @@ fn menu_comp(mut context: WidgetContext) -> WidgetNode {
             margin: Rect {
                 top: 200.,
                 bottom: 200.,
-                left: left_margin,
+                left: 200.,
                 right: 0.
             },
             ..Default::default()
@@ -144,17 +142,4 @@ pub fn menu(context: WidgetContext) -> WidgetNode {
             title: "Menu".to_owned()
         }})
     }
-}
-
-fn left_margin() -> f32 {
-    let res = 100.;
-    if let Some(window) = window() {
-		let w_res = window.inner_width();
-        if let Ok(w_js) = w_res {
-            if let Some(w) = w_js.as_f64() {
-                return w as f32 / 4.
-            }
-        }
-	}
-    res
 }
