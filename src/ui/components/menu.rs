@@ -152,7 +152,8 @@ fn left_margin() -> f32 {
 		let w_res = window.inner_width();
         if let Ok(w_js) = w_res {
             if let Some(w) = w_js.as_f64() {
-                return ((w / 2. * 0.8) - 50.) as f32
+                let wf = w as f32;
+                return wf * 640. / wf / 2.
             }
         }
 	}
