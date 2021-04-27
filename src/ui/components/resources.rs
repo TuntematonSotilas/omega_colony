@@ -5,47 +5,43 @@ use oxygengine::user_interface::raui::{
 
 use crate::ui::components::res_item;
 
-widget_component! {
-    pub resources_comp(key, props, state) {
-		let bkg = PaperProps { 
-			frame: None, 
-			..Default::default() 
-		};
-		let size = Props::new(SizeBoxProps {
-            width: SizeBoxSizeValue::Fill, 
-            height: SizeBoxSizeValue::Exact(30.),
-            ..Default::default()
-        });
-		let margin = Props::new(ContentBoxItemLayout {
-			margin: Rect {
-				top: 5.,
-				left: 50.,
-				..Default::default()
-			},
+fn resources_comp(_context: WidgetContext) -> WidgetNode {
+	let bkg = PaperProps { 
+		frame: None, 
+		..Default::default() 
+	};
+	let size = Props::new(SizeBoxProps {
+		width: SizeBoxSizeValue::Fill, 
+		height: SizeBoxSizeValue::Exact(30.),
+		..Default::default()
+	});
+	let margin = Props::new(ContentBoxItemLayout {
+		margin: Rect {
+			top: 5.,
+			left: 50.,
 			..Default::default()
-		});
-		widget!{
-			(#{"size"} size_box: {size} {
-				content = (#{"bkg"} paper: {bkg} [
-					(#{"cnt"} content_box [
-						(#{"margin"} content_box : {margin} [
-							(#{"h-box"} horizontal_box [
-								(#{"item-1"} res_item::res_item)
-								(#{"item-2"} res_item::res_item)
-								(#{"item-3"} res_item::res_item)
-							])
+		},
+		..Default::default()
+	});
+	widget!{
+		(#{"size"} size_box: {size} {
+			content = (#{"bkg"} paper: {bkg} [
+				(#{"cnt"} content_box [
+					(#{"margin"} content_box : {margin} [
+						(#{"h-box"} horizontal_box [
+							(#{"item-1"} res_item::res_item)
+							(#{"item-2"} res_item::res_item)
+							(#{"item-3"} res_item::res_item)
 						])
 					])
 				])
-			})
-		}
+			])
+		})
 	}
 }
 
-widget_component! {
-	pub resources(key) {
-		widget! {
-			(#{key} resources_comp)
-		}
+pub fn resources(context: WidgetContext) -> WidgetNode {
+	widget! {
+		(#{context.key} resources_comp)
 	}
 }

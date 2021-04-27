@@ -5,7 +5,7 @@ use oxygengine::user_interface::raui::{
 
 use crate::ui::{components::menu::menu, make_text_variants, make_button_variants, make_bkg_variants};
 
-pub fn theme_menu() -> ThemeProps {
+fn theme_menu() -> ThemeProps {
     let mut theme = make_default_theme(
         color_from_rgba(255,255,255, 1.),
         color_from_rgba(255, 255, 255, 1.),
@@ -93,12 +93,10 @@ pub fn theme_menu() -> ThemeProps {
     theme
 }
 
-widget_component! {
-    pub gui_menu(key, named_slots) {
-        widget! {
-            (#{key} content_box | {theme_menu()} [
-                (#{"menu"} menu)
-            ])
-        }
+pub fn gui_menu(context: WidgetContext) -> WidgetNode {
+    widget! {
+        (#{context.key} content_box | {theme_menu()} [
+            (#{"menu"} menu)
+        ])
     }
 }

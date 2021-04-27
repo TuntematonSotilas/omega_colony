@@ -5,7 +5,7 @@ use oxygengine::user_interface::raui::{
 
 use crate::ui::{components::splash::splash, make_bkg_variants};
 
-pub fn theme_splash() -> ThemeProps {
+fn theme_splash() -> ThemeProps {
 	let mut theme = make_default_theme(
 		color_from_rgba(255,255,255, 1.),
 		color_from_rgba(255, 255, 255, 1.),
@@ -24,13 +24,10 @@ pub fn theme_splash() -> ThemeProps {
 	theme
 }
 
-
-widget_component! {
-    pub gui_splash(key, named_slots) {
-        widget! {
-            (#{key} content_box| {theme_splash()} [
-                (#{"splash"} splash)
-            ])
-        }
-    }
+pub fn gui_splash(context: WidgetContext) -> WidgetNode {
+	widget! {
+		(#{context.key} content_box| {theme_splash()} [
+			(#{"splash"} splash)
+		])
+	}
 }

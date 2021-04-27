@@ -24,50 +24,54 @@ pub struct MenuBtnProps {
 }
 implement_props_data!(MenuBtnProps);
 
-widget_hook! {
-    pub use_menu_btn(life_cycle) {
-        life_cycle.change(|context| {
-            for msg in context.messenger.messages {
-                if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
-					if msg.trigger_start() {
-                        let props = context.props.read_cloned_or_default::<MenuBtnProps>();
-                        let signal = match props.id.as_str() {
-                            "new_game" => MenuBtnSignal::NewGame,
-                            _ => MenuBtnSignal::Continue,
-                        };
-                        context.signals.write(signal);
-                    }
+fn use_menu_btn(context: &mut WidgetContext) {
+    context.life_cycle.change(|context| {
+        for msg in context.messenger.messages {
+            if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
+                if msg.trigger_start() {
+                    let props = context.props.read_cloned_or_default::<MenuBtnProps>();
+                    let signal = match props.id.as_str() {
+                        "new_game" => MenuBtnSignal::NewGame,
+                        _ => MenuBtnSignal::Continue,
+                    };
+                    context.signals.write(signal);
                 }
             }
-        });
-    }
+        }
+    });
 }
 
-widget_component! {
-    pub menu_btn(id, key, props, state) [use_button_notified_state, use_menu_btn] {
-        let btn_props = props.clone()
-            .with(PaperProps { frame: None, ..Default::default() })
-            .with(NavItemActive)
-            .with(ButtonNotifyProps(id.to_owned().into()));
+#[pre_hooks(use_menu_btn)]
+pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
+    let WidgetContext {
+        id,
+        key,
+        props,
+        ..
+    } = context;
 
-        let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
-        let text = Props::new(TextPaperProps {
-            variant: "btn".to_string(),
-            text: menu_btn_props.label,
-            width: TextBoxSizeValue::Fill,
-            height: TextBoxSizeValue::Fill,
-            transform: Transform {
-                align: Vec2 { x: 0., y: 0.3},
-                ..Default::default()
-            },
-            use_main_color: true,
+    let btn_props = props.clone()
+        .with(PaperProps { frame: None, ..Default::default() })
+        .with(NavItemActive)
+        .with(ButtonNotifyProps(id.to_owned().into()));
+
+    let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
+    let text = Props::new(TextPaperProps {
+        variant: "btn".to_string(),
+        text: menu_btn_props.label,
+        width: TextBoxSizeValue::Fill,
+        height: TextBoxSizeValue::Fill,
+        transform: Transform {
+            align: Vec2 { x: 0., y: 0.3},
             ..Default::default()
-        });
+        },
+        use_main_color: true,
+        ..Default::default()
+    });
 
-        widget! {
-            (#{key} button_paper: {btn_props} {
-                content = (#{"label"} text_paper: {text.clone()})
-            })
-        }
+    widget! {
+        (#{key} button_paper: {btn_props} {
+            content = (#{"label"} text_paper: {text.clone()})
+        })
     }
 }

@@ -9,7 +9,7 @@ use crate::ui::{
     make_bkg_variants,
 };
 
-pub fn theme_game() -> ThemeProps {
+fn theme_game() -> ThemeProps {
     let mut theme = make_default_theme(
         color_from_rgba(255,255,255, 1.),
         color_from_rgba(255, 255, 255, 1.),
@@ -60,12 +60,10 @@ pub fn theme_game() -> ThemeProps {
     theme
 }
 
-widget_component! {
-    pub gui_game(key, named_slots) {
-        widget! {
-            (#{key} content_box | {theme_game()} [
-                (#{"resources"} resources)
-            ])
-        }
+pub fn gui_game(context: WidgetContext) -> WidgetNode {
+    widget! {
+        (#{context.key} content_box | {theme_game()} [
+            (#{"resources"} resources)
+        ])
     }
 }
