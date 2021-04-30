@@ -15,4 +15,4 @@ png://ui/planet.png
 png://ui/menu_btn.png
 png://ui/panel_bkg.png
 png://ui/panel_data.png
-png://ui/gaz.png
+png://ui/steel.png

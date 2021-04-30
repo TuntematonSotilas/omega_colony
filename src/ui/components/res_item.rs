@@ -15,22 +15,22 @@ pub fn res_item(context: WidgetContext) -> WidgetNode {
 		..Default::default() 
 	});
 	let size_img = Props::new(SizeBoxProps {
-		width: SizeBoxSizeValue::Exact(12.), 
-		height: SizeBoxSizeValue::Exact(12.),
+		width: SizeBoxSizeValue::Exact(16.), 
+		height: SizeBoxSizeValue::Exact(16.),
 		..Default::default()
 	});
-	let gaz = Props::new(ImageBoxProps {
+	let steel = Props::new(ImageBoxProps {
 		width: ImageBoxSizeValue::Fill,
 		height: ImageBoxSizeValue::Fill,
 		material: ImageBoxMaterial::Image(ImageBoxImage {
-			id: "ui/gaz.png".to_owned(),
+			id: "ui/steel.png".to_owned(),
 			..Default::default()
 		}),
 		..Default::default()
 	});
 	let margin = Props::new(ContentBoxItemLayout {
 		margin: Rect {
-			top: 4.,
+			top: 2.,
 			left: 4.,
 			..Default::default()
 		},
@@ -42,7 +42,7 @@ pub fn res_item(context: WidgetContext) -> WidgetNode {
 				(#{"margin"} content_box : {margin} [
 					(#{"h-box"} horizontal_box [
 						(#{"size"} size_box: {size_img} {
-							content = (#{"bkg"} image_box: {gaz})
+							content = (#{"bkg"} image_box: {steel})
 						})
 					])
 				])
