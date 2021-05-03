@@ -16,3 +16,5 @@ png://ui/menu_btn.png
 png://ui/panel_bkg.png
 png://ui/panel_data.png
 png://ui/steel.png
+png://ui/copper.png
+png://ui/gold.png

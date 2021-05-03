@@ -17,7 +17,7 @@ fn resources_comp(_context: WidgetContext) -> WidgetNode {
 	});
 	let margin = Props::new(ContentBoxItemLayout {
 		margin: Rect {
-			top: 5.,
+			top: 6.,
 			left: 50.,
 			..Default::default()
 		},
@@ -29,9 +29,15 @@ fn resources_comp(_context: WidgetContext) -> WidgetNode {
 				(#{"cnt"} content_box [
 					(#{"margin"} content_box : {margin} [
 						(#{"h-box"} horizontal_box [
-							(#{"item-1"} resource::res_item)
-							(#{"item-2"} resource::res_item)
-							(#{"item-3"} resource::res_item)
+							(#{"item-1"} resource::resource: { resource::ResourceProps { 
+								img: "ui/steel.png".to_string() 
+							}})
+							(#{"item-2"} resource::resource: { resource::ResourceProps { 
+								img: "ui/copper.png".to_string() 
+							}})
+							(#{"item-3"} resource::resource: { resource::ResourceProps { 
+								img: "ui/gold.png".to_string() 
+							}})
 						])
 					])
 				])
