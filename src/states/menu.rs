@@ -3,7 +3,10 @@ use crate::{
     states::planet::PlanetState,
     ui::components::menu_btn::MenuBtnSignal,
 	storage::sto_utils,
-	resources::time::{Time, TIME_STORAGE},
+	resources::{
+        stock::Stock,
+        time::{Time, TIME_STORAGE},
+    },
 };
 
 #[derive(Default)]
@@ -32,7 +35,10 @@ impl State for MenuState {
 								world.write_resource::<Time>().sec = sec;
 							}
                         },
-						_ => (),         
+						MenuBtnSignal::NewGame => {
+                            let mut stock = world.write_resource::<Stock>();
+                            stock.init();
+                        }         
                     }
 					return StateChange::Swap(Box::new(PlanetState));
                 }

@@ -22,6 +22,7 @@ use crate::{
         camera::Camera,
 		selected::Selected,
         referential::Referential,
+        stock::Stock,
 	},
 };
 
@@ -109,6 +110,7 @@ pub fn main_js() -> Result<(), JsValue> {
             PhantomData::<WebCompositeRenderer>::default(),
         )
         .with_resource(Time::default())
+        .with_resource(Stock::default())
         .with_resource(Camera::default())
 		.with_resource(Selected::default())
         .with_resource(Referential::default())
