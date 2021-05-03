@@ -42,7 +42,7 @@ pub fn res_item(context: WidgetContext) -> WidgetNode {
 				(#{"margin"} content_box : {margin} [
 					(#{"h-box"} horizontal_box [
 						(#{"size"} size_box: {size_img} {
-							content = (#{"bkg"} image_box: {steel})
+							content = (#{"res_img"} image_box: {steel})
 						})
 					])
 				])

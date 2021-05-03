@@ -3,7 +3,7 @@ use oxygengine::user_interface::raui::{
     material::prelude::*,
 };
 
-use crate::ui::components::res_item;
+use crate::ui::components::resource;
 
 fn resources_comp(_context: WidgetContext) -> WidgetNode {
 	let bkg = PaperProps { 
@@ -29,9 +29,9 @@ fn resources_comp(_context: WidgetContext) -> WidgetNode {
 				(#{"cnt"} content_box [
 					(#{"margin"} content_box : {margin} [
 						(#{"h-box"} horizontal_box [
-							(#{"item-1"} res_item::res_item)
-							(#{"item-2"} res_item::res_item)
-							(#{"item-3"} res_item::res_item)
+							(#{"item-1"} resource::res_item)
+							(#{"item-2"} resource::res_item)
+							(#{"item-3"} resource::res_item)
 						])
 					])
 				])

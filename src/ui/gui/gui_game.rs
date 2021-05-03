@@ -4,7 +4,7 @@ use oxygengine::user_interface::raui::{
 };
 
 use crate::ui::{
-	components::resources::resources, 
+	components::top_bar::resources, 
 	make_text_variants,
     make_bkg_variants,
 };
