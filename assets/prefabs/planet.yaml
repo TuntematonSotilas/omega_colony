@@ -47,6 +47,7 @@ entities:
           audio: audio/brahms-vals3-synth.ogg
           streaming: true
           play: true
+          volume: 0.1
   # Ground
   - Data:
       components:
