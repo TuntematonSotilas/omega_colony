@@ -30,13 +30,16 @@ fn resources_comp(_context: WidgetContext) -> WidgetNode {
 					(#{"margin"} content_box : {margin} [
 						(#{"h-box"} horizontal_box [
 							(#{"item-1"} resource::resource: { resource::ResourceProps { 
-								img: "ui/steel.png".to_string() 
+								img: "ui/energy.png".to_string() 
 							}})
 							(#{"item-2"} resource::resource: { resource::ResourceProps { 
-								img: "ui/copper.png".to_string() 
+								img: "ui/water.png".to_string() 
 							}})
 							(#{"item-3"} resource::resource: { resource::ResourceProps { 
-								img: "ui/gold.png".to_string() 
+								img: "ui/wood.png".to_string() 
+							}})
+							(#{"item-4"} resource::resource: { resource::ResourceProps { 
+								img: "ui/steel.png".to_string() 
 							}})
 						])
 					])

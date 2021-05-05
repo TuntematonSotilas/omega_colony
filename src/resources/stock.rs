@@ -8,8 +8,9 @@ pub struct Stock {
 impl Stock {
 	pub fn init(&mut self) {
 		self.data = HashMap::new();
-		self.data.insert("steel".to_string(), 100);
-        self.data.insert("copper".to_string(), 100);
-        self.data.insert("gold".to_string(), 100);
+		self.data.insert("energy".to_string(), 100);
+		self.data.insert("water".to_string(), 100);
+        self.data.insert("wood".to_string(), 100);
+        self.data.insert("steel".to_string(), 100);
 	}
 }
