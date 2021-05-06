@@ -92,7 +92,7 @@ pub fn main_js() -> Result<(), JsValue> {
                 get_canvas_by_id("screen"), // canvas target.
                 RenderState::new(Some(Color::rgb(39,32,49)))
 				.image_smoothing(false)
-				//.image_source_inner_margin(0.5) 
+				.image_source_inner_margin(0.5) 
             ),
         )
          // install audio support.
