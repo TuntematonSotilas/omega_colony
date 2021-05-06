@@ -39,7 +39,7 @@ pub fn resource(context: WidgetContext) -> WidgetNode {
 		height: SizeBoxSizeValue::Exact(16.),
 		..Default::default()
 	});
-	let steel = Props::new(ImageBoxProps {
+	let img = Props::new(ImageBoxProps {
 		width: ImageBoxSizeValue::Fill,
 		height: ImageBoxSizeValue::Fill,
 		material: ImageBoxMaterial::Image(ImageBoxImage {
@@ -48,15 +48,26 @@ pub fn resource(context: WidgetContext) -> WidgetNode {
 		}),
 		..Default::default()
 	});
+
+	let text = Props::new(TextPaperProps {
+        //variant: "btn".to_string(),
+        text: "0".to_owned(),
+        width: TextBoxSizeValue::Fill,
+        height: TextBoxSizeValue::Fill,
+        use_main_color: true,
+        ..Default::default()
+    });
+
 	widget! {
 		(#{context.key} size_box: {size} {
 			content = (#{"bkg"} paper: {bkg} [
 				(#{"margin"} content_box : {margin} [
-					(#{"h-box"} horizontal_box [
-						(#{"size"} size_box: {size_img} {
-							content = (#{"res_img"} image_box: {steel})
-						})
-					])
+					(#{"size"} size_box: {size_img} {
+						content = (#{"h-box"} horizontal_box [
+							(#{"img"} image_box: {img})
+							(#{"text"} text_paper: {text.clone()})
+						])
+					})
 				])
 			])
 		})
