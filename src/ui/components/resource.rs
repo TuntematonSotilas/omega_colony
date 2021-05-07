@@ -34,40 +34,36 @@ pub fn resource(context: WidgetContext) -> WidgetNode {
 		},
 		..Default::default()
 	});
-	let size_img = Props::new(SizeBoxProps {
-		width: SizeBoxSizeValue::Exact(16.), 
-		height: SizeBoxSizeValue::Exact(16.),
-		..Default::default()
-	});
 	let img = Props::new(ImageBoxProps {
-		width: ImageBoxSizeValue::Fill,
-		height: ImageBoxSizeValue::Fill,
+		width: ImageBoxSizeValue::Exact(16.),
+		height: ImageBoxSizeValue::Exact(16.),
 		material: ImageBoxMaterial::Image(ImageBoxImage {
 			id: props.img.to_owned(),
 			..Default::default()
 		}),
 		..Default::default()
 	});
-
 	let text = Props::new(TextPaperProps {
         //variant: "btn".to_string(),
         text: "0".to_owned(),
-        width: TextBoxSizeValue::Fill,
+        width: TextBoxSizeValue::Exact(60.),
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
+		alignment_override: Some(TextBoxAlignment::Right),
+		transform: Transform {
+            align: Vec2 { x: -0.1, y: 0.1},
+            ..Default::default()
+        },
         ..Default::default()
     });
-
 	widget! {
 		(#{context.key} size_box: {size} {
 			content = (#{"bkg"} paper: {bkg} [
 				(#{"margin"} content_box : {margin} [
-					(#{"size"} size_box: {size_img} {
-						content = (#{"h-box"} horizontal_box [
-							(#{"img"} image_box: {img})
-							(#{"text"} text_paper: {text.clone()})
-						])
-					})
+					(#{"h-box"} horizontal_box [
+						(#{"img"} image_box: {img})
+						(#{"text"} text_paper: {text.clone()})
+					])	
 				])
 			])
 		})
