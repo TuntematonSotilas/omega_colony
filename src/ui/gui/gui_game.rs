@@ -4,7 +4,10 @@ use oxygengine::user_interface::raui::{
 };
 
 use crate::ui::{
-	components::top_bar::resources, 
+	components::{
+        top_bar::top_bar,
+        right_bar::right_bar,
+    }, 
 	make_text_variants,
     make_bkg_variants,
 };
@@ -62,8 +65,11 @@ fn theme_game() -> ThemeProps {
 
 pub fn gui_game(context: WidgetContext) -> WidgetNode {
     widget! {
+        (#{"right_bar"} right_bar)
+        /*
         (#{context.key} content_box | {theme_game()} [
-            (#{"resources"} resources)
-        ])
+            (#{"top_bar"} top_bar)
+            (#{"right_bar"} right_bar)
+        ])*/
     }
 }

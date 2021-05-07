@@ -5,16 +5,16 @@ use oxygengine::user_interface::raui::{
 
 use crate::ui::components::resource;
 
-fn resources_comp(_context: WidgetContext) -> WidgetNode {
-	let bkg = PaperProps { 
-		frame: None, 
-		..Default::default() 
-	};
+fn top_bar_comp(_context: WidgetContext) -> WidgetNode {
 	let size = Props::new(SizeBoxProps {
 		width: SizeBoxSizeValue::Fill, 
 		height: SizeBoxSizeValue::Exact(30.),
 		..Default::default()
 	});
+	let bkg = PaperProps { 
+		frame: None, 
+		..Default::default() 
+	};
 	let margin = Props::new(ContentBoxItemLayout {
 		margin: Rect {
 			top: 6.,
@@ -49,8 +49,8 @@ fn resources_comp(_context: WidgetContext) -> WidgetNode {
 	}
 }
 
-pub fn resources(context: WidgetContext) -> WidgetNode {
+pub fn top_bar(context: WidgetContext) -> WidgetNode {
 	widget! {
-		(#{context.key} resources_comp)
+		(#{context.key} top_bar_comp)
 	}
 }
