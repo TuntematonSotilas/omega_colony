@@ -6,7 +6,7 @@ use oxygengine::user_interface::raui::{
 use crate::ui::{
 	components::{
         top_bar::top_bar,
-        right_bar::right_bar,
+        side_panel::side_panel,
     }, 
 	make_text_variants,
     make_bkg_variants,
@@ -64,12 +64,29 @@ fn theme_game() -> ThemeProps {
 }
 
 pub fn gui_game(context: WidgetContext) -> WidgetNode {
+    let size = Props::new(ContentBoxItemLayout {
+        anchors: Rect {
+            left: 1.0,
+            right: 1.0,
+            top: 0.0,
+            bottom: 0.0,
+        },
+        align: Vec2 { x: 1.0, y: 0.0 },
+        offset: Vec2 { x: 0.0, y: 40.0 },
+        ..Default::default()
+    })
+    .with(SizeBoxProps {
+        height: SizeBoxSizeValue::Exact(300.0), 
+        width: SizeBoxSizeValue::Exact(300.0),
+        ..Default::default()
+    });
+
     widget! {
-        (#{"right_bar"} right_bar)
-        /*
         (#{context.key} content_box | {theme_game()} [
             (#{"top_bar"} top_bar)
-            (#{"right_bar"} right_bar)
-        ])*/
+            (#{"size"} size_box: {size} {
+                content = (#{"side_panel"} side_panel)
+            })
+        ])
     }
 }
