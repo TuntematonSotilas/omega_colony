@@ -37,8 +37,8 @@ fn theme_game() -> ThemeProps {
         ThemedImageMaterial::Image(ImageBoxImage {
             id: "ui/panel_bkg.png".to_owned(),
             scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-				source: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
-				destination: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+				source: Rect { left: 4., right: 4., top: 4., bottom: 4.},
+				destination: Rect { left: 4., right: 4., top: 4., bottom: 4.},
 				..Default::default()
 			  }),
             ..Default::default()
@@ -51,8 +51,8 @@ fn theme_game() -> ThemeProps {
         ThemedImageMaterial::Image(ImageBoxImage {
             id: "ui/panel_data.png".to_owned(),
             scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-				source: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
-				destination: Rect { left: 4.0, right: 4.0, top: 4.0, bottom: 4.0},
+				source: Rect { left: 4., right: 4., top: 4., bottom: 4.},
+				destination: Rect { left: 4., right: 4., top: 4., bottom: 4.},
 				..Default::default()
 			  }),
             ..Default::default()
@@ -66,18 +66,18 @@ fn theme_game() -> ThemeProps {
 pub fn gui_game(context: WidgetContext) -> WidgetNode {
     let size = Props::new(ContentBoxItemLayout {
         anchors: Rect {
-            left: 1.0,
-            right: 1.0,
-            top: 0.0,
-            bottom: 0.0,
+            left: 1.,
+            right: 1.,
+            top: 0.,
+            bottom: 0.,
         },
-        align: Vec2 { x: 1.0, y: 0.0 },
-        offset: Vec2 { x: 0.0, y: 40.0 },
+        align: Vec2 { x: 1., y: 0. },
+        offset: Vec2 { x: 0., y: 40. },
         ..Default::default()
     })
     .with(SizeBoxProps {
-        height: SizeBoxSizeValue::Exact(300.0), 
-        width: SizeBoxSizeValue::Exact(300.0),
+        height: SizeBoxSizeValue::Exact(300.), 
+        width: SizeBoxSizeValue::Exact(300.),
         ..Default::default()
     });
 
