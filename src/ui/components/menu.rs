@@ -54,11 +54,7 @@ fn menu_comp(mut context: WidgetContext) -> WidgetNode {
     } = context;
 
     if let Ok(state) = state.read::<MenuState>() {
-
-        let bkg = PaperProps { 
-            frame: None, 
-            ..Default::default() 
-        };
+        
         let margin = Props::new(ContentBoxItemLayout {
             margin: Rect {
                 top: 200.,
@@ -111,7 +107,7 @@ fn menu_comp(mut context: WidgetContext) -> WidgetNode {
         });
 
         widget! {
-            (#{"bkg"} paper: {bkg} [
+            /*(#{"bkg"} paper: {bkg} [
                 (#{"margin"} nav_content_box: {margin} | {WidgetAlpha(state.alpha)} [
                     (#{"v-box"} vertical_box [
                         (#{"text"} text_paper: {title})
@@ -129,7 +125,8 @@ fn menu_comp(mut context: WidgetContext) -> WidgetNode {
                         ])
                     ])
                 ])
-            ])
+            ])*/
+            ()
         }
     } else {
         widget!{()}
@@ -137,9 +134,30 @@ fn menu_comp(mut context: WidgetContext) -> WidgetNode {
 }
 
 pub fn menu(context: WidgetContext) -> WidgetNode {
+    
+    let bkg = PaperProps { 
+        frame: None, 
+        ..Default::default() 
+    };
+    let title = Props::new(TextPaperProps {
+        text: "Menu".to_owned(),
+        width: TextBoxSizeValue::Fill,
+        height: TextBoxSizeValue::Fill,
+        use_main_color: true,
+        ..Default::default()
+    });
     widget! {
-        (#{context.key} menu_comp : { MenuTextProps { 
+        /*(#{context.key} menu_comp : { MenuTextProps { 
             title: "Menu".to_owned()
-        }})
+        }})*/
+        (#{context.key} vertical_box [
+            (#{"text"} text_paper: {title})
+            (#{"n_h_box"} nav_horizontal_box: {NavJumpLooped} [
+                (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                    id: "new_game".to_string(),
+                    label: "New Game".to_string(),
+                }})
+            ])
+        ])
     }
 }

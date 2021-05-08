@@ -3,7 +3,12 @@ use oxygengine::user_interface::raui::{
 	material::prelude::*
 };
 
-use crate::ui::{components::menu::menu, make_text_variants, make_button_variants, make_bkg_variants};
+use crate::ui::{
+    components::menu, 
+    make_text_variants, 
+    make_button_variants, 
+    make_bkg_variants
+};
 
 fn theme_menu() -> ThemeProps {
     let mut theme = make_default_theme(
@@ -20,7 +25,7 @@ fn theme_menu() -> ThemeProps {
                 name: "fonts/orbitron.json".to_owned(),
                 size: 18.,
             },
-            alignment: TextBoxAlignment::Left,
+            alignment: TextBoxAlignment::Center,
             ..Default::default()
         },
         &mut theme.text_variants,
@@ -94,9 +99,60 @@ fn theme_menu() -> ThemeProps {
 }
 
 pub fn gui_menu(context: WidgetContext) -> WidgetNode {
-    widget! {
+    /*widget! {
         (#{context.key} content_box | {theme_menu()} [
             (#{"menu"} menu)
         ])
+    }*/
+    let content_props = ContentBoxItemLayout {
+        margin: Rect {
+            left: 200.0,
+            right: 200.0,
+            top: 100.0,
+            bottom: 100.0,
+        },
+        ..Default::default()
+    };
+    let bkg = PaperProps { 
+        frame: None, 
+        ..Default::default() 
+    };
+    let title = Props::new(TextPaperProps {
+        text: "Menu".to_owned(),
+        width: TextBoxSizeValue::Fill,
+        height: TextBoxSizeValue::Fill,
+        use_main_color: true,
+        ..Default::default()
+    });
+    let content_props = ContentBoxItemLayout {
+        margin: Rect {
+            left: 200.0,
+            right: 200.0,
+            top: 100.0,
+            bottom: 100.0,
+        },
+        ..Default::default()
+    };
+    widget! {
+        (#{context.key} content_box | {theme_menu()} [
+           (#{"bkg"} paper: {bkg})
+           (#{"content"} vertical_box: {content_props} [
+                (#{"menu"} menu::menu)
+               /* 
+                (#{"text"} text_paper: {title})
+                (#{"n_h_box"} nav_horizontal_box: {NavJumpLooped} [
+                    (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                        id: "new_game".to_string(),
+                        label: "New Game".to_string(),
+                    }})
+                ])*/
+            ])
+        ])
+
+        /*
+        (#{context.key} content_box | {theme_menu()} [
+            (#{"menu"} menu)
+        ]) */
     }
+
 }
