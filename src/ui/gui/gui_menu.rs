@@ -31,19 +31,6 @@ fn theme_menu() -> ThemeProps {
         &mut theme.text_variants,
     );
 
-    make_text_variants(
-        "btn",
-        ThemedTextMaterial {
-            font: TextBoxFont {
-                name: "fonts/orbitron.json".to_owned(),
-                size: 12.,
-            },
-            alignment: TextBoxAlignment::Center,
-            ..Default::default()
-        },
-        &mut theme.text_variants,
-    );
-
     make_button_variants(
         "",
         ThemedButtonMaterial {
