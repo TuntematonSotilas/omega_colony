@@ -16,17 +16,6 @@ pub struct SplashState {
 }
 implement_props_data!(SplashState);
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize)]
-pub struct SplashTextProps {
-    #[serde(default)]
-    pub press_label: String,
-    #[serde(default)]
-    pub title: String,
-}
-
-implement_props_data!(SplashTextProps);
-
-
 fn use_splash(context: &mut WidgetContext) {
 	context.life_cycle.mount(|context| {
 		drop(context.state.write(SplashState {
@@ -60,18 +49,17 @@ fn use_splash(context: &mut WidgetContext) {
 }
 
 #[pre_hooks(use_splash)]
-fn splash_comp(mut context: WidgetContext) -> WidgetNode {
+pub fn splash(mut context: WidgetContext) -> WidgetNode {
 	let WidgetContext {
-        props,
+		key,
         state,
         ..
     } = context;
 
 	if let Ok(state) = state.read::<SplashState>() {
-		let text_prop = props.read_cloned_or_default::<SplashTextProps>();
 		let title = Props::new(TextBoxProps {
 			height: TextBoxSizeValue::Exact(1.),
-			text: text_prop.title,
+			text: "Omega Colony".to_owned(),
 			alignment: TextBoxAlignment::Center,
 			font: TextBoxFont {
 				name: "fonts/deadspace.json".to_owned(),
@@ -91,7 +79,7 @@ fn splash_comp(mut context: WidgetContext) -> WidgetNode {
 		});
 		let press_label = Props::new(TextBoxProps {
 			height: TextBoxSizeValue::Exact(1.),
-			text: text_prop.press_label,
+			text: "Press enter".to_owned(),
 			alignment: TextBoxAlignment::Center,
 			font: TextBoxFont {
 				name: "fonts/orbitron.json".to_owned(),
@@ -134,7 +122,7 @@ fn splash_comp(mut context: WidgetContext) -> WidgetNode {
 		};
 
 		widget! {
-			(#{"paper"} paper: {bkg} [
+			(#{key} paper: {bkg} [
 				(#{"title"} text_box: {title} | {WidgetAlpha(state.alpha)})
 				(#{"press_label"} text_box: {press_label} | {WidgetAlpha(state.alpha)})
 				(#{"planet"} image_box: {planet})
@@ -142,14 +130,5 @@ fn splash_comp(mut context: WidgetContext) -> WidgetNode {
 		}
 	} else {
 		widget!{()}
-	}
-}
-
-pub fn splash(context: WidgetContext) -> WidgetNode {
-	widget! {
-		(#{context.key} splash_comp: { SplashTextProps { 
-			title: "Omega Colony".to_owned(),
-			press_label: "Press enter".to_owned() 
-		}})
 	}
 }
