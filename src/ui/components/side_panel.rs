@@ -17,21 +17,15 @@ impl Default for Side {
     }
 }
 
-pub fn side_panel_comp(_context: WidgetContext) -> WidgetNode {
-    let bkg = PaperProps { 
+pub fn side_panel(context: WidgetContext) -> WidgetNode {
+	let bkg = Props::new(PaperProps { 
         frame: None, 
         ..Default::default() 
-    };
+    });
     
     widget! {
-        (#{"ctn"} content_box [
+        (#{context.key} content_box [
             (#{"bkg"} paper: {bkg})
         ])
     }
-}
-
-pub fn side_panel(context: WidgetContext) -> WidgetNode {
-	widget! {
-		(#{context.key} side_panel_comp)
-	}
 }

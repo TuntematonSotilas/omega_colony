@@ -18,7 +18,6 @@ fn top_bar_comp(_context: WidgetContext) -> WidgetNode {
 	let margin = Props::new(ContentBoxItemLayout {
 		margin: Rect {
 			top: 6.,
-			left: 50.,
 			..Default::default()
 		},
 		..Default::default()
