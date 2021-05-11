@@ -23,8 +23,16 @@ pub fn side_panel(context: WidgetContext) -> WidgetNode {
         ..Default::default() 
     });
     
+    let h_box = HorizontalBoxProps {
+        transform: Transform {
+            align: Vec2 { x: 0.9, y: 0. },
+            ..Default::default()
+        },
+        ..Default::default()
+    };
+
     widget! {
-        (#{context.key} content_box [
+        (#{"h_box"} horizontal_box: {h_box} [
             (#{"bkg"} paper: {bkg})
         ])
     }

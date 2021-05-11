@@ -75,7 +75,7 @@ pub fn gui_game(context: WidgetContext) -> WidgetNode {
         offset: Vec2 { x: 0., y: 30. },
         ..Default::default()
     })
-    .with(SizeBoxProps {
+    .with( SizeBoxProps {
         height: SizeBoxSizeValue::Exact(610.), 
         width: SizeBoxSizeValue::Exact(300.),
         ..Default::default()
