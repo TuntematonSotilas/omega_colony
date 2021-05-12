@@ -3,19 +3,11 @@ use oxygengine::user_interface::raui::{
 	material::prelude::*
 };
 
-use serde::{Deserialize, Serialize};
-
-#[derive(Debug, Copy, Clone, Serialize, Deserialize)]
-pub enum Side {
-    Left,
-    Right,
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum PanelSignal {
+    HideOrShow,
 }
-
-impl Default for Side {
-    fn default() -> Self {
-        Self::Left
-    }
-}
+implement_message_data!(PanelSignal);
 
 pub fn side_panel(context: WidgetContext) -> WidgetNode {
 	let bkg = Props::new(PaperProps { 

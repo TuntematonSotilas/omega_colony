@@ -1,4 +1,4 @@
-use oxygengine::prelude::*;
+use oxygengine::{prelude::*, widget::WidgetId};
 
 use crate::{
 	components::interactive_sprite::InteractiveSprite,
@@ -6,6 +6,7 @@ use crate::{
 		camera::Camera,
 		selected::Selected,
 	},
+	ui::components::side_panel::PanelSignal,
 };
 
 const HALF_TILE_W: Scalar = 8.;
@@ -20,11 +21,12 @@ impl<'s> System<'s> for SpriteClickSystem {
 		ReadStorage<'s, InteractiveSprite>,
 		ReadStorage<'s, CompositeTransform>,
 		Write<'s, Selected>,
+		Write<'s, UserInterfaceRes>
     );
 
     fn run(
         &mut self, 
-		(input, camera_cache, camera_res, interactive_sprites, transforms, mut selected)
+		(input, camera_cache, camera_res, interactive_sprites, transforms, mut selected, mut ui)
 		: Self::SystemData,
     ) {
         if input.trigger_or_default("mouse-left") == TriggerState::Pressed {
@@ -47,6 +49,10 @@ impl<'s> System<'s> for SpriteClickSystem {
 									let tile_pos = matrix * Vec2::new(x,0.);
 									selected.pos = tile_pos;
 									selected.code = interactive_sprite.code.clone();
+									if let Some(app) = ui.application_mut("") {
+										let id: WidgetId = "side_panel".parse::<WidgetId>().unwrap();
+										app.send_message(&id, PanelSignal::HideOrShow);
+									}
 							}
 						}
 					}
