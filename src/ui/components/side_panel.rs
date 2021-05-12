@@ -17,23 +17,23 @@ impl Default for Side {
     }
 }
 
-pub fn side_panel(_context: WidgetContext) -> WidgetNode {
+pub fn side_panel(context: WidgetContext) -> WidgetNode {
 	let bkg = Props::new(PaperProps { 
         frame: None, 
         ..Default::default() 
     });
-    
-    let h_box = HorizontalBoxProps {
+
+	let c_box = ContentBoxProps {
         transform: Transform {
-            align: Vec2 { x: 0.9, y: 0. },
+			align: Vec2 { x: 0.9, y: 0. },
             ..Default::default()
         },
         ..Default::default()
     };
 
     widget! {
-        (#{"h_box"} horizontal_box: {h_box} [
+        (#{context.key} content_box: {c_box} [
             (#{"bkg"} paper: {bkg})
-        ])
+		])
     }
 }

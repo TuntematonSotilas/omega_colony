@@ -37,8 +37,8 @@ fn theme_game() -> ThemeProps {
         ThemedImageMaterial::Image(ImageBoxImage {
             id: "ui/panel_bkg.png".to_owned(),
             scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-				source: Rect { left: 4., right: 4., top: 4., bottom: 4.},
-				destination: Rect { left: 4., right: 4., top: 4., bottom: 4.},
+				source: Rect { left: 2., right: 4., top: 4., bottom: 4.},
+				destination: Rect { left: 2., right: 4., top: 4., bottom: 4.},
 				..Default::default()
 			  }),
             ..Default::default()
