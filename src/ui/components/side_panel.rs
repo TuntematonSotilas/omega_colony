@@ -17,7 +17,7 @@ impl Default for Side {
     }
 }
 
-pub fn side_panel(context: WidgetContext) -> WidgetNode {
+pub fn side_panel(_context: WidgetContext) -> WidgetNode {
 	let bkg = Props::new(PaperProps { 
         frame: None, 
         ..Default::default() 

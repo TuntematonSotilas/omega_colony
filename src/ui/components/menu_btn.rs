@@ -55,6 +55,22 @@ pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
         .with(NavItemActive)
         .with(ButtonNotifyProps(id.to_owned().into()));
 
+	let size = Props::new(ContentBoxItemLayout {
+		anchors: Rect {
+			left: 0.5,
+			right: 0.5,
+			top: 0.,
+			bottom: 0.,
+		},
+		offset: Vec2 { x: -75., y: 0. },
+		..Default::default()
+	}).with(SizeBoxProps {
+		height: SizeBoxSizeValue::Exact(40.), 
+		width: SizeBoxSizeValue::Exact(150.),
+		..Default::default()
+	});
+		
+
     let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
     let text = Props::new(TextPaperProps {
         text: menu_btn_props.label,
@@ -69,8 +85,12 @@ pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
     });
 
     widget! {
-        (#{key} button_paper: {btn_props} {
-            content = (#{"label"} text_paper: {text.clone()})
-        })
+		(#{"ctn"} content_box [
+			(#{"size-btn"} size_box: {size} {
+				content = (#{key} button_paper: {btn_props} {
+					content = (#{"label"} text_paper: {text.clone()})
+				})
+			})
+		])
     }
 }

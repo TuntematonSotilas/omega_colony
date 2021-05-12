@@ -59,11 +59,6 @@ pub fn menu(mut context: WidgetContext) -> WidgetNode {
         use_main_color: true,
         ..Default::default()
     });
-    let size_btn = Props::new(SizeBoxProps {
-        width: SizeBoxSizeValue::Fill,
-		height: SizeBoxSizeValue::Exact(150.),
-		..Default::default()
-	}); 
     let mut time_txt = "No save".to_string();
     let mut continue_btn = widget! {()};
     if let Ok(state) = state.read::<MenuState>() {
@@ -92,18 +87,14 @@ pub fn menu(mut context: WidgetContext) -> WidgetNode {
         (#{key} vertical_box [
             (#{"text"} text_paper: {title})
             (#{"time"} text_paper: {time})
-            (#{"ctn"} content_box [
-                (#{"size-btn"} size_box: {&size_btn} {
-                    content = (#{"v_box"} nav_vertical_box: {NavJumpLooped} [
-                        {continue_btn}
-                        (space_box: {SpaceBoxProps::vertical(10.0)})
-                        (#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
-                            id: "new_game".to_string(),
-                            label: "New Game".to_string(),
-                        }})
-                    ])
-                })
-            ])
+				(#{"v_box"} nav_vertical_box: {NavJumpLooped} [
+					{continue_btn}
+					(space_box: {SpaceBoxProps::vertical(10.0)})
+					(#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+						id: "new_game".to_string(),
+						label: "New Game".to_string(),
+					}})
+				])
         ])
     }
 }
