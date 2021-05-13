@@ -9,7 +9,18 @@ pub enum PanelSignal {
 }
 implement_message_data!(PanelSignal);
 
-pub fn side_panel(context: WidgetContext) -> WidgetNode {
+fn use_panel(context: &mut WidgetContext) {
+	context.life_cycle.change(|context| {
+		for msg in context.messenger.messages {
+            if let Some(PanelSignal::HideOrShow) = msg.as_any().downcast_ref() {
+				debug!("PanelSignal::HideOrShow");
+			}
+		}
+	});
+}
+
+#[pre_hooks(use_panel)]
+pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 	let bkg = Props::new(PaperProps { 
         frame: None, 
         ..Default::default() 
