@@ -1,7 +1,7 @@
-use oxygengine::user_interface::raui::{
+use oxygengine::{user_interface::raui::{
 	core::prelude::*, 
 	material::prelude::*
-};
+}, widget::component::containers::vertical_box};
 
 use crate::ui::{
     components::menu, 
@@ -102,9 +102,7 @@ pub fn gui_menu(context: WidgetContext) -> WidgetNode {
     widget! {
         (#{context.key} content_box | {theme_menu()} [
            (#{"bkg"} paper: {bkg})
-           (#{"margin"} vertical_box: {margin} [
-                (#{"menu"} menu::menu)
-            ])
+           (#{"menu"} menu::menu: {margin})
         ])
     }
 
