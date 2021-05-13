@@ -1,4 +1,4 @@
-use oxygengine::{prelude::*, widget::WidgetId};
+use oxygengine::prelude::*;
 
 use crate::{
 	components::interactive_sprite::InteractiveSprite,
