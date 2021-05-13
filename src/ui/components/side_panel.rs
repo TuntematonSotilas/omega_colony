@@ -43,7 +43,7 @@ fn use_panel(context: &mut WidgetContext) {
 		}
 		if !state.open && state.x_align < 1. {
 			let x = state.x_align + 1. / FRAMES;
-			if x < 1. { state.x_align = x; } else { state.x_align = 0.; }
+			if x < 1. { state.x_align = x; } else { state.x_align = 1.; }
 		}
 		drop(context.state.write(state));
 	});
