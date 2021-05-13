@@ -53,10 +53,8 @@ impl<'s> System<'s> for SpriteClickSystem {
 									selected.code = interactive_sprite.code.clone();
 									if let Some(app) = ui.application_mut("") {
 										if let Some(side_panel) = &ui_widget.side_panel {
-											debug!("send {0}", side_panel.as_ref());
 											app.send_message(side_panel, PanelSignal::HideOrShow);
 										}
-										
 									}
 							}
 						}

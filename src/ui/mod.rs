@@ -16,7 +16,8 @@ pub fn setup(app: &mut Application) {
     app.register_props::<components::menu::MenuTextProps>("MenuTextProps");
     app.register_component("gui_menu", gui::gui_menu::gui_menu);
 
-    app.register_props::<components::resource::ResourceProps>("ResourceProps");
+     app.register_props::<components::side_panel::PanelState>("PanelState");
+	 app.register_props::<components::resource::ResourceProps>("ResourceProps");
 	app.register_component("gui_game", gui::gui_game::gui_game);
 }
 

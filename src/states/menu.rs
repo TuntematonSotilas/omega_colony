@@ -25,9 +25,8 @@ impl State for MenuState {
 	    
         let mut ui = world.write_resource::<UserInterfaceRes>();
         if let Some(app) = ui.application_mut("") {
-            for (caller, msg) in app.consume_signals() {
-				debug!("{0}", caller.as_ref());
-                if let Some(msg) = msg.as_any().downcast_ref::<MenuBtnSignal>() {
+            for (_caller, msg) in app.consume_signals() {
+				if let Some(msg) = msg.as_any().downcast_ref::<MenuBtnSignal>() {
                     world.write_resource::<Time>().launched = true;
 					match &msg {
                         MenuBtnSignal::Continue => {

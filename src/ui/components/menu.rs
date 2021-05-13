@@ -10,7 +10,7 @@ use crate::{
     storage::sto_utils,
 };
 
-const FRAMES: Scalar = 10.;
+const FRAMES: Scalar = 5.;
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct MenuState {
@@ -83,10 +83,15 @@ pub fn menu(mut context: WidgetContext) -> WidgetNode {
         color: ThemeColor::Secondary,
         ..Default::default()
     });
-    widget! {
-        (#{key} vertical_box [
-            (#{"text"} text_paper: {title})
-            (#{"time"} text_paper: {time})
+
+	let mut alpha = 0.;
+	if let Ok(state) = state.read::<MenuState>() {
+		alpha = state.alpha;
+	}
+	widget! {
+		(#{key} vertical_box | {WidgetAlpha(alpha)} [
+			(#{"text"} text_paper: {title})
+			(#{"time"} text_paper: {time})
 			(#{"v_box"} nav_vertical_box: {NavJumpLooped} [
 				{continue_btn}
 				(space_box: {SpaceBoxProps::vertical(10.0)})
@@ -95,6 +100,6 @@ pub fn menu(mut context: WidgetContext) -> WidgetNode {
 					label: "New Game".to_string(),
 				}})
 			])
-        ])
-    }
+		])
+	}
 }

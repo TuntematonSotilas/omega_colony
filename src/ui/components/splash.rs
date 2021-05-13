@@ -4,8 +4,6 @@ use oxygengine::user_interface::raui::{
 };
 use serde::{Deserialize, Serialize};
 
-const FRAMES: Scalar = 50.;
-
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct SplashState {
 	pub img_size: Scalar,
@@ -15,6 +13,8 @@ pub struct SplashState {
 	pub alpha: Scalar,
 }
 implement_props_data!(SplashState);
+
+const FRAMES: Scalar = 50.;
 
 fn use_splash(context: &mut WidgetContext) {
 	context.life_cycle.mount(|context| {
