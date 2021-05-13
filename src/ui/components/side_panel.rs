@@ -5,11 +5,16 @@ use oxygengine::user_interface::raui::{
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PanelSignal {
+	Register,
     HideOrShow,
 }
 implement_message_data!(PanelSignal);
 
 fn use_panel(context: &mut WidgetContext) {
+	context.life_cycle.mount(|context| {
+        context.signals.write(PanelSignal::Register);
+    });
+	
 	context.life_cycle.change(|context| {
 		for msg in context.messenger.messages {
             if let Some(PanelSignal::HideOrShow) = msg.as_any().downcast_ref() {
