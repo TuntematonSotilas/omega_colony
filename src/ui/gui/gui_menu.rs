@@ -1,7 +1,7 @@
 use oxygengine::{user_interface::raui::{
 	core::prelude::*, 
 	material::prelude::*
-}, widget::component::containers::vertical_box};
+}};
 
 use crate::ui::{
     components::menu, 
