@@ -44,10 +44,10 @@ entities:
             y: 480
         CompositeRenderDepth: 1
         AudioSource:
-          audio: audio/brahms-vals3-synth.ogg
+          audio: audio/observing-the-star.ogg
           streaming: true
           play: true
-          volume: 0.1
+          volume: 0.2
   # Ground
   - Data:
       components:

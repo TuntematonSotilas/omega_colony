@@ -1,4 +1,4 @@
-audio://audio/brahms-vals3-synth.ogg
+audio://audio/observing-the-star.ogg
 font://fonts/deadspace.ttf
 font://fonts/orbitron.ttf
 fontface://fonts/deadspace.json
