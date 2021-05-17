@@ -22,12 +22,9 @@ impl<'s> System<'s> for SelectorSystem {
     ) {
        
 		for (transform, visibilty, _selector) in (&mut transforms, &mut visibilties, &selectors).join() {	
-			let tr_pos = transform.get_translation();
-			if tr_pos != selected.pos {
+			if selected.visible != visibilty.0 {
 				transform.set_translation(selected.pos);
-				if visibilty.0 == false {
-					visibilty.0 = true;
-				}
+				visibilty.0 =! visibilty.0;
 			}
 		}
 	}	

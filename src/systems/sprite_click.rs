@@ -41,6 +41,7 @@ impl<'s> System<'s> for SpriteClickSystem {
 				if self.is_clicked(&camera_res, &camera_cache, point, interactive_sprite, matrix) {
 					let x = interactive_sprite.w / 2. - HALF_TILE_W;
 					let tile_pos = matrix * Vec2::new(x,0.);
+					selected.visible = !selected.visible;
 					selected.pos = tile_pos;
 					selected.code = interactive_sprite.code.clone();
 					if let Some(app) = ui.application_mut("") {
