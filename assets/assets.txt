@@ -15,6 +15,7 @@ png://ui/planet.png
 png://ui/menu_btn.png
 png://ui/panel_bkg.png
 png://ui/panel_data.png
+png://ui/log_box.png
 png://ui/energy.png
 png://ui/steel.png
 png://ui/water.png

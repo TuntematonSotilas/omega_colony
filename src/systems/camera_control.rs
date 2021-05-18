@@ -3,6 +3,8 @@ use oxygengine::prelude::*;
 use crate::resources::camera::Camera;
 
 const PIXL_BORDER: f32 = 20.;
+const SPEED: f32 = 2.;
+const INIT_POS: f32 = 64.;
 
 pub struct CameraControlSystem;
 
@@ -29,7 +31,7 @@ impl<'s> System<'s> for CameraControlSystem {
 
 		//Center camera
 		if !camera_res.is_centered {
-            self.apply_transform(&camera_res, cameras, screen_size, &mut transforms, 64., 64.);
+            self.apply_transform(&camera_res, cameras, screen_size, &mut transforms, INIT_POS, INIT_POS);
 			camera_res.is_centered = true;
 			return;
         }
@@ -47,8 +49,8 @@ impl<'s> System<'s> for CameraControlSystem {
 			let mut x_inc = 0.;
 			if x < left || x > right {
 				x_inc = match x > right {
-					true => 1.,
-					false => -1.,
+					true => SPEED,
+					false => - SPEED,
 				};
 			}
 			
@@ -58,8 +60,8 @@ impl<'s> System<'s> for CameraControlSystem {
 			let mut y_inc = 0.;
 			if y < top || y > bottom {
 				y_inc = match y > bottom {
-					true => 1.,
-					false => -1.,
+					true => SPEED,
+					false => - SPEED,
 				};
 			}
 			if x_inc != 0. || y_inc != 0. {

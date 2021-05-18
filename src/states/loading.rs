@@ -25,7 +25,7 @@ impl State for LoadingState {
 				Text::new("Arial", "Loading")
 					.color(Color::rgb(255,220,78))
 					.align(TextAlign::Center)
-					.size(20.0)
+					.size(20.)
 					.into(),
 			))
 			.with(CompositeTransform::translation([0., 0.].into()))

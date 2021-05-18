@@ -94,7 +94,7 @@ pub fn menu(mut context: WidgetContext) -> WidgetNode {
 			(#{"time"} text_paper: {time})
 			(#{"v_box"} nav_vertical_box: {NavJumpLooped} [
 				{continue_btn}
-				(space_box: {SpaceBoxProps::vertical(10.0)})
+				(space_box: {SpaceBoxProps::vertical(10.)})
 				(#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
 					id: "new_game".to_string(),
 					label: "New Game".to_string(),

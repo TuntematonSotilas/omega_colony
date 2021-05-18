@@ -68,9 +68,9 @@ impl<'s> SpriteClickSystem {
 				
 				if let Some(inv_mat) = matrix.inverse() {
 					let pos_inv = pos * inv_mat;
-					if pos_inv.x >= 0.0 && 
+					if pos_inv.x >= 0. && 
 						pos_inv.x <= interactive_sprite.w && 
-						pos_inv.y >= 0.0 && 
+						pos_inv.y >= 0. && 
 						pos_inv.y < interactive_sprite.h {
 							return true
 					}

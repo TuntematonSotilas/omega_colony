@@ -7,6 +7,7 @@ use crate::ui::{
 	components::{
         top_bar::top_bar,
         side_panel::side_panel,
+        log_box::log_box,
     }, 
 	make_text_variants,
     make_bkg_variants,
@@ -60,11 +61,25 @@ fn theme_game() -> ThemeProps {
         &mut theme.content_backgrounds,
     );
 
+    make_bkg_variants(
+        "logs",
+        ThemedImageMaterial::Image(ImageBoxImage {
+            id: "ui/log_box.png".to_owned(),
+            scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+				source: Rect { left: 2., right: 4., top: 4., bottom: 4.},
+				destination: Rect { left: 2., right: 4., top: 4., bottom: 4.},
+				..Default::default()
+			  }),
+            ..Default::default()
+        }),
+        &mut theme.content_backgrounds,
+    );
+
     theme
 }
 
 pub fn gui_game(context: WidgetContext) -> WidgetNode {
-    let size = Props::new(ContentBoxItemLayout {
+    let size_panel = Props::new(ContentBoxItemLayout {
         anchors: Rect {
             left: 1.,
             right: 1.,
@@ -80,12 +95,30 @@ pub fn gui_game(context: WidgetContext) -> WidgetNode {
         width: SizeBoxSizeValue::Exact(300.),
         ..Default::default()
     });
+    let size_log = Props::new(ContentBoxItemLayout {
+        anchors: Rect {
+            left: 0.,
+            right: 1.,
+            top: 1.,
+            bottom: 1.,
+        },
+        align: Vec2 { x: 0., y: 1. },
+        ..Default::default()
+    })
+    .with( SizeBoxProps {
+        height: SizeBoxSizeValue::Exact(30.), 
+        width: SizeBoxSizeValue::Exact(200.),
+        ..Default::default()
+    });
 
     widget! {
         (#{context.key} content_box | {theme_game()} [
             (#{"top_bar"} top_bar)
-            (#{"size"} size_box: {size} {
+            (#{"size_panel"} size_box: {size_panel} {
                 content = (#{"side_panel"} side_panel)
+            })
+            (#{"size_log"} size_box: {size_log} {
+                content = (#{"log_box"} log_box)
             })
         ])
     }
