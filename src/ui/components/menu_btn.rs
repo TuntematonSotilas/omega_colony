@@ -77,7 +77,7 @@ pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
         width: TextBoxSizeValue::Fill,
         height: TextBoxSizeValue::Fill,
         transform: Transform {
-            align: Vec2 { x: 0., y: 0.3},
+            align: Vec2 { x: 0., y: 0.3 },
             ..Default::default()
         },
         use_main_color: true,

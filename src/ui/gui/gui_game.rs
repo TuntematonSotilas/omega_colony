@@ -62,6 +62,20 @@ fn theme_game() -> ThemeProps {
     );
 
     make_bkg_variants(
+        "bkg_title",
+        ThemedImageMaterial::Image(ImageBoxImage {
+            id: "ui/bkg_title.png".to_owned(),
+            scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+				source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+				destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+				..Default::default()
+			  }),
+            ..Default::default()
+        }),
+        &mut theme.content_backgrounds,
+    );
+
+    make_bkg_variants(
         "logs",
         ThemedImageMaterial::Image(ImageBoxImage {
             id: "ui/log_box.png".to_owned(),

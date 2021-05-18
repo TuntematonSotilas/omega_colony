@@ -91,16 +91,39 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         },
         ..Default::default()
     };
-
-	
-	let title = TextPaperProps {
-        text: title_txt,
-        width: TextBoxSizeValue::Fill,
-        height: TextBoxSizeValue::Fill,
-        use_main_color: true,
-		..Default::default()
+	let size_title = SizeBoxProps {
+        height: SizeBoxSizeValue::Exact(70.), 
+        width: SizeBoxSizeValue::Fill,
+        ..Default::default()
     };
-
+	let margin_ext_title = ContentBoxItemLayout {
+		margin: Rect {
+            left: 10.,
+            right: 10.,
+            top: 10.,
+            bottom: 10.,
+        },
+		..Default::default()
+	};
+	let margin_title = ContentBoxItemLayout {
+		margin: Rect {
+            left: 80.,
+            right: 80.,
+			top: 10.,
+            bottom: 10.,
+        },
+		..Default::default()
+	};
+	let bkg_title = PaperProps { 
+        frame: None, 
+        variant: "bkg_title".to_owned(),
+        ..Default::default() 
+    };
+	let size_items = SizeBoxProps {
+        height: SizeBoxSizeValue::Exact(500.), 
+        width: SizeBoxSizeValue::Fill,
+        ..Default::default()
+    };
 	let preview = ImageBoxProps {
 		width: ImageBoxSizeValue::Exact(32.),
 		height: ImageBoxSizeValue::Exact(32.),
@@ -110,14 +133,45 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 		}),
 		..Default::default()
 	};
-
+	let title = TextPaperProps {
+        text: title_txt,
+        width: TextBoxSizeValue::Fill,
+        height: TextBoxSizeValue::Fill,
+        use_main_color: true,
+		transform: Transform {
+            align: Vec2 { x: 0., y: 0.3 },
+            ..Default::default()
+        },
+		..Default::default()
+    };
     widget! {
         (#{key} content_box: {c_box} | {WidgetAlpha(alpha)} [
             (#{"bkg"} paper: {bkg})
+			
+			(#{"v_box"} vertical_box [
+				(#{"title"} size_box: {size_title} {
+					content = (#{"cnt_title"} content_box [
+						(#{"margin_title"} content_box : {margin_ext_title} [
+							(#{"bkg_title"} paper: {bkg_title})
+							(#{"margin_title"} content_box : {margin_title} [
+								
+								(#{"h_title"} horizontal_box [
+									(#{"img"} image_box: {preview})
+									(#{"bkg"} text_paper: {title})
+								])
+							])
+						])
+					])
+				})
+				(#{"items"} size_box: {size_items} {
+					content = (#{"p2"} paper)
+				})
+			])
+			/*
 			(#{"h_box"} horizontal_box [
 				(#{"img"} image_box: {preview})
 				(#{"bkg"} text_paper: {title})
-			])
+			])*/
 		])
     }
 }
