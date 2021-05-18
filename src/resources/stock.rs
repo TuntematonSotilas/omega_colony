@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-#[derive(Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum StockType {
 	Energy,
 	Water,

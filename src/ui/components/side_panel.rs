@@ -4,10 +4,12 @@ use oxygengine::user_interface::raui::{
 };
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+use crate::resources::referential::RefeItem;
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum PanelSignal {
 	Register,
-    HideOrShow,
+    HideOrShow(RefeItem),
 }
 implement_message_data!(PanelSignal);
 
@@ -32,8 +34,11 @@ fn use_panel(context: &mut WidgetContext) {
 	context.life_cycle.change(|context| {
 		let mut state = context.state.read_cloned_or_default::<PanelState>();
 		for msg in context.messenger.messages {
-            if let Some(PanelSignal::HideOrShow) = msg.as_any().downcast_ref() {
+            if let Some(PanelSignal::HideOrShow(ref_item)) = msg.as_any().downcast_ref() {
 				state.open = !state.open;
+				if state.open {
+					debug!("{0}", ref_item.name);
+				}
 			}
 		}
 		if state.open && state.x_align > 0. {

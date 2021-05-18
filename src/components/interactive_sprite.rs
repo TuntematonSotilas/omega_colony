@@ -1,11 +1,13 @@
 use oxygengine::prelude::*;
 use serde::{Deserialize, Serialize};
 
+use crate::resources::referential::RefeCode;
+
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct InteractiveSprite {
     pub w: Scalar,
 	pub h: Scalar,
-	pub code: String,
+	pub code: RefeCode,
 }
 
 impl Component for InteractiveSprite {

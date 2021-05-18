@@ -15,5 +15,5 @@ entities:
         InteractiveSprite:
           w: 32
           h: 48
-          code: "base"
+          code: Base
         CompositeRenderDepth: 1

@@ -6,6 +6,7 @@ use crate::{
 		camera::Camera,
 		selected::Selected,
 		ui_widget::UiWidget,
+		referential::Referential,
 	},
 	ui::components::side_panel::PanelSignal,
 };
@@ -24,11 +25,12 @@ impl<'s> System<'s> for SpriteClickSystem {
 		Write<'s, Selected>,
 		Write<'s, UserInterfaceRes>,
 		Read<'s, UiWidget>,
+		Read<'s, Referential>,
     );
 
     fn run(
         &mut self, 
-		(input, camera_cache, camera_res, interactive_sprites, transforms, mut selected, mut ui, ui_widget)
+		(input, camera_cache, camera_res, interactive_sprites, transforms, mut selected, mut ui, ui_widget, referential)
 		: Self::SystemData,
     ) {
         if input.trigger_or_default("mouse-left") == TriggerState::Pressed {
@@ -44,11 +46,16 @@ impl<'s> System<'s> for SpriteClickSystem {
 					selected.visible = !selected.visible;
 					selected.pos = tile_pos;
 					selected.code = interactive_sprite.code.clone();
-					if let Some(app) = ui.application_mut("") {
-						if let Some(side_panel) = &ui_widget.side_panel {
-							app.send_message(side_panel, PanelSignal::HideOrShow);
+					
+					let refe = referential.buildings.get(&selected.code);
+					if let Some(ref_item) = refe {
+						if let Some(app) = ui.application_mut("") {
+							if let Some(side_panel) = &ui_widget.side_panel {
+								app.send_message(side_panel, PanelSignal::HideOrShow(ref_item.clone()));
+							}
 						}
-					}
+					} 
+					
 				}
 			}
         }
