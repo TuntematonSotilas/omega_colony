@@ -153,17 +153,15 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         (#{key} content_box: {c_box} | {WidgetAlpha(alpha)} [
             (#{"bkg"} paper: {bkg})
 			
-			(#{"v_box"} vertical_box [
+			(#{"v_box"} vertical_box: {margin_ext_title} [
 				(#{"title"} size_box: {size_title} {
 					content = (#{"cnt_title"} content_box [
-						(#{"margin_title"} content_box : {margin_ext_title} [
-							(#{"bkg_title"} paper: {bkg_title})
-							(#{"margin_title"} content_box : {margin_title} [
-								
-								(#{"h_title"} horizontal_box [
-									(#{"img"} image_box: {preview})
-									(#{"bkg"} text_paper: {title})
-								])
+						(#{"bkg_title"} paper: {bkg_title})
+						(#{"margin_title"} content_box : {margin_title} [
+							
+							(#{"h_title"} horizontal_box [
+								(#{"img"} image_box: {preview})
+								(#{"bkg"} text_paper: {title})
 							])
 						])
 					])
