@@ -107,7 +107,7 @@ pub fn gui_game(context: WidgetContext) -> WidgetNode {
     })
     .with( SizeBoxProps {
         height: SizeBoxSizeValue::Exact(30.), 
-        width: SizeBoxSizeValue::Exact(200.),
+        width: SizeBoxSizeValue::Exact(250.),
         ..Default::default()
     });
 

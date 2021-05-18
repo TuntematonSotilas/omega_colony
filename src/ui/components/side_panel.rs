@@ -62,8 +62,13 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         ..Default::default() 
     });
 	let mut x_align = 1.;
+	let mut alpha = 0.;
 	if let Ok(state) = state.read::<PanelState>() {
 		x_align = state.x_align;
+		alpha = match state.open {
+			true => 1.,
+			false => 0.
+		};
 	}
 	let c_box = ContentBoxProps {
         transform: Transform {
@@ -74,7 +79,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
     };
 
     widget! {
-        (#{key} content_box: {c_box} [
+        (#{key} content_box: {c_box} | {WidgetAlpha(alpha)} [
             (#{"bkg"} paper: {bkg})
 		])
     }
