@@ -4,7 +4,10 @@ use oxygengine::user_interface::raui::{
 };
 use serde::{Deserialize, Serialize};
 
-use crate::resources::referential::RefeItem;
+use crate::{
+	ui::components::panel_items,
+	resources::referential::RefeItem
+};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum PanelSignal {
@@ -72,6 +75,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 	let mut alpha = 0.;
 	let mut title_txt = String::new();
 	let mut preview_pic = String::new();
+	let mut refe = None;
 
 	if let Ok(state) = state.read::<PanelState>() {
 		x_align = state.x_align;
@@ -80,6 +84,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 			false => 0.
 		};
 		if let Some(refe_item) = &state.refe {
+			refe = Some(refe_item.to_owned());
 			title_txt = refe_item.name.to_owned();
 			preview_pic = refe_item.preview.to_owned();
 		};
@@ -164,14 +169,11 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 					])
 				})
 				(#{"items"} size_box: {size_items} {
-					content = (#{"p2"} paper)
+					content = (#{"panel_items"} panel_items::panel_items: { panel_items::PanelItemProps { 
+						refe: refe
+					}})
 				})
 			])
-			/*
-			(#{"h_box"} horizontal_box [
-				(#{"img"} image_box: {preview})
-				(#{"bkg"} text_paper: {title})
-			])*/
 		])
     }
 }
