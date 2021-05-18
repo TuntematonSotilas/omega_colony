@@ -19,4 +19,5 @@ png://ui/log_box.png
 png://ui/energy.png
 png://ui/steel.png
 png://ui/water.png
-png://ui/wood.png
+png://ui/cereal.png
+png://ui/technician.png
