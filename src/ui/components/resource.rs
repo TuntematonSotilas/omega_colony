@@ -16,25 +16,25 @@ implement_props_data!(ResourceProps);
 
 pub fn resource(context: WidgetContext) -> WidgetNode {
 	let props = context.props.read_cloned_or_default::<ResourceProps>();
-	let size = Props::new(SizeBoxProps {
+	let size = SizeBoxProps {
 		width: SizeBoxSizeValue::Exact(80.), 
 		height: SizeBoxSizeValue::Exact(20.),
 		..Default::default()
-	});
-	let bkg = Props::new(PaperProps { 
+	};
+	let bkg = PaperProps { 
 		variant: "data".to_string(),
 		frame: None, 
 		..Default::default() 
-	});
-	let margin = Props::new(ContentBoxItemLayout {
+	};
+	let margin = ContentBoxItemLayout {
 		margin: Rect {
 			top: 1.,
 			left: 4.,
 			..Default::default()
 		},
 		..Default::default()
-	});
-	let img = Props::new(ImageBoxProps {
+	};
+	let img = ImageBoxProps {
 		width: ImageBoxSizeValue::Exact(16.),
 		height: ImageBoxSizeValue::Exact(16.),
 		material: ImageBoxMaterial::Image(ImageBoxImage {
@@ -42,9 +42,8 @@ pub fn resource(context: WidgetContext) -> WidgetNode {
 			..Default::default()
 		}),
 		..Default::default()
-	});
-	let text = Props::new(TextPaperProps {
-        //variant: "btn".to_string(),
+	};
+	let text = TextPaperProps {
         text: "0".to_owned(),
         width: TextBoxSizeValue::Exact(60.),
         height: TextBoxSizeValue::Fill,
@@ -55,7 +54,7 @@ pub fn resource(context: WidgetContext) -> WidgetNode {
             ..Default::default()
         },
         ..Default::default()
-    });
+    };
 	widget! {
 		(#{context.key} size_box: {size} {
 			content = (#{"bkg"} paper: {bkg} [

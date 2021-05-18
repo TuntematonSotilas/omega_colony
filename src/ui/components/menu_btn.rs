@@ -72,7 +72,7 @@ pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
 		
 
     let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
-    let text = Props::new(TextPaperProps {
+    let text = TextPaperProps {
         text: menu_btn_props.label,
         width: TextBoxSizeValue::Fill,
         height: TextBoxSizeValue::Fill,
@@ -82,7 +82,7 @@ pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
         },
         use_main_color: true,
         ..Default::default()
-    });
+    };
 
     widget! {
 		(#{"ctn"} content_box [

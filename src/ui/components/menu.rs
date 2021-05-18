@@ -52,13 +52,13 @@ pub fn menu(mut context: WidgetContext) -> WidgetNode {
         state,
         ..
     } = context;
-    let title = Props::new(TextPaperProps {
+    let title = TextPaperProps {
         text: "Menu".to_owned(),
         width: TextBoxSizeValue::Fill,
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
         ..Default::default()
-    });
+    };
     let mut time_txt = "No save".to_string();
     let mut continue_btn = widget! {()};
     if let Ok(state) = state.read::<MenuState>() {

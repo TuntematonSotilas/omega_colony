@@ -6,22 +6,22 @@ use oxygengine::user_interface::raui::{
 use crate::ui::components::resource;
 
 fn top_bar_comp(_context: WidgetContext) -> WidgetNode {
-	let size = Props::new(SizeBoxProps {
+	let size = SizeBoxProps {
 		width: SizeBoxSizeValue::Fill, 
 		height: SizeBoxSizeValue::Exact(30.),
 		..Default::default()
-	});
+	};
 	let bkg = PaperProps { 
 		frame: None, 
 		..Default::default() 
 	};
-	let margin = Props::new(ContentBoxItemLayout {
+	let margin = ContentBoxItemLayout {
 		margin: Rect {
 			top: 6.,
 			..Default::default()
 		},
 		..Default::default()
-	});
+	};
 	widget!{
 		(#{"size"} size_box: {size} {
 			content = (#{"bkg"} paper: {bkg} [

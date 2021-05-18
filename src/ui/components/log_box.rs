@@ -4,11 +4,11 @@ use oxygengine::user_interface::raui::{
 };
 
 pub fn log_box(context: WidgetContext) -> WidgetNode {
-	let bkg = Props::new(PaperProps { 
+	let bkg = PaperProps { 
         frame: None, 
         variant: "logs".to_owned(),
         ..Default::default() 
-    });
+    };
     widget! {
         (#{context.key} paper: {bkg})
     }

@@ -15,7 +15,7 @@ impl Default for RefeCode {
     }
 }
 
-#[derive(Debug, Default, Clone, PartialEq, Eq)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RefeItem  {
     pub name: String,
 	pub preview: String,
