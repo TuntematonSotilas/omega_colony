@@ -3,9 +3,7 @@ use std::collections::HashMap;
 use crate::resources::stock::StockType;
 
 #[derive(Clone, PartialEq, Eq, Hash)]
-pub enum Building {
-	Base,
-}
+pub enum Building {}
 
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub enum Unit {
