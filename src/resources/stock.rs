@@ -1,16 +1,24 @@
 use std::collections::HashMap;
 
+#[derive(Clone, PartialEq, Eq, Hash)]
+pub enum StockType {
+	Energy,
+	Water,
+	Cereal,
+	Steel,
+}
+
 #[derive(Default, Clone)]
 pub struct Stock {
-	pub data: HashMap<String, u32>,
+	pub data: HashMap<StockType, u32>,
 }
 
 impl Stock {
 	pub fn init(&mut self) {
 		self.data = HashMap::new();
-		self.data.insert("energy".to_string(), 100);
-		self.data.insert("water".to_string(), 100);
-        self.data.insert("cereal".to_string(), 100);
-        self.data.insert("steel".to_string(), 100);
+		self.data.insert(StockType::Energy, 100);
+		self.data.insert(StockType::Water, 100);
+        self.data.insert(StockType::Cereal, 100);
+        self.data.insert(StockType::Steel, 100);
 	}
 }
