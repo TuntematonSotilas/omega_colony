@@ -4,7 +4,10 @@ use oxygengine::user_interface::raui::{
 };
 use serde::{Deserialize, Serialize};
 
-use crate::resources::referential::RefeItem;
+use crate::{
+    ui::components::panel_cost,
+    resources::referential::RefeItem
+};
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct PanelItemProps {
@@ -36,11 +39,6 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
         variant: "data".to_owned(),
         ..Default::default() 
     };
-	let size_cost = SizeBoxProps {
-        height: SizeBoxSizeValue::Fill, 
-        width: SizeBoxSizeValue::Exact(25.),
-        ..Default::default()
-    };
 
     let name = TextPaperProps {
         variant: "unit".to_owned(),
@@ -68,36 +66,12 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
         ..Default::default()
     });
 
-    /*let costs_list = child.cost.iter()
-    .map(|(_code, sic)| {
-        let pic_cost = ImageBoxProps {
-            width: ImageBoxSizeValue::Exact(10.),
-            height: ImageBoxSizeValue::Exact(10.),
-            material: ImageBoxMaterial::Image(ImageBoxImage {
-                id: sic.item.pic.to_owned(),
-                ..Default::default()
-            }),
-            ..Default::default()
-        };
-        let text_cost = TextPaperProps {
-            variant: "unit".to_owned(),
-            text: sic.cost.to_string(),
-            width: TextBoxSizeValue::Exact(15.),
-            height: TextBoxSizeValue::Fill,
-            use_main_color: true,
-            alignment_override: Some(TextBoxAlignment::Left),
-            ..Default::default()
-        };
-        
-        widget! {
-            (#{sic.item.name} size_box: {size_cost.to_owned()} {
-                content = (#{"box_cost"} horizontal_box [
-                    (#{"pic_cost"} image_box: {pic_cost})
-                    (#{"text_cost"} text_paper: {text_cost})
-                ])
-            })
-        }
-    }).collect::<Vec<_>>();*/
+    let costs_list = props.item.cost.iter()
+        .map(|(_code, sic)| {
+            widget! {
+                (#{sic.item.name} panel_cost::panel_cost : { panel_cost::PanelCostProps { sic: sic.clone() }} )
+            }
+        }).collect::<Vec<_>>();
             
     widget! {
         (#{context.key} size_box: {size.to_owned()} {
@@ -108,7 +82,7 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
                     (#{"prev_box"} content_box  [
                         (#{"prev_pic"} image_box: {prev_pic})
                     ])
-                    //(#{"h-box"} horizontal_box |[ costs_list ]|)
+                    (#{"h-box"} horizontal_box |[ costs_list ]|)
                 ])
             ])
         })
