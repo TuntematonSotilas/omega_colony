@@ -73,6 +73,22 @@ pub fn panel_items(context: WidgetContext) -> WidgetNode {
                 },
                 ..Default::default()
             });
+
+            let costs_list = child.cost.iter()
+                .map(|(_code, cost)| {
+                    let cost_text = TextPaperProps {
+                        variant: "unit".to_owned(),
+                        text: "1".to_string(), //cost.name.to_owned(),
+                        width: TextBoxSizeValue::Fill,
+                        height: TextBoxSizeValue::Fill,
+                        use_main_color: true,
+                        ..Default::default()
+                    };
+                    widget! {
+                        (#{"cost"} text_paper: {cost_text})
+                    }
+                });
+
             widget! {
                 (#{"size_item"} size_box: {size.to_owned()} {
                     content = (#{"content"} content_box [
@@ -82,6 +98,7 @@ pub fn panel_items(context: WidgetContext) -> WidgetNode {
                             (#{"prev"} content_box  [
                                 (#{"prev_pic"} image_box: {prev_pic})
                             ])
+                            (#{"costs"} horizontal_box |[ costs_list ]|)
                         ])
                     ])
                 })

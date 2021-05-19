@@ -31,14 +31,14 @@ fn top_bar_comp(_context: WidgetContext) -> WidgetNode {
 							(#{"item-1"} resource::resource: { resource::ResourceProps { 
 								img: "ui/energy.png".to_string() 
 							}})
+							(#{"item-4"} resource::resource: { resource::ResourceProps { 
+								img: "ui/steel.png".to_string() 
+							}})
 							(#{"item-2"} resource::resource: { resource::ResourceProps { 
 								img: "ui/water.png".to_string() 
 							}})
 							(#{"item-3"} resource::resource: { resource::ResourceProps { 
 								img: "ui/cereal.png".to_string() 
-							}})
-							(#{"item-4"} resource::resource: { resource::ResourceProps { 
-								img: "ui/steel.png".to_string() 
 							}})
 						])
 					])

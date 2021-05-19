@@ -34,6 +34,7 @@ impl Referential {
 		// units
 		let mut stock_tech = HashMap::new();
 		stock_tech.insert(StockType::Energy, 100);
+		stock_tech.insert(StockType::Steel, 100);
 		let technician = RefeItem {
 			name: "Technician".to_string(),
 			preview: "ui/technician.png".to_string(),

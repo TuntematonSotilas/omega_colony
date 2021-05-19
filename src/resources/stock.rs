@@ -10,6 +10,13 @@ pub enum StockType {
 	Steel,
 }
 
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct StockItem  {
+    pub name: String,
+	pub preview: String,
+    pub cost: u32,
+}
+
 #[derive(Default, Clone)]
 pub struct Stock {
 	pub data: HashMap<StockType, u32>,
