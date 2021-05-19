@@ -27,8 +27,8 @@ pub fn panel_items(context: WidgetContext) -> WidgetNode {
     }
 
 	let size = SizeBoxProps {
-        height: SizeBoxSizeValue::Exact(100.), 
-        width: SizeBoxSizeValue::Exact(100.),
+        height: SizeBoxSizeValue::Exact(120.), 
+        width: SizeBoxSizeValue::Exact(120.),
         ..Default::default()
     };
 	let margin = ContentBoxItemLayout {
@@ -45,7 +45,12 @@ pub fn panel_items(context: WidgetContext) -> WidgetNode {
         variant: "data".to_owned(),
         ..Default::default() 
     };
-	
+	let size_cost = SizeBoxProps {
+        height: SizeBoxSizeValue::Fill, 
+        width: SizeBoxSizeValue::Exact(25.),
+        ..Default::default()
+    };
+
     let childs_list = childs.iter()
         .map(|(_code, child)| {
             let name = TextPaperProps {
@@ -75,30 +80,46 @@ pub fn panel_items(context: WidgetContext) -> WidgetNode {
             });
 
             let costs_list = child.cost.iter()
-                .map(|(_code, cost)| {
-                    let cost_text = TextPaperProps {
-                        variant: "unit".to_owned(),
-                        text: "1".to_string(), //cost.name.to_owned(),
-                        width: TextBoxSizeValue::Fill,
-                        height: TextBoxSizeValue::Fill,
-                        use_main_color: true,
+                .map(|(_code, sic)| {
+                    let pic_cost = ImageBoxProps {
+                        width: ImageBoxSizeValue::Exact(10.),
+                        height: ImageBoxSizeValue::Exact(10.),
+                        material: ImageBoxMaterial::Image(ImageBoxImage {
+                            id: sic.item.pic.to_owned(),
+                            ..Default::default()
+                        }),
                         ..Default::default()
                     };
+                    let text_cost = TextPaperProps {
+                        variant: "unit".to_owned(),
+                        text: sic.cost.to_string(),
+                        width: TextBoxSizeValue::Exact(15.),
+                        height: TextBoxSizeValue::Fill,
+                        use_main_color: true,
+                        alignment_override: Some(TextBoxAlignment::Left),
+                        ..Default::default()
+                    };
+                    
                     widget! {
-                        (#{"cost"} text_paper: {cost_text})
+                        (#{sic.item.name} size_box: {size_cost.to_owned()} {
+                            content = (#{"box_cost"} horizontal_box [
+                                (#{"pic_cost"} image_box: {pic_cost})
+                                (#{"text_cost"} text_paper: {text_cost})
+                            ])
+                        })
                     }
-                });
-
+                }).collect::<Vec<_>>();
+                
             widget! {
-                (#{"size_item"} size_box: {size.to_owned()} {
+                (#{child.name} size_box: {size.to_owned()} {
                     content = (#{"content"} content_box [
                         (#{"bkg"} paper: {bkg.to_owned()})
                         (#{"v_box"} vertical_box : {margin.to_owned()} [
-                            (#{"name"} text_paper: {name})
-                            (#{"prev"} content_box  [
+                            (#{"name"} text_paper: {name.to_owned()})
+                            (#{"prev_box"} content_box  [
                                 (#{"prev_pic"} image_box: {prev_pic})
                             ])
-                            (#{"costs"} horizontal_box |[ costs_list ]|)
+                            (#{"h-box"} horizontal_box |[ costs_list ]|)
                         ])
                     ])
                 })

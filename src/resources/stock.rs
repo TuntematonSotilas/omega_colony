@@ -13,21 +13,42 @@ pub enum StockType {
 #[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct StockItem  {
     pub name: String,
-	pub preview: String,
-    pub cost: u32,
+	pub pic: String,
+}
+
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct StockItemCost  {
+    pub item: StockItem,
+	pub cost: u32,
 }
 
 #[derive(Default, Clone)]
 pub struct Stock {
-	pub data: HashMap<StockType, u32>,
+	pub refe: HashMap<StockType, StockItem>,
 }
 
 impl Stock {
 	pub fn init(&mut self) {
-		self.data = HashMap::new();
-		self.data.insert(StockType::Energy, 100);
-		self.data.insert(StockType::Water, 100);
-        self.data.insert(StockType::Cereal, 100);
-        self.data.insert(StockType::Steel, 100);
+		self.refe = HashMap::new();
+		let energy = StockItem {
+			name: "Energy".to_string(),
+			pic: "ui/energy.png".to_string(),
+		};
+		let water = StockItem {
+			name: "Water".to_string(),
+			pic: "ui/water.png".to_string(),
+		};
+		let steel = StockItem {
+			name: "Steel".to_string(),
+			pic: "ui/steel.png".to_string(),
+		};
+		let cereal = StockItem {
+			name: "Cereal".to_string(),
+			pic: "ui/cereal.png".to_string(),
+		};
+		self.refe.insert(StockType::Energy, energy);
+        self.refe.insert(StockType::Steel, steel);
+		self.refe.insert(StockType::Water, water);
+        self.refe.insert(StockType::Cereal, cereal);
 	}
 }

@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
-use crate::resources::stock::StockType;
+use crate::resources::stock::{Stock, StockType, StockItemCost};
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum RefeCode {
@@ -19,7 +19,7 @@ impl Default for RefeCode {
 pub struct RefeItem  {
     pub name: String,
 	pub preview: String,
-    pub cost: HashMap<StockType, u32>,
+    pub cost: HashMap<StockType, StockItemCost>,
 	pub childs: HashMap<RefeCode, RefeItem>, 
 }
 
@@ -31,10 +31,20 @@ pub struct Referential {
 
 impl Referential {
 	pub fn init(&mut self) {
+
+		let mut stock = Stock::default();
+		stock.init();
+
 		// units
 		let mut stock_tech = HashMap::new();
-		stock_tech.insert(StockType::Energy, 100);
-		stock_tech.insert(StockType::Steel, 100);
+		stock_tech.insert(StockType::Energy, StockItemCost { 
+			item: stock.refe.get(&StockType::Energy).cloned().unwrap_or_default(),
+			cost: 50
+		});
+		stock_tech.insert(StockType::Steel, StockItemCost { 
+			item: stock.refe.get(&StockType::Steel).cloned().unwrap_or_default(),
+			cost: 100
+		});
 		let technician = RefeItem {
 			name: "Technician".to_string(),
 			preview: "ui/technician.png".to_string(),
