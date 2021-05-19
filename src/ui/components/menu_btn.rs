@@ -50,7 +50,7 @@ pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
         ..
     } = context;
 
-    let btn_props = props.clone()
+    let btn_props = props.to_owned()
         .with(PaperProps { frame: None, ..Default::default() })
         .with(NavItemActive)
         .with(ButtonNotifyProps(id.to_owned().into()));
@@ -88,7 +88,7 @@ pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
 		(#{"ctn"} content_box [
 			(#{"size-btn"} size_box: {size} {
 				content = (#{key} button_paper: {btn_props} {
-					content = (#{"label"} text_paper: {text.clone()})
+					content = (#{"label"} text_paper: {text.to_owned()})
 				})
 			})
 		])

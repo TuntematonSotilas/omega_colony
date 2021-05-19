@@ -42,7 +42,7 @@ fn use_panel(context: &mut WidgetContext) {
             if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
 				state.open = !state.open;
 				if state.open {
-					state.refe = Some(refe.clone());
+					state.refe = Some(refe.to_owned());
 				}
 			}
 		}

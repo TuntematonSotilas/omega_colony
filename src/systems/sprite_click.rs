@@ -45,13 +45,13 @@ impl<'s> System<'s> for SpriteClickSystem {
 					let tile_pos = matrix * Vec2::new(x,0.);
 					selected.visible = !selected.visible;
 					selected.pos = tile_pos;
-					selected.code = interactive_sprite.code.clone();
+					selected.code = interactive_sprite.code.to_owned();
 					
 					let refe = referential.buildings.get(&selected.code);
 					if let Some(ref_item) = refe {
 						if let Some(app) = ui.application_mut("") {
 							if let Some(side_panel) = &ui_widget.side_panel {
-								app.send_message(side_panel, PanelSignal::HideOrShow(ref_item.clone()));
+								app.send_message(side_panel, PanelSignal::HideOrShow(ref_item.to_owned()));
 							}
 						}
 					} 

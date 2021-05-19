@@ -61,7 +61,7 @@ pub fn resource(context: WidgetContext) -> WidgetNode {
 				(#{"margin"} content_box : {margin} [
 					(#{"h-box"} horizontal_box [
 						(#{"img"} image_box: {img})
-						(#{"text"} text_paper: {text.clone()})
+						(#{"text"} text_paper: {text.to_owned()})
 					])	
 				])
 			])

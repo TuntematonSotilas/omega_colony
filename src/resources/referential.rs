@@ -27,21 +27,10 @@ pub struct RefeItem  {
 pub struct Referential {
 	pub is_init: bool,
 	pub buildings: HashMap<RefeCode, RefeItem>,
-	pub units: HashMap<RefeCode, RefeItem>,
 }
 
 impl Referential {
 	pub fn init(&mut self) {
-		// buildings
-		let base = RefeItem {
-			name: "Base".to_string(),
-			preview: "ui/base.png".to_string(),
-			cost: HashMap::new(),
-			childs: HashMap::new(),
-		};
-		self.buildings = HashMap::new();
-		self.buildings.insert(RefeCode::Base, base);
-
 		// units
 		let mut stock_tech = HashMap::new();
 		stock_tech.insert(StockType::Energy, 100);
@@ -51,9 +40,20 @@ impl Referential {
 			cost: stock_tech,
 			childs: HashMap::new(),
 		};
-		self.units = HashMap::new();
-		self.units.insert(RefeCode::Technician, technician);
 		
+		// buildings
+		let mut base_childs = HashMap::new();
+		base_childs.insert(RefeCode::Technician, technician);
+
+		let base = RefeItem {
+			name: "Base".to_string(),
+			preview: "ui/base.png".to_string(),
+			cost: HashMap::new(),
+			childs: base_childs,
+		};
+		self.buildings = HashMap::new();
+		self.buildings.insert(RefeCode::Base, base);
+
 		self.is_init = true;
 	}
 }

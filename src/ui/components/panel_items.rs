@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use oxygengine::user_interface::raui::{
 	core::prelude::*,
 	material::prelude::*,
@@ -20,25 +21,16 @@ pub fn panel_items(context: WidgetContext) -> WidgetNode {
     } = context;
 
     let props = context.props.read_cloned_or_default::<PanelItemProps>();
-    let mut preview_pic = String::new();
+    let mut childs = HashMap::new();
     if let Some(refe) = props.refe {
-        preview_pic = refe.preview;
+        childs = refe.childs;
     }
 
 	let size = SizeBoxProps {
-        height: SizeBoxSizeValue::Exact(32.), 
-        width: SizeBoxSizeValue::Exact(32.),
+        height: SizeBoxSizeValue::Exact(100.), 
+        width: SizeBoxSizeValue::Exact(100.),
         ..Default::default()
     };
-	let margin_ext = ContentBoxItemLayout {
-		margin: Rect {
-            left: 10.,
-            right: 10.,
-            top: 10.,
-            bottom: 10.,
-        },
-		..Default::default()
-	};
 	let margin = ContentBoxItemLayout {
 		margin: Rect {
             left: 5.,
@@ -53,28 +45,51 @@ pub fn panel_items(context: WidgetContext) -> WidgetNode {
         variant: "data".to_owned(),
         ..Default::default() 
     };
-	let preview = ImageBoxProps {
-		width: ImageBoxSizeValue::Exact(32.),
-		height: ImageBoxSizeValue::Exact(32.),
-		material: ImageBoxMaterial::Image(ImageBoxImage {
-			id: preview_pic.to_owned(),
-			..Default::default()
-		}),
-		..Default::default()
-	};
+	
+    let childs_list = childs.iter()
+        .map(|(_code, child)| {
+            let name = TextPaperProps {
+                variant: "unit".to_owned(),
+                text: child.name.to_owned(),
+                width: TextBoxSizeValue::Fill,
+                height: TextBoxSizeValue::Fill,
+                use_main_color: true,
+                ..Default::default()
+            };
+            let prev_pic = Props::new(ImageBoxProps {
+                width: ImageBoxSizeValue::Exact(32.),
+                height: ImageBoxSizeValue::Exact(32.),
+                material: ImageBoxMaterial::Image(ImageBoxImage {
+                    id: child.preview.to_owned(),
+                    ..Default::default()
+                }),
+                ..Default::default()
+            }).with( ContentBoxItemLayout {
+                margin: Rect {
+                    left: 32.,
+                    right: 32.,
+                    top: 0.,
+                    bottom: 0.,
+                },
+                ..Default::default()
+            });
+            widget! {
+                (#{"size_item"} size_box: {size.to_owned()} {
+                    content = (#{"content"} content_box [
+                        (#{"bkg"} paper: {bkg.to_owned()})
+                        (#{"v_box"} vertical_box : {margin.to_owned()} [
+                            (#{"name"} text_paper: {name})
+                            (#{"prev"} content_box  [
+                                (#{"prev_pic"} image_box: {prev_pic})
+                            ])
+                        ])
+                    ])
+                })
+            }
+        })
+        .collect::<Vec<_>>();
 
     widget! {
-        (#{key} flex_box [
-            /*(#{"size_item"} size_box: {size} {
-                content = (#{"content"} content_box [
-					(#{"margin_ext"} content_box : {margin_ext} [
-					(#{"bkg_title"} paper: {bkg})
-					(#{"margin_title"} content_box : {margin} [
-						(#{"preview"} image_box: {preview})
-					])
-				])
-            })*/
-			(#{"preview"} image_box: {preview})
-		])
+        (#{key} flex_box |[ childs_list ]|)
     }
 }

@@ -32,6 +32,18 @@ fn theme_game() -> ThemeProps {
         },
         &mut theme.text_variants,
     );
+    make_text_variants(
+        "unit",
+        ThemedTextMaterial {
+            font: TextBoxFont {
+                name: "fonts/orbitron.json".to_owned(),
+                size: 9.,
+            },
+            alignment: TextBoxAlignment::Center,
+            ..Default::default()
+        },
+        &mut theme.text_variants,
+    );
 
     make_bkg_variants(
         "",
