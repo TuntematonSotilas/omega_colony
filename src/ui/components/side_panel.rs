@@ -5,7 +5,7 @@ use oxygengine::user_interface::raui::{
 use serde::{Deserialize, Serialize};
 
 use crate::{
-	ui::components::panel_items,
+	ui::components::panel_item,
 	resources::referential::RefeItem
 };
 
@@ -75,7 +75,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 	let mut alpha = 0.;
 	let mut title_txt = String::new();
 	let mut preview_pic = String::new();
-	let mut refe = None;
+	let mut refe = RefeItem::default();
 
 	if let Ok(state) = state.read::<PanelState>() {
 		x_align = state.x_align;
@@ -84,7 +84,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 			false => 0.
 		};
 		if let Some(refe_item) = &state.refe {
-			refe = Some(refe_item.to_owned());
+			refe = refe_item.to_owned();
 			title_txt = refe_item.name.to_owned();
 			preview_pic = refe_item.preview.to_owned();
 		};
@@ -149,6 +149,15 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         },
 		..Default::default()
     };
+
+	let items_list = refe.childs.iter()
+        .map(|(_code, child)| {
+            widget! {
+                (#{child.name} panel_item::panel_item: { panel_item::PanelItemProps { item: child.to_owned() }})
+            }
+        })
+        .collect::<Vec<_>>();
+
     widget! {
         (#{key} content_box: {c_box} | {WidgetAlpha(alpha)} [
             (#{"bkg"} paper: {bkg})
@@ -167,9 +176,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 					])
 				})
 				(#{"items"} size_box: {size_items} {
-					content = (#{"panel_items"} panel_items::panel_items: { panel_items::PanelItemProps { 
-						refe: refe
-					}})
+					content =  (#{key} flex_box |[ items_list ]|)
 				})
 			])
 		])
