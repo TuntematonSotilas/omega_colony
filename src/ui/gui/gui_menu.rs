@@ -35,7 +35,7 @@ fn theme_menu() -> ThemeProps {
         "",
         ThemedButtonMaterial {
             default: ThemedImageMaterial::Image(ImageBoxImage {
-                id: "ui/menu_btn.png".to_owned(),
+                id: "ui/btn_m.png".to_owned(),
 				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
 					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
 					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
@@ -43,28 +43,13 @@ fn theme_menu() -> ThemeProps {
 				  }),
                 ..Default::default()
             }),
-             selected: ThemedImageMaterial::Image(ImageBoxImage {
-                id: "ui/menu_btn.png".to_owned(),
+            selected: ThemedImageMaterial::Image(ImageBoxImage {
+                id: "ui/btn_c.png".to_owned(),
 				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
 					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
 					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
 					..Default::default()
 				  }),
-                tint: {
-                    Color { r: 0., g: 0., b: 0., a: 0.9 }
-                },
-                ..Default::default()
-            }),
-            trigger: ThemedImageMaterial::Image(ImageBoxImage {
-                id: "ui/menu_btn.png".to_owned(),
-				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-					..Default::default()
-				  }),
-                tint: {
-                    Color { r: 0., g: 0., b: 0., a: 0.7 }
-                },
                 ..Default::default()
             }),
             ..Default::default()
