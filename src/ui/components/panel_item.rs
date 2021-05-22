@@ -18,7 +18,13 @@ implement_props_data!(PanelItemProps);
 
 pub fn panel_item(context: WidgetContext) -> WidgetNode {
 	
-    let props = context.props.read_cloned_or_default::<PanelItemProps>();
+	let WidgetContext {
+        key,
+        props,
+        ..
+    } = context;
+
+    let item_props = props.read_cloned_or_default::<PanelItemProps>();
     
 	let size = SizeBoxProps {
         height: SizeBoxSizeValue::Exact(120.), 
@@ -42,7 +48,7 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
 
     let name = TextPaperProps {
         variant: "unit".to_owned(),
-        text: props.item.name,
+        text: item_props.item.name,
         width: TextBoxSizeValue::Fill,
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
@@ -52,7 +58,7 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
         width: ImageBoxSizeValue::Exact(32.),
         height: ImageBoxSizeValue::Exact(32.),
         material: ImageBoxMaterial::Image(ImageBoxImage {
-            id: props.item.preview,
+            id: item_props.item.preview,
             ..Default::default()
         }),
         ..Default::default()
@@ -66,25 +72,30 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
         ..Default::default()
     });
 
-    let costs_list = props.item.cost.iter()
+    let costs_list = item_props.item.cost.iter()
         .map(|(_code, sic)| {
             widget! {
                 (#{sic.item.name} panel_cost::panel_cost : { panel_cost::PanelCostProps { sic: sic.clone() }} )
             }
         }).collect::<Vec<_>>();
-            
+    
+	let btn_props = props.to_owned()
+        .with(PaperProps { frame: None, ..Default::default() })
+        .with(NavItemActive);
+        //.with(ButtonNotifyProps(id.to_owned().into()));
+
     widget! {
-        (#{context.key} size_box: {size.to_owned()} {
-            content = (#{"content"} content_box [
-                (#{"bkg"} paper: {bkg.to_owned()})
-                (#{"v_box"} vertical_box : {margin.to_owned()} [
+        (#{key} size_box: {size.to_owned()} {
+            content = (#{"content"} button_paper: {btn_props} {
+                //(#{"bkg"} paper: {bkg.to_owned()})
+                content = (#{"v_box"} vertical_box : {margin.to_owned()} [
                     (#{"name"} text_paper: {name.to_owned()})
                     (#{"prev_box"} content_box  [
                         (#{"prev_pic"} image_box: {prev_pic})
                     ])
                     (#{"h-box"} horizontal_box |[ costs_list ]|)
                 ])
-            ])
+            })
         })
     }
 }

@@ -11,6 +11,7 @@ use crate::ui::{
     }, 
 	make_text_variants,
     make_bkg_variants,
+	make_button_variants,
 };
 
 fn theme_game() -> ThemeProps {
@@ -99,6 +100,32 @@ fn theme_game() -> ThemeProps {
             ..Default::default()
         }),
         &mut theme.content_backgrounds,
+    );
+
+	make_button_variants(
+        "",
+        ThemedButtonMaterial {
+            default: ThemedImageMaterial::Image(ImageBoxImage {
+                id: "ui/panel_btn.png".to_owned(),
+				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+					..Default::default()
+				  }),
+                ..Default::default()
+            }),
+            selected: ThemedImageMaterial::Image(ImageBoxImage {
+                id: "ui/btn_c.png".to_owned(),
+				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+					..Default::default()
+				  }),
+                ..Default::default()
+            }),
+            ..Default::default()
+        },
+        &mut theme.button_backgrounds,
     );
 
     theme
