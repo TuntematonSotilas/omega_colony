@@ -40,11 +40,6 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
         },
 		..Default::default()
 	};
-	let bkg = PaperProps { 
-        frame: None, 
-        variant: "data".to_owned(),
-        ..Default::default() 
-    };
 
     let name = TextPaperProps {
         variant: "unit".to_owned(),
@@ -87,7 +82,6 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
     widget! {
         (#{key} size_box: {size.to_owned()} {
             content = (#{"content"} button_paper: {btn_props} {
-                //(#{"bkg"} paper: {bkg.to_owned()})
                 content = (#{"v_box"} vertical_box : {margin.to_owned()} [
                     (#{"name"} text_paper: {name.to_owned()})
                     (#{"prev_box"} content_box  [
