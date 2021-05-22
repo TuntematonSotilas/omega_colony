@@ -28,15 +28,16 @@ pub fn resource(context: WidgetContext) -> WidgetNode {
 	};
 	let margin = ContentBoxItemLayout {
 		margin: Rect {
-			top: 1.,
+			top: 4.,
 			left: 4.,
+			bottom: 2.,
 			..Default::default()
 		},
 		..Default::default()
 	};
 	let img = ImageBoxProps {
-		width: ImageBoxSizeValue::Exact(16.),
-		height: ImageBoxSizeValue::Exact(16.),
+		width: ImageBoxSizeValue::Exact(12.),
+		height: ImageBoxSizeValue::Exact(12.),
 		material: ImageBoxMaterial::Image(ImageBoxImage {
 			id: props.img.to_owned(),
 			..Default::default()
@@ -49,20 +50,14 @@ pub fn resource(context: WidgetContext) -> WidgetNode {
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
 		alignment_override: Some(TextBoxAlignment::Right),
-		transform: Transform {
-            align: Vec2 { x: -0.1, y: 0.1},
-            ..Default::default()
-        },
         ..Default::default()
     };
 	widget! {
 		(#{context.key} size_box: {size} {
 			content = (#{"bkg"} paper: {bkg} [
-				(#{"margin"} content_box : {margin} [
-					(#{"h-box"} horizontal_box [
-						(#{"img"} image_box: {img})
-						(#{"text"} text_paper: {text.to_owned()})
-					])	
+				(#{"h-box"} horizontal_box: {margin} [
+					(#{"img"} image_box: {img})
+					(#{"text"} text_paper: {text.to_owned()})
 				])
 			])
 		})

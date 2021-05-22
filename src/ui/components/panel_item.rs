@@ -82,11 +82,9 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
     widget! {
         (#{key} size_box: {size.to_owned()} {
             content = (#{"content"} button_paper: {btn_props} {
-                content = (#{"v_box"} vertical_box : {margin.to_owned()} [
+                content = (#{"v_box"} vertical_box: {margin.to_owned()} [
                     (#{"name"} text_paper: {name.to_owned()})
-                    (#{"prev_box"} content_box  [
-                        (#{"prev_pic"} image_box: {prev_pic})
-                    ])
+                    (#{"prev_pic"} image_box: {prev_pic})
                     (#{"h-box"} horizontal_box |[ costs_list ]|)
                 ])
             })
