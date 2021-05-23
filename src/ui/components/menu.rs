@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     resources::time::TIME_STORAGE, 
-    ui::components::menu_btn,
+    ui::components::menu_btn::{ menu_btn, MenuBtnProps },
     storage::sto_utils,
 };
 
@@ -66,7 +66,7 @@ pub fn menu(mut context: WidgetContext) -> WidgetNode {
         {
             time_txt = format!("Time played : {0}s", sec);
             continue_btn = widget! {
-                (#{"continue_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+                (#{"continue_btn"} menu_btn: { MenuBtnProps {
                     id: "continue".to_string(),
                     label: "Continue".to_string(),
                 }})
@@ -95,7 +95,7 @@ pub fn menu(mut context: WidgetContext) -> WidgetNode {
 			(#{"v_box"} nav_vertical_box: {NavJumpLooped} [
 				{continue_btn}
 				(space_box: {SpaceBoxProps::vertical(10.)})
-				(#{"new_btn"} menu_btn::menu_btn: { menu_btn::MenuBtnProps {
+				(#{"new_btn"} menu_btn: { MenuBtnProps {
 					id: "new_game".to_string(),
 					label: "New Game".to_string(),
 				}})

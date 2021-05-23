@@ -61,9 +61,9 @@ fn theme_game() -> ThemeProps {
     );
 
 	make_bkg_variants(
-        "data",
+        "bkg_stock",
         ThemedImageMaterial::Image(ImageBoxImage {
-            id: "ui/panel_data.png".to_owned(),
+            id: "ui/panel_stock.png".to_owned(),
             scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
 				source: Rect { left: 4., right: 4., top: 4., bottom: 4.},
 				destination: Rect { left: 4., right: 4., top: 4., bottom: 4.},

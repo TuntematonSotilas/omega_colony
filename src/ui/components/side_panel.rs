@@ -5,7 +5,7 @@ use oxygengine::user_interface::raui::{
 use serde::{Deserialize, Serialize};
 
 use crate::{
-	ui::components::panel_item,
+	ui::components::panel_item::{ panel_item, PanelItemProps },
 	resources::referential::RefeItem
 };
 
@@ -153,7 +153,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 	let items_list = refe.childs.iter()
         .map(|(_code, child)| {
             widget! {
-                (#{child.name} panel_item::panel_item: { panel_item::PanelItemProps { item: child.to_owned() }})
+                (#{child.name} panel_item: { PanelItemProps { item: child.to_owned() }})
             }
         })
         .collect::<Vec<_>>();

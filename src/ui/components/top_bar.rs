@@ -3,7 +3,7 @@ use oxygengine::user_interface::raui::{
     material::prelude::*,
 };
 
-use crate::ui::components::resource;
+use crate::ui::components::stock::{ stock, StockProps };
 
 fn top_bar_comp(_context: WidgetContext) -> WidgetNode {
 	let size = SizeBoxProps {
@@ -28,18 +28,10 @@ fn top_bar_comp(_context: WidgetContext) -> WidgetNode {
 				(#{"cnt"} content_box [
 					(#{"margin"} content_box : {margin} [
 						(#{"h-box"} horizontal_box [
-							(#{"item-1"} resource::resource: { resource::ResourceProps { 
-								img: "ui/energy.png".to_string() 
-							}})
-							(#{"item-4"} resource::resource: { resource::ResourceProps { 
-								img: "ui/steel.png".to_string() 
-							}})
-							(#{"item-2"} resource::resource: { resource::ResourceProps { 
-								img: "ui/water.png".to_string() 
-							}})
-							(#{"item-3"} resource::resource: { resource::ResourceProps { 
-								img: "ui/cereal.png".to_string() 
-							}})
+							(#{"item-1"} stock: { StockProps { img: "ui/energy.png".to_string() }})
+							(#{"item-4"} stock: { StockProps { img: "ui/steel.png".to_string() }})
+							(#{"item-2"} stock: { StockProps { img: "ui/water.png".to_string() }})
+							(#{"item-3"} stock: { StockProps { img: "ui/cereal.png".to_string() }})
 						])
 					])
 				])

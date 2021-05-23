@@ -3,7 +3,10 @@ use oxygengine::user_interface::raui::{
 	material::prelude::*
 };
 
-use crate::ui::{components::splash::splash, make_bkg_variants};
+use crate::ui::{
+	components::splash::splash, 
+	make_bkg_variants
+};
 
 fn theme_splash() -> ThemeProps {
 	let mut theme = make_default_theme(

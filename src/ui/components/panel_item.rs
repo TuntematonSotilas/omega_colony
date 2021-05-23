@@ -5,7 +5,7 @@ use oxygengine::user_interface::raui::{
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    ui::components::panel_cost,
+    ui::components::panel_cost::{ panel_cost, PanelCostProps },
     resources::referential::RefeItem
 };
 
@@ -70,7 +70,7 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
     let costs_list = item_props.item.cost.iter()
         .map(|(_code, sic)| {
             widget! {
-                (#{sic.item.name} panel_cost::panel_cost : { panel_cost::PanelCostProps { sic: sic.clone() }} )
+                (#{sic.item.name} panel_cost : { PanelCostProps { sic: sic.clone() }} )
             }
         }).collect::<Vec<_>>();
     
@@ -84,7 +84,9 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
             content = (#{"content"} button_paper: {btn_props} {
                 content = (#{"v_box"} vertical_box: {margin.to_owned()} [
                     (#{"name"} text_paper: {name.to_owned()})
-                    (#{"prev_pic"} image_box: {prev_pic})
+					(#{"margin_pic"} content_box [
+						(#{"prev_pic"} image_box: {prev_pic})
+					])
                     (#{"h-box"} horizontal_box |[ costs_list ]|)
                 ])
             })

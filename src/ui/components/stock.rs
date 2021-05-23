@@ -8,21 +8,21 @@ use oxygengine::user_interface::raui::{
 use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
-pub struct ResourceProps {
+pub struct StockProps {
     #[serde(default)]
     pub img: String,
 }
-implement_props_data!(ResourceProps);
+implement_props_data!(StockProps);
 
-pub fn resource(context: WidgetContext) -> WidgetNode {
-	let props = context.props.read_cloned_or_default::<ResourceProps>();
+pub fn stock(context: WidgetContext) -> WidgetNode {
+	let props = context.props.read_cloned_or_default::<StockProps>();
 	let size = SizeBoxProps {
 		width: SizeBoxSizeValue::Exact(80.), 
 		height: SizeBoxSizeValue::Exact(20.),
 		..Default::default()
 	};
 	let bkg = PaperProps { 
-		variant: "data".to_string(),
+		variant: "bkg_stock".to_string(),
 		frame: None, 
 		..Default::default() 
 	};
