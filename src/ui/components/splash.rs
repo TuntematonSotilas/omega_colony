@@ -56,79 +56,84 @@ pub fn splash(mut context: WidgetContext) -> WidgetNode {
         ..
     } = context;
 
+	let (mut text_size, mut title_y, mut press_y, mut alpha, mut img_size) = (0., 0., 0., 0., 0.);
 	if let Ok(state) = state.read::<SplashState>() {
-		let title = Props::new(TextBoxProps {
-			height: TextBoxSizeValue::Exact(1.),
-			text: "Omega Colony".to_owned(),
-			alignment: TextBoxAlignment::Center,
-			font: TextBoxFont {
-				name: "fonts/deadspace.json".to_owned(),
-				size: 50.,
-			},
-			color: color_from_rgba(0, 153, 255, 1.),
-			transform: Transform {
-				pivot: Vec2 { x: 0.5, y: 0.5 },
-				scale: Vec2 { x: state.text_size, y: 1. },
-				..Default::default()
-			},
-			..Default::default()
-		})
-		.with(ContentBoxItemLayout {
-			align: Vec2 { x: 0.5, y: state.title_y },
-			..Default::default()
-		});
-		let press_label = Props::new(TextBoxProps {
-			height: TextBoxSizeValue::Exact(1.),
-			text: "Press enter".to_owned(),
-			alignment: TextBoxAlignment::Center,
-			font: TextBoxFont {
-				name: "fonts/orbitron.json".to_owned(),
-				size: 18.,
-			},
-			transform: Transform {
-				pivot: Vec2 { x: 0.5, y: 0.5 },
-				scale: Vec2 { x: state.text_size, y: 1.},
-				..Default::default()
-			},
-			..Default::default()
-		})
-		.with(ContentBoxItemLayout {
-			align: Vec2 { x: 0.5, y: state.press_y },
-			..Default::default()
-		});
-		let planet = Props::new(ImageBoxProps {
-			content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
-				horizontal_alignment: 0.5,
-				vertical_alignment: 0.5,
-			}),
-			material: ImageBoxMaterial::Image(ImageBoxImage {
-				id: "ui/planet.png".to_owned(),
-				..Default::default()
-			}),
-			transform: Transform {
-				pivot: Vec2 { x: 0.5, y: 0.5},
-				scale: Vec2 { x: state.img_size, y: state.img_size},
-				..Default::default()
-			},
-			..Default::default()
-		})
-		.with(ContentBoxItemLayout {
-			align: Vec2 { x: 0.5, y: 0.5 },
-			..Default::default()
-		});
-		let bkg = PaperProps { 
-			frame: None, 
-			..Default::default() 
-		};
+		text_size = state.text_size;
+		title_y = state.title_y;
+		press_y = state.press_y;
+		alpha = state.alpha;
+		img_size = state.img_size;
+	}
 
-		widget! {
-			(#{key} paper: {bkg} [
-				(#{"title"} text_box: {title} | {WidgetAlpha(state.alpha)})
-				(#{"press_label"} text_box: {press_label} | {WidgetAlpha(state.alpha)})
-				(#{"planet"} image_box: {planet})
-			])
-		}
-	} else {
-		widget!{()}
+	let title = Props::new(TextBoxProps {
+		height: TextBoxSizeValue::Exact(1.),
+		text: "Omega Colony".to_owned(),
+		alignment: TextBoxAlignment::Center,
+		font: TextBoxFont {
+			name: "fonts/deadspace.json".to_owned(),
+			size: 50.,
+		},
+		color: color_from_rgba(0, 153, 255, 1.),
+		transform: Transform {
+			pivot: Vec2 { x: 0.5, y: 0.5 },
+			scale: Vec2 { x: text_size, y: 1. },
+			..Default::default()
+		},
+		..Default::default()
+	})
+	.with(ContentBoxItemLayout {
+		align: Vec2 { x: 0.5, y: title_y },
+		..Default::default()
+	});
+	let press_label = Props::new(TextBoxProps {
+		height: TextBoxSizeValue::Exact(1.),
+		text: "Press enter".to_owned(),
+		alignment: TextBoxAlignment::Center,
+		font: TextBoxFont {
+			name: "fonts/orbitron.json".to_owned(),
+			size: 18.,
+		},
+		transform: Transform {
+			pivot: Vec2 { x: 0.5, y: 0.5 },
+			scale: Vec2 { x: text_size, y: 1.},
+			..Default::default()
+		},
+		..Default::default()
+	})
+	.with(ContentBoxItemLayout {
+		align: Vec2 { x: 0.5, y: press_y },
+		..Default::default()
+	});
+	let planet = Props::new(ImageBoxProps {
+		content_keep_aspect_ratio: Some(ImageBoxAspectRatio {
+			horizontal_alignment: 0.5,
+			vertical_alignment: 0.5,
+		}),
+		material: ImageBoxMaterial::Image(ImageBoxImage {
+			id: "ui/planet.png".to_owned(),
+			..Default::default()
+		}),
+		transform: Transform {
+			pivot: Vec2 { x: 0.5, y: 0.5},
+			scale: Vec2 { x: img_size, y: img_size},
+			..Default::default()
+		},
+		..Default::default()
+	})
+	.with(ContentBoxItemLayout {
+		align: Vec2 { x: 0.5, y: 0.5 },
+		..Default::default()
+	});
+	let bkg = PaperProps { 
+		frame: None, 
+		..Default::default() 
+	};
+
+	widget! {
+		(#{key} paper: {bkg} | {WidgetAlpha(alpha)} [
+			(#{"title"} text_box: {title})
+			(#{"press_label"} text_box: {press_label})
+			(#{"planet"} image_box: {planet})
+		])
 	}
 }

@@ -5,7 +5,7 @@ use oxygengine::user_interface::raui::{
 
 use crate::ui::components::stock::{ stock, StockProps };
 
-fn top_bar_comp(_context: WidgetContext) -> WidgetNode {
+pub fn top_bar(context: WidgetContext) -> WidgetNode {
 	let size = SizeBoxProps {
 		width: SizeBoxSizeValue::Fill, 
 		height: SizeBoxSizeValue::Exact(30.),
@@ -23,9 +23,9 @@ fn top_bar_comp(_context: WidgetContext) -> WidgetNode {
 		..Default::default()
 	};
 	widget!{
-		(#{"size"} size_box: {size} {
+		(#{context.key} size_box: {size} {
 			content = (#{"bkg"} paper: {bkg} [
-				(#{"top_bar"} content_box [
+				(#{"top_bar_box"} content_box [
 					(#{"margin"} content_box : {margin} [
 						(#{"h_box"} horizontal_box [
 							(#{"energy"} stock: { StockProps { img: "ui/energy.png".to_string() }})
@@ -37,11 +37,5 @@ fn top_bar_comp(_context: WidgetContext) -> WidgetNode {
 				])
 			])
 		})
-	}
-}
-
-pub fn top_bar(context: WidgetContext) -> WidgetNode {
-	widget! {
-		(#{context.key} top_bar_comp)
 	}
 }
