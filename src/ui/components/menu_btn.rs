@@ -69,7 +69,6 @@ pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
 		width: SizeBoxSizeValue::Exact(150.),
 		..Default::default()
 	});
-		
 
     let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
     let text = TextPaperProps {

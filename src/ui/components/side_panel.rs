@@ -97,11 +97,11 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         ..Default::default()
     };
 	let size_title = SizeBoxProps {
-        height: SizeBoxSizeValue::Exact(70.), 
+        height: SizeBoxSizeValue::Exact(60.), 
         width: SizeBoxSizeValue::Fill,
         ..Default::default()
     };
-	let margin_ext_title = ContentBoxItemLayout {
+	let margin_panel = ContentBoxItemLayout {
 		margin: Rect {
             left: 10.,
             right: 10.,
@@ -124,11 +124,6 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         variant: "bkg_title".to_owned(),
         ..Default::default() 
     };
-	let size_items = SizeBoxProps {
-        height: SizeBoxSizeValue::Exact(500.), 
-        width: SizeBoxSizeValue::Fill,
-        ..Default::default()
-    };
 	let preview = ImageBoxProps {
 		width: ImageBoxSizeValue::Exact(32.),
 		height: ImageBoxSizeValue::Exact(32.),
@@ -149,7 +144,21 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         },
 		..Default::default()
     };
-
+	let size_tabs = SizeBoxProps {
+        height: SizeBoxSizeValue::Exact(30.), 
+        width: SizeBoxSizeValue::Fill,
+        ..Default::default()
+    };
+	let size_items = SizeBoxProps {
+        height: SizeBoxSizeValue::Exact(480.), 
+        width: SizeBoxSizeValue::Fill,
+        ..Default::default()
+    };
+	let btn = PaperProps {
+		frame: None, 
+		..Default::default() 
+	};
+	
 	let items_list = refe.childs.iter()
         .map(|(_code, child)| {
             widget! {
@@ -161,16 +170,21 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
     widget! {
         (#{key} content_box: {c_box} | {WidgetAlpha(alpha)} [
             (#{"bkg"} paper: {bkg})
-			
-			(#{"v_box"} vertical_box: {margin_ext_title} [
+			(#{"v_box"} vertical_box: {margin_panel} [
 				(#{"title"} size_box: {size_title} {
 					content = (#{"box_title"} paper: {bkg_title} [
-						(#{"margin_title"} content_box : {margin_title} [						
+						(#{"margin_title"} content_box : {margin_title} [
 							(#{"h_title"} horizontal_box [
 								(#{"img"} image_box: {preview})
 								(#{"bkg"} text_paper: {title})
 							])
 						])
+					])
+				})
+				(#{"tabs"} size_box: {size_tabs} {
+					content = (#{"v_box"} horizontal_box [
+						(#{"units"} button_paper: {btn.to_owned()})
+						(#{"upgrades"} button_paper: {btn.to_owned()})
 					])
 				})
 				(#{"items"} size_box: {size_items} {
