@@ -85,8 +85,8 @@ pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
     };
 
     widget! {
-		(#{"ctn"} content_box [
-			(#{"size-btn"} size_box: {size} {
+		(#{"box_menu"} content_box [
+			(#{"size_btn"} size_box: {size} {
 				content = (#{key} button_paper: {btn_props} {
 					content = (#{"label"} text_paper: {text.to_owned()})
 				})

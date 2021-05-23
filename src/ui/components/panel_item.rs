@@ -87,7 +87,7 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
 					(#{"margin_pic"} content_box [
 						(#{"prev_pic"} image_box: {prev_pic})
 					])
-                    (#{"h-box"} horizontal_box |[ costs_list ]|)
+                    (#{"h_box"} horizontal_box |[ costs_list ]|)
                 ])
             })
         })

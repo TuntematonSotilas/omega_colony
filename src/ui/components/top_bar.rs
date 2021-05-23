@@ -25,13 +25,13 @@ fn top_bar_comp(_context: WidgetContext) -> WidgetNode {
 	widget!{
 		(#{"size"} size_box: {size} {
 			content = (#{"bkg"} paper: {bkg} [
-				(#{"cnt"} content_box [
+				(#{"top_bar"} content_box [
 					(#{"margin"} content_box : {margin} [
-						(#{"h-box"} horizontal_box [
-							(#{"item-1"} stock: { StockProps { img: "ui/energy.png".to_string() }})
-							(#{"item-4"} stock: { StockProps { img: "ui/steel.png".to_string() }})
-							(#{"item-2"} stock: { StockProps { img: "ui/water.png".to_string() }})
-							(#{"item-3"} stock: { StockProps { img: "ui/cereal.png".to_string() }})
+						(#{"h_box"} horizontal_box [
+							(#{"energy"} stock: { StockProps { img: "ui/energy.png".to_string() }})
+							(#{"steel"} stock: { StockProps { img: "ui/steel.png".to_string() }})
+							(#{"water"} stock: { StockProps { img: "ui/water.png".to_string() }})
+							(#{"cereal"} stock: { StockProps { img: "ui/cereal.png".to_string() }})
 						])
 					])
 				])

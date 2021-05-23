@@ -55,7 +55,7 @@ pub fn stock(context: WidgetContext) -> WidgetNode {
 	widget! {
 		(#{context.key} size_box: {size} {
 			content = (#{"bkg"} paper: {bkg} [
-				(#{"h-box"} horizontal_box: {margin} [
+				(#{"h_box"} horizontal_box: {margin} [
 					(#{"img"} image_box: {img})
 					(#{"text"} text_paper: {text.to_owned()})
 				])
