@@ -154,10 +154,11 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         width: SizeBoxSizeValue::Fill,
         ..Default::default()
     };
-	let btn = PaperProps {
+	let btn = Props::new(PaperProps {
+		variant: "tab".to_owned(),
 		frame: None, 
 		..Default::default() 
-	};
+	}).with(NavItemActive);
 	
 	let items_list = refe.childs.iter()
         .map(|(_code, child)| {
@@ -182,7 +183,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 					])
 				})
 				(#{"tabs"} size_box: {size_tabs} {
-					content = (#{"v_box"} horizontal_box [
+					content = (#{"v_box"} nav_horizontal_box [
 						(#{"units"} button_paper: {btn.to_owned()})
 						(#{"upgrades"} button_paper: {btn.to_owned()})
 					])

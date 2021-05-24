@@ -18,6 +18,8 @@ png://ui/panel_bkg.png
 png://ui/panel_stock.png
 png://ui/panel_btn.png
 png://ui/bkg_title.png
+png://ui/tab_active.png
+png://ui/tab_inactive.png
 png://ui/log_box.png
 png://ui/energy.png
 png://ui/steel.png
