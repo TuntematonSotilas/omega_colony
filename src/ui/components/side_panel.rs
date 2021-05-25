@@ -97,7 +97,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         ..Default::default()
     };
 	let size_title = SizeBoxProps {
-        height: SizeBoxSizeValue::Exact(60.), 
+        height: SizeBoxSizeValue::Exact(45.), 
         width: SizeBoxSizeValue::Fill,
         ..Default::default()
     };
@@ -114,8 +114,8 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 		margin: Rect {
             left: 80.,
             right: 80.,
-			top: 10.,
-            bottom: 10.,
+			top: 5.,
+            bottom: 5.,
         },
 		..Default::default()
 	};
@@ -150,7 +150,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         ..Default::default()
     };
 	let size_items = SizeBoxProps {
-        height: SizeBoxSizeValue::Exact(480.), 
+        height: SizeBoxSizeValue::Exact(500.), 
         width: SizeBoxSizeValue::Fill,
         ..Default::default()
     };
@@ -167,6 +167,21 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
             }
         })
         .collect::<Vec<_>>();
+	
+	let text_tab = TextPaperProps {
+		width: TextBoxSizeValue::Fill,
+		height: TextBoxSizeValue::Fill,
+		transform: Transform {
+			align: Vec2 { x: 0., y: 0.3 },
+			..Default::default()
+		},
+		use_main_color: true,
+		..Default::default()
+	};
+	let mut text_tab_units = text_tab.clone();
+	text_tab_units.text = "UNITS".to_owned(); 
+	let mut text_tab_upg = text_tab.clone();
+	text_tab_upg.text = "UPGRADES".to_owned();
 
     widget! {
         (#{key} content_box: {c_box} | {WidgetAlpha(alpha)} [
@@ -184,8 +199,12 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 				})
 				(#{"tabs"} size_box: {size_tabs} {
 					content = (#{"v_box"} nav_horizontal_box [
-						(#{"units"} button_paper: {btn.to_owned()})
-						(#{"upgrades"} button_paper: {btn.to_owned()})
+						(#{"units"} button_paper: {btn.to_owned()} {
+							content = (#{"label"} text_paper: {text_tab_units})
+						})
+						(#{"upgrades"} button_paper: {btn.to_owned()} {
+							content = (#{"label"} text_paper: {text_tab_upg})
+						})
 					])
 				})
 				(#{"items"} size_box: {size_items} {
