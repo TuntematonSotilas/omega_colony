@@ -4,7 +4,7 @@ use oxygengine::{user_interface::raui::{
 }};
 
 use crate::ui::{
-    components::menu, 
+    components::menu::menu, 
     make_text_variants, 
     make_button_variants, 
     make_bkg_variants
@@ -52,6 +52,15 @@ fn theme_menu() -> ThemeProps {
 				  }),
                 ..Default::default()
             }),
+			trigger: ThemedImageMaterial::Image(ImageBoxImage {
+                id: "ui/btn_m.png".to_owned(),
+				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+					..Default::default()
+				  }),
+                ..Default::default()
+            }),
             ..Default::default()
         },
         &mut theme.button_backgrounds,
@@ -87,7 +96,7 @@ pub fn gui_menu(context: WidgetContext) -> WidgetNode {
     widget! {
         (#{context.key} content_box | {theme_menu()} [
            (#{"bkg"} paper: {bkg})
-           (#{"menu"} menu::menu: {margin})
+           (#{"menu"} menu: {margin})
         ])
     }
 

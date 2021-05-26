@@ -5,7 +5,10 @@ use oxygengine::user_interface::raui::{
 use serde::{Deserialize, Serialize};
 
 use crate::{
-	ui::components::panel_item::{ panel_item, PanelItemProps },
+	ui::components::{
+		panel_item::{panel_item, PanelItemProps},
+		tab::{tab, TabProps},
+	},
 	resources::referential::RefeItem
 };
 
@@ -154,11 +157,6 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         width: SizeBoxSizeValue::Fill,
         ..Default::default()
     };
-	let btn = Props::new(PaperProps {
-		variant: "tab".to_owned(),
-		frame: None, 
-		..Default::default() 
-	}).with(NavItemActive);
 	
 	let items_list = refe.childs.iter()
         .map(|(_code, child)| {
@@ -167,21 +165,6 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
             }
         })
         .collect::<Vec<_>>();
-	
-	let text_tab = TextPaperProps {
-		width: TextBoxSizeValue::Fill,
-		height: TextBoxSizeValue::Fill,
-		transform: Transform {
-			align: Vec2 { x: 0., y: 0.3 },
-			..Default::default()
-		},
-		use_main_color: true,
-		..Default::default()
-	};
-	let mut text_tab_units = text_tab.clone();
-	text_tab_units.text = "UNITS".to_owned(); 
-	let mut text_tab_upg = text_tab.clone();
-	text_tab_upg.text = "UPGRADES".to_owned();
 
     widget! {
         (#{key} content_box: {c_box} | {WidgetAlpha(alpha)} [
@@ -198,13 +181,15 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 					])
 				})
 				(#{"tabs"} size_box: {size_tabs} {
-					content = (#{"v_box"} nav_horizontal_box [
-						(#{"units"} button_paper: {btn.to_owned()} {
-							content = (#{"label"} text_paper: {text_tab_units})
-						})
-						(#{"upgrades"} button_paper: {btn.to_owned()} {
-							content = (#{"label"} text_paper: {text_tab_upg})
-						})
+					content = (#{"h_tabs"} horizontal_box [
+						(#{"units"} tab: { TabProps {
+							id: "units".to_string(),
+							label: "UNITS".to_string(),
+						}})
+						(#{"upg"} tab: { TabProps {
+							id: "upg".to_string(),
+							label: "UPGRADES".to_string(),
+						}})
 					])
 				})
 				(#{"items"} size_box: {size_items} {
