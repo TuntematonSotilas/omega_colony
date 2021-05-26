@@ -20,7 +20,7 @@ fn use_tab(context: &mut WidgetContext) {
     context.life_cycle.change(|context| {
         for msg in context.messenger.messages {
             if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
-                if msg.trigger_start() {
+				if msg.trigger_start() {
                     debug!("tab clic");
                 }
             }

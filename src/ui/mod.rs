@@ -20,7 +20,7 @@ pub fn setup(app: &mut Application) {
     app.register_props::<components::panel_item::PanelItemProps>("PanelItemProps");
     app.register_props::<components::panel_cost::PanelCostProps>("PanelCostProps");
     app.register_props::<components::stock::StockProps>("StockProps");
-	app.register_props::<components::tab::TabProps>("MenuBtnProps");
+	app.register_props::<components::tab::TabProps>("TabProps");
 
 	app.register_component("gui_game", gui::gui_game::gui_game);
 }
