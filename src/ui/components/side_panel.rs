@@ -181,7 +181,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 					])
 				})
 				(#{"tabs"} size_box: {size_tabs} {
-					content = (#{"h_tabs"} horizontal_box [
+					content = (#{"h_tabs"} nav_horizontal_box [
 						(#{"units"} tab: { TabProps {
 							id: "units".to_string(),
 							label: "UNITS".to_string(),

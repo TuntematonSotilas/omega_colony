@@ -42,6 +42,7 @@ pub fn tab(mut context: WidgetContext) -> WidgetNode {
 			variant: "tab".to_owned(),
 			frame: None, 
 			..Default::default() })
+		.with(NavItemActive)
         .with(ButtonNotifyProps(id.to_owned().into()));
 
     let tab_props = props.read_cloned_or_default::<TabProps>();
