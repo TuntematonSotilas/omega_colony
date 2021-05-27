@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::resources::referential::RefeCode;
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Serialize, Deserialize)]
 pub struct InteractiveSprite {
     pub w: Scalar,
 	pub h: Scalar,

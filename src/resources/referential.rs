@@ -23,7 +23,7 @@ pub struct RefeItem  {
 	pub childs: HashMap<RefeCode, RefeItem>, 
 }
 
-#[derive(Default, Clone)]
+#[derive(Default)]
 pub struct Referential {
 	pub is_init: bool,
 	pub buildings: HashMap<RefeCode, RefeItem>,
