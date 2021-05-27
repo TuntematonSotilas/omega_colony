@@ -9,9 +9,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct TabProps {
-    #[serde(default)]
     pub id: String,
-    #[serde(default)]
     pub label: String,
 }
 implement_props_data!(TabProps);

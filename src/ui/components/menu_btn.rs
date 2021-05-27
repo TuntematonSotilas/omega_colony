@@ -17,9 +17,7 @@ implement_message_data!(MenuBtnSignal);
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct MenuBtnProps {
-    #[serde(default)]
     pub id: String,
-    #[serde(default)]
     pub label: String,
 }
 implement_props_data!(MenuBtnProps);

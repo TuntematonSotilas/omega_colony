@@ -11,7 +11,6 @@ use crate::{
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct PanelItemProps {
-    #[serde(default)]
     pub item: RefeItem,
 }
 implement_props_data!(PanelItemProps);

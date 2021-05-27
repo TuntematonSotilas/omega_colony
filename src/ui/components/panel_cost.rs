@@ -8,7 +8,6 @@ use crate::resources::stock::StockItemCost;
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct PanelCostProps {
-    #[serde(default)]
     pub sic: StockItemCost,
 }
 implement_props_data!(PanelCostProps);

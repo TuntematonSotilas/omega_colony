@@ -21,7 +21,6 @@ implement_props_data!(MenuState);
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct MenuTextProps {
-    #[serde(default)]
     pub title: String,
 }
 
