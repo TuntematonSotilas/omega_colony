@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 use crate::{
 	ui::components::{
 		panel_item::{panel_item, PanelItemProps},
-		tab::{tab, TabProps},
+		tab::{tab, TabProps, TabSignal},
 	},
 	resources::referential::RefeItem
 };
@@ -24,6 +24,7 @@ pub struct PanelState {
 	pub open: bool,
 	pub x_align: Scalar,
 	pub refe: Option<RefeItem>,
+	pub active_tab: bool,
 }
 implement_props_data!(PanelState);
 
@@ -35,6 +36,7 @@ fn use_panel(context: &mut WidgetContext) {
 			x_align: 1.,
 			open: false,
 			refe: None,
+			active_tab: true,
 		}));
         context.signals.write(PanelSignal::Register);
     });
@@ -42,10 +44,17 @@ fn use_panel(context: &mut WidgetContext) {
 	context.life_cycle.change(|context| {
 		let mut state = context.state.read_cloned_or_default::<PanelState>();
 		for msg in context.messenger.messages {
-            if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
+			if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
 				state.open = !state.open;
 				if state.open {
 					state.refe = Some(refe.to_owned());
+				}
+			}
+			if let Some(msg) = msg.as_any().downcast_ref::<TabSignal>() {
+				debug!("TabSignal");
+				state.active_tab = match msg {
+					TabSignal::Units => true,
+					_ => false
 				}
 			}
 		}
@@ -79,8 +88,10 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 	let mut title_txt = String::new();
 	let mut preview_pic = String::new();
 	let mut refe = RefeItem::default();
+	let mut active_tab = true;
 
 	if let Ok(state) = state.read::<PanelState>() {
+		active_tab = state.active_tab;
 		x_align = state.x_align;
 		alpha = match state.open {
 			true => 1.,
@@ -185,10 +196,12 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 						(#{"units"} tab: { TabProps {
 							id: "units".to_string(),
 							label: "UNITS".to_string(),
+							is_active: active_tab,
 						}})
 						(#{"upg"} tab: { TabProps {
-							id: "upg".to_string(),
+							id: "upgrades".to_string(),
 							label: "UPGRADES".to_string(),
+							is_active: !active_tab,
 						}})
 					])
 				})

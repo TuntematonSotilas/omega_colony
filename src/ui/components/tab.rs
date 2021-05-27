@@ -1,3 +1,4 @@
+use serde::{Deserialize, Serialize};
 use oxygengine::user_interface::raui::{
     core::{
         implement_props_data, 
@@ -5,21 +6,35 @@ use oxygengine::user_interface::raui::{
     },
     material::prelude::*,
 };
-use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct TabProps {
     pub id: String,
     pub label: String,
+	pub is_active: bool,
 }
 implement_props_data!(TabProps);
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum TabSignal {
+    Units,
+    Upgrades,
+}
+implement_message_data!(TabSignal);
+
 
 fn use_tab(context: &mut WidgetContext) {
     context.life_cycle.change(|context| {
         for msg in context.messenger.messages {
             if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
 				if msg.trigger_start() {
-                    debug!("tab clic");
+					let props = context.props.read_cloned_or_default::<TabProps>();
+					debug!("clic {0}", props.id); 
+                    let signal = match props.id.as_str() {
+                        "units" => TabSignal::Units,
+                        _ => TabSignal::Upgrades,
+                    };
+					context.signals.write(signal);
                 }
             }
         }
@@ -35,16 +50,20 @@ pub fn tab(mut context: WidgetContext) -> WidgetNode {
         ..
     } = context;
 
+	let tab_props = props.read_cloned_or_default::<TabProps>();
+    
+	let variant = match tab_props.is_active {
+		true => "tab_active",
+		_ => "tab_inactive",
+	};
     let btn_props = props.to_owned()
         .with(PaperProps { 
-			variant: "tab".to_owned(),
+			variant: variant.to_owned(),
 			frame: None, 
 			..Default::default() })
 		.with(NavItemActive)
         .with(ButtonNotifyProps(id.to_owned().into()));
 
-    let tab_props = props.read_cloned_or_default::<TabProps>();
-    
 	let text = TextPaperProps {
 		text: tab_props.label,
 		width: TextBoxSizeValue::Fill,
