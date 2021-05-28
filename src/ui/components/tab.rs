@@ -1,9 +1,6 @@
 use serde::{Deserialize, Serialize};
 use oxygengine::user_interface::raui::{
-    core::{
-        implement_props_data, 
-        prelude::*,
-    },
+    core::prelude::*,
     material::prelude::*,
 };
 
@@ -21,7 +18,6 @@ pub enum TabSignal {
     Upgrades,
 }
 implement_message_data!(TabSignal);
-
 
 fn use_tab(ctx: &mut WidgetContext) {
     ctx.life_cycle.mount(|context| {
