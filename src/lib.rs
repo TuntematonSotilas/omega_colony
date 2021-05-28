@@ -116,8 +116,8 @@ pub fn main_js() -> Result<(), JsValue> {
 		.with_resource(Selected::default())
         .with_resource(Referential::default())
 		.with_resource(UiWidget::default())
-		.with_system(TimeSystem, "time", &[])
-        .with_system(CameraControlSystem, "camera_control", &[])
+		//.with_system(TimeSystem, "time", &[])
+        //.with_system(CameraControlSystem, "camera_control", &[])
 		.with_system(SpriteClickSystem, "sprite_click", &[])
 		.with_system(SelectorSystem, "selector", &[])
         .build(LoadingState::default(), WebAppTimer::default());

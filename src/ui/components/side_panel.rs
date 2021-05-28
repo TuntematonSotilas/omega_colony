@@ -44,12 +44,12 @@ fn use_panel(context: &mut WidgetContext) {
 	context.life_cycle.change(|context| {
 		let mut state = context.state.read_cloned_or_default::<PanelState>();
 		for msg in context.messenger.messages {
-			if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
+			/*if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
 				state.open = !state.open;
 				if state.open {
 					state.refe = Some(refe.to_owned());
 				}
-			}
+			}*/
 			if let Some(msg) = msg.as_any().downcast_ref::<TabSignal>() {
 				debug!("TabSignal");
 				state.active_tab = match msg {
@@ -58,7 +58,7 @@ fn use_panel(context: &mut WidgetContext) {
 				}
 			}
 		}
-		if state.open && state.x_align > 0. {
+		/*if state.open && state.x_align > 0. {
 			let x = state.x_align - 1. / FRAMES; 
 			if x > 0. { state.x_align = x; } else { state.x_align = 0.; }
 			
@@ -66,7 +66,7 @@ fn use_panel(context: &mut WidgetContext) {
 		if !state.open && state.x_align < 1. {
 			let x = state.x_align + 1. / FRAMES;
 			if x < 1. { state.x_align = x; } else { state.x_align = 1.; }
-		}
+		}*/
 		drop(context.state.write(state));
 	});
 }
@@ -83,7 +83,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         frame: None, 
         ..Default::default() 
     };
-	let mut x_align = 1.;
+	let mut x_align = 0.; //1.;
 	let mut alpha = 0.;
 	let mut title_txt = String::new();
 	let mut preview_pic = String::new();
@@ -91,11 +91,12 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 	let mut active_tab = true;
 
 	if let Ok(state) = state.read::<PanelState>() {
+		debug!("state.active_tab : {0}", state.active_tab);
 		active_tab = state.active_tab;
-		x_align = state.x_align;
+		//x_align = state.x_align;
 		alpha = match state.open {
 			true => 1.,
-			false => 0.
+			false => 1.//0.
 		};
 		if let Some(refe_item) = &state.refe {
 			refe = refe_item.to_owned();
