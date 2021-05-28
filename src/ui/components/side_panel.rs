@@ -24,7 +24,7 @@ implement_message_data!(PanelSignal);
 pub struct PanelState {
 	pub open: bool,
 	pub refe: Option<RefeItem>,
-	pub active_tab: bool,
+	pub tab_units: bool,
 }
 implement_props_data!(PanelState);
 
@@ -33,7 +33,7 @@ fn use_panel(context: &mut WidgetContext) {
 		drop(context.state.write(PanelState {
 			open: false,
 			refe: None,
-			active_tab: true,
+			tab_units: true,
 		}));
         context.signals.write(PanelSignal::Register);
     });
@@ -48,7 +48,7 @@ fn use_panel(context: &mut WidgetContext) {
 				}
 			}
 			if let Some(PanelSignal::ActiveTab) = msg.as_any().downcast_ref() {
-				state.active_tab = !state.active_tab; 
+				state.tab_units = !state.tab_units; 
 			}
 		}
 		drop(context.state.write(state));
@@ -71,10 +71,10 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 	let mut title_txt = String::new();
 	let mut preview_pic = String::new();
 	let mut refe = RefeItem::default();
-	let mut active_tab = true;
+	let mut tab_units = true;
 
 	if let Ok(state) = state.read::<PanelState>() {
-		active_tab = state.active_tab;
+		tab_units = state.tab_units;
 		alpha = match state.open {
 			true => 1.,
 			false => 0.,
@@ -144,7 +144,11 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         ..Default::default()
     };
 	
-	let items_list = refe.childs.iter()
+	let items = match tab_units {
+		true => refe.units,
+		false => refe.upgrades,
+	};
+	let items_list = items.iter()
         .map(|(_code, child)| {
             widget! {
                 (#{child.name} panel_item: { PanelItemProps { item: child.to_owned() }})
@@ -171,12 +175,12 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 						(#{"units"} tab: { TabProps {
 							id: "units".to_string(),
 							label: "UNITS".to_string(),
-							is_active: active_tab,
+							is_active: tab_units,
 						}})
 						(#{"upg"} tab: { TabProps {
 							id: "upgrades".to_string(),
 							label: "UPGRADES".to_string(),
-							is_active: !active_tab,
+							is_active: !tab_units,
 						}})
 					])
 				})

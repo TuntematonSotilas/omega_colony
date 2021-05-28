@@ -20,7 +20,8 @@ pub struct RefeItem  {
     pub name: String,
 	pub preview: String,
     pub cost: HashMap<StockType, StockItemCost>,
-	pub childs: HashMap<RefeCode, RefeItem>, 
+	pub units: HashMap<RefeCode, RefeItem>, 
+	pub upgrades: HashMap<RefeCode, RefeItem>, 
 }
 
 #[derive(Default)]
@@ -49,7 +50,8 @@ impl Referential {
 			name: "Technician".to_string(),
 			preview: "ui/technician.png".to_string(),
 			cost: stock_tech,
-			childs: HashMap::new(),
+			units: HashMap::new(),
+			upgrades: HashMap::new(),
 		};
 		
 		// buildings
@@ -60,7 +62,8 @@ impl Referential {
 			name: "Base".to_string(),
 			preview: "ui/base.png".to_string(),
 			cost: HashMap::new(),
-			childs: base_childs,
+			units: base_childs,
+			upgrades: HashMap::new(),
 		};
 		self.buildings = HashMap::new();
 		self.buildings.insert(RefeCode::Base, base);
