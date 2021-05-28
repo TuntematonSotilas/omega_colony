@@ -18,6 +18,7 @@ implement_props_data!(PanelItemProps);
 pub fn panel_item(context: WidgetContext) -> WidgetNode {
 	
 	let WidgetContext {
+		id,
         key,
         props,
         ..
@@ -73,14 +74,16 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
             }
         }).collect::<Vec<_>>();
     
-	let btn = PaperProps { 
-		frame: None, 
-		..Default::default() 
-	};
+	let btn_props = props.to_owned()
+        .with(PaperProps { 
+			frame: None, 
+			..Default::default() })
+		.with(NavItemActive)
+        .with(ButtonNotifyProps(id.to_owned().into()));
 
     widget! {
         (#{key} size_box: {size.to_owned()} {
-            content = (#{"btn"} button_paper: {btn} {
+            content = (#{"btn"} button_paper: {btn_props} {
                 content = (#{"v_box"} vertical_box: {margin.to_owned()} [
                     (#{"name"} text_paper: {name.to_owned()})
 					(#{"margin_pic"} content_box [

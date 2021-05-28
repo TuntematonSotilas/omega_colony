@@ -115,7 +115,16 @@ fn theme_game() -> ThemeProps {
                 ..Default::default()
             }),
             selected: ThemedImageMaterial::Image(ImageBoxImage {
-                id: "ui/btn_c.png".to_owned(),
+                id: "ui/panel_btn.png".to_owned(),
+				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+					..Default::default()
+				  }),
+                ..Default::default()
+            }),
+			trigger: ThemedImageMaterial::Image(ImageBoxImage {
+                id: "ui/panel_btn.png".to_owned(),
 				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
 					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
 					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},

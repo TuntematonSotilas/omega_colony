@@ -185,7 +185,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 					])
 				})
 				(#{"items"} size_box: {size_items} {
-					content =  (#{"flex_items"} flex_box |[ items_list ]|)
+					content =  (#{"flex_items"} nav_flex_box |[ items_list ]|)
 				})
 			])
 		])
