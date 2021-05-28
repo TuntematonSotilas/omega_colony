@@ -91,7 +91,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 	let mut active_tab = true;
 
 	if let Ok(state) = state.read::<PanelState>() {
-		debug!("state.active_tab : {0}", state.active_tab);
+		//debug!("state.active_tab : {0}", state.active_tab);
 		active_tab = state.active_tab;
 		//x_align = state.x_align;
 		alpha = match state.open {

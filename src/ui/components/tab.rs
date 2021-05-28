@@ -15,7 +15,7 @@ pub struct TabProps {
 }
 implement_props_data!(TabProps);
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone)]
 pub enum TabSignal {
     Units,
     Upgrades,
