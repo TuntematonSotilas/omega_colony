@@ -43,7 +43,7 @@ fn use_panel(context: &mut WidgetContext) {
     });
 	
 	context.life_cycle.change(|context| {
-		let mut state = context.state.read_cloned_or_default::<PanelState>();
+		//let mut state = context.state.read_cloned_or_default::<PanelState>();
 		for msg in context.messenger.messages {
 			debug!("read");
 			/*if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
@@ -54,10 +54,10 @@ fn use_panel(context: &mut WidgetContext) {
 			}*/
 			if let Some(msg) = msg.as_any().downcast_ref::<TabSignal>() {
 				debug!("TabSignal");
-				state.active_tab = match msg {
+				/*state.active_tab = match msg {
 					TabSignal::Units => true,
 					_ => false
-				}
+				}*/
 			}
 		}
 		/*if state.open && state.x_align > 0. {
@@ -69,7 +69,7 @@ fn use_panel(context: &mut WidgetContext) {
 			let x = state.x_align + 1. / FRAMES;
 			if x < 1. { state.x_align = x; } else { state.x_align = 1.; }
 		}*/
-		drop(context.state.write(state));
+		//drop(context.state.write(state));
 	});
 }
 

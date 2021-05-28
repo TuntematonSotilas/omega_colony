@@ -15,7 +15,7 @@ pub struct TabProps {
 }
 implement_props_data!(TabProps);
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Copy)]
 pub enum TabSignal {
     Units,
     Upgrades,
@@ -23,12 +23,12 @@ pub enum TabSignal {
 implement_message_data!(TabSignal);
 
 
-fn use_tab(context: &mut WidgetContext) {
-    context.life_cycle.mount(|context| {
+fn use_tab(ctx: &mut WidgetContext) {
+    ctx.life_cycle.mount(|context| {
 		context.signals.write(TabSignal::Units);
     });
 
-    context.life_cycle.change(|context| {
+    ctx.life_cycle.change(|context| {
         for msg in context.messenger.messages {
             if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
 				if msg.trigger_start() {
@@ -38,7 +38,7 @@ fn use_tab(context: &mut WidgetContext) {
                         "units" => TabSignal::Units,
                         _ => TabSignal::Upgrades,
                     };
-					context.signals.write(signal);
+                    context.signals.write(signal);
                 }
             }
         }
