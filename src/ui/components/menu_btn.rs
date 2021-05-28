@@ -8,7 +8,7 @@ use oxygengine::user_interface::raui::{
 };
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy)]
 pub enum MenuBtnSignal {
     NewGame,
     Continue,

@@ -39,11 +39,13 @@ fn use_panel(context: &mut WidgetContext) {
 			active_tab: true,
 		}));
         context.signals.write(PanelSignal::Register);
+        context.signals.write(TabSignal::Units);
     });
 	
 	context.life_cycle.change(|context| {
 		let mut state = context.state.read_cloned_or_default::<PanelState>();
 		for msg in context.messenger.messages {
+			debug!("read");
 			/*if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
 				state.open = !state.open;
 				if state.open {

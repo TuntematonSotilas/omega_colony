@@ -24,6 +24,10 @@ implement_message_data!(TabSignal);
 
 
 fn use_tab(context: &mut WidgetContext) {
+    context.life_cycle.mount(|context| {
+		context.signals.write(TabSignal::Units);
+    });
+
     context.life_cycle.change(|context| {
         for msg in context.messenger.messages {
             if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
