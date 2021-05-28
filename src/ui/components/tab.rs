@@ -25,11 +25,13 @@ fn use_tab(ctx: &mut WidgetContext) {
             if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
 				if msg.trigger_start() {
 					let props = context.props.read_cloned_or_default::<TabProps>();
-					let signal = match props.id.as_str() {
-                        "units" => TabSignal::Units,
-                        _ => TabSignal::Upgrades,
-                    };
-                    context.signals.write(signal);
+					if !props.is_active {
+						let signal = match props.id.as_str() {
+							"units" => TabSignal::Units,
+							_ => TabSignal::Upgrades,
+						};
+						context.signals.write(signal);
+					}
                 }
             }
         }
