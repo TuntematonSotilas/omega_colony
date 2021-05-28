@@ -20,17 +20,12 @@ pub enum TabSignal {
 implement_message_data!(TabSignal);
 
 fn use_tab(ctx: &mut WidgetContext) {
-    ctx.life_cycle.mount(|context| {
-		context.signals.write(TabSignal::Units);
-    });
-
     ctx.life_cycle.change(|context| {
         for msg in context.messenger.messages {
             if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
 				if msg.trigger_start() {
 					let props = context.props.read_cloned_or_default::<TabProps>();
-					debug!("clic {0}", props.id); 
-                    let signal = match props.id.as_str() {
+					let signal = match props.id.as_str() {
                         "units" => TabSignal::Units,
                         _ => TabSignal::Upgrades,
                     };

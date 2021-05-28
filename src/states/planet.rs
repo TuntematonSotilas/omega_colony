@@ -1,9 +1,15 @@
 use oxygengine::prelude::*;
 
-use crate::{resources::{
-	camera::Camera,
-	ui_widget::UiWidget,
-}, ui::components::side_panel::PanelSignal};
+use crate::{
+	resources::{
+		camera::Camera,
+		ui_widget::UiWidget,
+	}, 
+	ui::components::{
+		tab::TabSignal,
+		side_panel::PanelSignal,
+	},
+};
 
 #[derive(Default)]
 pub struct PlanetState;
@@ -45,6 +51,11 @@ impl State for PlanetState {
 						if world.read_resource::<UiWidget>().side_panel.is_none() {
 							world.write_resource::<UiWidget>().side_panel = Some(caller);
 						}
+					}
+				}
+				if let Some(_msg) = msg.as_any().downcast_ref::<TabSignal>() {
+                   	if let Some(side_panel) = &world.read_resource::<UiWidget>().side_panel {
+						app.send_message(side_panel, PanelSignal::ActiveTab);
 					}
 				}
 			}

@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 use crate::{
 	ui::components::{
 		panel_item::{panel_item, PanelItemProps},
-		tab::{tab, TabProps, TabSignal},
+		tab::{tab, TabProps},
 	},
 	resources::referential::RefeItem
 };
@@ -16,60 +16,42 @@ use crate::{
 pub enum PanelSignal {
 	Register,
     HideOrShow(RefeItem),
+	ActiveTab,
 }
 implement_message_data!(PanelSignal);
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct PanelState {
 	pub open: bool,
-	pub x_align: Scalar,
 	pub refe: Option<RefeItem>,
 	pub active_tab: bool,
 }
 implement_props_data!(PanelState);
 
-const FRAMES: Scalar = 5.;
-
 fn use_panel(context: &mut WidgetContext) {
 	context.life_cycle.mount(|context| {
 		drop(context.state.write(PanelState {
-			x_align: 1.,
 			open: false,
 			refe: None,
 			active_tab: true,
 		}));
         context.signals.write(PanelSignal::Register);
-        context.signals.write(TabSignal::Units);
     });
 	
 	context.life_cycle.change(|context| {
-		//let mut state = context.state.read_cloned_or_default::<PanelState>();
+		let mut state = context.state.read_cloned_or_default::<PanelState>();
 		for msg in context.messenger.messages {
-			debug!("read");
-			/*if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
+			if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
 				state.open = !state.open;
 				if state.open {
 					state.refe = Some(refe.to_owned());
 				}
-			}*/
-			if let Some(msg) = msg.as_any().downcast_ref::<TabSignal>() {
-				debug!("TabSignal");
-				/*state.active_tab = match msg {
-					TabSignal::Units => true,
-					_ => false
-				}*/
+			}
+			if let Some(PanelSignal::ActiveTab) = msg.as_any().downcast_ref() {
+				state.active_tab = !state.active_tab; 
 			}
 		}
-		/*if state.open && state.x_align > 0. {
-			let x = state.x_align - 1. / FRAMES; 
-			if x > 0. { state.x_align = x; } else { state.x_align = 0.; }
-			
-		}
-		if !state.open && state.x_align < 1. {
-			let x = state.x_align + 1. / FRAMES;
-			if x < 1. { state.x_align = x; } else { state.x_align = 1.; }
-		}*/
-		//drop(context.state.write(state));
+		drop(context.state.write(state));
 	});
 }
 
@@ -85,7 +67,6 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         frame: None, 
         ..Default::default() 
     };
-	let mut x_align = 0.; //1.;
 	let mut alpha = 0.;
 	let mut title_txt = String::new();
 	let mut preview_pic = String::new();
@@ -93,12 +74,10 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 	let mut active_tab = true;
 
 	if let Ok(state) = state.read::<PanelState>() {
-		//debug!("state.active_tab : {0}", state.active_tab);
 		active_tab = state.active_tab;
-		//x_align = state.x_align;
 		alpha = match state.open {
 			true => 1.,
-			false => 1.//0.
+			false => 0.,
 		};
 		if let Some(refe_item) = &state.refe {
 			refe = refe_item.to_owned();
@@ -106,13 +85,6 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 			preview_pic = refe_item.preview.to_owned();
 		};
 	}
-	let c_box = ContentBoxProps {
-        transform: Transform {
-			align: Vec2 { x: x_align, y: 0. },
-            ..Default::default()
-        },
-        ..Default::default()
-    };
 	let size_title = SizeBoxProps {
         height: SizeBoxSizeValue::Exact(45.), 
         width: SizeBoxSizeValue::Fill,
@@ -181,7 +153,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         .collect::<Vec<_>>();
 
     widget! {
-        (#{key} content_box: {c_box} | {WidgetAlpha(alpha)} [
+        (#{key} content_box | {WidgetAlpha(alpha)} [
             (#{"bkg"} paper: {bkg})
 			(#{"v_box"} vertical_box: {margin_panel} [
 				(#{"title"} size_box: {size_title} {
@@ -209,7 +181,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 					])
 				})
 				(#{"items"} size_box: {size_items} {
-					content =  (#{key} flex_box |[ items_list ]|)
+					content =  (#{"flex_items"} flex_box |[ items_list ]|)
 				})
 			])
 		])
