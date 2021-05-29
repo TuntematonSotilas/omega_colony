@@ -4,10 +4,12 @@ use crate::{
 	resources::{
 		camera::Camera,
 		ui_widget::UiWidget,
+		stock::Stock,
 	}, 
 	ui::components::{
 		tab::TabSignal,
 		side_panel::PanelSignal,
+		top_bar::TopBarSignal,
 	},
 };
 
@@ -48,20 +50,16 @@ impl State for PlanetState {
             for (caller, msg) in app.consume_signals() {
 
 				// Register Top Bar
-                /*if let Some(msg) = msg.as_any().downcast_ref::<TopBarSignal>() {
-
-				}*/
-				/*let mut refe = world.write_resource::<Referential>();
-				if !refe.is_init {
-					refe.init();
-				}*/
+                if let Some(msg) = msg.as_any().downcast_ref::<TopBarSignal>() {
+					if msg == &TopBarSignal::Register {
+						world.write_resource::<UiWidget>().top_bar = Some(caller.to_owned());
+					}
+				}
 
 				// Register Panel
                 if let Some(msg) = msg.as_any().downcast_ref::<PanelSignal>() {
                     if msg == &PanelSignal::Register {
-						if world.read_resource::<UiWidget>().side_panel.is_none() {
-							world.write_resource::<UiWidget>().side_panel = Some(caller);
-						}
+						world.write_resource::<UiWidget>().side_panel = Some(caller.to_owned());
 					}
 				}
 				// Transfer Tab Signal

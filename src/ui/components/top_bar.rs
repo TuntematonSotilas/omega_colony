@@ -3,9 +3,29 @@ use oxygengine::user_interface::raui::{
     material::prelude::*,
 };
 
-use crate::ui::components::stock::{ stock, StockProps };
+use crate::{
+	resources::{
+		stock::Stock,
+		player_stock::PlayerStock,
+	},
+	ui::components::stock::{stock, StockProps},
+};
 
-pub fn top_bar(context: WidgetContext) -> WidgetNode {
+#[derive(MessageData, Debug, Clone, PartialEq, Eq)]
+pub enum TopBarSignal {
+	Register,
+	InitRefeStock(Stock),
+	UpdateStock(PlayerStock),
+}
+
+fn use_tab_bar(context: &mut WidgetContext) {
+	context.life_cycle.mount(|context| {
+		context.signals.write(TopBarSignal::Register);
+	})
+}
+
+#[pre_hooks(use_tab_bar)]
+pub fn top_bar(mut context: WidgetContext) -> WidgetNode {
 	let size = SizeBoxProps {
 		width: SizeBoxSizeValue::Fill, 
 		height: SizeBoxSizeValue::Exact(30.),

@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -22,7 +21,7 @@ pub struct StockItemCost  {
 	pub cost: u32,
 }
 
-#[derive(Default, Clone)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Stock {
 	pub refe: HashMap<StockType, StockItem>,
 }

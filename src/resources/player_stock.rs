@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use crate::resources::stock::StockType;
 
-#[derive(Default)]
+#[derive(Debug, Default, Clone, PartialEq, Eq)]
 pub struct PlayerStock {
 	pub is_init: bool,
 	pub stock: HashMap<StockType, u32>,
