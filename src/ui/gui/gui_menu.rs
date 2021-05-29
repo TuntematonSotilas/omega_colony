@@ -31,36 +31,21 @@ fn theme_menu() -> ThemeProps {
         &mut theme.text_variants,
     );
 
+	let theme_btn = ThemedImageMaterial::Image(ImageBoxImage {
+		id: "ui/menu_btn.png".to_owned(),
+		scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+			source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+			destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+			..Default::default()
+		  }),
+		..Default::default()
+	});
     make_button_variants(
         "",
         ThemedButtonMaterial {
-            default: ThemedImageMaterial::Image(ImageBoxImage {
-                id: "ui/btn_m.png".to_owned(),
-				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-					..Default::default()
-				  }),
-                ..Default::default()
-            }),
-            selected: ThemedImageMaterial::Image(ImageBoxImage {
-                id: "ui/btn_c.png".to_owned(),
-				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-					..Default::default()
-				  }),
-                ..Default::default()
-            }),
-			trigger: ThemedImageMaterial::Image(ImageBoxImage {
-                id: "ui/btn_m.png".to_owned(),
-				scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-					source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-					destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-					..Default::default()
-				  }),
-                ..Default::default()
-            }),
+            default: theme_btn.to_owned(),
+            selected: theme_btn.to_owned(),
+			trigger: theme_btn.to_owned(),
             ..Default::default()
         },
         &mut theme.button_backgrounds,

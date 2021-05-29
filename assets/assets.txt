@@ -12,8 +12,7 @@ prefab://prefabs/selector.yaml
 png://ui/stars.png
 png://ui/title.png
 png://ui/planet.png
-png://ui/btn_c.png
-png://ui/btn_m.png
+png://ui/menu_btn.png
 png://ui/panel_bkg.png
 png://ui/panel_stock.png
 png://ui/panel_btn.png
