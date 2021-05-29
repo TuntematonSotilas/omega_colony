@@ -9,11 +9,10 @@ use crate::{
     resources::referential::RefeItem
 };
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize)]
+#[derive(PropsData, Default, Debug, Clone, Serialize, Deserialize)]
 pub struct PanelItemProps {
     pub item: RefeItem,
 }
-implement_props_data!(PanelItemProps);
 
 pub fn panel_item(context: WidgetContext) -> WidgetNode {
 	

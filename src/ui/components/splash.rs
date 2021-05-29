@@ -1,10 +1,10 @@
 use oxygengine::user_interface::raui::{
-    core::{implement_props_data, prelude::*},
+    core::prelude::*,
     material::prelude::*,
 };
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+#[derive(PropsData, Debug, Default, Clone, Serialize, Deserialize)]
 pub struct SplashState {
 	pub img_size: Scalar,
 	pub text_size: Scalar,
@@ -12,7 +12,6 @@ pub struct SplashState {
 	pub press_y: Scalar,
 	pub alpha: Scalar,
 }
-implement_props_data!(SplashState);
 
 const FRAMES: Scalar = 50.;
 

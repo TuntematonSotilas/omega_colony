@@ -12,21 +12,19 @@ use crate::{
 	resources::referential::RefeItem
 };
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(MessageData, Debug, Clone, PartialEq, Eq)]
 pub enum PanelSignal {
 	Register,
     HideOrShow(RefeItem),
 	ActiveTab,
 }
-implement_message_data!(PanelSignal);
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+#[derive(PropsData, Debug, Default, Clone, Serialize, Deserialize)]
 pub struct PanelState {
 	pub open: bool,
 	pub refe: Option<RefeItem>,
 	pub tab_units: bool,
 }
-implement_props_data!(PanelState);
 
 fn use_panel(context: &mut WidgetContext) {
 	context.life_cycle.mount(|context| {

@@ -4,19 +4,17 @@ use oxygengine::user_interface::raui::{
 };
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Copy)]
+#[derive(MessageData, Debug, Clone, Copy)]
 pub enum MenuBtnSignal {
     NewGame,
     Continue,
 }
-implement_message_data!(MenuBtnSignal);
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize)]
+#[derive(PropsData, Default, Debug, Clone, Serialize, Deserialize)]
 pub struct MenuBtnProps {
     pub id: String,
     pub label: String,
 }
-implement_props_data!(MenuBtnProps);
 
 fn use_menu_btn(context: &mut WidgetContext) {
     context.life_cycle.change(|context| {

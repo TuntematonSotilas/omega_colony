@@ -42,10 +42,21 @@ impl State for PlanetState {
 			let camera = entity_find_world("camera", world);
 			world.write_resource::<Camera>().camera = camera;
 		}
-		// Set widget
+
 		let mut ui = world.write_resource::<UserInterfaceRes>();
 		if let Some(app) = ui.application_mut("") {
             for (caller, msg) in app.consume_signals() {
+
+				// Register Top Bar
+                /*if let Some(msg) = msg.as_any().downcast_ref::<TopBarSignal>() {
+
+				}*/
+				/*let mut refe = world.write_resource::<Referential>();
+				if !refe.is_init {
+					refe.init();
+				}*/
+
+				// Register Panel
                 if let Some(msg) = msg.as_any().downcast_ref::<PanelSignal>() {
                     if msg == &PanelSignal::Register {
 						if world.read_resource::<UiWidget>().side_panel.is_none() {
@@ -53,6 +64,7 @@ impl State for PlanetState {
 						}
 					}
 				}
+				// Transfer Tab Signal
 				if let Some(_msg) = msg.as_any().downcast_ref::<TabSignal>() {
                    	if let Some(side_panel) = &world.read_resource::<UiWidget>().side_panel {
 						app.send_message(side_panel, PanelSignal::ActiveTab);
@@ -60,8 +72,6 @@ impl State for PlanetState {
 				}
 			}
 		}
-		
-
 		StateChange::None
     }
 }

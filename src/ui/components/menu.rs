@@ -1,5 +1,5 @@
 use oxygengine::user_interface::raui::{
-    core::{implement_props_data, prelude::*},
+    core::prelude::*,
     material::prelude::*,
 };
 use serde::{Deserialize, Serialize};
@@ -12,19 +12,16 @@ use crate::{
 
 const FRAMES: Scalar = 5.;
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+#[derive(PropsData, Debug, Default, Clone, Serialize, Deserialize)]
 pub struct MenuState {
 	pub alpha: Scalar,
     pub sec: Option<u32>,
 }
-implement_props_data!(MenuState);
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize)]
+#[derive(PropsData, Default, Debug, Clone, Serialize, Deserialize)]
 pub struct MenuTextProps {
     pub title: String,
 }
-
-implement_props_data!(MenuTextProps);
 
 fn use_menu(context: &mut WidgetContext) {
     context.life_cycle.mount(|context| {

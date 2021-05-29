@@ -1,17 +1,13 @@
 use oxygengine::user_interface::raui::{
-    core::{
-        implement_props_data, 
-        prelude::*,
-    },
+    core::prelude::*,
     material::prelude::*,
 };
 use serde::{Deserialize, Serialize};
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize)]
+#[derive(PropsData, Default, Debug, Clone, Serialize, Deserialize)]
 pub struct StockProps {
     pub img: String,
 }
-implement_props_data!(StockProps);
 
 pub fn stock(context: WidgetContext) -> WidgetNode {
 	let props = context.props.read_cloned_or_default::<StockProps>();

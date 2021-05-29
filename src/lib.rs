@@ -23,6 +23,7 @@ use crate::{
 		selected::Selected,
         referential::Referential,
         stock::Stock,
+		player_stock::PlayerStock,
 		ui_widget::UiWidget,
 	},
 };
@@ -112,6 +113,7 @@ pub fn main_js() -> Result<(), JsValue> {
         )
         .with_resource(Time::default())
         .with_resource(Stock::default())
+		.with_resource(PlayerStock::default())
         .with_resource(Camera::default())
 		.with_resource(Selected::default())
         .with_resource(Referential::default())

@@ -4,20 +4,18 @@ use oxygengine::user_interface::raui::{
     material::prelude::*,
 };
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize)]
+#[derive(PropsData, Default, Debug, Clone, Serialize, Deserialize)]
 pub struct TabProps {
     pub id: String,
     pub label: String,
 	pub is_active: bool,
 }
-implement_props_data!(TabProps);
 
-#[derive(Debug, Clone, Copy)]
+#[derive(MessageData, Debug, Clone, Copy)]
 pub enum TabSignal {
     Units,
     Upgrades,
 }
-implement_message_data!(TabSignal);
 
 fn use_tab(ctx: &mut WidgetContext) {
     ctx.life_cycle.change(|context| {

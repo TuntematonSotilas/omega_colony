@@ -6,11 +6,10 @@ use serde::{Deserialize, Serialize};
 
 use crate::resources::stock::StockItemCost;
 
-#[derive(Default, Debug, Clone, Serialize, Deserialize)]
+#[derive(PropsData, Default, Debug, Clone, Serialize, Deserialize)]
 pub struct PanelCostProps {
     pub sic: StockItemCost,
 }
-implement_props_data!(PanelCostProps);
 
 pub fn panel_cost(context: WidgetContext) -> WidgetNode {
 	
