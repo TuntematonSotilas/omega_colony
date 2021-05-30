@@ -19,7 +19,7 @@ pub fn panel_cost(context: WidgetContext) -> WidgetNode {
         width: ImageBoxSizeValue::Exact(10.),
         height: ImageBoxSizeValue::Exact(10.),
         material: ImageBoxMaterial::Image(ImageBoxImage {
-            id: props.sic.item.pic.to_owned(),
+            id: props.sic.item.pic,
             ..Default::default()
         }),
         ..Default::default()
@@ -40,7 +40,7 @@ pub fn panel_cost(context: WidgetContext) -> WidgetNode {
     };
 
     widget! {
-        (#{context.key} size_box: {size_cost.to_owned()} {
+        (#{context.key} size_box: {size_cost} {
             content = (#{"box_cost"} horizontal_box [
                 (#{"pic_cost"} image_box: {pic_cost})
                 (#{"text_cost"} text_paper: {text_cost})

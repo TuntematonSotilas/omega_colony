@@ -1,7 +1,9 @@
 use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
+
 use crate::resources::stock::StockType;
 
-#[derive(Debug, Default, Clone, PartialEq, Eq)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Deserialize, Serialize)]
 pub struct PlayerStock {
 	pub is_init: bool,
 	pub stock: HashMap<StockType, u32>,

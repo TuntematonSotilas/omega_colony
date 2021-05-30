@@ -28,8 +28,7 @@ impl<'s> System<'s> for PlayerStockSystem {
 			if let Some(app) = ui.application_mut("") {
 				if let Some(top_bar) = &ui_widget.top_bar {
 					player_stock.init();
-					app.send_message(top_bar, TopBarSignal::InitRefeStock(stock.to_owned()));
-					app.send_message(top_bar, TopBarSignal::UpdateStock(player_stock.to_owned()));
+					app.send_message(top_bar, TopBarSignal::InitRefeStock(stock.to_owned(), player_stock.to_owned()));
 				}
 			}
 		}

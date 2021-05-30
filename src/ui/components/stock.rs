@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 #[derive(PropsData, Default, Debug, Clone, Serialize, Deserialize)]
 pub struct StockProps {
     pub img: String,
+	pub cnt: u32,
 }
 
 pub fn stock(context: WidgetContext) -> WidgetNode {
@@ -34,13 +35,13 @@ pub fn stock(context: WidgetContext) -> WidgetNode {
 		width: ImageBoxSizeValue::Exact(12.),
 		height: ImageBoxSizeValue::Exact(12.),
 		material: ImageBoxMaterial::Image(ImageBoxImage {
-			id: props.img.to_owned(),
+			id: props.img,
 			..Default::default()
 		}),
 		..Default::default()
 	};
 	let text = TextPaperProps {
-        text: "0".to_owned(),
+        text: props.cnt.to_string(),
         width: TextBoxSizeValue::Exact(60.),
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
@@ -52,7 +53,7 @@ pub fn stock(context: WidgetContext) -> WidgetNode {
 			content = (#{"bkg"} paper: {bkg} [
 				(#{"h_box"} horizontal_box: {margin} [
 					(#{"img"} image_box: {img})
-					(#{"text"} text_paper: {text.to_owned()})
+					(#{"text"} text_paper: {text})
 				])
 			])
 		})

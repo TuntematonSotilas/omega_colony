@@ -64,7 +64,7 @@ pub fn menu_btn(mut context: WidgetContext) -> WidgetNode {
 
     let menu_btn_props = props.read_cloned_or_default::<MenuBtnProps>();
     let text = TextPaperProps {
-        text: menu_btn_props.label.to_owned(),
+        text: menu_btn_props.label,
         width: TextBoxSizeValue::Fill,
         height: TextBoxSizeValue::Fill,
         transform: Transform {

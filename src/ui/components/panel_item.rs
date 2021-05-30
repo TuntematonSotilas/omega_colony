@@ -81,10 +81,10 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
         .with(ButtonNotifyProps(id.to_owned().into()));
 
     widget! {
-        (#{key} size_box: {size.to_owned()} {
+        (#{key} size_box: {size} {
             content = (#{"btn"} button_paper: {btn_props} {
-                content = (#{"v_box"} vertical_box: {margin.to_owned()} [
-                    (#{"name"} text_paper: {name.to_owned()})
+                content = (#{"v_box"} vertical_box: {margin} [
+                    (#{"name"} text_paper: {name})
 					(#{"margin_pic"} content_box [
 						(#{"prev_pic"} image_box: {prev_pic})
 					])

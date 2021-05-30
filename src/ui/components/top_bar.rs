@@ -15,13 +15,13 @@ use crate::{
 #[derive(MessageData, Debug, Clone, PartialEq, Eq)]
 pub enum TopBarSignal {
 	Register,
-	InitRefeStock(Stock),
-	UpdateStock(PlayerStock),
+	InitRefeStock(Stock, PlayerStock),
 }
 
 #[derive(PropsData, Debug, Default, Clone, Serialize, Deserialize)]
 pub struct TopBarState {
 	pub stock: Stock,
+	pub player_stock: PlayerStock,
 }
 
 fn use_tab_bar(context: &mut WidgetContext) {
@@ -30,13 +30,11 @@ fn use_tab_bar(context: &mut WidgetContext) {
 	});
 	context.life_cycle.change(|context| {
 		for msg in context.messenger.messages {
-			if let Some(TopBarSignal::InitRefeStock(stock)) = msg.as_any().downcast_ref() {
-				let mut state = context.state.read_cloned_or_default::<TopBarState>();
+			if let Some(TopBarSignal::InitRefeStock(stock, player_stock)) = msg.as_any().downcast_ref() {
+				let mut state = context.state.read_cloned_or_default::<TopBarState>();	
 				state.stock = stock.to_owned();
+				state.player_stock = player_stock.to_owned();
 				drop(context.state.write(state));
-			}
-			if let Some(TopBarSignal::UpdateStock(player_stock)) = msg.as_any().downcast_ref() {
-				debug!("UpdateStock");
 			}
 		}
 	});
@@ -66,11 +64,12 @@ pub fn top_bar(mut context: WidgetContext) -> WidgetNode {
 		},
 		..Default::default()
 	};
-	let top_bar_state = state.read_cloned_or_default::<TopBarState>();
-	let items_list = top_bar_state.stock.refe.iter()
-        .map(|(_code, item)| {
-            widget! {
-				(#{item.name} stock: { StockProps { img: item.pic.to_owned() }})
+	let refe_state = state.read_cloned_or_default::<TopBarState>();
+	let items_list = refe_state.stock.refe.iter()
+        .map(|(code, item)| {
+            let cnt = refe_state.player_stock.stock.get(code).cloned().unwrap_or_default();
+			widget! {
+				(#{item.name} stock: { StockProps { cnt: cnt, img: item.pic.to_owned() }})
             }
         })
         .collect::<Vec<_>>();
