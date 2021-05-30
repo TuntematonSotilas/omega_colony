@@ -51,6 +51,7 @@ pub fn tab(mut context: WidgetContext) -> WidgetNode {
 		true => "tab_active",
 		_ => "tab_inactive",
 	};
+
     let btn_props = props.to_owned()
         .with(PaperProps { 
 			variant: variant.to_owned(),

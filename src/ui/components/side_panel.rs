@@ -23,7 +23,7 @@ pub enum PanelSignal {
 pub struct PanelState {
 	pub open: bool,
 	pub refe: Option<RefeItem>,
-	pub tab_units: bool,
+	pub is_tab_units: bool,
 }
 
 fn use_panel(context: &mut WidgetContext) {
@@ -31,7 +31,7 @@ fn use_panel(context: &mut WidgetContext) {
 		drop(context.state.write(PanelState {
 			open: false,
 			refe: None,
-			tab_units: true,
+			is_tab_units: true,
 		}));
         context.signals.write(PanelSignal::Register);
     });
@@ -46,8 +46,7 @@ fn use_panel(context: &mut WidgetContext) {
 				}
 			}
 			if let Some(PanelSignal::ActiveTab) = msg.as_any().downcast_ref() {
-				let mut state = context.state.read_cloned_or_default::<PanelState>();
-				state.tab_units = !state.tab_units; 
+				state.is_tab_units = !state.is_tab_units; 
 			}	
 			drop(context.state.write(state));
 		}
@@ -66,24 +65,16 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         frame: None, 
         ..Default::default() 
     };
-	let mut alpha = 0.;
-	let mut title_txt = String::new();
-	let mut preview_pic = String::new();
-	let mut refe = RefeItem::default();
-	let mut tab_units = true;
+	
+	let panel_state = state.read_cloned_or_default::<PanelState>();
 
-	if let Ok(state) = state.read::<PanelState>() {
-		tab_units = state.tab_units;
-		alpha = match state.open {
-			true => 1.,
-			false => 0.,
-		};
-		if let Some(refe_item) = &state.refe {
-			refe = refe_item.to_owned();
-			title_txt = refe_item.name.to_owned();
-			preview_pic = refe_item.preview.to_owned();
-		};
-	}
+	let alpha = match panel_state.open {
+		true => 1.,
+		false => 0.,
+	};
+
+	let refe = panel_state.refe.unwrap_or_default();
+	
 	let size_title = SizeBoxProps {
         height: SizeBoxSizeValue::Exact(45.), 
         width: SizeBoxSizeValue::Fill,
@@ -116,13 +107,13 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 		width: ImageBoxSizeValue::Exact(32.),
 		height: ImageBoxSizeValue::Exact(32.),
 		material: ImageBoxMaterial::Image(ImageBoxImage {
-			id: preview_pic,
+			id: refe.preview,
 			..Default::default()
 		}),
 		..Default::default()
 	};
 	let title = TextPaperProps {
-        text: title_txt,
+        text: refe.name,
         width: TextBoxSizeValue::Fill,
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
@@ -143,7 +134,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         ..Default::default()
     };
 	
-	let items = match tab_units {
+	let items = match panel_state.is_tab_units {
 		true => refe.units,
 		false => refe.upgrades,
 	};
@@ -174,12 +165,12 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 						(#{"units"} tab: { TabProps {
 							id: "units".to_string(),
 							label: "UNITS".to_string(),
-							is_active: tab_units,
+							is_active: panel_state.is_tab_units,
 						}})
 						(#{"upg"} tab: { TabProps {
 							id: "upgrades".to_string(),
 							label: "UPGRADES".to_string(),
-							is_active: !tab_units,
+							is_active: !panel_state.is_tab_units,
 						}})
 					])
 				})

@@ -55,15 +55,8 @@ pub fn splash(mut context: WidgetContext) -> WidgetNode {
         ..
     } = context;
 
-	let (mut text_size, mut title_y, mut press_y, mut alpha, mut img_size) = (0., 0., 0., 0., 0.);
-	if let Ok(state) = state.read::<SplashState>() {
-		text_size = state.text_size;
-		title_y = state.title_y;
-		press_y = state.press_y;
-		alpha = state.alpha;
-		img_size = state.img_size;
-	}
-
+	let splash_state = state.read_cloned_or_default::<SplashState>();
+	
 	let title = Props::new(TextBoxProps {
 		height: TextBoxSizeValue::Exact(1.),
 		text: "Omega Colony".to_owned(),
@@ -75,13 +68,13 @@ pub fn splash(mut context: WidgetContext) -> WidgetNode {
 		color: color_from_rgba(0, 153, 255, 1.),
 		transform: Transform {
 			pivot: Vec2 { x: 0.5, y: 0.5 },
-			scale: Vec2 { x: text_size, y: 1. },
+			scale: Vec2 { x: splash_state.text_size, y: 1. },
 			..Default::default()
 		},
 		..Default::default()
 	})
 	.with(ContentBoxItemLayout {
-		align: Vec2 { x: 0.5, y: title_y },
+		align: Vec2 { x: 0.5, y: splash_state.title_y },
 		..Default::default()
 	});
 	let press_label = Props::new(TextBoxProps {
@@ -94,13 +87,13 @@ pub fn splash(mut context: WidgetContext) -> WidgetNode {
 		},
 		transform: Transform {
 			pivot: Vec2 { x: 0.5, y: 0.5 },
-			scale: Vec2 { x: text_size, y: 1.},
+			scale: Vec2 { x: splash_state.text_size, y: 1.},
 			..Default::default()
 		},
 		..Default::default()
 	})
 	.with(ContentBoxItemLayout {
-		align: Vec2 { x: 0.5, y: press_y },
+		align: Vec2 { x: 0.5, y: splash_state.press_y },
 		..Default::default()
 	});
 	let planet = Props::new(ImageBoxProps {
@@ -114,7 +107,7 @@ pub fn splash(mut context: WidgetContext) -> WidgetNode {
 		}),
 		transform: Transform {
 			pivot: Vec2 { x: 0.5, y: 0.5},
-			scale: Vec2 { x: img_size, y: img_size},
+			scale: Vec2 { x: splash_state.img_size, y: splash_state.img_size},
 			..Default::default()
 		},
 		..Default::default()
@@ -129,7 +122,7 @@ pub fn splash(mut context: WidgetContext) -> WidgetNode {
 	};
 
 	widget! {
-		(#{key} paper: {bkg} | {WidgetAlpha(alpha)} [
+		(#{key} paper: {bkg} | {WidgetAlpha(splash_state.alpha)} [
 			(#{"title"} text_box: {title})
 			(#{"press_label"} text_box: {press_label})
 			(#{"planet"} image_box: {planet})

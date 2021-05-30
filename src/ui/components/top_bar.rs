@@ -31,7 +31,6 @@ fn use_tab_bar(context: &mut WidgetContext) {
 	context.life_cycle.change(|context| {
 		for msg in context.messenger.messages {
 			if let Some(TopBarSignal::InitRefeStock(stock)) = msg.as_any().downcast_ref() {
-				debug!("InitRefeStock {:?}", stock.refe.len());
 				let mut state = context.state.read_cloned_or_default::<TopBarState>();
 				state.stock = stock.to_owned();
 				drop(context.state.write(state));
@@ -67,11 +66,8 @@ pub fn top_bar(mut context: WidgetContext) -> WidgetNode {
 		},
 		..Default::default()
 	};
-	let mut stock_refe = Stock::default();
-	if let Ok(state) = state.read::<TopBarState>() {
-		stock_refe = state.stock.to_owned();
-	}
-	let items_list = stock_refe.refe.iter()
+	let top_bar_state = state.read_cloned_or_default::<TopBarState>();
+	let items_list = top_bar_state.stock.refe.iter()
         .map(|(_code, item)| {
             widget! {
 				(#{item.name} stock: { StockProps { img: item.pic.to_owned() }})

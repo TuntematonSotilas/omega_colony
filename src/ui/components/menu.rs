@@ -55,22 +55,24 @@ pub fn menu(mut context: WidgetContext) -> WidgetNode {
         use_main_color: true,
         ..Default::default()
     };
-    let mut time_txt = "No save".to_string();
+
+	let menu_state = state.read_cloned_or_default::<MenuState>();
+
+	let mut time_txt = "No save".to_string();
     let mut continue_btn = widget! {()};
-    if let Ok(state) = state.read::<MenuState>() {
-        if let Some(sec) = state.sec
-        {
-            time_txt = format!("Time played : {0}s", sec);
-            continue_btn = widget! {
-                (#{"continue_btn"} menu_btn: { MenuBtnProps {
-                    id: "continue".to_string(),
-                    label: "Continue".to_string(),
-                }})
-            };
-        }
-    }
+	if let Some(sec) = menu_state.sec
+	{
+		time_txt = format!("Time played : {0}s", sec);
+		continue_btn = widget! {
+			(#{"continue_btn"} menu_btn: { MenuBtnProps {
+				id: "continue".to_string(),
+				label: "Continue".to_string(),
+			}})
+		};
+	}
+
     let time = Props::new(TextPaperProps {
-        text: time_txt.to_owned(),
+        text: time_txt,
         width: TextBoxSizeValue::Fill,
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
@@ -80,12 +82,8 @@ pub fn menu(mut context: WidgetContext) -> WidgetNode {
         ..Default::default()
     });
 
-	let mut alpha = 0.;
-	if let Ok(state) = state.read::<MenuState>() {
-		alpha = state.alpha;
-	}
 	widget! {
-		(#{key} vertical_box | {WidgetAlpha(alpha)} [
+		(#{key} vertical_box | {WidgetAlpha(menu_state.alpha)} [
 			(#{"text"} text_paper: {title})
 			(#{"time"} text_paper: {time})
 			(#{"v_box"} nav_vertical_box: {NavJumpLooped} [
