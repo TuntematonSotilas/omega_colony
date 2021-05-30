@@ -4,7 +4,6 @@ use crate::{
 	resources::{
 		camera::Camera,
 		ui_widget::UiWidget,
-		stock::Stock,
 	}, 
 	ui::components::{
 		tab::TabSignal,

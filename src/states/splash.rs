@@ -2,7 +2,10 @@ use oxygengine::prelude::*;
 
 use crate::{
 	states::menu::MenuState,
-	resources::referential::Referential,
+	resources::{
+		referential::Referential,
+		stock::Stock,
+	},
 };
 
 #[derive(Default)]
@@ -18,9 +21,14 @@ impl State for SplashState {
     }
 
     fn on_process(&mut self, world: &mut World) -> StateChange {
+
+		let mut stock = world.write_resource::<Stock>();
+		if !stock.is_init {
+            stock.init();
+        }
         let mut refe = world.write_resource::<Referential>();
         if !refe.is_init {
-            refe.init();
+            refe.init(stock.refe.to_owned());
         }
         let input = &world.read_resource::<InputController>();
         if input.trigger_or_default("enter") == TriggerState::Pressed {

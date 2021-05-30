@@ -37,19 +37,21 @@ fn use_panel(context: &mut WidgetContext) {
     });
 	
 	context.life_cycle.change(|context| {
-		let mut state = context.state.read_cloned_or_default::<PanelState>();
 		for msg in context.messenger.messages {
 			if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
+				let mut state = context.state.read_cloned_or_default::<PanelState>();
 				state.open = !state.open;
 				if state.open {
 					state.refe = Some(refe.to_owned());
 				}
+				drop(context.state.write(state));
 			}
 			if let Some(PanelSignal::ActiveTab) = msg.as_any().downcast_ref() {
+				let mut state = context.state.read_cloned_or_default::<PanelState>();
 				state.tab_units = !state.tab_units; 
-			}
+				drop(context.state.write(state));
+			}	
 		}
-		drop(context.state.write(state));
 	});
 }
 

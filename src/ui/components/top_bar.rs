@@ -2,6 +2,7 @@ use oxygengine::user_interface::raui::{
     core::prelude::*,
     material::prelude::*,
 };
+use serde::{Deserialize, Serialize};
 
 use crate::{
 	resources::{
@@ -18,14 +19,38 @@ pub enum TopBarSignal {
 	UpdateStock(PlayerStock),
 }
 
+#[derive(PropsData, Debug, Default, Clone, Serialize, Deserialize)]
+pub struct TopBarState {
+	pub stock: Stock,
+}
+
 fn use_tab_bar(context: &mut WidgetContext) {
 	context.life_cycle.mount(|context| {
 		context.signals.write(TopBarSignal::Register);
-	})
+	});
+	context.life_cycle.change(|context| {
+		for msg in context.messenger.messages {
+			if let Some(TopBarSignal::InitRefeStock(stock)) = msg.as_any().downcast_ref() {
+				debug!("InitRefeStock {:?}", stock.refe.len());
+				let mut state = context.state.read_cloned_or_default::<TopBarState>();
+				state.stock = stock.to_owned();
+				drop(context.state.write(state));
+			}
+			if let Some(TopBarSignal::UpdateStock(player_stock)) = msg.as_any().downcast_ref() {
+				debug!("UpdateStock");
+			}
+		}
+	});
 }
 
 #[pre_hooks(use_tab_bar)]
 pub fn top_bar(mut context: WidgetContext) -> WidgetNode {
+	let WidgetContext {
+		key,
+        state,
+        ..
+    } = context;
+
 	let size = SizeBoxProps {
 		width: SizeBoxSizeValue::Fill, 
 		height: SizeBoxSizeValue::Exact(30.),
@@ -42,17 +67,24 @@ pub fn top_bar(mut context: WidgetContext) -> WidgetNode {
 		},
 		..Default::default()
 	};
+	let mut stock_refe = Stock::default();
+	if let Ok(state) = state.read::<TopBarState>() {
+		stock_refe = state.stock.to_owned();
+	}
+	let items_list = stock_refe.refe.iter()
+        .map(|(_code, item)| {
+            widget! {
+				(#{item.name} stock: { StockProps { img: item.pic.to_owned() }})
+            }
+        })
+        .collect::<Vec<_>>();
+		
 	widget!{
-		(#{context.key} size_box: {size} {
+		(#{key} size_box: {size} {
 			content = (#{"bkg"} paper: {bkg} [
 				(#{"top_bar_box"} content_box [
 					(#{"margin"} content_box : {margin} [
-						(#{"h_box"} horizontal_box [
-							(#{"energy"} stock: { StockProps { img: "ui/energy.png".to_string() }})
-							(#{"steel"} stock: { StockProps { img: "ui/steel.png".to_string() }})
-							(#{"water"} stock: { StockProps { img: "ui/water.png".to_string() }})
-							(#{"cereal"} stock: { StockProps { img: "ui/cereal.png".to_string() }})
-						])
+						(#{"h_box"} horizontal_box |[ items_list ]|)
 					])
 				])
 			])

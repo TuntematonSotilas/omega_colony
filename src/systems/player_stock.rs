@@ -3,6 +3,7 @@ use oxygengine::prelude::*;
 use crate::{
 	resources::{
 		ui_widget::UiWidget,
+		stock::Stock,
 		player_stock::PlayerStock,
 	},
 	ui::components::top_bar::TopBarSignal,
@@ -15,25 +16,20 @@ impl<'s> System<'s> for PlayerStockSystem {
         Write<'s, UserInterfaceRes>,
 		Read<'s, UiWidget>,
 		Write<'s, PlayerStock>,
+		Read<'s, Stock>,
     );
 
     fn run(
         &mut self, 
-		(mut ui, ui_widget, mut player_stock)
+		(mut ui, ui_widget, mut player_stock, stock)
 		: Self::SystemData,
     ) {
-		
 		if !player_stock.is_init {
-			player_stock.init();
 			if let Some(app) = ui.application_mut("") {
-				if let Some(side_panel) = &ui_widget.side_panel {
-					//let stock = world.read_resource::<Stock>();
-						//let cp = stock.clone();
-						//app.send_message(&caller, TopBarSignal::InitRefeStock(*cp));
-						
-						app.send_message(side_panel, TopBarSignal::UpdateStock(player_stock.to_owned()));
-
-						
+				if let Some(top_bar) = &ui_widget.top_bar {
+					player_stock.init();
+					app.send_message(top_bar, TopBarSignal::InitRefeStock(stock.to_owned()));
+					app.send_message(top_bar, TopBarSignal::UpdateStock(player_stock.to_owned()));
 				}
 			}
 		}

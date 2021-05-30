@@ -23,6 +23,7 @@ pub struct StockItemCost  {
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Stock {
+	pub is_init: bool,
 	pub refe: HashMap<StockType, StockItem>,
 }
 
@@ -49,5 +50,7 @@ impl Stock {
         self.refe.insert(StockType::Steel, steel);
 		self.refe.insert(StockType::Water, water);
         self.refe.insert(StockType::Cereal, cereal);
+
+		self.is_init = true;
 	}
 }
