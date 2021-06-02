@@ -8,7 +8,6 @@ use crate::{
     ui::components::panel_cost::{ panel_cost, PanelCostProps },
     resources::{
 		referential::RefeItem,
-		stock::StockType,
 		player_stock::PlayerStock,
 	},
 };
@@ -30,6 +29,8 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
 
     let item_props = props.read_cloned_or_default::<PanelItemProps>();
     
+	let item = item_props.item.to_owned();
+	
 	let size = SizeBoxProps {
         height: SizeBoxSizeValue::Exact(120.), 
         width: SizeBoxSizeValue::Exact(120.),
@@ -47,7 +48,7 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
 
     let name = TextPaperProps {
         variant: "unit".to_owned(),
-        text: item_props.item.name,
+        text: item.name,
         width: TextBoxSizeValue::Fill,
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
@@ -57,7 +58,7 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
         width: ImageBoxSizeValue::Exact(32.),
         height: ImageBoxSizeValue::Exact(32.),
         material: ImageBoxMaterial::Image(ImageBoxImage {
-            id: item_props.item.preview,
+            id: item.preview,
             ..Default::default()
         }),
         ..Default::default()
@@ -71,15 +72,18 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
         ..Default::default()
     });
 
-    let costs_list = item_props.item.cost.iter()
+	let player_stock = item_props.player_stock.to_owned();
+	let is_buyable = player_stock.is_buyabe(item_props.item.cost);
+	debug!("player_stock {0}", is_buyable);
+
+    let costs_list = item.cost.iter()
         .map(|(_code, sic)| {
-            widget! {
+			widget! {
                 (#{sic.item.name} panel_cost : { PanelCostProps { sic: sic.clone() }} )
             }
         }).collect::<Vec<_>>();
     
-
-	debug!("player_stock {0}", item_props.player_stock.stock.get(&StockType::Energy).cloned().unwrap_or_default());
+	
 
 	let btn_props = props.to_owned()
         .with(PaperProps { 
