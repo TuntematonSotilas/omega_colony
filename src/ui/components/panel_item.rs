@@ -6,12 +6,17 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     ui::components::panel_cost::{ panel_cost, PanelCostProps },
-    resources::referential::RefeItem
+    resources::{
+		referential::RefeItem,
+		stock::StockType,
+		player_stock::PlayerStock,
+	},
 };
 
 #[derive(PropsData, Default, Debug, Clone, Serialize, Deserialize)]
 pub struct PanelItemProps {
     pub item: RefeItem,
+	pub player_stock: PlayerStock,
 }
 
 pub fn panel_item(context: WidgetContext) -> WidgetNode {
@@ -73,6 +78,9 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
             }
         }).collect::<Vec<_>>();
     
+
+	debug!("player_stock {0}", item_props.player_stock.stock.get(&StockType::Energy).cloned().unwrap_or_default());
+
 	let btn_props = props.to_owned()
         .with(PaperProps { 
 			frame: None, 

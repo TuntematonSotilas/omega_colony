@@ -9,44 +9,44 @@ use crate::{
 		panel_item::{panel_item, PanelItemProps},
 		tab::{tab, TabProps},
 	},
-	resources::referential::RefeItem
+	resources::{
+		referential::RefeItem,
+		player_stock::PlayerStock,
+	},
 };
 
 #[derive(MessageData, Debug, Clone, PartialEq, Eq)]
 pub enum PanelSignal {
 	Register,
-    HideOrShow(RefeItem),
+    HideOrShow(RefeItem, PlayerStock),
 	ActiveTab,
 }
 
 #[derive(PropsData, Debug, Default, Clone, Serialize, Deserialize)]
 pub struct PanelState {
 	pub open: bool,
-	pub refe: Option<RefeItem>,
-	pub is_tab_units: bool,
+	pub is_tab_upg: bool,
+	pub refe: RefeItem,
+	pub player_stock: PlayerStock,
 }
 
 fn use_panel(context: &mut WidgetContext) {
 	context.life_cycle.mount(|context| {
-		drop(context.state.write(PanelState {
-			open: false,
-			refe: None,
-			is_tab_units: true,
-		}));
-        context.signals.write(PanelSignal::Register);
+		context.signals.write(PanelSignal::Register);
     });
 	
 	context.life_cycle.change(|context| {
 		for msg in context.messenger.messages {
 			let mut state = context.state.read_cloned_or_default::<PanelState>();
-			if let Some(PanelSignal::HideOrShow(refe)) = msg.as_any().downcast_ref() {
+			if let Some(PanelSignal::HideOrShow(refe, player_stock)) = msg.as_any().downcast_ref() {
 				state.open = !state.open;
 				if state.open {
-					state.refe = Some(refe.to_owned());
+					state.refe = refe.to_owned();
+					state.player_stock = player_stock.to_owned();
 				}
 			}
 			if let Some(PanelSignal::ActiveTab) = msg.as_any().downcast_ref() {
-				state.is_tab_units = !state.is_tab_units; 
+				state.is_tab_upg = !state.is_tab_upg; 
 			}	
 			drop(context.state.write(state));
 		}
@@ -73,8 +73,6 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 		false => 0.,
 	};
 
-	let refe = panel_state.refe.unwrap_or_default();
-	
 	let size_title = SizeBoxProps {
         height: SizeBoxSizeValue::Exact(45.), 
         width: SizeBoxSizeValue::Fill,
@@ -107,13 +105,13 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 		width: ImageBoxSizeValue::Exact(32.),
 		height: ImageBoxSizeValue::Exact(32.),
 		material: ImageBoxMaterial::Image(ImageBoxImage {
-			id: refe.preview,
+			id: panel_state.refe.preview,
 			..Default::default()
 		}),
 		..Default::default()
 	};
 	let title = TextPaperProps {
-        text: refe.name,
+        text: panel_state.refe.name,
         width: TextBoxSizeValue::Fill,
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
@@ -134,14 +132,20 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         ..Default::default()
     };
 	
-	let items = match panel_state.is_tab_units {
-		true => refe.units,
-		false => refe.upgrades,
+	let items = match panel_state.is_tab_upg {
+		true => panel_state.refe.upgrades,
+		false => panel_state.refe.units,
 	};
+
+	let player_stock = panel_state.player_stock.clone();
+
 	let items_list = items.iter()
         .map(|(_code, child)| {
-            widget! {
-                (#{child.name} panel_item: { PanelItemProps { item: child.to_owned() }})
+			widget! {
+                (#{child.name} panel_item: { PanelItemProps { 
+					item: child.to_owned(), 
+					player_stock: player_stock.to_owned(),
+				}})
             }
         })
         .collect::<Vec<_>>();
@@ -165,12 +169,12 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 						(#{"units"} tab: { TabProps {
 							id: "units".to_string(),
 							label: "UNITS".to_string(),
-							is_active: panel_state.is_tab_units,
+							is_active: !panel_state.is_tab_upg,
 						}})
 						(#{"upg"} tab: { TabProps {
 							id: "upgrades".to_string(),
 							label: "UPGRADES".to_string(),
-							is_active: !panel_state.is_tab_units,
+							is_active: panel_state.is_tab_upg,
 						}})
 					])
 				})
