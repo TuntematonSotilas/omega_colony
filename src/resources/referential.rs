@@ -37,7 +37,7 @@ impl Referential {
 		let mut stock_tech = HashMap::new();
 		stock_tech.insert(StockType::Energy, StockItemCost { 
 			item: stock_refe.get(&StockType::Energy).cloned().unwrap_or_default(),
-			cost: 50
+			cost: 200
 		});
 		stock_tech.insert(StockType::Steel, StockItemCost { 
 			item: stock_refe.get(&StockType::Steel).cloned().unwrap_or_default(),

@@ -54,7 +54,16 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
         use_main_color: true,
         ..Default::default()
     };
-    let prev_pic = Props::new(ImageBoxProps {
+    
+	let player_stock = item_props.player_stock.to_owned();
+	let is_buyable = player_stock.is_buyabe(item_props.item.cost);
+	
+	let alpha = match is_buyable {
+		true => 1.,
+		false => 0.5,
+	};
+
+	let prev_pic = Props::new(ImageBoxProps {
         width: ImageBoxSizeValue::Exact(32.),
         height: ImageBoxSizeValue::Exact(32.),
         material: ImageBoxMaterial::Image(ImageBoxImage {
@@ -71,10 +80,6 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
         },
         ..Default::default()
     });
-
-	let player_stock = item_props.player_stock.to_owned();
-	let is_buyable = player_stock.is_buyabe(item_props.item.cost);
-	debug!("player_stock {0}", is_buyable);
 
     let costs_list = item.cost.iter()
         .map(|(_code, sic)| {
@@ -95,7 +100,7 @@ pub fn panel_item(context: WidgetContext) -> WidgetNode {
     widget! {
         (#{key} size_box: {size} {
             content = (#{"btn"} button_paper: {btn_props} {
-                content = (#{"v_box"} vertical_box: {margin} [
+                content = (#{"v_box"} vertical_box: {margin} | {WidgetAlpha(alpha)} [
                     (#{"name"} text_paper: {name})
 					(#{"margin_pic"} content_box [
 						(#{"prev_pic"} image_box: {prev_pic})
