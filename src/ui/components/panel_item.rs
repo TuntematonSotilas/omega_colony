@@ -18,7 +18,26 @@ pub struct PanelItemProps {
 	pub player_stock: PlayerStock,
 }
 
-pub fn panel_item(context: WidgetContext) -> WidgetNode {
+#[derive(MessageData, Debug, Clone, Copy)]
+pub enum PanelItemSignal {
+    Build,
+}
+
+fn use_panel_item(ctx: &mut WidgetContext) {
+	ctx.life_cycle.change(|context| {
+        for msg in context.messenger.messages {
+            if let Some(msg) = msg.as_any().downcast_ref::<ButtonNotifyMessage>() {
+				if msg.trigger_start() {
+					debug!("clic");
+					context.signals.write(PanelItemSignal::Build);
+				}
+			}
+		}
+	});
+}
+
+#[pre_hooks(use_panel_item)]
+pub fn panel_item(mut context: WidgetContext) -> WidgetNode {
 	
 	let WidgetContext {
 		id,

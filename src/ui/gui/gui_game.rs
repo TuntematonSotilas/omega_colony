@@ -111,12 +111,21 @@ fn theme_game() -> ThemeProps {
 		  }),
 		..Default::default()
 	});
+	let theme_btn_clic = ThemedImageMaterial::Image(ImageBoxImage {
+		id: "ui/panel_btn_clic.png".to_owned(),
+		scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+			source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+			destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+			..Default::default()
+		  }),
+		..Default::default()
+	});
 	make_button_variants(
         "",
         ThemedButtonMaterial {
             default: theme_btn.to_owned(),
             selected: theme_btn.to_owned(),
-			trigger: theme_btn.to_owned(),
+			trigger: theme_btn_clic.to_owned(),
             ..Default::default()
         },
         &mut theme.button_backgrounds,

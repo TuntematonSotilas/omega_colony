@@ -9,6 +9,7 @@ use crate::{
 		tab::TabSignal,
 		side_panel::PanelSignal,
 		top_bar::TopBarSignal,
+		panel_item::PanelItemSignal,
 	},
 };
 
@@ -54,18 +55,21 @@ impl State for PlanetState {
 						world.write_resource::<UiWidget>().top_bar = Some(caller.to_owned());
 					}
 				}
-
 				// Register Panel
-                if let Some(msg) = msg.as_any().downcast_ref::<PanelSignal>() {
+                else if let Some(msg) = msg.as_any().downcast_ref::<PanelSignal>() {
                     if msg == &PanelSignal::Register {
 						world.write_resource::<UiWidget>().side_panel = Some(caller.to_owned());
 					}
 				}
 				// Transfer Tab Signal
-				if let Some(_msg) = msg.as_any().downcast_ref::<TabSignal>() {
+				else if let Some(_msg) = msg.as_any().downcast_ref::<TabSignal>() {
                    	if let Some(side_panel) = &world.read_resource::<UiWidget>().side_panel {
 						app.send_message(side_panel, PanelSignal::ActiveTab);
 					}
+				}
+				// Panel Item Signal
+				else if let Some(_msg) = msg.as_any().downcast_ref::<PanelItemSignal>() {
+                   	debug!("PanelItemSignal");
 				}
 			}
 		}
