@@ -145,45 +145,6 @@ fn theme_game() -> ThemeProps {
         &mut theme.button_backgrounds,
     );
 
-	let tab_inactive = ThemedImageMaterial::Image(ImageBoxImage {
-		id: "ui/tab_inactive.png".to_owned(),
-		scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-			source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-			destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-			..Default::default()
-		  }),
-		..Default::default()
-	});
-	make_button_variants(
-        "tab_inactive",
-        ThemedButtonMaterial {
-            default: tab_inactive.to_owned(),
-			selected: tab_inactive.to_owned(),
-			trigger: tab_inactive.to_owned(),
-            ..Default::default()
-        },
-        &mut theme.button_backgrounds,
-    );
-	let tab_active = ThemedImageMaterial::Image(ImageBoxImage {
-		id: "ui/tab_active.png".to_owned(),
-		scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
-			source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-			destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
-			..Default::default()
-		  }),
-		..Default::default()
-	});
-	make_button_variants(
-        "tab_active",
-        ThemedButtonMaterial {
-            default: tab_active.to_owned(),
-			selected: tab_active.to_owned(),
-			trigger: tab_active.to_owned(),
-            ..Default::default()
-        },
-        &mut theme.button_backgrounds,
-    );
-
     theme
 }
 

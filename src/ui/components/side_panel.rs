@@ -1,14 +1,14 @@
-use oxygengine::{user_interface::raui::{
+use oxygengine::{
+	user_interface::raui::{
 	core::prelude::*, 
 	material::prelude::*
-}, widget::component::containers::tabs_box};
+}};
 
 use serde::{Deserialize, Serialize};
 
 use crate::{
 	ui::components::{
 		panel_item::{panel_item, PanelItemProps},
-		tab::{tab, TabProps},
 	},
 	resources::{
 		referential::RefeItem,
@@ -20,13 +20,11 @@ use crate::{
 pub enum PanelSignal {
 	Register,
     HideOrShow(RefeItem, PlayerStock),
-	ActiveTab,
 }
 
 #[derive(PropsData, Debug, Default, Clone, Serialize, Deserialize)]
 pub struct PanelState {
 	pub open: bool,
-	pub is_tab_upg: bool,
 	pub refe: RefeItem,
 	pub player_stock: PlayerStock,
 }
@@ -46,9 +44,6 @@ fn use_panel(context: &mut WidgetContext) {
 					state.player_stock = player_stock.to_owned();
 				}
 			}
-			if let Some(PanelSignal::ActiveTab) = msg.as_any().downcast_ref() {
-				state.is_tab_upg = !state.is_tab_upg; 
-			}	
 			drop(context.state.write(state));
 		}
 	});
@@ -122,25 +117,16 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         },
 		..Default::default()
     };
-	let size_tabs = SizeBoxProps {
-        height: SizeBoxSizeValue::Exact(30.), 
-        width: SizeBoxSizeValue::Fill,
-        ..Default::default()
-    };
 	let size_items = SizeBoxProps {
         height: SizeBoxSizeValue::Exact(500.), 
         width: SizeBoxSizeValue::Fill,
         ..Default::default()
     };
-	
-	let items = match panel_state.is_tab_upg {
-		true => panel_state.refe.upgrades,
-		false => panel_state.refe.units,
-	};
 
 	let player_stock = panel_state.player_stock.clone();
 
-	let items_list = items.iter()
+	let items_units = panel_state.refe.units;
+	let units_list = items_units.iter()
         .map(|(_code, child)| {
 			widget! {
                 (#{child.name} panel_item: { PanelItemProps { 
@@ -151,51 +137,35 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         })
         .collect::<Vec<_>>();
 
-	let t1 = TextPaperProps {
+	let tab_text_u = TextPaperProps {
 		text: "UNITS".to_owned(),
 		width: TextBoxSizeValue::Fill,
 		height: TextBoxSizeValue::Fill,
+		transform: Transform {
+			align: Vec2 { x: 0., y: 0.3 },
+			..Default::default()
+		},
 		use_main_color: true,
 		..Default::default()
 	};
-	let c1 = TextPaperProps {
-		text: "c_UNITS".to_owned(),
-		width: TextBoxSizeValue::Fill,
-		height: TextBoxSizeValue::Fill,
-		use_main_color: true,
+	let mut tab_text_g = tab_text_u.clone();
+	tab_text_g.text = "UPGRADES".to_owned();
+	
+	let tabs_props = TabsBoxProps {
+		tabs_location: TabsBoxTabsLocation::Top,
+		tabs_and_content_separation: 5.,
 		..Default::default()
 	};
-	let t2 = TextPaperProps {
-		text: "UPGRADES".to_owned(),
-		width: TextBoxSizeValue::Fill,
-		height: TextBoxSizeValue::Fill,
-		use_main_color: true,
+	let tab_size = SizeBoxProps {
+		height: SizeBoxSizeValue::Exact(30.), 
+		width: SizeBoxSizeValue::Fill,
 		..Default::default()
 	};
-	let c2 = TextPaperProps {
-		text: "c_UPGRADES".to_owned(),
-		width: TextBoxSizeValue::Fill,
-		height: TextBoxSizeValue::Fill,
-		use_main_color: true,
-		..Default::default()
-	};
-
-	let tab_paper = PaperProps { 
+	let tab_bkg = PaperProps { 
 		variant: "tab_inactive".to_owned(),
         frame: None, 
         ..Default::default() 
     };
-
-	let tab_props = TabsBoxProps {
-		tabs_location: TabsBoxTabsLocation::Top,
-		..Default::default()
-	};
-	
-	let size_tab = SizeBoxProps {
-		height: SizeBoxSizeValue::Exact(20.), 
-		width: SizeBoxSizeValue::Exact(30.),
-		..Default::default()
-	};
 
     widget! {
         (#{key} content_box | {WidgetAlpha(alpha)} [
@@ -211,52 +181,28 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 						])
 					])
 				})
-				// (#{"tabs"} size_box: {size_tabs} {
-				// 	content = (#{"h_tabs"} nav_horizontal_box [
-				// 		(#{"units"} tab: { TabProps {
-				// 			id: "units".to_string(),
-				// 			label: "UNITS".to_string(),
-				// 			is_active: !panel_state.is_tab_upg,
-				// 		}})
-				// 		(#{"upg"} tab: { TabProps {
-				// 			id: "upgrades".to_string(),
-				// 			label: "UPGRADES".to_string(),
-				// 			is_active: panel_state.is_tab_upg,
-				// 		}})
-				// 	])
-				// })
-				// (#{"items"} size_box: {size_items} {
-				// 	content =  (#{"flex_items"} nav_flex_box |[ items_list ]|)
-				// })
-
-				(#{"tabs"} size_box: {size_tabs} {
-					content = (#{"nav_tabs"} nav_tabs_box : {tab_props} [
-						{WidgetNode::pack_tuple([
-							widget! {
-								(#{"s1"} size_box: {size_tab.to_owned()} {
-									content = (#{"p1"} paper: {tab_paper.to_owned()} [
-										(#{"t1"} text_paper: {t1})
-									])
-								})
-							}, 
-							widget! {
-								(#{"c1"} text_paper: {c1})
-							},
-						])}
-						{WidgetNode::pack_tuple([
-							widget! {
-								(#{"s2"} size_box: {size_tab.to_owned()} {
-									content = (#{"p2"} paper: {tab_paper.to_owned()} [
-										(#{"t1"} text_paper: {t2})
-									])
-								})
-							}, 
-							widget! {
-								(#{"c2"} text_paper: {c2})
-							},
-						])}
-					])
-				})
+				(#{"nav_tabs"} nav_tabs_box : {tabs_props} [
+					{WidgetNode::pack_tuple([
+						widget! {(#{"tab_size_u"} size_box: {tab_size.to_owned()} {
+							content = (#{"tab_bkg_u"} paper: {tab_bkg.to_owned()} [
+								(#{"tab_text_u"} text_paper: {tab_text_u})
+							])
+						})}, 
+						widget! {(#{"cnt_text_u"} size_box: {size_items.to_owned()} {
+							content =  (#{"flex_items"} nav_flex_box |[ units_list ]|)
+						})},
+					])}
+					{WidgetNode::pack_tuple([
+						widget! {(#{"tb_size_g"} size_box: {tab_size.to_owned()} {
+							content = (#{"tab_bkg_g"} paper: {tab_bkg.to_owned()} [
+								(#{"tab_text_g"} text_paper: {tab_text_g})
+							])
+						})}, 
+						widget! {(#{"cnt_text_u"} size_box: {size_items.to_owned()} {
+							content =  ()
+						})},
+					])}
+				])
 			])
 		])
     }
