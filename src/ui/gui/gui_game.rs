@@ -102,6 +102,20 @@ fn theme_game() -> ThemeProps {
         &mut theme.content_backgrounds,
     );
 
+	make_bkg_variants(
+        "tab_inactive",
+        ThemedImageMaterial::Image(ImageBoxImage {
+            id: "ui/tab_inactive.png".to_owned(),
+            scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {
+				source: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+				destination: Rect { left: 3., right: 3., top: 3., bottom: 3.},
+				..Default::default()
+			  }),
+            ..Default::default()
+        }),
+        &mut theme.content_backgrounds,
+    );
+
 	let theme_btn = ThemedImageMaterial::Image(ImageBoxImage {
 		id: "ui/panel_btn.png".to_owned(),
 		scaling: ImageBoxImageScaling::Frame(ImageBoxFrame {

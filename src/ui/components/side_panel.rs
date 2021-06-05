@@ -158,6 +158,44 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 		use_main_color: true,
 		..Default::default()
 	};
+	let c1 = TextPaperProps {
+		text: "c_UNITS".to_owned(),
+		width: TextBoxSizeValue::Fill,
+		height: TextBoxSizeValue::Fill,
+		use_main_color: true,
+		..Default::default()
+	};
+	let t2 = TextPaperProps {
+		text: "UPGRADES".to_owned(),
+		width: TextBoxSizeValue::Fill,
+		height: TextBoxSizeValue::Fill,
+		use_main_color: true,
+		..Default::default()
+	};
+	let c2 = TextPaperProps {
+		text: "c_UPGRADES".to_owned(),
+		width: TextBoxSizeValue::Fill,
+		height: TextBoxSizeValue::Fill,
+		use_main_color: true,
+		..Default::default()
+	};
+
+	let tab_paper = PaperProps { 
+		variant: "tab_inactive".to_owned(),
+        frame: None, 
+        ..Default::default() 
+    };
+
+	let tab_props = TabsBoxProps {
+		tabs_location: TabsBoxTabsLocation::Top,
+		..Default::default()
+	};
+	
+	let size_tab = SizeBoxProps {
+		height: SizeBoxSizeValue::Exact(20.), 
+		width: SizeBoxSizeValue::Exact(30.),
+		..Default::default()
+	};
 
     widget! {
         (#{key} content_box | {WidgetAlpha(alpha)} [
@@ -168,7 +206,7 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 						(#{"margin_title"} content_box : {margin_title} [
 							(#{"h_title"} horizontal_box [
 								(#{"img"} image_box: {preview})
-								(#{"bkg"} text_paper: {title})
+								(#{"title"} text_paper: {title})
 							])
 						])
 					])
@@ -191,8 +229,33 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 				// 	content =  (#{"flex_items"} nav_flex_box |[ items_list ]|)
 				// })
 
-				(#{"tabs"} nav_tabs_box {
-				 	content =  (#{"t1"} text_box: {t1})
+				(#{"tabs"} size_box: {size_tabs} {
+					content = (#{"nav_tabs"} nav_tabs_box : {tab_props} [
+						{WidgetNode::pack_tuple([
+							widget! {
+								(#{"s1"} size_box: {size_tab.to_owned()} {
+									content = (#{"p1"} paper: {tab_paper.to_owned()} [
+										(#{"t1"} text_paper: {t1})
+									])
+								})
+							}, 
+							widget! {
+								(#{"c1"} text_paper: {c1})
+							},
+						])}
+						{WidgetNode::pack_tuple([
+							widget! {
+								(#{"s2"} size_box: {size_tab.to_owned()} {
+									content = (#{"p2"} paper: {tab_paper.to_owned()} [
+										(#{"t1"} text_paper: {t2})
+									])
+								})
+							}, 
+							widget! {
+								(#{"c2"} text_paper: {c2})
+							},
+						])}
+					])
 				})
 			])
 		])
