@@ -45,7 +45,7 @@ pub fn stock(context: WidgetContext) -> WidgetNode {
         width: TextBoxSizeValue::Exact(60.),
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
-		alignment_override: Some(TextBoxAlignment::Right),
+		horizontal_align_override: Some(TextBoxHorizontalAlign::Right),
         ..Default::default()
     };
 	widget! {

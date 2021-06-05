@@ -28,7 +28,7 @@ fn theme_game() -> ThemeProps {
                 name: "fonts/orbitron.json".to_owned(),
                 size: 12.,
             },
-            alignment: TextBoxAlignment::Center,
+            horizontal_align: TextBoxHorizontalAlign::Center,
             ..Default::default()
         },
         &mut theme.text_variants,
@@ -40,7 +40,7 @@ fn theme_game() -> ThemeProps {
                 name: "fonts/orbitron.json".to_owned(),
                 size: 9.,
             },
-            alignment: TextBoxAlignment::Center,
+            horizontal_align: TextBoxHorizontalAlign::Center,
             ..Default::default()
         },
         &mut theme.text_variants,

@@ -30,7 +30,7 @@ pub fn panel_cost(context: WidgetContext) -> WidgetNode {
         width: TextBoxSizeValue::Exact(15.),
         height: TextBoxSizeValue::Fill,
         use_main_color: true,
-        alignment_override: Some(TextBoxAlignment::Left),
+        horizontal_align_override: Some(TextBoxHorizontalAlign::Left),
         ..Default::default()
     };
     let size_cost = SizeBoxProps {

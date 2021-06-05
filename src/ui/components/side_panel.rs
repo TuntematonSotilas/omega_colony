@@ -1,7 +1,8 @@
-use oxygengine::user_interface::raui::{
+use oxygengine::{user_interface::raui::{
 	core::prelude::*, 
 	material::prelude::*
-};
+}, widget::component::containers::tabs_box};
+
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -150,6 +151,14 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         })
         .collect::<Vec<_>>();
 
+	let t1 = TextPaperProps {
+		text: "UNITS".to_owned(),
+		width: TextBoxSizeValue::Fill,
+		height: TextBoxSizeValue::Fill,
+		use_main_color: true,
+		..Default::default()
+	};
+
     widget! {
         (#{key} content_box | {WidgetAlpha(alpha)} [
             (#{"bkg"} paper: {bkg})
@@ -164,22 +173,26 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 						])
 					])
 				})
-				(#{"tabs"} size_box: {size_tabs} {
-					content = (#{"h_tabs"} nav_horizontal_box [
-						(#{"units"} tab: { TabProps {
-							id: "units".to_string(),
-							label: "UNITS".to_string(),
-							is_active: !panel_state.is_tab_upg,
-						}})
-						(#{"upg"} tab: { TabProps {
-							id: "upgrades".to_string(),
-							label: "UPGRADES".to_string(),
-							is_active: panel_state.is_tab_upg,
-						}})
-					])
-				})
-				(#{"items"} size_box: {size_items} {
-					content =  (#{"flex_items"} nav_flex_box |[ items_list ]|)
+				// (#{"tabs"} size_box: {size_tabs} {
+				// 	content = (#{"h_tabs"} nav_horizontal_box [
+				// 		(#{"units"} tab: { TabProps {
+				// 			id: "units".to_string(),
+				// 			label: "UNITS".to_string(),
+				// 			is_active: !panel_state.is_tab_upg,
+				// 		}})
+				// 		(#{"upg"} tab: { TabProps {
+				// 			id: "upgrades".to_string(),
+				// 			label: "UPGRADES".to_string(),
+				// 			is_active: panel_state.is_tab_upg,
+				// 		}})
+				// 	])
+				// })
+				// (#{"items"} size_box: {size_items} {
+				// 	content =  (#{"flex_items"} nav_flex_box |[ items_list ]|)
+				// })
+
+				(#{"tabs"} nav_tabs_box {
+				 	content =  (#{"t1"} text_box: {t1})
 				})
 			])
 		])

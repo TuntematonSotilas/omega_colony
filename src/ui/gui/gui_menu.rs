@@ -25,7 +25,7 @@ fn theme_menu() -> ThemeProps {
                 name: "fonts/orbitron.json".to_owned(),
                 size: 18.,
             },
-            alignment: TextBoxAlignment::Center,
+            horizontal_align: TextBoxHorizontalAlign::Center,
             ..Default::default()
         },
         &mut theme.text_variants,

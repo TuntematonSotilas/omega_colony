@@ -60,7 +60,7 @@ pub fn splash(mut context: WidgetContext) -> WidgetNode {
 	let title = Props::new(TextBoxProps {
 		height: TextBoxSizeValue::Exact(1.),
 		text: "Omega Colony".to_owned(),
-		alignment: TextBoxAlignment::Center,
+		horizontal_align: TextBoxHorizontalAlign::Center,
 		font: TextBoxFont {
 			name: "fonts/deadspace.json".to_owned(),
 			size: 50.,
@@ -80,7 +80,7 @@ pub fn splash(mut context: WidgetContext) -> WidgetNode {
 	let press_label = Props::new(TextBoxProps {
 		height: TextBoxSizeValue::Exact(1.),
 		text: "Press enter".to_owned(),
-		alignment: TextBoxAlignment::Center,
+		horizontal_align: TextBoxHorizontalAlign::Center,
 		font: TextBoxFont {
 			name: "fonts/orbitron.json".to_owned(),
 			size: 18.,
