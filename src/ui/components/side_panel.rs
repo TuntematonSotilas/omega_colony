@@ -9,6 +9,7 @@ use serde::{Deserialize, Serialize};
 use crate::{
 	ui::components::{
 		panel_item::{panel_item, PanelItemProps},
+		tab::{tab, TabProps},
 	},
 	resources::{
 		referential::RefeItem,
@@ -137,36 +138,15 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
         })
         .collect::<Vec<_>>();
 
-	let tab_text_u = TextPaperProps {
-		text: "UNITS".to_owned(),
-		width: TextBoxSizeValue::Fill,
-		height: TextBoxSizeValue::Fill,
-		transform: Transform {
-			align: Vec2 { x: 0., y: 0.3 },
-			..Default::default()
-		},
-		use_main_color: true,
-		..Default::default()
-	};
-	let mut tab_text_g = tab_text_u.clone();
-	tab_text_g.text = "UPGRADES".to_owned();
-	
 	let tabs_props = TabsBoxProps {
 		tabs_location: TabsBoxTabsLocation::Top,
 		tabs_and_content_separation: 5.,
 		..Default::default()
 	};
-	let tab_size = SizeBoxProps {
-		height: SizeBoxSizeValue::Exact(30.), 
-		width: SizeBoxSizeValue::Fill,
-		..Default::default()
-	};
-	let tab_bkg = PaperProps { 
-		variant: "tab_inactive".to_owned(),
-        frame: None, 
-        ..Default::default() 
-    };
-
+	
+	let tab_units = TabProps { label: "UNITS".to_owned() };
+	let tab_upg = TabProps { label: "UPGRADES".to_owned() };
+	
     widget! {
         (#{key} content_box | {WidgetAlpha(alpha)} [
             (#{"bkg"} paper: {bkg})
@@ -183,22 +163,18 @@ pub fn side_panel(mut context: WidgetContext) -> WidgetNode {
 				})
 				(#{"nav_tabs"} nav_tabs_box : {tabs_props} [
 					{WidgetNode::pack_tuple([
-						widget! {(#{"tab_size_u"} size_box: {tab_size.to_owned()} {
-							content = (#{"tab_bkg_u"} paper: {tab_bkg.to_owned()} [
-								(#{"tab_text_u"} text_paper: {tab_text_u})
-							])
-						})}, 
+						widget! {
+							(#{"tab_plate_u"} tab: {tab_units})
+						},
 						widget! {(#{"cnt_text_u"} size_box: {size_items.to_owned()} {
 							content =  (#{"flex_items"} nav_flex_box |[ units_list ]|)
 						})},
 					])}
 					{WidgetNode::pack_tuple([
-						widget! {(#{"tb_size_g"} size_box: {tab_size.to_owned()} {
-							content = (#{"tab_bkg_g"} paper: {tab_bkg.to_owned()} [
-								(#{"tab_text_g"} text_paper: {tab_text_g})
-							])
-						})}, 
-						widget! {(#{"cnt_text_u"} size_box: {size_items.to_owned()} {
+						widget! {
+							(#{"tab_plate_g"} tab: {tab_upg})
+						},
+						widget! {(#{"cnt_text_g"} size_box: {size_items.to_owned()} {
 							content =  ()
 						})},
 					])}
