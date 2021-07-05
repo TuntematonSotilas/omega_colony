@@ -1,4 +1,4 @@
-use oxygengine::prelude::*;
+/*use oxygengine::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::resources::referential::RefeCode;
@@ -15,4 +15,4 @@ impl Component for InteractiveSprite {
 }
 
 impl Prefab for InteractiveSprite {}
-impl PrefabComponent for InteractiveSprite {}
+impl PrefabComponent for InteractiveSprite {}*/

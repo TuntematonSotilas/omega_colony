@@ -1,4 +1,4 @@
-use oxygengine::prelude::*;
+/*use oxygengine::prelude::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
@@ -9,4 +9,4 @@ impl Component for Selector {
 }
 
 impl Prefab for Selector {}
-impl PrefabComponent for Selector {}
+impl PrefabComponent for Selector {}*/

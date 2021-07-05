@@ -11,13 +11,13 @@ use crate::{
 		interactive_sprite::InteractiveSprite,
 		selector::Selector,
 	},
-	systems::{
+	/*systems::{
 		camera_control::CameraControlSystem,
 		player_stock::PlayerStockSystem,
 		sprite_click::SpriteClickSystem,
 		selector::SelectorSystem,
         time::TimeSystem
-	},
+	},*/
 	resources::{
 		time::Time,
         camera::Camera,
