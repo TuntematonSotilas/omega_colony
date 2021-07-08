@@ -12,7 +12,7 @@ use crate::{
 pub struct SplashState;
 
 impl State for SplashState {
-    fn on_enter(&mut self, world: &mut World) {
+    fn on_enter(&mut self, universe: &mut Universe) {
 		// Instantiate from prefab.
         world
             .write_resource::<PrefabManager>()
@@ -20,7 +20,7 @@ impl State for SplashState {
             .unwrap();
     }
 
-    fn on_process(&mut self, world: &mut World) -> StateChange {
+    fn on_process(&mut self, universe: &mut Universe) -> StateChange {
 
 		let mut stock = world.write_resource::<Stock>();
 		if !stock.is_init {

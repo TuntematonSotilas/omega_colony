@@ -16,35 +16,35 @@ use crate::{
 pub struct PlanetState;
 
 impl State for PlanetState {
-    fn on_enter(&mut self, world: &mut World) {
+    fn on_enter(&mut self, universe: &mut Universe) {
         // instantiate world objects from scene prefab.
-        world
-			.write_resource::<PrefabManager>()
-			.instantiate_world("planet", world)
+        universe
+			.expect_resource_mut::<PrefabManager>()
+			.instantiate("planet", universe)
 			.unwrap()[0];
 
 		// instantiate base from prefab.
-        world
-            .write_resource::<PrefabManager>()
-            .instantiate_world("base", world)
+        universe
+            .expect_resource_mut::<PrefabManager>()
+            .instantiate("base", universe)
             .unwrap()[0];
 
 		// instantiate selector from prefab.
-        world
-            .write_resource::<PrefabManager>()
-            .instantiate_world("selector", world)
+        universe
+            .expect_resource_mut::<PrefabManager>()
+            .instantiate("selector", universe)
             .unwrap()[0];
 
     }
 
-    fn on_process(&mut self, world: &mut World) -> StateChange {
+    fn on_process(&mut self, universe: &mut Universe) -> StateChange {
 		// Set camera
-		if world.read_resource::<Camera>().camera.is_none() {
+		if universe.expect_resource::<Camera>().camera.is_none() {
 			let camera = entity_find_world("camera", world);
 			world.write_resource::<Camera>().camera = camera;
 		}
 
-		let mut ui = world.write_resource::<UserInterfaceRes>();
+		let mut ui = world.expect_resource_mut::<UserInterfaceRes>();
 		if let Some(app) = ui.application_mut("") {
             for (caller, msg) in app.consume_signals() {
 

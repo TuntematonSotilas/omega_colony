@@ -7,11 +7,11 @@ pub struct LoadingState {
 }
 
 impl State for LoadingState {
-    fn on_enter(&mut self, world: &mut World) {
-        let token = world.read_resource::<AppLifeCycle>().current_state_token();
+    fn on_enter(&mut self, universe: &mut Universe) {
+        let token = universe.read_resource::<AppLifeCycle>().current_state_token();
         
         //Camera
-		world
+		universe
             .create_entity()
             .with(CompositeCamera::new(CompositeScalingMode::CenterAspect))
             .with(CompositeTransform::scale(640.0.into()))
@@ -19,7 +19,7 @@ impl State for LoadingState {
 			.build();
         
         //Text
-		world
+		universe
 			.create_entity()
 			.with(CompositeRenderable(
 				Text::new("Arial", "Loading")
@@ -33,8 +33,8 @@ impl State for LoadingState {
             .build();
     }
     
-    fn on_process(&mut self, world: &mut World) -> StateChange {
-        let assets = &mut world.write_resource::<AssetsDatabase>();
+    fn on_process(&mut self, universe: &mut Universe) -> StateChange {
+        let assets = &mut universe.expect_resource_mut::<AssetsDatabase>();
         if let Some(preloader) = &mut self.preloader {
             if preloader.process(assets).unwrap() {
                 return StateChange::Swap(Box::new(SplashState));
