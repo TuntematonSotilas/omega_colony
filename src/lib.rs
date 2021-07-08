@@ -7,10 +7,10 @@ use std::marker::PhantomData;
 
 use crate::{
     states::loading::LoadingState,
-	components::{
+	/*components::{
 		interactive_sprite::InteractiveSprite,
 		selector::Selector,
-	},
+	},*/
 	/*systems::{
 		camera_control::CameraControlSystem,
 		player_stock::PlayerStockSystem,
@@ -47,7 +47,7 @@ pub fn main_js() -> Result<(), JsValue> {
     logger_setup(WebLogger);
 
     // Application build phase - install all systems and resources and setup them.
-    let app = App::build()
+    let app = App::build::<LinearPipelineBuilder>()
         // install core module assets managment.
         .with_bundle(
             oxygengine::core::assets::bundle_installer,
@@ -61,6 +61,7 @@ pub fn main_js() -> Result<(), JsValue> {
                 oxygengine::audio::protocols_installer(assets);
             }),
         )
+		.unwrap()
         // install core module prefabs management.
         .with_bundle(oxygengine::core::prefab::bundle_installer, |prefabs| {
             // install composite renderer prefabs.
@@ -72,10 +73,11 @@ pub fn main_js() -> Result<(), JsValue> {
             // install audio prefabs.
             oxygengine::audio::prefabs_installer(prefabs);
             // register game prefabs component factories.
-			prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
-			prefabs.register_component_factory::<Selector>("Selector");
-            prefabs.register_component_factory::<CompositeVisibility>("CompositeVisibility");
+			//prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
+			//prefabs.register_component_factory::<Selector>("Selector");
+            //prefabs.register_component_factory::<CompositeVisibility>("CompositeVisibility");
         })
+		.unwrap()
         // install input managment.
         .with_bundle(oxygengine::input::bundle_installer, |input| {
             // register input devices.
@@ -88,6 +90,7 @@ pub fn main_js() -> Result<(), JsValue> {
 			input.map_trigger("mouse-left", "mouse", "left");
             input.map_trigger("mouse-right", "mouse", "right");
         })
+		.unwrap()
         // install composite renderer.
         .with_bundle(
             oxygengine::composite_renderer::bundle_installer,
@@ -98,20 +101,24 @@ pub fn main_js() -> Result<(), JsValue> {
 				.image_source_inner_margin(0.5) 
             ),
         )
+		.unwrap()
          // install audio support.
         .with_bundle(oxygengine::audio::bundle_installer, WebAudio::default())
+		.unwrap()
         // install UI support.
         .with_bundle(
             oxygengine::user_interface::bundle_installer,
-            UserInterfaceRes::new(ui::setup)
-                .with_pointer_axis("mouse-x", "mouse-y")
-                .with_pointer_trigger("mouse-left", "mouse-right"),
+            UserInterfaceBundleSetup::default().user_interface(
+            		UserInterface::new(ui::setup)
+                		.with_pointer_axis("mouse-x", "mouse-y")
+                		.with_pointer_trigger("mouse-left", "mouse-right"),
+			),
         )
-        // install integration between UI and composite rendering.
-        .with_bundle(
-            oxygengine::integration_user_interface_composite_renderer::bundle_installer,
-            PhantomData::<WebCompositeRenderer>::default(),
+		.unwrap()
+		.with_bundle(
+            oxygengine::integration_user_interface_composite_renderer::bundle_installer::<WebCompositeRenderer, _,>,(),
         )
+        .unwrap()
         .with_resource(Time::default())
         .with_resource(Stock::default())
 		.with_resource(PlayerStock::default())
@@ -119,12 +126,12 @@ pub fn main_js() -> Result<(), JsValue> {
 		.with_resource(Selected::default())
         .with_resource(Referential::default())
 		.with_resource(UiWidget::default())
-		.with_system(CameraControlSystem, "camera_control", &[])
-		.with_system(PlayerStockSystem, "player_stock", &[])
-		.with_system(SpriteClickSystem, "sprite_click", &[])
-		.with_system(SelectorSystem, "selector", &[])
-        .with_system(TimeSystem, "time", &[])
-        .build(LoadingState::default(), WebAppTimer::default());
+		//.with_system(CameraControlSystem, "camera_control", &[])
+		//.with_system(PlayerStockSystem, "player_stock", &[])
+		//.with_system(SpriteClickSystem, "sprite_click", &[])
+		//.with_system(SelectorSystem, "selector", &[])
+        //.with_system(TimeSystem, "time", &[])
+        .build::<SequencePipelineEngine, _, _>(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.
     AppRunner::new(app).run(WebAppRunner)?;
