@@ -8,29 +8,27 @@ pub struct LoadingState {
 
 impl State for LoadingState {
     fn on_enter(&mut self, universe: &mut Universe) {
-        /*let token = universe.read_resource::<AppLifeCycle>().current_state_token();
         
-        //Camera
-		universe
-            .create_entity()
-            .with(CompositeCamera::new(CompositeScalingMode::CenterAspect))
-            .with(CompositeTransform::scale(640.0.into()))
-            .with(NonPersistent(token))
-			.build();
-        
-        //Text
-		universe
-			.create_entity()
-			.with(CompositeRenderable(
+		let token = universe.expect_resource::<AppLifeCycle>().current_state_token();
+
+		let mut world = universe.world_mut();
+		world.spawn((
+			CompositeCamera::new(CompositeScalingMode::CenterAspect),
+			CompositeTransform::scale(640.0.into()),
+			NonPersistent(token),
+		));
+
+		world.spawn((
+			CompositeRenderable(
 				Text::new("Arial", "Loading")
 					.color(Color::rgb(255,220,78))
 					.align(TextAlign::Center)
 					.size(20.)
 					.into(),
-			))
-			.with(CompositeTransform::translation([0., 0.].into()))
-			.with(NonPersistent(token))
-            .build();*/
+			),
+			CompositeTransform::translation([0., 0.].into()),
+			NonPersistent(token),
+		));
     }
     
     fn on_process(&mut self, universe: &mut Universe) -> StateChange {
