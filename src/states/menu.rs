@@ -21,10 +21,10 @@ impl State for MenuState {
     fn on_process(&mut self, universe: &mut Universe) -> StateChange {
 	    
         let mut ui = universe.expect_resource_mut::<UserInterface>();
-        if let Some(app) = ui.application_mut("") {
-            for (_caller, msg) in app.consume_signals() {
+       	if let Some(data) = ui.get_mut("") {
+			for (_caller, msg) in data.signals_received() {
 				if let Some(msg) = msg.as_any().downcast_ref::<MenuBtnSignal>() {
-                    universe.expect_resource_mut::<Time>().launched = true;
+					universe.expect_resource_mut::<Time>().launched = true;
 					match &msg {
                         MenuBtnSignal::Continue => {
                             let sec_opt = sto_utils::get::<u32>(TIME_STORAGE);

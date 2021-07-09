@@ -6,10 +6,10 @@ use wasm_bindgen::prelude::*;
 
 use crate::{
     states::loading::LoadingState,
-	/*components::{
+	components::{
 		interactive_sprite::InteractiveSprite,
 		selector::Selector,
-	},*/
+	},
 	/*systems::{
 		camera_control::CameraControlSystem,
 		player_stock::PlayerStockSystem,
@@ -72,8 +72,8 @@ pub fn main_js() -> Result<(), JsValue> {
             // install audio prefabs.
             oxygengine::audio::prefabs_installer(prefabs);
             // register game prefabs component factories.
-			//prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
-			//prefabs.register_component_factory::<Selector>("Selector");
+			prefabs.register_component_factory::<InteractiveSprite>("InteractiveSprite");
+			prefabs.register_component_factory::<Selector>("Selector");
             //prefabs.register_component_factory::<CompositeVisibility>("CompositeVisibility");
         })
 		.unwrap()

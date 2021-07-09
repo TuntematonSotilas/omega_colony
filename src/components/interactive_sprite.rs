@@ -1,4 +1,4 @@
-/*use oxygengine::prelude::*;
+use oxygengine::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::resources::referential::RefeCode;
@@ -10,9 +10,5 @@ pub struct InteractiveSprite {
 	pub code: RefeCode,
 }
 
-impl Component for InteractiveSprite {
-    type Storage = VecStorage<Self>;
-}
-
 impl Prefab for InteractiveSprite {}
-impl PrefabComponent for InteractiveSprite {}*/
+impl PrefabComponent for InteractiveSprite {}
