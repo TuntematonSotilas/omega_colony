@@ -3,7 +3,6 @@ extern crate oxygengine;
 
 use oxygengine::prelude::*;
 use wasm_bindgen::prelude::*;
-use std::marker::PhantomData;
 
 use crate::{
     states::loading::LoadingState,

@@ -14,23 +14,23 @@ pub struct SplashState;
 impl State for SplashState {
     fn on_enter(&mut self, universe: &mut Universe) {
 		// Instantiate from prefab.
-        world
-            .write_resource::<PrefabManager>()
-            .instantiate_world("splash", world)
+        universe
+            .expect_resource_mut::<PrefabManager>()
+            .instantiate("splash", universe)
             .unwrap();
     }
 
     fn on_process(&mut self, universe: &mut Universe) -> StateChange {
 
-		let mut stock = world.write_resource::<Stock>();
+		let mut stock = universe.expect_resource_mut::<Stock>();
 		if !stock.is_init {
             stock.init();
         }
-        let mut refe = world.write_resource::<Referential>();
+        let mut refe = universe.expect_resource_mut::<Referential>();
         if !refe.is_init {
             refe.init(stock.refe.to_owned());
         }
-        let input = &world.read_resource::<InputController>();
+        let input = &universe.expect_resource::<InputController>();
         if input.trigger_or_default("enter") == TriggerState::Pressed {
             return StateChange::Swap(Box::new(MenuState));
         }
