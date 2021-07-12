@@ -35,6 +35,8 @@ pub fn camera_control_system(universe: &mut Universe) {
 	{
 		let screen_size = renderer.view_size();
 
+		debug!("iter");
+
 		//Center camera
 		if !camera.is_centered {
 			
