@@ -10,13 +10,13 @@ use crate::{
 		interactive_sprite::InteractiveSprite,
 		selector::Selector,
 	},
-	/*systems::{
-		camera_control::CameraControlSystem,
-		player_stock::PlayerStockSystem,
+	systems::{
+		camera_control::{CameraControlSystemResources, camera_control_system},
+		/*player_stock::PlayerStockSystem,
 		sprite_click::SpriteClickSystem,
 		selector::SelectorSystem,
-        time::TimeSystem
-	},*/
+        time::TimeSystem*/
+	},
 	resources::{
 		time::Time,
         camera::Camera,
@@ -130,6 +130,12 @@ pub fn main_js() -> Result<(), JsValue> {
 		//.with_system(SpriteClickSystem, "sprite_click", &[])
 		//.with_system(SelectorSystem, "selector", &[])
         //.with_system(TimeSystem, "time", &[])
+		.with_system::<CameraControlSystemResources>(
+            "camera_control",
+            camera_control_system,
+            &[],
+        )
+		.unwrap()
         .build::<SequencePipelineEngine, _, _>(LoadingState::default(), WebAppTimer::default());
 
     // Application run phase - spawn runner that ticks our app.

@@ -42,7 +42,8 @@ impl State for PlanetState {
 		if universe.expect_resource::<Camera>().camera.is_none() {
 
 			let hierarchy = universe.expect_resource::<Hierarchy>();
-			let camera = hierarchy.entity_by_name("camera");
+			let entity = hierarchy.entity_by_name("camera");
+			universe.expect_resource_mut::<Camera>().camera = entity;
 			
 			//let camera = entity_find_world("camera", world);
 			//world.write_resource::<Camera>().camera = camera;

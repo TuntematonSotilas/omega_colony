@@ -1,4 +1,4 @@
-/*use oxygengine::prelude::*;
+use oxygengine::prelude::*;
 
 use crate::resources::camera::Camera;
 
@@ -6,84 +6,115 @@ const PIXL_BORDER: f32 = 20.;
 const SPEED: f32 = 2.;
 const INIT_POS: f32 = 64.;
 
-pub struct CameraControlSystem;
+pub type CameraControlSystemResources<'a> = (
+    WorldRef,
+    &'a InputController,
+    &'a UserInterface,
+    &'a mut Camera,
+    Comp<&'a CompositeCamera>,
+    Comp<&'a WebCompositeRenderer>,
+	Comp<&'a mut CompositeTransform>,
+);
 
-impl<'s> System<'s> for CameraControlSystem {
-    type SystemData = (
-        ReadExpect<'s, WebCompositeRenderer>,
-        Write<'s, Camera>,
-		Read<'s, InputController>,
-        ReadStorage<'s, CompositeCamera>,
-        WriteStorage<'s, CompositeTransform>,
-    );
+pub fn camera_control_system(universe: &mut Universe) {
 
-    fn run(
-		&mut self, 
-		(renderer, mut camera_res, input, cameras, mut transforms)
-		: Self::SystemData
-	) {
+	let (world, input, ui, mut camera, ..) =
+        universe.query_resources::<CameraControlSystemResources>();
+	
+	if camera.camera.is_none() {
+		return;
+	}
 
-		if camera_res.camera.is_none() {
-            return;
-        }
-
+	for (_, (composite_camera,  renderer, transform )) in world
+	.query::<(
+		&CompositeCamera,
+		&WebCompositeRenderer,
+		&mut CompositeTransform,
+	)>()
+	.iter()
+	{
 		let screen_size = renderer.view_size();
 
 		//Center camera
-		if !camera_res.is_centered {
-            self.apply_transform(&camera_res, cameras, screen_size, &mut transforms, INIT_POS, INIT_POS);
-			camera_res.is_centered = true;
-			return;
-        }
+		if !camera.is_centered {
+			
+			//world.apply_transform(&camera, composite_camera, screen_size, &mut transforms, INIT_POS, INIT_POS);
 
-		
-		let x = input.axis_or_default("mouse-x");
-		let y = input.axis_or_default("mouse-y");
-		
-		//when mouse move
-		if x != camera_res.prev_x || y != camera_res.prev_y {
-
-			//when borders left or right
-			let left = screen_size.x / PIXL_BORDER;
-			let right = screen_size.x - left; 
-			let mut x_inc = 0.;
-			if x < left || x > right {
-				x_inc = match x > right {
-					true => SPEED,
-					false => - SPEED,
-				};
+			let tr = transform.get_translation();
+			debug!("tr {:?}", tr);
+		}
+	}
+}
+			/*let entity = camera.camera.unwrap();
+			let view_box = if let Some(transform) = transform.get(entity) {
+				if let Some(camera) = cameras.get(entity) {
+					camera.view_box(transform, screen_size)
+				} else {
+					None
+				}
+			} else {
+				None
+			};
+			if let Some(mut view_box) = view_box {
+				view_box.x += x_inc;
+				view_box.y += y_inc;
+				transforms
+					.get_mut(entity)
+					.unwrap()
+					.set_translation(view_box.center());
 			}
 			
-			//when borders top or bottom
-			let top = screen_size.y / PIXL_BORDER;
-			let bottom = screen_size.y - top; 
-			let mut y_inc = 0.;
-			if y < top || y > bottom {
-				y_inc = match y > bottom {
-					true => SPEED,
-					false => - SPEED,
-				};
-			}
-			if x_inc != 0. || y_inc != 0. {
-				self.apply_transform(&camera_res, cameras, screen_size, &mut transforms, x_inc, y_inc);
-			}
-		}
-		camera_res.prev_x = x;
-		camera_res.prev_y = y;
-    }
-}
+			camera.is_centered = true;
+			return;
+		}*/
+	
 
-impl<'s> CameraControlSystem {
-	fn apply_transform(
-		&self,
-		camera_res: &Write<'s, Camera>,
-		cameras: ReadStorage<'s, CompositeCamera>,
+	/*
+
+	
+	let x = input.axis_or_default("mouse-x");
+	let y = input.axis_or_default("mouse-y");
+	
+	//when mouse move
+	if x != camera_res.prev_x || y != camera_res.prev_y {
+
+		//when borders left or right
+		let left = screen_size.x / PIXL_BORDER;
+		let right = screen_size.x - left; 
+		let mut x_inc = 0.;
+		if x < left || x > right {
+			x_inc = match x > right {
+				true => SPEED,
+				false => - SPEED,
+			};
+		}
+		
+		//when borders top or bottom
+		let top = screen_size.y / PIXL_BORDER;
+		let bottom = screen_size.y - top; 
+		let mut y_inc = 0.;
+		if y < top || y > bottom {
+			y_inc = match y > bottom {
+				true => SPEED,
+				false => - SPEED,
+			};
+		}
+		if x_inc != 0. || y_inc != 0. {
+			self.apply_transform(&camera_res, cameras, screen_size, &mut transforms, x_inc, y_inc);
+		}
+	}
+	camera_res.prev_x = x;
+	camera_res.prev_y = y;*/
+
+	/*fn apply_transform(
+		camera: &mut Camera,
+		cameras: &mut CompositeCamera,
 		screen_size: Vec2,
-		transforms: &mut WriteStorage<'s, CompositeTransform>,
+		transforms: &mut CompositeTransform,
 		x_inc: f32,
 		y_inc: f32,
 	) {
-		let entity = camera_res.camera.unwrap();
+		let entity = camera.camera.unwrap();
 		let view_box = if let Some(transform) = transforms.get(entity) {
 			if let Some(camera) = cameras.get(entity) {
 				camera.view_box(transform, screen_size)
@@ -101,5 +132,4 @@ impl<'s> CameraControlSystem {
 				.unwrap()
 				.set_translation(view_box.center());
 		}
-	}
-}*/
+	}*/
