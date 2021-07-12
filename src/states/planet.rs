@@ -39,11 +39,14 @@ impl State for PlanetState {
 
     fn on_process(&mut self, universe: &mut Universe) -> StateChange {
 		// Set camera
+		if universe.expect_resource::<Camera>().camera.is_none() {
 
-		/*if universe.expect_resource::<Camera>().camera.is_none() {
-			let camera = entity_find_world("camera", world);
-			world.write_resource::<Camera>().camera = camera;
-		}*/
+			let hierarchy = universe.expect_resource::<Hierarchy>();
+			let camera = hierarchy.entity_by_name("camera");
+			
+			//let camera = entity_find_world("camera", world);
+			//world.write_resource::<Camera>().camera = camera;
+		}
 
 		let mut ui = universe.expect_resource_mut::<UserInterface>();
 		if let Some(app) = ui.application_mut("") {
